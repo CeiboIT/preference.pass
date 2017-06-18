@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-toolbar',
   template: `    
-    <md-toolbar>
+    <md-toolbar color="primary">
       <md-toolbar-row>
         Preference pass
         <button md-button>Activities

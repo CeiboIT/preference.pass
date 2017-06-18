@@ -6,13 +6,14 @@ import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import {ToolbarModule} from './components/navigation/toolbar/toolbar.module';
-
+import { routing } from './app.routes';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    routing,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,

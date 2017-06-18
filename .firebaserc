@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "preference-pass",
+    "development":"preference-pass-testing"
+  }
+}

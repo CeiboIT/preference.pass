@@ -4,7 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-landing-container',
   template: `
     <div class="container">
-      landing
+      <div class="col-12">
+        Landing
+      </div>
     </div>
   `
 })

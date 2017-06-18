@@ -6,7 +6,9 @@ import { HttpModule } from '@angular/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import {ToolbarModule} from './components/navigation/toolbar/toolbar.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 import { routing } from './app.routes';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,6 +18,7 @@ import { routing } from './app.routes';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    FlexLayoutModule,
     ToolbarModule,
     routing
   ],

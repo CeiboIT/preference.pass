@@ -4,11 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-toolbar',
   template: `    
     <md-toolbar color="primary">
-      <md-toolbar-row>
-        Preference pass
-        <button md-button>Activities
-        </button>
-      </md-toolbar-row>
+      Preference pass
+      <span fxFlex></span>
+      <button md-button>Activities
+      </button>
     </md-toolbar>
   
   `

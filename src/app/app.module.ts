@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import {ToolbarModule} from './components/navigation/toolbar/toolbar.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { routing } from './app.routes';
+import {LayoutEffects} from './effects/layout';
+import {EffectsModule} from '@ngrx/effects';
+import {reducer} from './reducers';
+import {StoreModule} from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { routing } from './app.routes';
     HttpModule,
     FlexLayoutModule,
     ToolbarModule,
-    routing
+    routing,
+    StoreModule.provideStore(reducer),
+    EffectsModule.run(LayoutEffects)
   ],
   providers: [],
   bootstrap: [AppComponent]

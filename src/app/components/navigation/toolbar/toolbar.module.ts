@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MdButtonModule, MdToolbarModule} from '@angular/material';
+import {MdButtonModule, MdIconModule, MdToolbarModule} from '@angular/material';
 import {ToolbarComponent} from './toolbar.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -9,6 +9,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     CommonModule,
     MdToolbarModule,
     MdButtonModule,
+    MdIconModule,
     FlexLayoutModule
   ],
   declarations: [ToolbarComponent],

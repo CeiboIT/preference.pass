@@ -12,6 +12,9 @@ import {LayoutEffects} from './effects/layout';
 import {EffectsModule} from '@ngrx/effects';
 import {reducer} from './reducers';
 import {StoreModule} from '@ngrx/store';
+import {MdDialogModule} from '@angular/material';
+import {AuthModalComponent} from './components/widgets/auth-modal/auth-modal.component';
+import {AuthModalModule} from "./components/widgets/auth-modal/auth-modal.module";
 
 @NgModule({
   declarations: [
@@ -22,13 +25,16 @@ import {StoreModule} from '@ngrx/store';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    MdDialogModule,
     FlexLayoutModule,
-    ToolbarModule,
     routing,
     StoreModule.provideStore(reducer),
-    EffectsModule.run(LayoutEffects)
+    EffectsModule.run(LayoutEffects),
+    ToolbarModule,
+    AuthModalModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AuthModalComponent]
 })
 export class AppModule { }

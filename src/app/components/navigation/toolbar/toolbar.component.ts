@@ -11,10 +11,10 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
         <md-icon>home</md-icon>
       </button>
       <div>
-        <button md-raised-button color="accent" (click)="openLogin()">
+        <button md-button color="accent" (click)="openLogin()">
           Login
         </button>
-        <button md-raised-button color="accent">
+        <button md-button color="accent">
           Register
         </button>
       </div>

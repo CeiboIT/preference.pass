@@ -1,25 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-auth-modal',
-  template: `
-    <div>
-      <div fxFlex="90%" fxFlexAlign.gt-sm="center">
-        <div fxFlex>
-          <button md-raised-button class="facebook-button">
-            <i class="socicon-facebook"></i> {{ FacebookLoginText }}
-          </button>
-        </div>
-        <div class="division"></div>
-        <div fxFlex>
-          <button md-raised-button class="google-button">
-            <i class="socicon-google"></i> {{ GoogleLoginText }}
-          </button>
-        </div>
-      </div>
-      </div>
-  `,
+
   styles: [`
     .facebook-button {
       background: #4568b2;
@@ -47,10 +31,49 @@ import {MdDialog} from '@angular/material';
       margin-top: 10px;
       margin-bottom: 3px;
     }
-  `]
+    
+    .email-full-width {
+      width: 100%;
+    }
+  `],
+  template: `
+    <div>
+      <div fxFlex="90%" fxFlexAlign.gt-sm="center">
+        <div fxFlex>
+          <button md-raised-button class="facebook-button">
+            <i class="socicon-facebook"></i> {{ FacebookLoginText }}
+          </button>
+        </div>
+        <div class="division"></div>
+        <div fxFlex>
+          <button md-raised-button class="google-button">
+            <i class="socicon-google"></i> {{ GoogleLoginText }}
+          </button>
+        </div>
+        <div fxFlex>
+          <form novalidate [formGroup]="auth">
+            <div fxFlex>
+              <md-input-container class="email-full-width">
+                <input mdInput placeholder="Enter your email address" formControlName="email">
+              </md-input-container>
+            </div>
+            <div fxFlex>
+              <button  md-raised-button color="primary" type="submit">
+                Register with email
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+  `
 })
 export class AuthModalComponent {
   public FacebookLoginText = 'Log in with Facebook';
   public GoogleLoginText = 'Log in with Google';
-  constructor() { }
+  public auth = this.fb.group({
+    email: ['']
+  });
+  constructor(private fb: FormBuilder) {}
+
 }

@@ -30,4 +30,16 @@ export class LayoutEffects {
     this.dialog.open(AuthModalComponent, stylesToUse);
    });
 
+  @Effect({dispatch: false})
+  openRegisterDialog: Observable<{}> = this.action$
+    .ofType(ActionTypes.OPEN_REGISTER)
+    .do(() => {
+      const stylesToUse = (retrieveWidth() ) ?
+        {'width': '100%',
+          'height': '100%'}
+        :
+        {'width': '30%'};
+
+      this.dialog.open(AuthModalComponent, stylesToUse);
+    });
 }

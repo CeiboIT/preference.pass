@@ -27,7 +27,11 @@ export class LayoutEffects {
        :
        {'width': '30%'};
 
-    this.dialog.open(AuthModalComponent, stylesToUse);
+    this.dialog.open(AuthModalComponent, stylesToUse)
+      .afterClosed().subscribe(result => {
+        console.log(result);
+        return result
+    });
    });
 
   @Effect({dispatch: false})

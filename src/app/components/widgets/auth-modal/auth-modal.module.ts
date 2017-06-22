@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthModalComponent } from './auth-modal.component';
-import {MdButtonModule, MdInputModule} from '@angular/material';
+import {MdButtonModule, MdDialogModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -10,7 +10,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MdButtonModule,
-    MdInputModule
+    MdInputModule,
+    MdDialogModule
   ],
   declarations: [AuthModalComponent]
 })

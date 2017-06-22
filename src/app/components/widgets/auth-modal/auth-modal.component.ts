@@ -40,13 +40,13 @@ import {FormBuilder} from '@angular/forms';
     <div>
       <div fxFlex="90%" fxFlexAlign.gt-sm="center">
         <div fxFlex>
-          <button md-raised-button class="facebook-button">
+          <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
             <i class="socicon-facebook"></i> {{ FacebookLoginText }}
           </button>
         </div>
         <div class="division"></div>
         <div fxFlex>
-          <button md-raised-button class="google-button">
+          <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button">
             <i class="socicon-google"></i> {{ GoogleLoginText }}
           </button>
         </div>
@@ -58,7 +58,7 @@ import {FormBuilder} from '@angular/forms';
               </md-input-container>
             </div>
             <div fxFlex>
-              <button  md-raised-button color="primary" type="submit">
+              <button  [md-dialog-close]="loginWithEmail()" md-raised-button color="primary" type="submit">
                 Register with email
               </button>
             </div>
@@ -76,4 +76,22 @@ export class AuthModalComponent {
   });
   constructor(private fb: FormBuilder) {}
 
+  loginWithEmail() {
+    return {
+      type: 'Email',
+      data: this.auth.value
+    };
+  }
+
+  loginWithFacebook() {
+    return {
+      type : 'Facebook'
+    };
+  }
+
+  loginWithGoogle() {
+    return {
+      type: 'Google'
+    };
+  }
 }

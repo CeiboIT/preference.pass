@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthModalComponent } from './auth-modal.component';
 import {MdButtonModule, MdDialogModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {EmailSignupModule} from '../../../modules/forms/email-signup/email-signup.module';
-
+import {EmailSignupModule} from '../../forms/email-signup/email-signup.module';
 @NgModule({
   imports: [
     CommonModule,

@@ -40,19 +40,19 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
   template: `
     <div>
       <div fxFlex="90%" fxFlexAlign.gt-sm="center">
-        <div fxFlex>
-          <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
-            <i class="socicon-facebook"></i> {{ FacebookLoginText }}
-          </button>
-        </div>
-        <div class="division"></div>
-        <div fxFlex>
-          <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button">
-            <i class="socicon-google"></i> {{ GoogleLoginText }}
-          </button>
-        </div>
-        <div fxFlex>
-          <form novalidate [formGroup]="auth" *ngIf="isLogin">
+        <div fxFlex *ngIf="isLogin">
+          <div fxFlex>
+            <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
+              <i class="socicon-facebook"></i> {{ FacebookLoginText }}
+            </button>
+          </div>
+          <div class="division"></div>
+          <div fxFlex>
+            <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button">
+              <i class="socicon-google"></i> {{ GoogleLoginText }}
+            </button>
+          </div>
+          <form novalidate [formGroup]="auth">
             <div fxFlex>
               <md-input-container class="email-full-width">
                 <input mdInput placeholder="Enter your email address" formControlName="email">
@@ -67,23 +67,26 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
               Don't have an account? <button md-button (click)="changeModalType()"> Register</button>
             </div>
           </form>
-          
-          <div fxFlex *ngIf="!isLogin">
-            <form>
-              <app-email-signup [parent]="register"></app-email-signup>
-              <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
-                Register with email
-              </button>
-            </form>
-            <div fxFlex>
-              Already have an account? <button md-button (click)="changeModalType()"> Login</button>
-            </div>
-          </div>
-          
+        </div>
+
+        <div fxFlex *ngIf="!isLogin">
           <div fxFlex>
-            {{register.value | json   }}
+              <span>
+                Registrate con Facebook o Google
+              </span>
+          </div>
+          <form novalidate [formGroup]="register">
+            <app-email-signup [parent]="register"></app-email-signup>
+            <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
+              Register with email
+            </button>
+          </form>
+          <div fxFlex>
+            Already have an account? <button md-button (click)="changeModalType()"> Login</button>
           </div>
         </div>
+
+        
       </div>
       </div>
   `
@@ -95,9 +98,12 @@ export class AuthModalComponent {
     email: ['']
   });
   public modalType: string;
+  public isAuthWithEmail = false;
   public register = this.fb.group({
     email: [''],
-    password: ['']
+    password: [''],
+    firstName: [''],
+    lastName: ['']
   });
 
   constructor(private fb: FormBuilder, private dialogRef: MdDialogRef<AuthModalComponent>,

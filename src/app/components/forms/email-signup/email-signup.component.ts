@@ -6,6 +6,8 @@ import {FormGroup} from '@angular/forms';
   template: `
     <div [formGroup]="parent">
       <app-email-input [parent]="parent"></app-email-input>
+      <app-user-first-name-input [parent]="parent"></app-user-first-name-input>
+      <app-user-last-name-input [parent]="parent"></app-user-last-name-input>
       <app-password [parent]="parent"></app-password>
     </div>
   `

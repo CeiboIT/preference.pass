@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "assets/css/indigo-pink.css",
+        "assets/css/preference-pass.scss",
         "assets/css/bootstrap-grid.min.css"
       ],
       "scripts": [

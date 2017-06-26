@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdGridListModule } from '@angular/material';
 
 @Component({
   selector: 'app-activities-list-container',

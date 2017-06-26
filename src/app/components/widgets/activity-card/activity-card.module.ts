@@ -6,6 +6,7 @@ import { ActivityCardComponent } from './activity-card.component';
   imports: [
     CommonModule
   ],
-  declarations: [ActivityCardComponent]
+  declarations: [ActivityCardComponent],
+  bootstrap: [ActivityCardComponent]
 })
 export class ActivityCardModule { }

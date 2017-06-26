@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { Activity } from '../../../models/activity';
+import { ActivitiesService } from '../../../services/activities/activities.service';
 
 @Component({
   selector: 'app-landing-container',
-  template: `
-    <div class="container">
-      <div class="col-12">
-        Landing
-      </div>
-    </div>
-  `
+  templateUrl: './landing-container.component.html',
+  providers: [ActivitiesService]
 })
+
 export class LandingContainerComponent implements OnInit {
 
-  constructor() { }
+  activities : Activity[];
+
+  constructor(
+    private activitiesService : ActivitiesService
+  ) { }
 
   ngOnInit() {
+    this.getActivities();
+  }
+
+  getActivities() : void {
+    this.activitiesService.getAllActivities().then(activities => this.activities = activities );
   }
 
 }

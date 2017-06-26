@@ -15,6 +15,9 @@ import {StoreModule} from '@ngrx/store';
 import {MdDialogModule} from '@angular/material';
 import {AuthModalComponent} from './components/widgets/auth-modal/auth-modal.component';
 import {AuthModalModule} from "./components/widgets/auth-modal/auth-modal.module";
+import {UserEffects} from "./effects/user";
+import {AuthService} from "./services/auth.service";
+import {EmailSignupModule} from "./modules/forms/email-signup/email-signup.module";
 
 @NgModule({
   declarations: [
@@ -30,10 +33,11 @@ import {AuthModalModule} from "./components/widgets/auth-modal/auth-modal.module
     routing,
     StoreModule.provideStore(reducer),
     EffectsModule.run(LayoutEffects),
+    EffectsModule.run(UserEffects),
     ToolbarModule,
     AuthModalModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [AuthModalComponent]
 })

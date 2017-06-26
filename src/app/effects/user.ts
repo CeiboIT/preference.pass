@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
-import { ActionTypes, LoginWithEmailFailure, LoginWithEmailSuccess } from '../actions/user';
+import {
+  ActionTypes, LoginWithEmailFailure, LoginWithEmailSuccess, RegisterWithEmailAndPasswordFailure,
+  RegisterWithEmailAndPasswordSuccess
+} from '../actions/user';
 import {AuthService} from '../services/auth.service';
 
 @Injectable()
@@ -10,7 +13,21 @@ export class UserEffects {
   @Effect()
   LoginWithEmail: Observable<{}> = this.action$
     .ofType(ActionTypes.LOGIN_WITH_EMAIL)
-    .switchMap(payload => this.authService.passwordLessEmail(payload)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      console.log(payload);
+      return this.authService.passwordLessEmail(payload)
         .then(result => new LoginWithEmailSuccess({}))
-        .catch(err => new LoginWithEmailFailure({})));
+        .catch(err => new LoginWithEmailFailure({}));
+    });
+  @Effect()
+  RegisterWithEmailAndPassword: Observable<{}> = this.action$
+    .ofType(ActionTypes.REGISTER_WITH_EMAIL_AND_PASSWORD)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      console.log(payload);
+      return this.authService.registerWithEmail(payload)
+        .then(result => new RegisterWithEmailAndPasswordSuccess({}))
+        .catch(err => new RegisterWithEmailAndPasswordFailure({}));
+    });
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthModalComponent } from './auth-modal.component';
 import {MdButtonModule, MdDialogModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EmailSignupModule} from '../../../modules/forms/email-signup/email-signup.module';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     MdButtonModule,
     MdInputModule,
-    MdDialogModule
+    MdDialogModule,
+    EmailSignupModule
   ],
   declarations: [AuthModalComponent]
 })

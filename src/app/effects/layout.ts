@@ -4,9 +4,11 @@ import {Observable} from 'rxjs/Observable';
 import {MdDialog} from '@angular/material';
 import {AuthModalComponent} from '../components/widgets/auth-modal/auth-modal.component';
 import { ActionTypes } from '../actions/layout';
+import { LoginWithEmail, RegisterWithEmailAndPassword } from '../actions/user';
+import {Store} from '@ngrx/store';
 
-function retrieveWidth(){
-  if(matchMedia){
+function retrieveWidth() {
+  if (matchMedia) {
     let isXS = window.matchMedia('(max-width: 480px)');
     let isSM =  window.matchMedia('(max-width: 768px)');
     return isXS.matches || isSM.matches;
@@ -15,9 +17,9 @@ function retrieveWidth(){
 
 @Injectable()
 export class LayoutEffects {
-  constructor(private action$: Actions, private dialog: MdDialog) {}
+  constructor(private action$: Actions, private dialog: MdDialog, private store: Store<any>) {}
 
- @Effect({dispatch: false})
+   @Effect({dispatch: false})
  openAuthDialog: Observable<{}> = this.action$
    .ofType(ActionTypes.OPEN_LOGIN)
    .do(() => {
@@ -29,8 +31,14 @@ export class LayoutEffects {
 
     this.dialog.open(AuthModalComponent, stylesToUse)
       .afterClosed().subscribe(result => {
-        console.log(result);
-        return result
+        switch (result.type) {
+          case('EmailRegister'):
+            this.store.dispatch(new RegisterWithEmailAndPassword(result.data));
+          break;
+          case('EmailLogin'):
+            this.store.dispatch(new LoginWithEmail({email: result.data.email}));
+          break;
+        }
     });
    });
 

@@ -63,6 +63,19 @@ import {FormBuilder} from '@angular/forms';
               </button>
             </div>
           </form>
+          
+          <div fxFlex>
+            <form>
+              <app-email-signup [parent]="register"></app-email-signup>
+              <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
+                Register with email
+              </button>
+            </form>
+          </div>
+          
+          <div fxFlex>
+            {{register.value | json   }}
+          </div>
         </div>
       </div>
       </div>
@@ -74,12 +87,24 @@ export class AuthModalComponent {
   public auth = this.fb.group({
     email: ['']
   });
-  constructor(private fb: FormBuilder) {}
 
+  public register = this.fb.group({
+    email: [''],
+    password: ['']
+  });
+
+  constructor(private fb: FormBuilder) {}
   loginWithEmail() {
     return {
-      type: 'Email',
+      type: 'EmailLogin',
       data: this.auth.value
+    };
+  }
+
+  registerWithEmail () {
+    return {
+     type: 'EmailRegister',
+     data: this.register.value
     };
   }
 

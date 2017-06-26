@@ -23,13 +23,15 @@ export class LayoutEffects {
  openAuthDialog: Observable<{}> = this.action$
    .ofType(ActionTypes.OPEN_LOGIN)
    .do(() => {
-     const stylesToUse = (retrieveWidth() ) ?
-       {'width': '100%',
-         'height': '100%'}
-       :
-       {'width': '30%'};
+    let modalConfig = {
+      data: {
+        type: 'login'
+      }
+    };
+     retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
+         'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
 
-    this.dialog.open(AuthModalComponent, stylesToUse)
+    this.dialog.open(AuthModalComponent, modalConfig)
       .afterClosed().subscribe(result => {
         switch (result.type) {
           case('EmailRegister'):
@@ -46,12 +48,12 @@ export class LayoutEffects {
   openRegisterDialog: Observable<{}> = this.action$
     .ofType(ActionTypes.OPEN_REGISTER)
     .do(() => {
-      const stylesToUse = (retrieveWidth() ) ?
-        {'width': '100%',
-          'height': '100%'}
-        :
-        {'width': '30%'};
+      let modalConfig = {
+        data: {type: 'register'}
+      };
+      retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
+        'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
 
-      this.dialog.open(AuthModalComponent, stylesToUse);
+      this.dialog.open(AuthModalComponent, modalConfig);
     });
 }

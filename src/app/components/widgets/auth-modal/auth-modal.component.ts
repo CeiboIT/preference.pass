@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
+import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
+
 
 @Component({
   selector: 'app-auth-modal',
-
   styles: [`
     .facebook-button {
       background: #4568b2;
@@ -51,7 +52,7 @@ import {FormBuilder} from '@angular/forms';
           </button>
         </div>
         <div fxFlex>
-          <form novalidate [formGroup]="auth">
+          <form novalidate [formGroup]="auth" *ngIf="isLogin">
             <div fxFlex>
               <md-input-container class="email-full-width">
                 <input mdInput placeholder="Enter your email address" formControlName="email">
@@ -59,18 +60,24 @@ import {FormBuilder} from '@angular/forms';
             </div>
             <div fxFlex>
               <button  [md-dialog-close]="loginWithEmail()" md-raised-button color="primary" type="submit">
-                Register with email
+                Login with email
               </button>
+            </div>
+            <div fxFlex>
+              Don't have an account? <button md-button (click)="changeModalType()"> Register</button>
             </div>
           </form>
           
-          <div fxFlex>
+          <div fxFlex *ngIf="!isLogin">
             <form>
               <app-email-signup [parent]="register"></app-email-signup>
               <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
                 Register with email
               </button>
             </form>
+            <div fxFlex>
+              Already have an account? <button md-button (click)="changeModalType()"> Login</button>
+            </div>
           </div>
           
           <div fxFlex>
@@ -87,19 +94,23 @@ export class AuthModalComponent {
   public auth = this.fb.group({
     email: ['']
   });
-
+  public modalType: string;
   public register = this.fb.group({
     email: [''],
     password: ['']
   });
 
-  constructor(private fb: FormBuilder) {}
-  loginWithEmail() {
-    return {
-      type: 'EmailLogin',
-      data: this.auth.value
-    };
+  constructor(private fb: FormBuilder, private dialogRef: MdDialogRef<AuthModalComponent>,
+    @Inject(MD_DIALOG_DATA) public data: any) {
+    console.log(this.data);
+    this.modalType = this.data.type;
   }
+    loginWithEmail() {
+      return {
+        type: 'EmailLogin',
+        data: this.auth.value
+      };
+    }
 
   registerWithEmail () {
     return {
@@ -118,5 +129,17 @@ export class AuthModalComponent {
     return {
       type: 'Google'
     };
+  }
+
+  changeModalType() {
+    if (this.modalType === 'login') {
+      this.modalType = 'register';
+    } else {
+      this.modalType = 'login';
+    }
+  }
+
+  get isLogin() {
+    return this.modalType === 'login';
   }
 }

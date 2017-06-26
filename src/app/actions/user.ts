@@ -38,11 +38,11 @@ export class RegisterWithEmailAndPassword implements Action {
   constructor(public payload: any) { }
 }
 export class RegisterWithEmailAndPasswordFailure implements Action {
-  type = ActionTypes.LOGIN_WITH_EMAIL_FAILURE;
+  type = ActionTypes.REGISTER_WITH_EMAIL_AND_PASSWORD_FAILURE;
   constructor(public payload: any) { }
 }
 export class RegisterWithEmailAndPasswordSuccess implements Action {
-  type = ActionTypes.LOGIN_WITH_EMAIL_SUCCESS;
+  type = ActionTypes.REGISTER_WITH_EMAIL_AND_PASSWORD_SUCCESS;
   constructor(public payload: any) { }
 }
 

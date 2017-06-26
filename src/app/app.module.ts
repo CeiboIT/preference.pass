@@ -14,10 +14,11 @@ import {reducer} from './reducers';
 import {StoreModule} from '@ngrx/store';
 import {MdDialogModule} from '@angular/material';
 import {AuthModalComponent} from './components/widgets/auth-modal/auth-modal.component';
-import {AuthModalModule} from "./components/widgets/auth-modal/auth-modal.module";
-import {UserEffects} from "./effects/user";
-import {AuthService} from "./services/auth.service";
-import {EmailSignupModule} from "./modules/forms/email-signup/email-signup.module";
+import {AuthModalModule} from './components/widgets/auth-modal/auth-modal.module';
+import {UserEffects} from './effects/user';
+import {AuthService} from './services/auth.service';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +33,9 @@ import {EmailSignupModule} from "./modules/forms/email-signup/email-signup.modul
     FlexLayoutModule,
     routing,
     StoreModule.provideStore(reducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 5
+    }),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     ToolbarModule,

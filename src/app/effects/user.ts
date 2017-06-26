@@ -27,7 +27,7 @@ export class UserEffects {
     .switchMap((payload) => {
       console.log(payload);
       return this.authService.registerWithEmail(payload)
-        .then(result => new RegisterWithEmailAndPasswordSuccess({}))
-        .catch(err => new RegisterWithEmailAndPasswordFailure({}));
+        .then(result => new RegisterWithEmailAndPasswordSuccess(result))
+        .catch(err => new RegisterWithEmailAndPasswordFailure(err));
     });
 }

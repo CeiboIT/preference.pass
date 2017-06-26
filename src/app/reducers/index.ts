@@ -1,5 +1,9 @@
 import {combineReducers} from '@ngrx/store';
-const reducers = {};
+import userReducer from './user';
+
+const reducers = {
+  user: userReducer
+};
 
 const appReducer = combineReducers(reducers);
 

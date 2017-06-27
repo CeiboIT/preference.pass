@@ -16,8 +16,10 @@ import {MdDialogModule} from '@angular/material';
 import {AuthModalComponent} from './components/widgets/auth-modal/auth-modal.component';
 import {AuthModalModule} from './components/widgets/auth-modal/auth-modal.module';
 import {UserEffects} from './effects/user';
+import {ActivitiesEffects} from './effects/activities';
 import {AuthService} from './services/auth.service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {ActivitiesService} from "./services/activities/activities.service";
 
 
 @NgModule({
@@ -38,10 +40,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     }),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
+    EffectsModule.run(ActivitiesEffects),
     ToolbarModule,
     AuthModalModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ActivitiesService],
   bootstrap: [AppComponent],
   entryComponents: [AuthModalComponent]
 })

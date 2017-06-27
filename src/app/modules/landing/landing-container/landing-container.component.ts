@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Activity } from '../../../models/activity';
 import { ActivitiesService } from '../../../services/activities/activities.service';
+import {Store} from '@ngrx/store';
+import { GetList } from '../../../actions/activities';
+import {Observable} from 'rxjs/Observable';
+import { onStateChangeObservable } from '../../../utils/store';
 
 @Component({
   selector: 'app-landing-container',
@@ -9,19 +13,14 @@ import { ActivitiesService } from '../../../services/activities/activities.servi
 })
 
 export class LandingContainerComponent implements OnInit {
-
-  activities : Activity[];
-
+  activities: Activity[];
+  public activities$: Observable<any>;
   constructor(
-    private activitiesService : ActivitiesService
+    private store: Store<any>
   ) { }
-
   ngOnInit() {
-    this.getActivities();
+    this.store.dispatch(new GetList({}));
+    console.log(this.store)
+    this.activities$ = onStateChangeObservable(this.store, 'activities.list');
   }
-
-  getActivities() : void {
-    this.activitiesService.getAllActivities().then(activities => this.activities = activities );
-  }
-
 }

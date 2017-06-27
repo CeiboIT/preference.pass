@@ -1,8 +1,10 @@
 import {combineReducers} from '@ngrx/store';
 import userReducer from './user';
+import activitiesReducer from './activities';
 
 const reducers = {
-  user: userReducer
+  user: userReducer,
+  activities: activitiesReducer
 };
 
 const appReducer = combineReducers(reducers);

@@ -85,10 +85,8 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
             Already have an account? <button md-button (click)="changeModalType()"> Login</button>
           </div>
         </div>
-
-        
       </div>
-      </div>
+    </div>
   `
 })
 export class AuthModalComponent {

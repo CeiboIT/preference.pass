@@ -64,7 +64,7 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
               </button>
             </div>
             <div fxFlex>
-              Don't have an account? <button md-button (click)="changeModalType()"> Register</button>
+              Don't have an account? <button type="button" md-button (click)="changeModalType()"> Register</button>
             </div>
           </form>
         </div>

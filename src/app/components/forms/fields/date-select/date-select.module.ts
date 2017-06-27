@@ -8,10 +8,9 @@ import { DateSelectComponent } from './date-select.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    MdSelectModule
+    CommonModule, MdSelectModule
   ],
   declarations: [DaySelectComponent, MonthSelectComponent, YearSelectComponent, DateSelectComponent],
-  exports: [DaySelectComponent, MonthSelectComponent, YearSelectComponent, DateSelectComponent],
+  exports: [DateSelectComponent]
 })
 export class DateSelectModule { }

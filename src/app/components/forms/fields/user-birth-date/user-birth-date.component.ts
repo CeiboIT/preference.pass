@@ -4,15 +4,7 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-user-birth-date',
   template: `
-    <md-input-container *ngIf="isDatePicker">
-      <input mdInput [mdDatepicker]="myDatepicker">
-      <button mdSuffix [mdDatepickerToggle]="myDatepicker"></button>
-    </md-input-container>
-    <md-datepicker #myDatepicker></md-datepicker>
-    
-    <div fxFlex>
-      
-    </div>
+<p>Basofia</p>
   `
 })
 export class UserBirthDateComponent implements OnInit {
@@ -21,10 +13,6 @@ export class UserBirthDateComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  get isDatePicker() {
-    this.showAs === 'datepicker';
   }
 
 }

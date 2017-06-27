@@ -101,7 +101,8 @@ export class AuthModalComponent {
     email: [''],
     password: [''],
     firstName: [''],
-    lastName: ['']
+    lastName: [''],
+    birthDate: ['']
   });
 
   constructor(private fb: FormBuilder, private dialogRef: MdDialogRef<AuthModalComponent>,

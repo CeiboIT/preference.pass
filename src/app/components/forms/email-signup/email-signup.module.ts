@@ -4,6 +4,7 @@ import { EmailSignupComponent } from './email-signup.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FieldsModule} from '../fields/fields.module';
 import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {DateSelectModule} from "../fields/date-select/date-select.module";
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import {MdButtonModule, MdCheckboxModule} from '@angular/material';
     ReactiveFormsModule,
     MdButtonModule,
     MdCheckboxModule,
-    FieldsModule
+    FieldsModule,
+    DateSelectModule
   ],
   declarations: [EmailSignupComponent],
   exports: [EmailSignupComponent]

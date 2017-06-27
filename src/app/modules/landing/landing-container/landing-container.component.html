@@ -1,0 +1,5 @@
+<md-grid-list cols="5" >
+    <md-grid-tile *ngFor="let activity of activities" >
+        <app-activity-card  [activity]="activity"></app-activity-card>
+    </md-grid-tile>
+</md-grid-list>

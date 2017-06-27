@@ -1,18 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Activity } from '../../../models/activity';
 
 @Component({
   selector: 'app-activity-card',
-  template: `
-    <div>
-      activity card
-    </div>
-  `
+  templateUrl: './activity-card.component.html' 
 })
-export class ActivityCardComponent implements OnInit {
-  @Input() activity;
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class ActivityCardComponent {
+  @Input() activity : Activity;
 
 }

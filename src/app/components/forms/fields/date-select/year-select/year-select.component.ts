@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-year-select',
   template: `
-    <md-select placeholder="Month">
+    <md-select placeholder="Year">
       <md-option *ngFor="let year of years" [value]="year">
         {{ year }}
       </md-option>

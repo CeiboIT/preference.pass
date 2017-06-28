@@ -10,7 +10,7 @@ import {FormGroup} from '@angular/forms';
       <app-user-last-name-input [parent]="parent"></app-user-last-name-input>
       <app-password [parent]="parent"></app-password>
       <div fxFlex>
-        <app-date-select [parent]="parent"></app-date-select>
+        <app-date-select [parent]="parent" [parentKey]="'birthDate'"></app-date-select>
         <div fxFlex>
           Para poder registrarte, debes ser mayor de 18 años. El resto de usuarios no podrá ver tu fecha de nacimiento.
         </div>

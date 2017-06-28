@@ -1,5 +1,17 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import * as moment from 'moment';
+function getDaysInMonth(year, month) {
+  let daysInMonth;
+  if (month < 10) {
+    const dateString = year  + '-0' + month;
+    daysInMonth = moment(dateString, 'YYYY-MM').daysInMonth();
+  }
+  if (month >= 10) {
+    const dateString = year  + '-' + month;
+    daysInMonth = moment(dateString, 'YYYY-MM').daysInMonth();
+  }
+  return daysInMonth;
+}
 
 @Component({
   selector: 'app-day-select',
@@ -13,27 +25,39 @@ import * as moment from 'moment';
 })
 export class DaySelectComponent implements OnInit {
   @Input() monthObserver: EventEmitter<any>;
+  @Input() yearObserver: EventEmitter<any>;
+  @Output() daySelected: EventEmitter<any> = new EventEmitter();
   public days = [];
+  private month;
+  private year;
   constructor() { }
   ngOnInit() {
     // moment("2012-02", "YYYY-MM").daysInMonth()
-    let daysInMonth;
     this.monthObserver.subscribe((value) => {
-      if (value < 10) {
-        const dateString = '2012-0' + value;
-        daysInMonth = moment(dateString, 'YYYY-MM').daysInMonth();
-      }
-      if (value >= 10) {
-        const dateString = '2012-' + value;
-        daysInMonth = moment(dateString, 'YYYY-MM').daysInMonth();
-      }
-      let _days = [];
-      for (let i = 1; i <= daysInMonth; i++) {
-       _days.push(i);
-      }
-      this.days = _days;
+      this.month = value;
+      const _year = this.year || new Date().getFullYear();
+      const daysInMonth = getDaysInMonth(_year, this.month);
+      this.generateDaysInMonth(daysInMonth);
     });
 
+    this.yearObserver.subscribe((value) => {
+      this.year = value;
+      const _month = this.month || new Date().getMonth();
+      const daysInMonth = getDaysInMonth(this.year, _month);
+      this.generateDaysInMonth(daysInMonth);
+    });
+
+  }
+  onChange($event) {
+    this.daySelected.emit($event.value);
+  }
+
+  generateDaysInMonth(daysInMonth) {
+    let _days = [];
+    for (let i = 1; i <= daysInMonth; i++) {
+      _days.push(i);
+    }
+    this.days = _days;
   }
 
 }

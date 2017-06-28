@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-year-select',
   template: `
-    <md-select placeholder="Year">
+    <md-select placeholder="Year" (change)="onChange($event)" >
       <md-option *ngFor="let year of years" [value]="year">
         {{ year }}
       </md-option>
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class YearSelectComponent implements OnInit {
+  @Output() yearSelected: EventEmitter<any> = new EventEmitter();
   constructor() { }
   ngOnInit() {
   }
@@ -21,5 +22,9 @@ export class YearSelectComponent implements OnInit {
       _years.unshift(i);
     };
     return _years;
+  }
+
+  onChange($event) {
+    this.yearSelected.emit($event.value);
   }
 }

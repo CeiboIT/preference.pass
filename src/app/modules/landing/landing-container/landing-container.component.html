@@ -1,5 +1,3 @@
-<md-grid-list cols="5" >
-    <md-grid-tile *ngFor="let activity of activities$ | async" >
-        <app-activity-card  [activity]="activity"></app-activity-card>
-    </md-grid-tile>
-</md-grid-list>
+<div class='activities-landing-container' *ngFor="let activity of activities$ | async" >
+    <app-activity-card [activity]="activity"></app-activity-card>
+</div>

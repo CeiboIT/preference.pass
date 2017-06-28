@@ -16,9 +16,9 @@ import {FormGroup} from '@angular/forms';
         </div>
       </div>
       <div>
-        <md-checkbox>
+        <!-- <md-checkbox>
           Me gustaría recibir cupones, promociones, encuestas y actualizaciones por correo electrónico sobre Airbnb y sus socios.
-        </md-checkbox>
+        </md-checkbox> -->
       </div>
     </div>
   `

@@ -4,7 +4,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-date-select',
   template: `    
-    <div fxFlex *ngFor="let p of format">
+    <div fxFlex="100" *ngFor="let p of format" fxLayout="row">
       <div fxFlex="33%">
         <app-day-select *ngIf="p == 'day'" 
                         [monthObserver]="monthSelectionObserver" 

@@ -97,6 +97,7 @@ export class AuthModalComponent {
   });
   public modalType: string;
   public isAuthWithEmail = false;
+  public registerType = 'social';
   public register = this.fb.group({
     email: [''],
     password: [''],
@@ -116,7 +117,6 @@ export class AuthModalComponent {
         data: this.auth.value
       };
     }
-
   registerWithEmail () {
     return {
      type: 'EmailRegister',
@@ -139,12 +139,15 @@ export class AuthModalComponent {
   changeModalType() {
     if (this.modalType === 'login') {
       this.modalType = 'register';
+      this.registerType = 'withEmail';
     } else {
       this.modalType = 'login';
     }
   }
-
   get isLogin() {
     return this.modalType === 'login';
+  }
+  get isRegisterWithEmail() {
+    return this.registerType === 'withEmail';
   }
 }

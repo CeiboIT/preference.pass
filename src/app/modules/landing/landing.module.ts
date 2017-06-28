@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { routing } from './landing.routes';
+import { MdCardModule } from '@angular/material';
 import { LandingContainerComponent } from './landing-container/landing-container.component';
-import { MdGridListModule } from '@angular/material';
 import { ActivityCardComponent } from '../../components/widgets/activity-card/activity-card.component'
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    MdGridListModule
+    MdCardModule
   ],
   declarations: [
     LandingContainerComponent,

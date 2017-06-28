@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Activity } from '../../../models/activity';
 import { ActivitiesService } from '../../../services/activities/activities.service';
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { GetList } from '../../../actions/activities';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 
 @Component({
@@ -20,7 +20,6 @@ export class LandingContainerComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.store.dispatch(new GetList({}));
-    console.log(this.store)
     this.activities$ = onStateChangeObservable(this.store, 'activities.list');
   }
 }

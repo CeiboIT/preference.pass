@@ -4,6 +4,7 @@ import { AuthModalComponent } from './auth-modal.component';
 import {MdButtonModule, MdDialogModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EmailSignupModule} from '../../forms/email-signup/email-signup.module';
+import {FlexLayoutModule} from '@angular/flex-layout';
 @NgModule({
   imports: [
     CommonModule,
@@ -12,7 +13,8 @@ import {EmailSignupModule} from '../../forms/email-signup/email-signup.module';
     MdButtonModule,
     MdInputModule,
     MdDialogModule,
-    EmailSignupModule
+    EmailSignupModule,
+    FlexLayoutModule
   ],
   declarations: [AuthModalComponent]
 })

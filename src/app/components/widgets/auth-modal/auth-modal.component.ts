@@ -40,7 +40,7 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
   template: `
     <div>
       <div fxFlex="90%" fxFlexAlign.gt-sm="center">
-        <div fxFlex *ngIf="isLogin">
+        <div fxFlex="100%" fxLayout="column" *ngIf="isLogin">
           <div fxFlex>
             <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
               <i class="socicon-facebook"></i> {{ FacebookLoginText }}

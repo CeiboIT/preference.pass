@@ -36,10 +36,13 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
     .email-full-width {
       width: 100%;
     }
+    .modal-container {
+      min-height: 30vh;
+    }
   `],
   template: `
-    <div>
-      <div fxFlex="90%" fxFlexAlign.gt-sm="center">
+    <div class="modal-container">
+      <div fxFlex="100%" fxFlexAlign.gt-sm="top center">
         <div fxFlex="100%" fxLayout="column" *ngIf="isLogin">
           <div fxFlex>
             <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
@@ -52,7 +55,7 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
               <i class="socicon-google"></i> {{ GoogleLoginText }}
             </button>
           </div>
-          <form novalidate [formGroup]="auth">
+          <form fxFlex fxLayout="column" novalidate [formGroup]="auth">
             <div fxFlex>
               <md-input-container class="email-full-width">
                 <input mdInput placeholder="Enter your email address" formControlName="email">

@@ -10,6 +10,6 @@ import {MdButtonModule, MdCardModule} from '@angular/material';
     MdButtonModule
   ],
   declarations: [ActivityCardComponent],
-  bootstrap: [ActivityCardComponent]
+  exports: [ActivityCardComponent]
 })
 export class ActivityCardModule { }

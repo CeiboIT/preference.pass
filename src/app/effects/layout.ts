@@ -29,7 +29,7 @@ export class LayoutEffects {
       }
     };
      retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
-         'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
+         'height': '100%'}) : Object.assign(modalConfig, {'width': '30%', height: '50%'});
 
     this.dialog.open(AuthModalComponent, modalConfig)
       .afterClosed().subscribe(result => {

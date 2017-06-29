@@ -5,6 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FieldsModule} from '../fields/fields.module';
 import {MdButtonModule, MdCheckboxModule} from '@angular/material';
 import {DateSelectModule} from "../fields/date-select/date-select.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {DateSelectModule} from "../fields/date-select/date-select.module";
     MdButtonModule,
     MdCheckboxModule,
     FieldsModule,
-    DateSelectModule
+    DateSelectModule,
+    FlexLayoutModule
   ],
   declarations: [EmailSignupComponent],
   exports: [EmailSignupComponent]

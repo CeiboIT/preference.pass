@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-email-signup',
   template: `
-    <div [formGroup]="parent">
+    <div [formGroup]="parent" fxFlex="100%">
       <app-email-input [parent]="parent"></app-email-input>
       <app-user-first-name-input [parent]="parent"></app-user-first-name-input>
       <app-user-last-name-input [parent]="parent"></app-user-last-name-input>

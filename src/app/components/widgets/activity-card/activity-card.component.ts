@@ -3,7 +3,22 @@ import { Activity } from '../../../models/activity';
 
 @Component({
   selector: 'app-activity-card',
-  templateUrl: './activity-card.component.html',
+  template: `
+    <md-card class="activity-card">
+      <md-card-header>
+        <md-card-title>{{activity.name}}</md-card-title>
+        <md-card-subtitle>{{activity.location}}</md-card-subtitle>
+      </md-card-header>
+      <img md-card-image src="https://goo.gl/akgGCC" layout-fill >
+      <md-card-content>
+        <p> {{activity.description}} </p>
+        <p> $ {{activity.price}} </p>
+      </md-card-content>
+      <md-card-actions align='center' layout="row">
+        <button md-button>Ver detalle</button>
+        <button md-button>Reservar</button>
+      </md-card-actions>
+    </md-card>`,
   styles: [`
     .activity-card { width: 400px; }
   `]

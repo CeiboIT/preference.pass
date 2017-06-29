@@ -1,3 +1,5 @@
-<div class='activities-landing-container' *ngFor="let activity of activities$ | async" >
-    <app-activity-card [activity]="activity"></app-activity-card>
+<div
+  fxFlex
+  class='activities-landing-container' *ngFor="let activity of activities$ | async" >
+  <app-activity-card fxFlex="33%" [activity]="activity"></app-activity-card>
 </div>

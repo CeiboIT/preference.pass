@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { routing } from './landing.routes';
-import { MdCardModule } from '@angular/material';
+import {MdButton, MdButtonModule, MdCardModule} from '@angular/material';
 import { LandingContainerComponent } from './landing-container/landing-container.component';
-import { ActivityCardComponent } from '../../components/widgets/activity-card/activity-card.component'
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {ActivityCardModule} from '../../components/widgets/activity-card/activity-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    MdCardModule
+    FlexLayoutModule,
+    ActivityCardModule
   ],
   declarations: [
-    LandingContainerComponent,
-    ActivityCardComponent
+    LandingContainerComponent
   ],
   exports: [LandingContainerComponent],
-  
+
 })
 export class LandingModule { }

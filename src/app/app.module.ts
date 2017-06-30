@@ -21,7 +21,6 @@ import {AuthService} from './services/auth.service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {ActivitiesService} from "./services/activities/activities.service";
 
-
 @NgModule({
   declarations: [
     AppComponent

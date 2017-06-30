@@ -26,7 +26,11 @@ export class AuthEffects {
     .map(action => action.payload)
     .switchMap((payload) => {
       console.log(payload);
-      return this.authService.registerWithEmail(payload)
+      const registerPayload = {
+        email: payload.email,
+        password: payload.password
+      };
+      return this.authService.registerWithEmail(registerPayload)
         .then(result => new RegisterWithEmailAndPasswordSuccess(result))
         .catch(err => new RegisterWithEmailAndPasswordFailure(err));
     });

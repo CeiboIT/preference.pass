@@ -55,11 +55,7 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
             </button>
           </div>
           <form novalidate [formGroup]="auth">
-            <div>
-              <md-input-container class="email-full-width">
-                <input mdInput placeholder="Enter your email address" formControlName="email">
-              </md-input-container>
-            </div>
+            <app-email-login [parent]="auth"></app-email-login>
             <div>
               <button  [md-dialog-close]="loginWithEmail()" md-raised-button color="primary" type="submit">
                 Login with email
@@ -88,13 +84,13 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
         </div>
         <div class="row" *ngIf="!isLogin && !isRegisterWithEmail">
           <div class="col-12">
-            <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
-              <i class="socicon-facebook"></i> Log in with Facebook
+            <button md-raised-button [md-dialog-close]="registerWithFacebook()" class="facebook-button">
+              <i class="socicon-facebook"></i> Register with Facebook
             </button>
           </div>
           <div class="col-12">
-            <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button">
-              <i class="socicon-google"></i> Log in with Google
+            <button md-raised-button [md-dialog-close]="registerWithGoogle()" class="google-button">
+              <i class="socicon-google"></i> Register with Google
             </button>
           </div>
           <div class="col-12">
@@ -121,7 +117,8 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 })
 export class AuthModalComponent {
   public auth = this.fb.group({
-    email: ['']
+    email: [''],
+    password: ['']
   });
   public modalType: string;
   public isAuthWithEmail = false;
@@ -139,12 +136,12 @@ export class AuthModalComponent {
     console.log(this.data);
     this.modalType = this.data.type;
   }
-    loginWithEmail() {
-      return {
-        type: 'EmailLogin',
-        data: this.auth.value
-      };
-    }
+  loginWithEmail() {
+    return {
+      type: 'EmailLogin',
+      data: this.auth.value
+    };
+  }
   registerWithEmail () {
     return {
      type: 'EmailRegister',
@@ -152,15 +149,28 @@ export class AuthModalComponent {
     };
   }
 
+
   loginWithFacebook() {
     return {
-      type : 'Facebook'
+      type : 'FacebookLogin'
     };
   }
 
   loginWithGoogle() {
     return {
-      type: 'Google'
+      type: 'GoogleLogin'
+    };
+  }
+
+  registerWithFacebook() {
+    return {
+      type: 'FacebookRegister'
+    };
+  }
+
+  registerWithGoogle() {
+    return {
+      type: 'GoogleRegister'
     };
   }
 

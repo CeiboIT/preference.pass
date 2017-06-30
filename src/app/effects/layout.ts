@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {MdDialog} from '@angular/material';
 import {AuthModalComponent} from '../components/widgets/auth-modal/auth-modal.component';
 import { ActionTypes } from '../actions/layout';
-import { LoginWithEmail, RegisterWithEmailAndPassword } from '../actions/user';
+import { LoginWithEmail, RegisterWithEmailAndPassword } from '../actions/auth';
 import {Store} from '@ngrx/store';
 
 function retrieveWidth() {

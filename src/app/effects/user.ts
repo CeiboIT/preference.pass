@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {
   ActionTypes, LoginWithEmailFailure, LoginWithEmailSuccess, RegisterWithEmailAndPasswordFailure,
   RegisterWithEmailAndPasswordSuccess
-} from '../actions/user';
+} from '../actions/auth';
 import {AuthService} from '../services/auth.service';
 
 @Injectable()

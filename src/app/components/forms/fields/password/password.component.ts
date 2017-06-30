@@ -6,10 +6,10 @@ import {FormGroup} from '@angular/forms';
   template: `
     <div [formGroup]="parent">
       <md-input-container class="input-full-width">
-        <input mdInput placeholder="Password" formControlName="password">
+        <input type="password" mdInput placeholder="Password" formControlName="password">
       </md-input-container>
       <md-input-container class="input-full-width" *ngIf="confirmPassword">
-        <input mdInput placeholder="Confirm Password" formControlName="password">
+        <input mdInput type="password" placeholder="Confirm Password" formControlName="password">
       </md-input-container>
     </div>
   `

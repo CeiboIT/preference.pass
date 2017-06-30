@@ -6,7 +6,7 @@ import { NGValidators } from 'ng-validators';
   selector: 'app-email-input',
   template: `    
     <div [formGroup]="parent">
-      <md-input-container>
+      <md-input-container class="input-full-width">
         <input mdInput placeholder="Email" formControlName="email">
       </md-input-container>
     </div>

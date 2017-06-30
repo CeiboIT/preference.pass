@@ -5,7 +5,7 @@ import {FormGroup, Validators, FormControl} from '@angular/forms';
   selector: 'app-user-first-name-input',
   template: `    
     <div [formGroup]="parent">
-      <md-input-container>
+      <md-input-container class="input-full-width">
         <input mdInput placeholder="First Name" formControlName="firstName">
       </md-input-container>
     </div>

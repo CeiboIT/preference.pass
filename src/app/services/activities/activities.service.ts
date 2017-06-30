@@ -12,6 +12,7 @@ export const ACTIVITIES: Activity[] = [
   { name: 'Cena para 3 personas 20% off', location: 'Cancun', price:12000 }
 ];
 */
+
 export const ACTIVITIES: Activity[] = [
   { name: 'Cenote Celeste', location: 'Tulum', price:12000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
   { name: 'Cenote Azul', location: 'Cancun', price:12000, description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},

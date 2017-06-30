@@ -42,14 +42,13 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
   `],
   template: `
     <div class="modal-container">
-      <div fxFlex="100%" fxFlexAlign.gt-sm="top center">
-        <div fxFlex="100%" fxLayout="column" *ngIf="isLogin">
+      <div fxFlex fxFlexAlign.gt-sm="top center">
+        <div fxFlex fxLayout="column" *ngIf="isLogin">
           <div fxFlex>
             <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
               <i class="socicon-facebook"></i> {{ FacebookLoginText }}
             </button>
           </div>
-          <div class="division"></div>
           <div fxFlex>
             <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button">
               <i class="socicon-google"></i> {{ GoogleLoginText }}
@@ -72,21 +71,23 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
           </form>
         </div>
 
-        <div fxFlex *ngIf="!isLogin">
+        <div fxFlex fxLayout="column" *ngIf="!isLogin">
           <div fxFlex>
-              <span>
-                Registrate con Facebook o Google
-              </span>
+            Registrate con Facebook o Google
           </div>
-          <form novalidate [formGroup]="register">
-            <app-email-signup [parent]="register"></app-email-signup>
-            <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
-              Register with email
-            </button>
+          <form novalidate [formGroup]="register" fxFlex fxLayout="column">
+            <div fxFlex>
+              <app-email-signup [parent]="register"></app-email-signup>
+            </div>
+            <div fxFlex>
+              <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
+                Register with email
+              </button>
+            </div>
           </form>
-          <div fxFlex>
+          <!--<div>
             Already have an account? <button md-button (click)="changeModalType()"> Login</button>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

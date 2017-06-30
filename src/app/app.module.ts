@@ -15,7 +15,7 @@ import {StoreModule} from '@ngrx/store';
 import {MdDialogModule} from '@angular/material';
 import {AuthModalComponent} from './components/widgets/auth-modal/auth-modal.component';
 import {AuthModalModule} from './components/widgets/auth-modal/auth-modal.module';
-import {UserEffects} from './effects/user';
+import {AuthEffects} from './effects/auth';
 import {ActivitiesEffects} from './effects/activities';
 import {AuthService} from './services/auth.service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -23,6 +23,7 @@ import {ActivitiesService} from './services/activities/activities.service';
 import {ApolloModule} from 'apollo-angular';
 import {provideClient} from './app.config';
 import {UserService} from './services/user.service';
+import {UserEffects} from './effects/user';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,9 @@ import {UserService} from './services/user.service';
     }),
     ApolloModule.forRoot(provideClient),
     EffectsModule.run(LayoutEffects),
-    EffectsModule.run(UserEffects),
+    EffectsModule.run(AuthEffects),
     EffectsModule.run(ActivitiesEffects),
+    EffectsModule.run(UserEffects),
     ToolbarModule,
     AuthModalModule,
     FlexLayoutModule

@@ -16,7 +16,7 @@ export const ActionTypes = {
   REGISTER_WITH_FACEBOOK_SUCCESS: type('[User] Register with Facebook Success'),
   REGISTER_WITH_GOOGLE: type('[User] Register with Google'),
   REGISTER_WITH_GOOGLE_FAILURE: type('[User] Register with Google Failure'),
-  REGISTER_WITH_GOOGLE_SUCCESS: type('[User] Register with Google Success'),
+  REGISTER_WITH_GOOGLE_SUCCESS: type('[User] Register with Google Success')
 };
 
 export class LoginWithEmail implements Action {
@@ -45,7 +45,5 @@ export class RegisterWithEmailAndPasswordSuccess implements Action {
   constructor(public payload: any) { }
 }
 
-export type Actions =  LoginWithEmail | LoginWithEmailFailure | LoginWithEmailSuccess |
+export type Actions = LoginWithEmail | LoginWithEmailFailure | LoginWithEmailSuccess |
 RegisterWithEmailAndPassword | RegisterWithEmailAndPasswordFailure | RegisterWithEmailAndPasswordSuccess;
-
-

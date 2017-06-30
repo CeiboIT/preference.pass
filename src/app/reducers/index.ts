@@ -1,5 +1,5 @@
 import {combineReducers} from '@ngrx/store';
-import userReducer from './user';
+import userReducer from './auth';
 import activitiesReducer from './activities';
 
 const reducers = {

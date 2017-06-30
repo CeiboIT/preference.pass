@@ -16,7 +16,7 @@ function getDaysInMonth(year, month) {
 @Component({
   selector: 'app-day-select',
   template: `
-    <md-select placeholder="Days" (change)="onChange($event)">
+    <md-select placeholder="Days" (change)="onChange($event)" class="input-full-width">
       <md-option *ngFor="let day of days" [value]="day">
         {{ day }}
       </md-option>

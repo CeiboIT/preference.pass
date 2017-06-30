@@ -20,7 +20,8 @@ import {ActivitiesEffects} from './effects/activities';
 import {AuthService} from './services/auth.service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {ActivitiesService} from './services/activities/activities.service';
-
+import {ApolloModule} from 'apollo-angular';
+import {provideClient} from './app.config';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {ActivitiesService} from './services/activities/activities.service';
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),
+    ApolloModule.forRoot(provideClient),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     EffectsModule.run(ActivitiesEffects),

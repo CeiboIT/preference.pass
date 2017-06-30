@@ -3,7 +3,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 @Component({
   selector: 'app-year-select',
   template: `
-    <md-select placeholder="Year" (change)="onChange($event)" >
+    <md-select placeholder="Year" (change)="onChange($event)" class="input-full-width">
       <md-option *ngFor="let year of years" [value]="year">
         {{ year }}
       </md-option>

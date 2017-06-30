@@ -3,7 +3,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-month-select',
   template: `
-    <md-select placeholder="Month" (change)="onChange($event)">
+    <md-select placeholder="Month" (change)="onChange($event)" class="input-full-width">
       <md-option *ngFor="let month of months" [value]="month">
         {{ month }}
       </md-option>

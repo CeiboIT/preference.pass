@@ -19,7 +19,7 @@ import {UserEffects} from './effects/user';
 import {ActivitiesEffects} from './effects/activities';
 import {AuthService} from './services/auth.service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import {ActivitiesService} from "./services/activities/activities.service";
+import {ActivitiesService} from './services/activities/activities.service';
 
 
 @NgModule({
@@ -42,7 +42,8 @@ import {ActivitiesService} from "./services/activities/activities.service";
     EffectsModule.run(UserEffects),
     EffectsModule.run(ActivitiesEffects),
     ToolbarModule,
-    AuthModalModule
+    AuthModalModule,
+    FlexLayoutModule
   ],
   providers: [AuthService, ActivitiesService],
   bootstrap: [AppComponent],

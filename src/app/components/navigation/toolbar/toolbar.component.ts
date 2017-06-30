@@ -4,7 +4,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
 @Component({
   selector: 'app-toolbar',
   template: `    
-    <md-toolbar color="primary">
+    <md-toolbar color="primary" fxFlex>
       Preference pass
       <span fxFlex></span>
       <button md-icon-button *ngIf="isLoggedIn">

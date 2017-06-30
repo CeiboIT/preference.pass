@@ -3,8 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `    
-    <app-toolbar></app-toolbar>
-    <router-outlet></router-outlet>
+    <div fxFlex fxLayout="column">
+      <div fxFlex>
+        <app-toolbar></app-toolbar>
+      </div>
+      <div fxFlex>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   `
 })
 export class AppComponent {

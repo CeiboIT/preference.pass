@@ -3,23 +3,26 @@ import {FormGroup} from '@angular/forms';
 import * as moment from 'moment';
 @Component({
   selector: 'app-date-select',
-  template: `    
-    <div fxFlex="100" *ngFor="let p of format" fxLayout="row">
-      <div fxFlex="33%">
-        <app-day-select *ngIf="p == 'day'" 
-                        [monthObserver]="monthSelectionObserver" 
-                        [yearObserver]="yearSelectionObserver" 
-                        (daySelected)="onDaySelected($event)"
-        > 
-        </app-day-select>
-      </div>
-      <div fxFlex="33%">
-        <app-month-select *ngIf="p == 'month'" (monthSelected)="onMonthSelected($event)" ></app-month-select>
-      </div>
-      <div fxFlex="33%">
-        <app-year-select *ngIf="p == 'year'" (yearSelected)="onYearSelected($event)" ></app-year-select>
+  template: `
+    <div class="row">
+      <div *ngFor="let p of format" class="col-md-4">
+        <div>
+          <app-day-select *ngIf="p == 'day'"
+                          [monthObserver]="monthSelectionObserver"
+                          [yearObserver]="yearSelectionObserver"
+                          (daySelected)="onDaySelected($event)"
+          >
+          </app-day-select>
+        </div>
+        <div>
+          <app-month-select *ngIf="p == 'month'" (monthSelected)="onMonthSelected($event)" ></app-month-select>
+        </div>
+        <div>
+          <app-year-select *ngIf="p == 'year'" (yearSelected)="onYearSelected($event)" ></app-year-select>
+        </div>
       </div>
     </div>
+    
     
     <pre>
       

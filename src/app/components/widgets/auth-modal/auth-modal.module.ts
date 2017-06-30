@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthModalComponent } from './auth-modal.component';
-import {MdButtonModule, MdDialogModule, MdInputModule} from '@angular/material';
+import {MdButtonModule, MdDialogModule, MdIconModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EmailSignupModule} from '../../forms/email-signup/email-signup.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -12,9 +12,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     ReactiveFormsModule,
     MdButtonModule,
     MdInputModule,
+    MdIconModule,
     MdDialogModule,
-    EmailSignupModule,
-    FlexLayoutModule
+    EmailSignupModule
   ],
   declarations: [AuthModalComponent]
 })

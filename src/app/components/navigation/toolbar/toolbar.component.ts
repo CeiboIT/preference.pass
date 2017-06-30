@@ -14,7 +14,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
         <button md-button color="accent" (click)="openLogin()">
           Login
         </button>
-        <button md-button color="accent">
+        <button md-button color="accent" (click)="openRegister()">
           Register
         </button>
       </div>

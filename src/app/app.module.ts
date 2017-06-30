@@ -22,6 +22,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {ActivitiesService} from './services/activities/activities.service';
 import {ApolloModule} from 'apollo-angular';
 import {provideClient} from './app.config';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import {provideClient} from './app.config';
     AuthModalModule,
     FlexLayoutModule
   ],
-  providers: [AuthService, ActivitiesService],
+  providers: [AuthService, ActivitiesService, UserService],
   bootstrap: [AppComponent],
   entryComponents: [AuthModalComponent]
 })

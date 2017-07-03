@@ -21,7 +21,8 @@
       "styles": [
         "styles.css",
         "assets/css/preference-pass.scss",
-        "assets/css/bootstrap-grid.min.css"
+        "assets/css/bootstrap-grid.min.css",
+        "assets/css/bootstrap-utilities-spacing.min.css"
       ],
       "scripts": [
         "vendors/js/auth0-7.6.1.min.js"

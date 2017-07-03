@@ -1,5 +1,8 @@
-<div
-  fxFlex="100%"
-  class='activities-landing-container' *ngFor="let activity of activities$ | async" >
-  <app-activity-card fxFlex="33%" [activity]="activity"></app-activity-card>
+<div class="col-md-12">
+  <div class="row">
+    <div
+      class="activities-landing-container col-md-3 col-sm-6 col-12" *ngFor="let activity of activities$ | async">
+        <app-activity-card [activity]="activity"></app-activity-card>
+    </div>
+  </div>
 </div>

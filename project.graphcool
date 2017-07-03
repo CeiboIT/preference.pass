@@ -1,0 +1,189 @@
+# projectId: cj41c9u2zddol0177la66g30g
+# version: 25
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  subscription: Subscription @relation(name: "SubscriptionOnUser")
+  email: String!
+  nickname: String!
+  firstName: String!
+  lastName: String!
+  birthDate: DateTime!
+  userId: String!
+  picture: String!
+  reservations: [Reservation!]! @relation(name: "UserOnReservation")
+  companions: [Companion!]! @relation(name: "UserOnCompanion")
+}
+
+type Companion implements Node {
+  fullName: String!
+  birthDate: DateTime!
+  legalId: String
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  reservations: [Reservation!]! @relation(name: "CompanionsOnReservation")
+  companionOwner: User @relation(name: "UserOnCompanion")
+}
+
+type MediaFile implements Node {
+  url: String! @isUnique
+  filename: String
+  mimetype: String
+  id: ID! @isUnique
+  client: String
+  size: Int
+  isWriteable: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  handle: String
+  source: String
+  status: String
+}
+
+type MainPhoto implements Node {
+  url: String! @isUnique
+  filename: String
+  mimetype: String
+  id: ID! @isUnique
+  client: String
+  size: Int
+  isWriteable: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  handle: String
+  source: String
+  status: String
+  activity: Activity @relation(name: "MainPhotoOnActivity")
+}
+
+type SubPhoto implements Node {
+  url: String! @isUnique
+  filename: String
+  mimetype: String
+  id: ID! @isUnique
+  client: String
+  size: Int
+  isWriteable: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  handle: String
+  source: String
+  status: String
+}
+
+type Area implements Node {
+  name: String!
+  location: String!
+  distributors: [Distributor!]! @relation(name: "DistributorOnArea")
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  country: String
+  city: String
+  activities: [Activity!]! @relation(name: "ActivitiesOnArea")
+}
+
+type Distributor implements Node {
+  name: String!
+  sellers: [Seller!]! @relation(name: "SellerOnDistributor")
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  activities: [Activity!]! @relation(name: "ActivityOnDistributor")
+  areas: [Area!]! @relation(name: "DistributorOnArea")
+}
+
+type Seller implements Node {
+  fullName: String
+  code: String
+  distributor: Distributor! @relation(name: "SellerOnDistributor")
+  cards: [DiscountCard!]! @relation(name: "DiscountCardOnSeller")
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}
+
+type DiscountCard implements Node {
+  used: Boolean!
+  code: String!
+  seller: Seller @relation(name: "DiscountCardOnSeller")
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}
+
+type Activity implements Node {
+  distributor: Distributor! @relation(name: "ActivityOnDistributor")
+  name: String!
+  id: ID! @isUnique
+  location: String
+  discount: Discount @relation(name: "DiscountOnActivity")
+  mainPhoto: JSON
+  subPhotos: [JSON!]!
+  description: String
+  published: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  lat: Float
+  long: Float
+  locationAdvice: String; @rename(oldName: "locationDescription")
+  area: Area @relation(name: "ActivitiesOnArea")
+  reservations: [Reservation!]! @relation(name: "ReservationsOnActivity")
+  category: Category @relation(name: "ActivityOnCategory")
+}
+
+type Discount implements Node {
+  originalPrice: Float!
+  discountPrice: Float!
+  activity: Activity @relation(name: "DiscountOnActivity")
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  pendingForApproval: Boolean
+  isActive: Boolean
+}
+
+type Subscription implements Node {
+  subscriptor: User @relation(name: "SubscriptionOnUser")
+  validity: DateTime!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  kids: Int
+  adults: Int!
+  type: String
+}
+
+type Reservation implements Node {
+  owner: User @relation(name: "UserOnReservation")
+  companions: [Companion!]! @relation(name: "CompanionsOnReservation")
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  fee: Float!
+  activity: Activity @relation(name: "ReservationsOnActivity")
+}
+
+type Category implements Node {
+  name: String!
+  picture: String!
+  description: String
+  activities: [Activity!]! @relation(name: "ActivityOnCategory")
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}

@@ -31,6 +31,41 @@ export class AuthService {
     });
   }
 
+  authWithFacebook(type) {
+    return new Promise((resolve, reject) => {
+      auth0.login({
+        connection: 'facebook'
+      }, (err, result) => {
+        if (err) {
+          reject('Error on signin:' + err.message);
+        } else {
+          console.log('Sucess sign up with Facebook login!');
+          this.getAuthUser(result.idToken)
+            .then((profile) => resolve(profile))
+            .catch((error => reject(error)));
+        }
+      });
+    });
+  }
+
+  authWithGoogle(type) {
+    return new Promise((resolve, reject) => {
+      auth0.login({
+        connection: 'google-oauth2'
+      }, (err, result) => {
+        if (err) {
+          reject('Error on signin:' + err.message);
+        } else {
+          console.log('Sucess sign up with Google login!');
+          this.getAuthUser(result.idToken)
+            .then((profile) => resolve(profile))
+            .catch((error => reject(error)));
+        }
+      });
+
+    });
+  }
+
   registerWithEmail(data: AuthWithEmail) {
     return new Promise((resolve, reject) => {
       auth0.signup({

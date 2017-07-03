@@ -34,4 +34,22 @@ export class AuthEffects {
         .then(result => new RegisterWithEmailAndPasswordSuccess(result))
         .catch(err => new RegisterWithEmailAndPasswordFailure(err));
     });
+
+  @Effect()
+  AuthWithGoogle: Observable<{}> = this.action$
+    .ofType(ActionTypes.REGISTER_WITH_GOOGLE)
+    .switchMap((action) => {
+      return this.authService.authWithGoogle({type: action.type})
+        .then(result => new RegisterWithEmailAndPasswordSuccess(result))
+        .catch(err => new RegisterWithEmailAndPasswordFailure(err));
+    });
+
+  @Effect()
+  AuthWithFacebook: Observable<{}> = this.action$
+    .ofType(ActionTypes.REGISTER_WITH_FACEBOOK)
+    .switchMap((action) => {
+      return this.authService.authWithFacebook({type: action.type})
+        .then(result => new RegisterWithEmailAndPasswordSuccess(result))
+        .catch(err => new RegisterWithEmailAndPasswordFailure(err));
+    });
 }

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {MdDialog} from '@angular/material';
 import {AuthModalComponent} from '../components/widgets/auth-modal/auth-modal.component';
 import { ActionTypes } from '../actions/layout';
-import { LoginWithEmail, RegisterWithEmailAndPassword } from '../actions/auth';
+import {LoginWithEmail, RegisterWithEmailAndPassword, RegisterWithFacebook, RegisterWithGoogle,} from '../actions/auth';
 import {Store} from '@ngrx/store';
 
 function retrieveWidth() {
@@ -33,14 +33,7 @@ export class LayoutEffects {
 
     this.dialog.open(AuthModalComponent, modalConfig)
       .afterClosed().subscribe(result => {
-        switch (result.type) {
-          case('EmailRegister'):
-            this.store.dispatch(new RegisterWithEmailAndPassword(result.data));
-          break;
-          case('EmailLogin'):
-            this.store.dispatch(new LoginWithEmail({email: result.data.email}));
-          break;
-        }
+        this.dispatchAuthAction(result.type, result.data);
     });
    });
 
@@ -54,6 +47,26 @@ export class LayoutEffects {
       retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
         'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
 
-      this.dialog.open(AuthModalComponent, modalConfig);
+      this.dialog.open(AuthModalComponent, modalConfig)
+        .afterClosed().subscribe(result => {
+          this.dispatchAuthAction(result.type, result.data);
+      });
     });
+
+  dispatchAuthAction(type, data){
+    switch (type) {
+      case('EmailRegister'):
+        this.store.dispatch(new RegisterWithEmailAndPassword(data));
+        break;
+      case('EmailLogin'):
+        this.store.dispatch(new LoginWithEmail({email: data.email}));
+        break;
+      case('GoogleRegister'):
+        this.store.dispatch(new RegisterWithGoogle({type: type }));
+        break;
+      case('FacebookRegister'):
+        this.store.dispatch(new RegisterWithFacebook({type: type}));
+        break;
+    }
+  }
 }

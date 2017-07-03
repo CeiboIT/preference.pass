@@ -45,5 +45,16 @@ export class RegisterWithEmailAndPasswordSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+export class RegisterWithGoogle implements Action {
+  type = ActionTypes.REGISTER_WITH_GOOGLE;
+  constructor(public payload: any) {};
+}
+
+export class RegisterWithFacebook implements Action {
+  type = ActionTypes.REGISTER_WITH_FACEBOOK;
+  constructor(public payload: any) {};
+}
+
 export type Actions = LoginWithEmail | LoginWithEmailFailure | LoginWithEmailSuccess |
-RegisterWithEmailAndPassword | RegisterWithEmailAndPasswordFailure | RegisterWithEmailAndPasswordSuccess;
+RegisterWithEmailAndPassword | RegisterWithEmailAndPasswordFailure | RegisterWithEmailAndPasswordSuccess |
+RegisterWithGoogle | RegisterWithFacebook;

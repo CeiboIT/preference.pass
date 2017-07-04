@@ -8,6 +8,7 @@ import { UserFirstNameInputComponent } from './user-first-name-input/user-first-
 import { UserLastNameInputComponent } from './user-last-name-input/user-last-name-input.component';
 import { UserBirthDateComponent } from './user-birth-date/user-birth-date.component';
 import {DateSelectModule} from './date-select/date-select.module';
+import { KidsAmountInputComponent } from './kids-amount-input/kids-amount-input.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,7 @@ import {DateSelectModule} from './date-select/date-select.module';
     DateSelectModule
   ],
   declarations: [EmailInputComponent, PasswordComponent, UserFirstNameInputComponent,
-    UserLastNameInputComponent, UserBirthDateComponent],
+    UserLastNameInputComponent, UserBirthDateComponent, KidsAmountInputComponent],
   exports: [EmailInputComponent, PasswordComponent, UserFirstNameInputComponent,
     UserLastNameInputComponent, UserBirthDateComponent]
 })

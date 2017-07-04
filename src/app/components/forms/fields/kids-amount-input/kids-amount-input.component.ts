@@ -11,7 +11,7 @@ import {FormGroup} from '@angular/forms';
         </md-icon>
       </button>
       <md-input-container>
-        <input mdInput placeholder="Kids" value="0" formControlName="kidsAmount">
+        <input mdInput type="number" placeholder="Kids" value="0" formControlName="kidsAmount">
       </md-input-container>
       <button md-icon-button color="primary" (click)="clickOnAdd.emit()">
         <md-icon>

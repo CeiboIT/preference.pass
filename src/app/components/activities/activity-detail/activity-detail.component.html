@@ -1,0 +1,17 @@
+<div class="activity-detail">
+  <div column1 class="activity-image">
+    <img src="{{activity.imageURL}}" layout-fill> 
+  </div>
+  <div column2 class="activity-detail-summary">
+    <h2>{{activity.name}}</h2>
+    <h4>{{activity.location}}</h4>
+    <span class="discount"> Descuento $
+      <span>{{activity.discount}}</span> - <span>{{activity.price}}</span>
+      <span class="discount-percentage">5% off</span>
+    </span>
+    <div class="activity-detail-actions">
+      <button md-button>Reservar</button>
+      <button md-button>Favorito &#9825;</button>
+    </div>
+  </div>
+</div>

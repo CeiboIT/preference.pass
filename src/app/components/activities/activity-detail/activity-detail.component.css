@@ -1,0 +1,27 @@
+.activity-image {
+    max-width: 500px; 
+    max-height: 500px;
+    margin-top: 20px;
+}
+
+.activity-detail {
+    position: relative;
+    padding-left: 25px;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
+.discount-percentage {
+    display: inline-block;
+    margin: 5px 0 0 5px;
+    background-color: #e62e04;
+    color: #fff;
+    line-height: 20px;
+    padding: 0 5px;
+}
+
+.column2.column1{
+    display:flex;
+    flex-direction:column;
+}

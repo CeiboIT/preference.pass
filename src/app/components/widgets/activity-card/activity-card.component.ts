@@ -4,7 +4,7 @@ import { Activity } from '../../../models/activity';
 @Component({
   selector: 'app-activity-card',
   template: `
-    <md-card class="activity-card">
+    <md-card class="activity-card mb-3">
       <md-card-header>
         <md-card-title>{{activity.name}}</md-card-title>
         <md-card-subtitle>{{activity.location}}</md-card-subtitle>
@@ -18,10 +18,7 @@ import { Activity } from '../../../models/activity';
         <button md-button>Ver detalle</button>
         <button md-button>Reservar</button>
       </md-card-actions>
-    </md-card>`,
-  styles: [`
-    .activity-card { width: 400px; }
-  `]
+    </md-card>`
 })
 export class ActivityCardComponent {
   @Input() activity: Activity;

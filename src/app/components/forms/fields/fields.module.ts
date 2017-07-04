@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmailInputComponent } from './email-input/email-input.component';
-import {MdCheckboxModule, MdIconModule, MdInputModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule, MdIconModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PasswordComponent } from './password/password.component';
 import { UserFirstNameInputComponent } from './user-first-name-input/user-first-name-input.component';
@@ -16,12 +16,13 @@ import { KidsAmountInputComponent } from './kids-amount-input/kids-amount-input.
     ReactiveFormsModule,
     MdInputModule,
     MdIconModule,
+    MdButtonModule,
     MdCheckboxModule,
     DateSelectModule
   ],
   declarations: [EmailInputComponent, PasswordComponent, UserFirstNameInputComponent,
     UserLastNameInputComponent, UserBirthDateComponent, KidsAmountInputComponent],
   exports: [EmailInputComponent, PasswordComponent, UserFirstNameInputComponent,
-    UserLastNameInputComponent, UserBirthDateComponent]
+    UserLastNameInputComponent, UserBirthDateComponent, KidsAmountInputComponent]
 })
 export class FieldsModule { }

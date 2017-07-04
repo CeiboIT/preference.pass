@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
   selector: 'app-companion-amount',
   template: `
     <div>
+      <app-kids-amount-input [parent]="parent"></app-kids-amount-input>
     </div>
   `
 })

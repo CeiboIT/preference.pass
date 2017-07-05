@@ -3,20 +3,23 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-subscription-pricing-card',
   template:  `    
-    <md-card class="row align-items-center">
-      <div class="col-12">
-        <h3>
+    <md-card>
+      <md-card-title>
+        <h3 class="text-info">
           1 day
         </h3>
-      </div>
-      <div class="col-12">
-        <h1>
-          19.99
-        </h1>
-        <span>
-          USD
-        </span>
-      </div>
+      </md-card-title>
+      <md-card-content>
+        <h2>
+          $19.99
+        </h2>
+      </md-card-content>
+      <md-card-footer>
+        <button md-raised-button color="primary" class="w-100">
+          Select
+        </button>
+      </md-card-footer>
+  
     </md-card>
   `
 })

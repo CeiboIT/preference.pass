@@ -4,18 +4,23 @@ import {FormBuilder} from "@angular/forms";
 @Component({
   selector: 'app-subscription-wizard',
   template: `
-  <div>
+  <div class="container">
     <h3>
       Wizard
     </h3>
-    <app-companions-amount-container [parent]="paymentRequest">
-      
+    <app-companions-amount-container [parent]="paymentRequest"
+      (successClicked)="onCompanionFormSucccessClick($event)"
+    >
     </app-companions-amount-container>
+    
+    
+    {{ paymentRequest.value | json }}
   </div>
   `
 })
 export class SubscriptionWizardComponent implements OnInit {
   public paymentRequest;
+  public step = 1;
   constructor(private fb: FormBuilder) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
@@ -23,6 +28,10 @@ export class SubscriptionWizardComponent implements OnInit {
       cardToken: [''],
       discountCardCode: ['']
     });
+  }
+
+  onCompanionFormSucccessClick($event) {
+    console.log('click on success');
   }
 
   ngOnInit() {

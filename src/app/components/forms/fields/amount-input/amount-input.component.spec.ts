@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KidsAmountInputComponent } from './kids-amount-input.component';
+import { AmountInputComponent } from './amount-input.component';
 
 describe('KidsAmountInputComponent', () => {
-  let component: KidsAmountInputComponent;
-  let fixture: ComponentFixture<KidsAmountInputComponent>;
+  let component: AmountInputComponent;
+  let fixture: ComponentFixture<AmountInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KidsAmountInputComponent ]
+      declarations: [ AmountInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KidsAmountInputComponent);
+    fixture = TestBed.createComponent(AmountInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

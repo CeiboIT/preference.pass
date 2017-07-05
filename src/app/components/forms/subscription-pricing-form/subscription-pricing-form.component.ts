@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {Pricing} from '../../../models/subscription';
 
 @Component({
   selector: 'app-subscription-pricing-form',
@@ -16,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class SubscriptionPricingFormComponent implements OnInit {
-
+  @Input() pricing: Pricing[] = [];
   constructor() { }
 
   ngOnInit() {

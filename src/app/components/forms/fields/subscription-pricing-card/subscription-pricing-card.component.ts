@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Price} from '../../../../models/subscription';
 
 @Component({
@@ -42,6 +42,7 @@ import {Price} from '../../../../models/subscription';
 })
 export class SubscriptionPricingCardComponent implements OnInit {
   @Input() price: Price;
+  @Output() onCardSelected: EventEmitter<any> = new EventEmitter();
   constructor() { }
   ngOnInit() { }
   get days(){

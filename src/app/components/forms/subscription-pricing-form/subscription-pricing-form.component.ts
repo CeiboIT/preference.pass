@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Pricing} from '../../../models/subscription';
-
+import {Price} from '../../../models/subscription';
+import {prices} from '../../../constants/prices';
 @Component({
   selector: 'app-subscription-pricing-form',
   template: `    
@@ -10,17 +10,25 @@ import {Pricing} from '../../../models/subscription';
             Pricing
           </h2>
         </div>
-        <app-subscription-pricing-card class="col-3">
-          
+        
+        <app-subscription-pricing-card class="col-3" 
+                                       *ngFor="let price of pricesToUse"
+                                       [price]="price"
+                                       (onCardSelected)="onPriceSelected($event)"
+        >
         </app-subscription-pricing-card>
       </div>
   `
 })
 export class SubscriptionPricingFormComponent implements OnInit {
-  @Input() pricing: Pricing[] = [];
+  @Input() hasDiscount = false;
   constructor() { }
-
-  ngOnInit() {
+  ngOnInit() {}
+  get pricesToUse(): Price[] {
+    return (this.hasDiscount) ? prices.withDiscount : prices.normal;
   }
-
+  onPriceSelected($event) {
+    console.log($event);
+    return $event;
+  }
 }

@@ -24,12 +24,10 @@ import {ApolloModule} from 'apollo-angular';
 import {provideClient} from './app.config';
 import {UserService} from './services/user.service';
 import {UserEffects} from './effects/user';
-import { PricingContainerComponent } from './modules/subcription/subscription-wizard/pricing-container/pricing-container.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PricingContainerComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

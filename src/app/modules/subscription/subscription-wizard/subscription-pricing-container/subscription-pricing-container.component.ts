@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-subscription-pricing-container',
   template: `    
     <div>
-      <h2>
-        Select price
-      </h2>
+      
+      <button md-raised-button color="primary">
+        I have a discount card
+      </button>
       
       <app-subscription-pricing-form></app-subscription-pricing-form>
     </div>

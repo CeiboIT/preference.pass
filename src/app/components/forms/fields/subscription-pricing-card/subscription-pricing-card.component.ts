@@ -4,12 +4,12 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-subscription-pricing-card',
   template:  `    
     <md-card class="row align-items-center">
-      <div class="row">
+      <div class="col-12">
         <h3>
           1 day
         </h3>
       </div>
-      <div class="row">
+      <div class="col-12">
         <h1>
           19.99
         </h1>

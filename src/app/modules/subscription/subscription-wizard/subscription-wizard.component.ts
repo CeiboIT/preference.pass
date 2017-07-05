@@ -13,6 +13,9 @@ import {FormBuilder} from "@angular/forms";
     >
     </app-companions-amount-container>
     
+    <app-subscription-pricing-container>
+      
+    </app-subscription-pricing-container>
     
     {{ paymentRequest.value | json }}
   </div>

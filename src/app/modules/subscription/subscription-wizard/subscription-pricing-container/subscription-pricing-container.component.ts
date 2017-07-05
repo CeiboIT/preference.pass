@@ -2,8 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-subscription-pricing-container',
-  templateUrl: './subscription-pricing-container.component.html',
-  styleUrls: ['./subscription-pricing-container.component.css']
+  template: `    
+    <div>
+      <h2>
+        Select price
+      </h2>
+      
+      <app-subscription-pricing-form></app-subscription-pricing-form>
+    </div>
+  `
 })
 export class SubscriptionPricingContainerComponent implements OnInit {
 

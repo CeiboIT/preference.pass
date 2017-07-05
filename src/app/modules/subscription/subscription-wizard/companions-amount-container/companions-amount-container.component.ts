@@ -9,9 +9,8 @@ import {FormGroup} from '@angular/forms';
         How many companions are coming with you?    
       </h2>
       <app-companion-amount [parent]="parent"></app-companion-amount>
-      
-      <button>
-        
+      <button md-button>
+        Next step
       </button>
     </div>
   `

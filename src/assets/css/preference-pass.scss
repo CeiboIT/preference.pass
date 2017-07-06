@@ -12,8 +12,8 @@ $mat-black: (
   50 : #e0e0e0,
   100 : #b3b3b3,
   200 : #808080,
-  300 : #4d4d4d,
-  400 : #262626,
+  300 : #484848,
+  400 : #212121,
   500 : #000000,
   600 : #000000,
   700 : #000000,
@@ -44,8 +44,8 @@ $mat-black: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$candy-app-primary: mat-palette($mat-black);
-$candy-app-accent:  mat-palette($mat-teal, A200, A100, A400);
+$candy-app-primary: mat-palette($mat-black, 400, 300);
+$candy-app-accent:  mat-palette($mat-amber, 300, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);

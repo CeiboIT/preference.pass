@@ -8,6 +8,8 @@ import { Activity } from '../../../models/activity';
 })
 export class ActivityDetailComponent {
   @Input() activity: Activity;
+  public lat: number = 51.678418;
+  public lng: number = 7.809007;
 
   constructor() { }
 }

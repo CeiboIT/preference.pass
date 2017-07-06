@@ -25,6 +25,8 @@ import { provideClient } from './app.config';
 import { UserService } from './services/user.service';
 import { UserEffects } from './effects/user';
 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -40,6 +42,9 @@ import { UserEffects } from './effects/user';
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyC0lBxLiH_mL9PAi48ZP5qVzmJiX22yUy8'
     }),
     ApolloModule.forRoot(provideClient),
     EffectsModule.run(LayoutEffects),

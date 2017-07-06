@@ -26,11 +26,11 @@
             </div><!-- /.detail-banner-info -->
 
             <h2 class="detail-title">
-                Chichen Itza
+                {{ activity.name }}
             </h2>
 
             <div class="detail-banner-address">
-                <i class="fa fa-map-o"></i> Ostuni, Brindisi, Italia
+                <i class="fa fa-map-o"></i> {{ activity.location }}
             </div><!-- /.detail-banner-address -->
 
             <div class="detail-banner-rating">
@@ -57,22 +57,28 @@
 <div class="container">
     <div class="row detail-content">
     <div class="col-sm-7">
-        <div class="detail-gallery">
+        <div class="detail-gallery mb-3">
             <img src="http://preview.byaviators.com/template/superlist/assets/img/tmp/gallery-4.jpg">
         </div><!-- /.detail-gallery -->
 
-        <h2>About <span class="text-secondary">Chichen Itza</span></h2>
+        <md-card class="mb-3">
+          <h2>About <span class="text-secondary">{{ activity.name }}</span></h2>
+          <p>Vestibulum a lectus ullamcorper, dapibus ante id, sagittis libero. In tincidunt nisi venenatis, ornare eros at, hendrerit sem. Nunc metus purus, porta a dignissim vel, vulputate sed odio. Aenean est nisi, pulvinar eget velit quis, placerat hendrerit arcu. Vestibulum non dictum nibh.</p>
+          <p>In congue mattis felis, non hendrerit orci dictum id. Etiam consequat nulla vitae tempus interdum.Nam gravida convallis lacus, at dignissim urna pulvinar sed.</p>
+          <p>Cras ac mi odio. Aliquam erat volutpat. Cras euismod facilisis ligula in tristique. Proin et eleifend lacus, vitae dictum orci</p>
+        </md-card>
 
-        <p>Vestibulum a lectus ullamcorper, dapibus ante id, sagittis libero. In tincidunt nisi venenatis, ornare eros at, hendrerit sem. Nunc metus purus, porta a dignissim vel, vulputate sed odio. Aenean est nisi, pulvinar eget velit quis, placerat hendrerit arcu. Vestibulum non dictum nibh.</p>
-        <p>In congue mattis felis, non hendrerit orci dictum id. Etiam consequat nulla vitae tempus interdum.Nam gravida convallis lacus, at dignissim urna pulvinar sed.</p>
-        <p>Cras ac mi odio. Aliquam erat volutpat. Cras euismod facilisis ligula in tristique. Proin et eleifend lacus, vitae dictum orci</p>
-
+        <md-card class="mb-3">
+          <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </md-card>
 
     </div><!-- /.col-sm-7 -->
 
     <div class="col-sm-5">
-        <div class="background-white p-3">
-            <div class="detail-overview-hearts">
+        <md-card class="mb-3">
+          <div class="detail-overview-hearts">
                 <i class="fa fa-heart"></i> <strong>213 </strong>people love it
             </div>
             <div class="detail-overview-rating">
@@ -81,10 +87,10 @@
 
             <div class="detail-actions row">
                 <div class="col-sm-4">
-                    <button md-button>Reservar</button>
+                    <button md-button md-raised-button class="md-primary">Reservar</button>
                 </div><!-- /.col-sm-4 -->
             </div><!-- /.detail-actions -->
-        </div>
+        </md-card>
     </div><!-- /.col-sm-5 -->
 </div><!-- /.row -->
 

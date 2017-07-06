@@ -6,60 +6,86 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 @Component({
   selector: 'app-auth-modal',
   styles: [`
+    .facebook-button, .google-button, .submit-button {
+      padding: 8px 20px;
+    }
+
     .facebook-button {
       background: #4568b2;
       color: white;
-      display: block;
-      width:100%;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      padding-left: 24px;
-      padding-right: 24px;
     }
 
     .google-button {
       background: white;
-      color: black;
-      width:100%;
-      border: black solid 3px;
-      display: block;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      padding-left: 24px;
-      padding-right: 24px;
+      color: #212121;
+      border: #212121 solid 2px;
     }
-    .division {
-      margin-top: 10px;
-      margin-bottom: 3px;
+
+    .submit-button {
+      color: white;
     }
     
-    .email-full-width {
-      width: 100%;
+    .separator {
+      position: relative;
+      font-size: 18px;
+      color: #aaa;
+      margin: 0;
+      padding: 20px 0;
     }
+
+    .hr-separator {
+      margin-top: 0!important;
+      margin-bottom: 0!important;
+      border-top: 1px solid #d2d8d8;
+    }
+
+    .span-or {
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 5px;
+      margin-left: -25px;
+      background-color: #fff;
+      width: 50px;
+      text-align: center;
+    }
+
     .modal-container {
       min-height: 30vh;
     }
   `],
   template: `
     <div class="modal-container justify-content-center">
+      <div class="w-100" style="overflow:hidden;">
+        <button md-button md-dialog-close class="pull-right mb-2" style="min-width: auto;"><i class="fa fa-close"></i></button>
+      </div>
       <div>
         <div *ngIf="isLogin">
           <div>
-            <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button">
-              <i class="socicon-facebook"></i> Log in with Facebook
+            <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button w-100 mb-2">
+              <i class="socicon-facebook mr-2"></i> Log in with Facebook
             </button>
           </div>
           <div>
-            <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button">
-              <i class="socicon-google"></i> Log in with Google
+            <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button w-100 mb-2">
+              <i class="socicon-google mr-2"></i> Log in with Google
             </button>
           </div>
+
+          <div class="separator">
+            <hr class="hr-separator">
+            <span class="span-or">or</span>
+          </div>
+
           <form novalidate [formGroup]="auth">
             <app-email-login [parent]="auth"></app-email-login>
             <div>
-              <button  [md-dialog-close]="loginWithEmail()" md-raised-button color="primary" type="submit">
+              <button [md-dialog-close]="loginWithEmail()" md-raised-button color="accent" type="submit" class="submit-button w-100">
                 Login with email
               </button>
+            </div>
+            <div class="separator">
+              <hr class="hr-separator">
             </div>
             <div>
               Don't have an account? <button type="button" md-button (click)="changeToRegisterWithEmail()"> Register</button>
@@ -76,7 +102,7 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
           <form class="row" novalidate [formGroup]="register">
             <div class="col-12">
               <app-email-signup [parent]="register"></app-email-signup>
-              <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="primary" type="submit">
+              <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="accent" class="submit-button w-100 mb-2" type="submit">
                 Register with email
               </button>
             </div>
@@ -84,17 +110,17 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
         </div>
         <div class="row" *ngIf="!isLogin && !isRegisterWithEmail">
           <div class="col-12">
-            <button md-raised-button [md-dialog-close]="registerWithFacebook()" class="facebook-button">
+            <button md-raised-button [md-dialog-close]="registerWithFacebook()" class="facebook-button w-100 mb-2">
               <i class="socicon-facebook"></i> Register with Facebook
             </button>
           </div>
           <div class="col-12">
-            <button md-raised-button [md-dialog-close]="registerWithGoogle()" class="google-button">
+            <button md-raised-button [md-dialog-close]="registerWithGoogle()" class="google-button w-100 mb-2">
               <i class="socicon-google"></i> Register with Google
             </button>
           </div>
           <div class="col-12">
-            <button md-raised-button (click)="changeToRegisterWithEmail()" class="google-button">
+            <button md-raised-button (click)="changeToRegisterWithEmail()" class="google-button w-100 mb-2">
               <md-icon>email</md-icon> Register with email
             </button>
           </div>

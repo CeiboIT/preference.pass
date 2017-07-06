@@ -45,7 +45,7 @@ $mat-black: (
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $candy-app-primary: mat-palette($mat-black, 400, 300);
-$candy-app-accent:  mat-palette($mat-amber, 300, A100, A400);
+$candy-app-accent:  mat-palette($mat-yellow, 700, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);

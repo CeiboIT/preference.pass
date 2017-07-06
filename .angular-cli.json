@@ -19,10 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
         "assets/css/preference-pass.scss",
+        "assets/css/bootstrap-reboot.min.css",
         "assets/css/bootstrap-grid.min.css",
-        "assets/css/bootstrap-utilities-spacing.min.css"
+        "assets/css/bootstrap-utilities-spacing.min.css",
+        "assets/css/font-awesome.min.css",
+        "styles.css"
       ],
       "scripts": [
         "vendors/js/auth0-7.6.1.min.js"

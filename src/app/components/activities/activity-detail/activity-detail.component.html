@@ -1,0 +1,97 @@
+<!--<div class="activity-detail">
+  <div column1 class="activity-image">
+    <img src="{{activity.imageURL}}" layout-fill> 
+  </div>
+  <div column2 class="activity-detail-summary">
+    <h2>{{activity.name}}</h2>
+    <h4>{{activity.location}}</h4>
+    <span class="discount"> Descuento $
+      <span>{{activity.discount}}</span> - <span>{{activity.price}}</span>
+      <span class="discount-percentage">5% off</span>
+    </span>
+    <div class="activity-detail-actions">
+      <button md-button>Reservar</button>
+      <button md-button>Favorito &#9825;</button>
+    </div>
+  </div>
+</div>-->
+
+
+<div class="mb-5">
+    <div class="detail-banner" style="background-image: url(http://www.excursionesenlarivieramaya.es/wp-content/uploads/2017/01/Cenote-Ik-Kill-Excursiones-Mundo-Maya-3.jpg);">
+    <div class="container">
+        <div class="detail-banner-left">
+            <div class="detail-banner-info">
+                <div class="detail-label">Category</div>
+            </div><!-- /.detail-banner-info -->
+
+            <h2 class="detail-title">
+                {{ activity.name }}
+            </h2>
+
+            <div class="detail-banner-address">
+                <i class="fa fa-map-o"></i> {{ activity.location }}
+            </div><!-- /.detail-banner-address -->
+
+            <div class="detail-banner-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+            </div><!-- /.detail-banner-rating -->
+
+            <div class="detail-banner-btn bookmark">
+                <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
+            </div><!-- /.detail-claim -->
+
+            <div class="detail-banner-btn heart">
+                <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
+            </div><!-- /.detail-claim -->
+
+        </div><!-- /.detail-banner-left -->
+    </div><!-- /.container -->
+    </div><!-- /.detail-banner -->
+</div>
+
+<div class="container">
+    <div class="row detail-content">
+    <div class="col-sm-7">
+        <div class="detail-gallery mb-3">
+            <img src="http://preview.byaviators.com/template/superlist/assets/img/tmp/gallery-4.jpg">
+        </div><!-- /.detail-gallery -->
+
+        <md-card class="mb-3">
+          <h2>About <span class="text-secondary">{{ activity.name }}</span></h2>
+          <p>Vestibulum a lectus ullamcorper, dapibus ante id, sagittis libero. In tincidunt nisi venenatis, ornare eros at, hendrerit sem. Nunc metus purus, porta a dignissim vel, vulputate sed odio. Aenean est nisi, pulvinar eget velit quis, placerat hendrerit arcu. Vestibulum non dictum nibh.</p>
+          <p>In congue mattis felis, non hendrerit orci dictum id. Etiam consequat nulla vitae tempus interdum.Nam gravida convallis lacus, at dignissim urna pulvinar sed.</p>
+          <p>Cras ac mi odio. Aliquam erat volutpat. Cras euismod facilisis ligula in tristique. Proin et eleifend lacus, vitae dictum orci</p>
+        </md-card>
+
+        <md-card class="mb-3">
+          <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </md-card>
+
+    </div><!-- /.col-sm-7 -->
+
+    <div class="col-sm-5">
+        <md-card class="mb-3">
+          <div class="detail-overview-hearts">
+                <i class="fa fa-heart"></i> <strong>213 </strong>people love it
+            </div>
+            <div class="detail-overview-rating">
+                <i class="fa fa-star"></i> <strong>4.3 / 5 </strong>from <a href="#reviews">316 reviews</a>
+            </div>
+
+            <div class="detail-actions row">
+                <div class="col-sm-4">
+                    <button md-button md-raised-button class="md-primary">Reservar</button>
+                </div><!-- /.col-sm-4 -->
+            </div><!-- /.detail-actions -->
+        </md-card>
+    </div><!-- /.col-sm-5 -->
+</div><!-- /.row -->
+
+</div>

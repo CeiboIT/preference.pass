@@ -49,6 +49,14 @@
   .detail-banner .container {
     height: 100%;
     position: relative; }
+    .detail-banner .tolanding-banner {
+      position: absolute;
+      top: 7%;
+      left: 15px;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      z-index: 1;
+    }
   .detail-banner .detail-banner-left, .detail-banner .detail-banner-right {
     position: absolute;
     top: 50%;

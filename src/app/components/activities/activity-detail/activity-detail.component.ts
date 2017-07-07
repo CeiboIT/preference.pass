@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Activity } from '../../../models/activity';
 
 @Component({
@@ -11,5 +12,11 @@ export class ActivityDetailComponent {
   public lat: number = 51.678418;
   public lng: number = 7.809007;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
+
+  goToLanding(): void {
+    this.router.navigate(['/landing']);
+  }
 }

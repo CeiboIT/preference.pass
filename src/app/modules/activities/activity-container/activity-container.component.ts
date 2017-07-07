@@ -10,7 +10,6 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-activity-container',
   template: `
-    <button md-button (click)="goBack()">Ir a lista de Actividades</button>
     <app-activity-detail [activity]="activity$ | async"></app-activity-detail>
   `
 })
@@ -28,10 +27,6 @@ export class ActivityContainerComponent implements OnInit {
     const id = +this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDetail(id));
     this.activity$ = onStateChangeObservable(this.store, 'activities.detail');
-  }
-
-  goBack(): void {
-    this.router.navigate(['/landing']);
   }
 
 }

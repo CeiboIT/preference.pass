@@ -1,7 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-auth-modal',
@@ -168,7 +167,6 @@ export class AuthModalComponent {
     };
   }
 
-
   loginWithFacebook() {
     return {
       type : 'FacebookLogin'
@@ -205,6 +203,7 @@ export class AuthModalComponent {
   get isLogin() {
     return this.modalType === 'login';
   }
+
   get isRegisterWithEmail() {
     return this.registerType === 'withEmail';
   }

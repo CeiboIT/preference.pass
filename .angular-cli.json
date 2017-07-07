@@ -23,8 +23,9 @@
         "assets/css/bootstrap-reboot.min.css",
         "assets/css/bootstrap-grid.min.css",
         "assets/css/bootstrap-utilities-spacing.min.css",
+        "assets/css/bootstrap-utilities-flexbox.min.css",
         "assets/css/font-awesome.min.css",
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [
         "vendors/js/auth0-7.6.1.min.js"

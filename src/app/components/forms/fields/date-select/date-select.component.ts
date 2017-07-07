@@ -5,7 +5,7 @@ import * as moment from 'moment';
   selector: 'app-date-select',
   template: `
     <div class="row">
-      <div *ngFor="let p of format" class="col-md-4">
+      <div *ngFor="let p of format" class="col-md-4 py-3 py-sm-0">
         <div>
           <app-day-select *ngIf="p == 'day'"
                           [monthObserver]="monthSelectionObserver"
@@ -22,11 +22,6 @@ import * as moment from 'moment';
         </div>
       </div>
     </div>
-    
-    
-    <pre>
-      
-    </pre>
   `
 })
 export class DateSelectComponent implements OnInit {

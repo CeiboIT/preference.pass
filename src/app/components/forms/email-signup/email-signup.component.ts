@@ -4,8 +4,8 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-email-signup',
   template: `
-    <div [formGroup]="parent" fxLayout="row">
-      <div style="width: 100%">
+    <div [formGroup]="parent">
+      <div class="w-100">
         <div>
           <app-email-input [parent]="parent"></app-email-input>
         </div>
@@ -18,7 +18,7 @@ import {FormGroup} from '@angular/forms';
         <div>
             <app-password [parent]="parent"></app-password>
         </div>
-        <div>
+        <div class="py-sm-3">
            <app-date-select [parent]="parent" [parentKey]="'birthDate'"></app-date-select>
         </div>
         <!--<div fxFlex>

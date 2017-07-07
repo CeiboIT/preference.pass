@@ -20,10 +20,6 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
       color: #212121;
       border: #212121 solid 2px;
     }
-
-    .submit-button {
-      color: white;
-    }
     
     .separator {
       position: relative;
@@ -56,19 +52,19 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
   `],
   template: `
     <div class="modal-container justify-content-center">
-      <div class="w-100" style="overflow:hidden;">
+      <div class="w-100" class="o-hidden d-block d-sm-none">
         <button md-button md-dialog-close class="pull-right mb-2" style="min-width: auto;"><i class="fa fa-close"></i></button>
       </div>
       <div>
         <div *ngIf="isLogin">
           <div>
             <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button w-100 mb-2">
-              <i class="socicon-facebook mr-2"></i> Log in with Facebook
+              <i class="fa fa-facebook mr-2"></i> Log in with Facebook
             </button>
           </div>
           <div>
             <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button w-100 mb-2">
-              <i class="socicon-google mr-2"></i> Log in with Google
+              <i class="fa fa-google mr-2"></i> Log in with Google
             </button>
           </div>
 
@@ -79,63 +75,59 @@ import {MD_DIALOG_DATA, MdDialogRef} from '@angular/material';
 
           <form novalidate [formGroup]="auth">
             <app-email-login [parent]="auth"></app-email-login>
-            <div>
-              <button [md-dialog-close]="loginWithEmail()" md-raised-button color="accent" type="submit" class="submit-button w-100">
+            <div class="my-2">
+              <button type="submit" class="submit-button w-100 text-white" [md-dialog-close]="loginWithEmail()" md-raised-button color="accent">
                 Login with email
               </button>
             </div>
             <div class="separator">
               <hr class="hr-separator">
             </div>
-            <div>
-              Don't have an account? <button type="button" md-button (click)="changeToRegisterWithEmail()"> Register</button>
+            <div class="d-flex justify-content-between align-items-center">
+              Don't have an account? <button type="button" class="btn-outline accent" (click)="changeToRegisterWithEmail()"> Register</button>
             </div>
           </form>
         </div>
 
         <div *ngIf="!isLogin && isRegisterWithEmail">
-          <div class="row">
-            <div class="col-12 justify-content-center">
-              Register with Facebook or Google
-            </div>
+          <div class="mb-2">
+            Register with Facebook or Google
           </div>
-          <form class="row" novalidate [formGroup]="register">
-            <div class="col-12">
+          <form novalidate [formGroup]="register">
+            <div>
               <app-email-signup [parent]="register"></app-email-signup>
-              <button  [md-dialog-close]="registerWithEmail()" md-raised-button color="accent" class="submit-button w-100 mb-2" type="submit">
+              <button type="submit" class="submit-button w-100 my-2 text-white" [md-dialog-close]="registerWithEmail()" md-raised-button color="accent">
                 Register with email
               </button>
             </div>
           </form>
         </div>
-        <div class="row" *ngIf="!isLogin && !isRegisterWithEmail">
-          <div class="col-12">
+        <div *ngIf="!isLogin && !isRegisterWithEmail">
+          <div>
             <button md-raised-button [md-dialog-close]="registerWithFacebook()" class="facebook-button w-100 mb-2">
-              <i class="socicon-facebook"></i> Register with Facebook
+              <i class="fa fa-facebook mr-2"></i> Register with Facebook
             </button>
           </div>
-          <div class="col-12">
+          <div >
             <button md-raised-button [md-dialog-close]="registerWithGoogle()" class="google-button w-100 mb-2">
-              <i class="socicon-google"></i> Register with Google
+              <i class="fa fa-google mr-2"></i> Register with Google
             </button>
           </div>
-          <div class="col-12">
+          <div>
             <button md-raised-button (click)="changeToRegisterWithEmail()" class="google-button w-100 mb-2">
-              <md-icon>email</md-icon> Register with email
+              <i class="fa fa-envelope mr-2"></i> Register with email
             </button>
           </div>
         </div>
         
-        <div *ngIf="!isLogin">
+        <div class="my-2" *ngIf="!isLogin">
           Al hacer clic en Registrarse o en 
           Continuar con, acepto las Condiciones del servicio, 
           la Política de Privacidad de Prefence Pass.
         </div>
-        
-        <div class="row" *ngIf="!isLogin">
-          <div class="col-12">
-            Already have an account? <button md-button (click)="changeToLogin()"> Login</button>
-          </div>
+      
+        <div class="d-flex justify-content-between align-items-center" *ngIf="!isLogin">
+          Already have an account? <button class="btn-outline accent" (click)="changeToLogin()"> Login</button>
         </div>
       </div>
     </div>
@@ -159,15 +151,16 @@ export class AuthModalComponent {
 
   constructor(private fb: FormBuilder, private dialogRef: MdDialogRef<AuthModalComponent>,
     @Inject(MD_DIALOG_DATA) public data: any) {
-    console.log(this.data);
     this.modalType = this.data.type;
   }
+
   loginWithEmail() {
     return {
       type: 'EmailLogin',
       data: this.auth.value
     };
   }
+
   registerWithEmail () {
     return {
      type: 'EmailRegister',
@@ -200,7 +193,6 @@ export class AuthModalComponent {
     };
   }
 
-
   changeToRegisterWithEmail() {
     this.modalType = 'register';
     this.registerType = 'withEmail';
@@ -209,6 +201,7 @@ export class AuthModalComponent {
   changeToLogin() {
     this.modalType = 'login';
   }
+
   get isLogin() {
     return this.modalType === 'login';
   }

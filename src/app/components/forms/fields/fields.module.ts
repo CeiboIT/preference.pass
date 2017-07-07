@@ -10,6 +10,7 @@ import { UserBirthDateComponent } from './user-birth-date/user-birth-date.compon
 import {DateSelectModule} from './date-select/date-select.module';
 import {AmountInputComponent} from './amount-input/amount-input.component';
 import { SubscriptionPricingCardComponent } from './subscription-pricing-card/subscription-pricing-card.component';
+import { PpDiscountCardInputComponent } from './pp-discount-card-input/pp-discount-card-input.component';
 
 @NgModule({
   imports: [
@@ -24,8 +25,10 @@ import { SubscriptionPricingCardComponent } from './subscription-pricing-card/su
     DateSelectModule
   ],
   declarations: [EmailInputComponent, PasswordComponent, UserFirstNameInputComponent,
-    UserLastNameInputComponent, UserBirthDateComponent, AmountInputComponent, SubscriptionPricingCardComponent],
+    UserLastNameInputComponent, UserBirthDateComponent, AmountInputComponent,
+    SubscriptionPricingCardComponent, PpDiscountCardInputComponent],
   exports: [EmailInputComponent, PasswordComponent, UserFirstNameInputComponent,
-    UserLastNameInputComponent, UserBirthDateComponent, AmountInputComponent, SubscriptionPricingCardComponent]
+    UserLastNameInputComponent, UserBirthDateComponent, AmountInputComponent,
+    SubscriptionPricingCardComponent, PpDiscountCardInputComponent]
 })
 export class FieldsModule { }

@@ -5,12 +5,14 @@ import { CompanionsAmountContainerComponent } from './companions-amount-containe
 import {CompanionAmountModule} from '../../../components/forms/companion-amount/companion-amount.module';
 import {MdButtonModule} from '@angular/material';
 import {SubscriptionPricingContainerModule} from './subscription-pricing-container/subscription-pricing-container.module';
+import {DiscountCardContainerModule} from './discount-card-container/discount-card-container.module';
 
 @NgModule({
   imports: [
     CommonModule,
     CompanionAmountModule,
     SubscriptionPricingContainerModule,
+    DiscountCardContainerModule,
     MdButtonModule
   ],
   declarations: [SubscriptionWizardComponent, CompanionsAmountContainerComponent],

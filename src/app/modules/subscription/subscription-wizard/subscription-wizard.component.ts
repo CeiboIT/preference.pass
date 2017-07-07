@@ -9,31 +9,35 @@ import {FormBuilder} from "@angular/forms";
       Wizard
     </h3>
     <app-companions-amount-container [parent]="paymentRequest"
-      (successClicked)="onCompanionFormSucccessClick($event)"
-    >
-    </app-companions-amount-container>
-    
-    <app-subscription-pricing-container>
-      
-    </app-subscription-pricing-container>
-    
-    {{ paymentRequest.value | json }}
+      (successClicked)="onCompanionFormSuccessClick($event)"
+    ></app-companions-amount-container>
+    <app-subscription-pricing-container [parent]="paymentRequest"></app-subscription-pricing-container>
+    <app-discount-card-container [parent]="discountCard"></app-discount-card-container>
+    <div>
+      {{ paymentRequest.value | json }}
+    </div>
+    <div>
+      {{ discountCard.value | json }}
+    </div>
   </div>
   `
 })
 export class SubscriptionWizardComponent implements OnInit {
   public paymentRequest;
+  public discountCard;
   public step = 1;
   constructor(private fb: FormBuilder) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
       adultsAmount: [''],
-      cardToken: [''],
+      cardToken: ['']
+    });
+    this.discountCard = this.fb.group({
       discountCardCode: ['']
     });
   }
 
-  onCompanionFormSucccessClick($event) {
+  onCompanionFormSuccessClick($event) {
     console.log('click on success');
   }
 

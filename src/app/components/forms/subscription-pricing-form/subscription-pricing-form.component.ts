@@ -11,11 +11,9 @@ import {prices} from '../../../constants/prices';
           </h2>
         </div>
         
-        <app-subscription-pricing-card class="col-3" 
+        <app-subscription-pricing-card class="col-md-3 col-sm-12" 
                                        *ngFor="let price of pricesToUse"
-                                       [price]="price"
-                                       (onCardSelected)="onPriceSelected($event)"
-        >
+                                       [price]="price" (onCardSelected)="onPriceSelected($event)">
         </app-subscription-pricing-card>
       </div>
   `

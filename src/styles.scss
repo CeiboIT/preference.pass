@@ -1,6 +1,10 @@
 $bg-color: #F7F7F7;
 $accent: #fbc02d; 
 
+* {
+    outline: none!important;
+}
+
 body {
   background-color: $bg-color;
 }

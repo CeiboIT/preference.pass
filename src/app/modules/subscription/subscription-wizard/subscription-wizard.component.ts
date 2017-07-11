@@ -5,28 +5,24 @@ import {FormBuilder} from "@angular/forms";
   selector: 'app-subscription-wizard',
   template: `
   <div class="container">
-    <h3>
-      Wizard
-    </h3>
-
     <md-card class="mb-3">
-      <div class="wz-header d-flex flex-row justify-content-between">
-          <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}" (click)="step = 1">
-            <span class="mdl-step__label">
+      <div class="wz-header d-sm-flex d-none flex-row justify-content-between ">
+          <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}">
+            <span class="mdl-step__label" (click)="step = 1">
               <span class="mdl-step__title">
                 <span class="mdl-step__title-text">Title of step 1</span>
             </span>
             <span class="mdl-step__label-indicator"><span class="mdl-step__label-indicator-content">1</span></span></span>
           </div>
-          <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 2}" (click)="step = 2">
-            <span class="mdl-step__label">
+          <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 2}">
+            <span class="mdl-step__label" (click)="step = 2">
               <span class="mdl-step__title">
                 <span class="mdl-step__title-text">Title of step 2</span>
             </span>
             <span class="mdl-step__label-indicator"><span class="mdl-step__label-indicator-content">2</span></span></span>
           </div>
-          <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 3}" (click)="step = 3">
-            <span class="mdl-step__label">
+          <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 3}">
+            <span class="mdl-step__label" (click)="step = 3">
               <span class="mdl-step__title">
                 <span class="mdl-step__title-text">Title of step 3</span>
             </span>
@@ -40,10 +36,15 @@ import {FormBuilder} from "@angular/forms";
         ></app-companions-amount-container>
       </div>
       <div [hidden]="step !== 2">
-        <app-subscription-pricing-container [parent]="paymentRequest"></app-subscription-pricing-container>
+        <div class="mb-4" [hidden]="hasDiscountCard">
+          <app-subscription-pricing-container [parent]="paymentRequest" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"></app-subscription-pricing-container>
+        </div>
+        <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"></app-discount-card-container>
+
+        {{ hasDiscountCard }}
       </div>
       <div [hidden]="step !== 3">
-        <app-discount-card-container [parent]="discountCard"></app-discount-card-container>
+        pay
       </div>
       <div>
         {{ paymentRequest.value | json }}
@@ -53,10 +54,10 @@ import {FormBuilder} from "@angular/forms";
       </div>
 
       <div class="d-flex justify-content-between mt-4">
-        <button md-button (click)="back()" [disabled]="step === 1">
+        <button md-button (click)="back()" [disabled]="step === 1 || hasDiscountCard">
           BACK
         </button>
-        <button md-button (click)="next()" [disabled]="step === 3">
+        <button md-button (click)="next()" [disabled]="step === 3 || hasDiscountCard">
           CONTINUE
         </button>
       </div>
@@ -109,6 +110,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public paymentRequest;
   public discountCard;
   public step = 1;
+  public hasDiscountCard: boolean = false;
   constructor(private fb: FormBuilder) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
@@ -124,15 +126,20 @@ export class SubscriptionWizardComponent implements OnInit {
     console.log('click on success');
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   back() {
     this.step --;
+    this.hasDiscountCard = false;
   }
 
   next() {
     this.step ++;
+    this.hasDiscountCard = false;
+  }
+
+  hasDiscountCardChange(event) {
+    this.hasDiscountCard = event;
   }
 
 }

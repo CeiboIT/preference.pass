@@ -1,12 +1,10 @@
 import { ActivitiesEffects } from './effects/activities';
-import { ActivitiesService } from './services/activities/activities.service';
 import { AgmCoreModule } from '@agm/core';
 import { ApolloModule } from 'apollo-angular';
 import { AppComponent } from './app.component';
 import { AuthEffects } from './effects/auth';
 import { AuthModalComponent } from './components/widgets/auth-modal/auth-modal.component';
 import { AuthModalModule } from './components/widgets/auth-modal/auth-modal.module';
-import { AuthService } from './services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
@@ -23,9 +21,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
-import { UserService } from './services/user.service';
+import { services as SERVICES } from './services';
 import 'hammerjs';
-
 
 @NgModule({
   declarations: [
@@ -47,15 +44,15 @@ import 'hammerjs';
       apiKey: 'AIzaSyC0lBxLiH_mL9PAi48ZP5qVzmJiX22yUy8'
     }),
     ApolloModule.forRoot(provideClient),
-    EffectsModule.run(LayoutEffects),
-    EffectsModule.run(AuthEffects),
     EffectsModule.run(ActivitiesEffects),
+    EffectsModule.run(AuthEffects),
+    EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     ToolbarModule,
     AuthModalModule,
     FlexLayoutModule
   ],
-  providers: [AuthService, ActivitiesService, UserService],
+  providers: [SERVICES],
   bootstrap: [AppComponent],
   entryComponents: [AuthModalComponent]
 })

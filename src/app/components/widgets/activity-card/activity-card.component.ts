@@ -10,9 +10,9 @@ import { Activity } from '../../../models/activity';
         <md-card-title>{{activity.name}}</md-card-title>
         <md-card-subtitle>{{activity.location}}</md-card-subtitle>
       </md-card-header>
-      <img md-card-image src="{{activity.imageURL}}" layout-fill >
+      <img md-card-image src="{{activity.mainPhoto.url}}" layout-fill >
       <md-card-content>
-        <p> {{activity.description}} </p>
+        <p> {{activity.shortDescription}} </p>
         <p> $ {{activity.price}} </p>
       </md-card-content>
       <md-card-actions align='center' layout="row">

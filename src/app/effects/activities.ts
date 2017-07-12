@@ -1,16 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
-import {Observable} from 'rxjs/Observable';
+import { Actions, Effect } from '@ngrx/effects';
 import {
-  ActionTypes, GetList, GetListFailure, GetListSuccess, GetDetail, GetDetailSuccess, GetDetailFailure
-} from '../actions/activities';
-import {ActivitiesService} from '../services/activities/activities.service';
+  ActionTypes,
+  GetDetail,
+  GetDetailFailure,
+  GetDetailSuccess,
+  GetList,
+  GetListFailure,
+  GetListSuccess
+  } from '../actions/activities';
+import { ActivitiesQueries } from '../services/activities/queries';
+import { ActivitiesService } from '../services/activities/activities.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ActivitiesEffects {
   constructor(
     private action$: Actions, 
-    private activitiesService: ActivitiesService
+    private activitiesService: ActivitiesService,
+    private activitiesQueries: ActivitiesQueries
   ) {}
 
   @Effect()
@@ -18,9 +32,13 @@ export class ActivitiesEffects {
     .ofType(ActionTypes.GET_LIST)
     .map(action => action.payload)
     .switchMap((payload) => {
-      return this.activitiesService.getAllActivities()
-        .then(result => new GetListSuccess(result))
-        .catch(error => new GetListFailure(error));
+      return this.activitiesQueries.getAllActivities()
+        .map((result)=>{
+            return new GetListSuccess(
+              result.data['allActivities']
+            )
+          })
+          .catch(() => Observable.of({ type: ActionTypes.GET_LIST_FAILURE }))
     });
 
   @Effect()

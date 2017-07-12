@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-subscription-wizard',
   template: `
   <div class="container">
     <md-card class="mb-3">
-      <div class="wz-header d-sm-flex d-none flex-row justify-content-between ">
+      <div class="wz-header d-sm-flex d-none flex-row justify-content-between">
           <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}">
             <span class="mdl-step__label" (click)="step = 1">
               <span class="mdl-step__title">
@@ -40,11 +40,16 @@ import {FormBuilder} from "@angular/forms";
           <app-subscription-pricing-container [parent]="paymentRequest" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"></app-subscription-pricing-container>
         </div>
         <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"></app-discount-card-container>
-
-        {{ hasDiscountCard }}
       </div>
       <div [hidden]="step !== 3">
-        pay
+        <app-payment-form
+            [onSuccess]="onCardChargeSuccess"
+            [onError]="onCardChargeError"
+            [stripeKey]="stripeKey"
+            [error]="displayError$ | async"
+            [errorMsg]="payBidErrorMsg$ | async"
+            [loading]="payBidLoading$ | async">
+        </app-payment-form>
       </div>
       <div>
         {{ paymentRequest.value | json }}
@@ -111,6 +116,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public discountCard;
   public step = 1;
   public hasDiscountCard: boolean = false;
+  public stripeKey = 'pk_test_zIcomWu5HiVeH9i5FpWWkcQW';
   constructor(private fb: FormBuilder) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
@@ -137,6 +143,15 @@ export class SubscriptionWizardComponent implements OnInit {
     this.step ++;
     this.hasDiscountCard = false;
   }
+
+  onCardChargeSuccess = (result) => {
+    let token = result.token ? result.token.id : null;
+    this.paymentRequest.get('cardToken').setValue(token);
+	}
+
+	onCardChargeError = (err) => {
+		console.log(err);
+	}
 
   hasDiscountCardChange(event) {
     this.hasDiscountCard = event;

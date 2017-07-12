@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MdButtonModule, MdIconModule, MdToolbarModule} from '@angular/material';
-import {ToolbarComponent} from './toolbar.component';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MdButtonModule, MdIconModule, MdToolbarModule } from '@angular/material';
+import { NgModule } from '@angular/core';
+import { ToolbarComponent } from './toolbar.component';
 
 @NgModule({
   imports: [

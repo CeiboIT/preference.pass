@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CompanionAmountComponent } from './companion-amount.component';
-import {FieldsModule} from '../fields/fields.module';
+import { FieldsModule } from '../fields/fields.module';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   imports: [

@@ -24,7 +24,7 @@ export class ActivityContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = +this.activatedRoute.snapshot.params['id'];
+    const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDetail(id));
     this.activity$ = onStateChangeObservable(this.store, 'activities.detail');
   }

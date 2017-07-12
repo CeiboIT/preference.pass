@@ -17,7 +17,7 @@
 </div>-->
 
 
-<div class="mb-5">
+<div class="mb-5" *ngIf="activity">
     <div class="detail-banner" style="background-image: url(http://www.excursionesenlarivieramaya.es/wp-content/uploads/2017/01/Cenote-Ik-Kill-Excursiones-Mundo-Maya-3.jpg);">
     <div class="tolanding-banner text-white">    
         <button class="btn-outline accent" (click)="goToLanding()">
@@ -27,7 +27,7 @@
     <div class="container">
         <div class="detail-banner-left">
             <div class="detail-banner-info">
-                <div class="detail-label">Category</div>
+                <div class="detail-label">{{ activity.category.name }}</div>
             </div><!-- /.detail-banner-info -->
 
             <h2 class="detail-title">
@@ -35,7 +35,7 @@
             </h2>
 
             <div class="detail-banner-address">
-                <i class="fa fa-map-o"></i> {{ activity.location }}
+                <i class="fa fa-map-o"></i> {{ activity.area.formatedAddress }}
             </div><!-- /.detail-banner-address -->
 
             <div class="detail-banner-rating">
@@ -63,14 +63,12 @@
     <div class="row detail-content">
     <div class="col-sm-7">
         <div class="detail-gallery mb-3">
-            <img src="http://preview.byaviators.com/template/superlist/assets/img/tmp/gallery-4.jpg">
+            <img [src]="activity.mainPhoto.url">
         </div><!-- /.detail-gallery -->
 
         <md-card class="mb-3">
           <h2>About <span class="text-secondary">{{ activity.name }}</span></h2>
-          <p>Vestibulum a lectus ullamcorper, dapibus ante id, sagittis libero. In tincidunt nisi venenatis, ornare eros at, hendrerit sem. Nunc metus purus, porta a dignissim vel, vulputate sed odio. Aenean est nisi, pulvinar eget velit quis, placerat hendrerit arcu. Vestibulum non dictum nibh.</p>
-          <p>In congue mattis felis, non hendrerit orci dictum id. Etiam consequat nulla vitae tempus interdum.Nam gravida convallis lacus, at dignissim urna pulvinar sed.</p>
-          <p>Cras ac mi odio. Aliquam erat volutpat. Cras euismod facilisis ligula in tristique. Proin et eleifend lacus, vitae dictum orci</p>
+          {{ activity.description }}
         </md-card>
 
         <md-card class="mb-3">

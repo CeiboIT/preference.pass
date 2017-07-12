@@ -46,8 +46,13 @@ export class ActivitiesEffects {
     .ofType(ActionTypes.GET_DETAIL)
     .map(action => action.payload)
     .switchMap((payload) => {
-      return this.activitiesService.getActivityByID(payload)
-        .then(result => new GetDetailSuccess(result))
-        .catch(error => new GetDetailFailure(error));
+      return this.activitiesQueries.getActivityByID(payload)
+        .map((result)=>{
+          console.log(result)
+            return new GetDetailSuccess(
+              result.data['Activity']
+            )
+          })
+          .catch(() => Observable.of({ type: ActionTypes.GET_DETAIL_FAILURE }))
     });
 }

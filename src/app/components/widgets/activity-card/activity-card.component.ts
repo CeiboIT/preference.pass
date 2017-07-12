@@ -8,7 +8,7 @@ import { Activity } from '../../../models/activity';
     <md-card class="activity-card mb-3">
       <md-card-header>
         <md-card-title>{{activity.name}}</md-card-title>
-        <md-card-subtitle>{{activity.location}}</md-card-subtitle>
+        <md-card-subtitle>{{activity.area.formatedAddress}}</md-card-subtitle>
       </md-card-header>
       <img md-card-image src="{{activity.mainPhoto.url}}" layout-fill >
       <md-card-content>

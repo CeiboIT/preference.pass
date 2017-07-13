@@ -16,12 +16,17 @@ export class ActivitiesQueries {
                     formatedAddress
                 }
                 shortDescription
+                startsAt
+                finishAt
                 rates {
                     name
                     discountPrice
                     currency
                 }
                 mainPhoto
+                category {
+                    name			
+                }
             }
         }
       `
@@ -56,6 +61,8 @@ export class ActivitiesQueries {
                 category {
                     name			
                 }
+                lat
+                lng
             }
         }
       `

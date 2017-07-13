@@ -63,7 +63,7 @@
     <div class="row detail-content">
     <div class="col-sm-7">
         <div class="detail-gallery mb-3">
-            <img [src]="activity.mainPhoto?.url">
+            <app-photo-gallery [mainPhoto]="activity.mainPhoto" [subPhotos]="activity.subPhotos"></app-photo-gallery>
         </div><!-- /.detail-gallery -->
 
         <md-card class="mb-3">

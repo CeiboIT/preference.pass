@@ -1,0 +1,51 @@
+:host > img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.sub-photos {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+}
+
+.sub-photos .item {
+    display: inline-block;
+    width: 110.4px;
+    margin-right: 0px;
+    position: relative;
+    min-height: 1px;
+    -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sub-photos .item li {
+    display: inline-block;
+    list-style: none;
+    margin: 0px;
+    padding: 10px;
+    transition: all linear .15s;
+    width: 100%;
+}
+
+.sub-photos .item li a {
+    border-bottom: none;
+    display: block;
+    height: 70px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.sub-photos .item li a img {
+    height: 100%;
+    max-width: none;
+    min-width: 100%;
+    width: auto;
+}

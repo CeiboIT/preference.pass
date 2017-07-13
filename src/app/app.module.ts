@@ -23,6 +23,7 @@ import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
 import { services as SERVICES } from './services';
 import 'hammerjs';
+import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
 
 @NgModule({
   declarations: [

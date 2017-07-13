@@ -16,22 +16,12 @@ export class ActivitiesQueries {
                     formatedAddress
                 }
                 shortDescription
-                description
-                communicationExplanation
-                departureExplanation
-                startsAt
-                finishAt
-                scheduleExplanation
-                discount {
+                rates {
                     name
                     discountPrice
                     currency
                 }
                 mainPhoto
-                subPhotos
-                category {
-                    name			
-                }
             }
         }
       `
@@ -56,7 +46,7 @@ export class ActivitiesQueries {
                 startsAt
                 finishAt
                 scheduleExplanation
-                discount {
+                rates {
                     name
                     discountPrice
                     currency

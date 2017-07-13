@@ -7,13 +7,18 @@ import { onStateChangeObservable } from '../../../utils/store';
 @Component({
   selector: 'app-landing-container',
   template: `
-    <div class="container">
-      <div class="col-md-12">
-        <div class="row">
-          <div
-            class="activities-landing-container col-md-4 col-sm-6 col-12" *ngFor="let activity of activities$ | async">
-              <app-activity-card [activity]="activity"></app-activity-card>
+    <div class="container-fluid mt-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="col-12">
+            <h3>Hot deals</h3>
           </div>
+          <div class="col-12">
+            <app-activity-list [activities]="activities$ | async "></app-activity-list>
+          </div>
+        </div>
+        <div class="col-12">
+          
         </div>
       </div>
     </div>
@@ -22,7 +27,7 @@ import { onStateChangeObservable } from '../../../utils/store';
 
 export class LandingContainerComponent implements OnInit {
   public activities$: Observable<any>;
-  
+
   constructor(
     private store: Store<any>
   ) { }

@@ -41,7 +41,6 @@ export class ActivitiesQueries {
   }
 
   getActivityByID(id) {
-      console.warn(id);
        const GET_ACTIVITY = gql`
         query($id: ID!) {
             Activity(id: $id) {

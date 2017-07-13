@@ -27,7 +27,7 @@
     <div class="container">
         <div class="detail-banner-left">
             <div class="detail-banner-info">
-                <div class="detail-label">{{ activity.category.name }}</div>
+                <div class="detail-label">{{ activity.category?.name }}</div>
             </div><!-- /.detail-banner-info -->
 
             <h2 class="detail-title">
@@ -35,7 +35,7 @@
             </h2>
 
             <div class="detail-banner-address">
-                <i class="fa fa-map-o"></i> {{ activity.area.formatedAddress }}
+                <i class="fa fa-map-o"></i> {{ activity.area?.formatedAddress }}
             </div><!-- /.detail-banner-address -->
 
             <div class="detail-banner-rating">
@@ -63,7 +63,7 @@
     <div class="row detail-content">
     <div class="col-sm-7">
         <div class="detail-gallery mb-3">
-            <img [src]="activity.mainPhoto.url">
+            <img [src]="activity.mainPhoto?.url">
         </div><!-- /.detail-gallery -->
 
         <md-card class="mb-3">
@@ -72,8 +72,8 @@
         </md-card>
 
         <md-card class="mb-3">
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          <agm-map [latitude]="activity.lat" [longitude]="activity.lng">
+            <agm-marker [latitude]="activity.lat" [longitude]="activity.lng"></agm-marker>
           </agm-map>
         </md-card>
 

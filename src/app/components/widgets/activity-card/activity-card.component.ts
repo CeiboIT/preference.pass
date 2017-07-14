@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import {compress} from '../../../constants/filestack';
 
 @Component({
   selector: 'app-activity-card',
@@ -32,7 +33,7 @@ export class ActivityCardComponent {
     this.router.navigate(['/detail', this.activity.id]);
   }
   get activityPhoto(){
-      return this.activity.mainPhoto.url || '';
+      return compress + this.activity.mainPhoto.url  || '';
   }
 
 }

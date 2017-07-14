@@ -24,6 +24,7 @@
         "assets/css/bootstrap-grid.min.css",
         "assets/css/bootstrap-utilities-spacing.min.css",
         "assets/css/bootstrap-utilities-flexbox.min.css",
+        "assets/css/bootstrap-utilities-hidden.css",
         "assets/css/font-awesome.min.css",
         "assets/css/photoswipe/photoswipe.css",
         "assets/css/photoswipe/photoswipe-default-skin.css",

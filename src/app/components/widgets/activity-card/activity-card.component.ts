@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
     `,
   styles: [
     '.activity-card {width:100%;}',
-    '.activity-card-image {height:300px; background-repeat: no-repeat !important; background-size: cover !important;}',
+    '.activity-card-image {height:250px; background-repeat: no-repeat !important; background-size: cover !important;}',
     '.activity-card:hover {cursor:pointer}',
     '.activity-title {font-size:16px;}',
     '.activity-content {font-size:14px;}'

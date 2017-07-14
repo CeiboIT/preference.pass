@@ -20,7 +20,7 @@ declare var PhotoSwipeUI_Default;
 				</ul>
 			</md-card>
 		`,
-	styleUrls: ['/photo-gallery.component.css']
+  styleUrls: ['./photo-gallery.component.css']
 })
 
 export class PhotoGalleryComponent implements OnInit {
@@ -34,7 +34,7 @@ export class PhotoGalleryComponent implements OnInit {
 
 	getItems() {
 		var items = [];
-		
+
 		items.push({
 			src: this.mainPhoto.url,
 			w: 300,

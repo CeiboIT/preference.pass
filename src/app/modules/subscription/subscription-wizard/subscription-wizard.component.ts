@@ -37,12 +37,12 @@ import { FormBuilder } from '@angular/forms';
       </div>
       <div [hidden]="step !== 2">
         <div class="mb-4" [hidden]="hasDiscountCard">
-          <app-subscription-pricing-container [parent]="paymentRequest" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
-            
+          <app-subscription-pricing-container [parent]="paymentRequest" 
+                                              (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
           </app-subscription-pricing-container>
         </div>
-        <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
-          
+        <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" 
+                                     (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
         </app-discount-card-container>
       </div>
       <div [hidden]="step !== 3">

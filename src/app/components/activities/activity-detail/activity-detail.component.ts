@@ -8,7 +8,7 @@ import { Activity } from '../../../models/activity';
   styleUrls: ['./activity-detail.component.css']
 })
 export class ActivityDetailComponent {
-  @Input() activity: Activity;
+  @Input() activity;
   public lat: number = 51.678418;
   public lng: number = 7.809007;
 

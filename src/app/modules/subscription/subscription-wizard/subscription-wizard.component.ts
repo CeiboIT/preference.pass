@@ -37,9 +37,13 @@ import { FormBuilder } from '@angular/forms';
       </div>
       <div [hidden]="step !== 2">
         <div class="mb-4" [hidden]="hasDiscountCard">
-          <app-subscription-pricing-container [parent]="paymentRequest" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"></app-subscription-pricing-container>
+          <app-subscription-pricing-container [parent]="paymentRequest" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
+            
+          </app-subscription-pricing-container>
         </div>
-        <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"></app-discount-card-container>
+        <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
+          
+        </app-discount-card-container>
       </div>
       <div [hidden]="step !== 3">
         <app-payment-form
@@ -117,6 +121,9 @@ export class SubscriptionWizardComponent implements OnInit {
   public step = 1;
   public hasDiscountCard: boolean = false;
   public stripeKey = 'pk_test_zIcomWu5HiVeH9i5FpWWkcQW';
+  public displayError$;
+  public payBidErrorMsg$;
+  public payBidLoading$;
   constructor(private fb: FormBuilder) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],

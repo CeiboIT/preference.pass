@@ -9,7 +9,6 @@ import {Component, Input, OnInit} from '@angular/core';
         <app-activity-card [activity]="activity"></app-activity-card>
       </div>
     </div>
-
     <div class="scrolling-wrapper-flexbox hidden-md-down">
       <div class="activities-landing-container col-3" *ngFor="let activity of activities">
         <app-activity-card [activity]="activity"></app-activity-card>

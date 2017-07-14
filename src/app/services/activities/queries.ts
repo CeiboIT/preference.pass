@@ -35,6 +35,38 @@ export class ActivitiesQueries {
     })
   }
 
+  getActivitiesByCategory(categoryName) {
+    const GET_ACTIVITY_BY_CATEGORY = gql`
+      query($categoryName: String) {
+        allActivities(filter: {
+          category: { name: $categoryName}
+        }) {
+          id
+          name
+          area {
+            formatedAddress
+          }
+          shortDescription
+          startsAt
+          finishAt
+          rates {
+            name
+            discountPrice
+            currency
+          }
+          mainPhoto
+          category {
+            name
+          }
+        }
+      }
+    `
+    return this.client.watchQuery({
+      query: GET_ACTIVITY_BY_CATEGORY,
+      variables: { categoryName: categoryName }
+    })
+  }
+
   getActivityByID(id) {
        const GET_ACTIVITY = gql`
         query($id: ID!) {

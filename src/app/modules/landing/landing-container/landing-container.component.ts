@@ -7,7 +7,14 @@ import { onStateChangeObservable } from '../../../utils/store';
 @Component({
   selector: 'app-landing-container',
   template: `
-    <app-activity-list [activities]="activities$ | async "></app-activity-list>
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-12">
+          <h3>Tours</h3>
+        </div>
+        <app-activity-list [activities]="activities$ | async "></app-activity-list>
+      </div>
+    </div>
   `
 })
 

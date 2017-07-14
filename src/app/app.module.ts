@@ -24,6 +24,7 @@ import { UserEffects } from './effects/user';
 import { services as SERVICES } from './services';
 import 'hammerjs';
 import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
+import {NgxSiemaModule} from "ngx-siema";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ActivityListComponent } from './components/activities/activity-list/act
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC0lBxLiH_mL9PAi48ZP5qVzmJiX22yUy8'
     }),
+    NgxSiemaModule.forRoot(),
     ApolloModule.forRoot(provideClient),
     EffectsModule.run(ActivitiesEffects),
     EffectsModule.run(AuthEffects),

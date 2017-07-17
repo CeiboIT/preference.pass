@@ -1,5 +1,5 @@
-# projectId: cj41c9u2zddol0177la66g30g
-# version: 25
+# project: cj41c9u2zddol0177la66g30g
+# version: 101
 
 type File implements Node {
   contentType: String!
@@ -18,6 +18,7 @@ type User implements Node {
   updatedAt: DateTime!
   subscription: Subscription @relation(name: "SubscriptionOnUser")
   email: String!
+  phoneNumber: String
   nickname: String!
   firstName: String!
   lastName: String!
@@ -26,6 +27,7 @@ type User implements Node {
   picture: String!
   reservations: [Reservation!]! @relation(name: "UserOnReservation")
   companions: [Companion!]! @relation(name: "UserOnCompanion")
+  auth0UserId: String @isUnique
 }
 
 type Companion implements Node {
@@ -33,6 +35,7 @@ type Companion implements Node {
   birthDate: DateTime!
   legalId: String
   createdAt: DateTime!
+  phoneNumber: String
   id: ID! @isUnique
   updatedAt: DateTime!
   reservations: [Reservation!]! @relation(name: "CompanionsOnReservation")
@@ -54,47 +57,32 @@ type MediaFile implements Node {
   status: String
 }
 
-type MainPhoto implements Node {
-  url: String! @isUnique
-  filename: String
-  mimetype: String
-  id: ID! @isUnique
-  client: String
-  size: Int
-  isWriteable: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  handle: String
-  source: String
-  status: String
-  activity: Activity @relation(name: "MainPhotoOnActivity")
-}
-
-type SubPhoto implements Node {
-  url: String! @isUnique
-  filename: String
-  mimetype: String
-  id: ID! @isUnique
-  client: String
-  size: Int
-  isWriteable: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  handle: String
-  source: String
-  status: String
-}
-
 type Area implements Node {
   name: String!
-  location: String!
   distributors: [Distributor!]! @relation(name: "DistributorOnArea")
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
-  country: String
-  city: String
   activities: [Activity!]! @relation(name: "ActivitiesOnArea")
+  formatedAddress: String
+  lat: Float
+  lng: Float
+  mainPhoto: Json
+  subPhotos: [Json!]
+  description: String
+  howToReachLocationExplanation: String
+  countryLongName: String
+  countryShortName: String
+  localityShortName: String
+  localityLongName: String
+  administrativeAreaLevel1LongName: String
+  administrativeAreaLevel1ShortName: String
+  administrativeAreaLevel2LongName: String
+  administrativeAreaLevel2ShortName: String
+  administrativeAreaLevel3LongName: String
+  administrativeAreaLevel3ShortName: String
+  administrativeAreaLevel4LongName: String
+  administrativeAreaLevel4ShortName: String
 }
 
 type Distributor implements Node {
@@ -105,16 +93,21 @@ type Distributor implements Node {
   updatedAt: DateTime!
   activities: [Activity!]! @relation(name: "ActivityOnDistributor")
   areas: [Area!]! @relation(name: "DistributorOnArea")
+  phoneNumber: String
+  contactExplanation: String
 }
 
 type Seller implements Node {
   fullName: String
   code: String
+  phoneNumber: String
+  email: String
   distributor: Distributor! @relation(name: "SellerOnDistributor")
   cards: [DiscountCard!]! @relation(name: "DiscountCardOnSeller")
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
+  contactExplanation: String
 }
 
 type DiscountCard implements Node {
@@ -127,34 +120,66 @@ type DiscountCard implements Node {
 }
 
 type Activity implements Node {
-  distributor: Distributor! @relation(name: "ActivityOnDistributor")
+  distributor: Distributor @relation(name: "ActivityOnDistributor")
   name: String!
   id: ID! @isUnique
-  location: String
-  discount: Discount @relation(name: "DiscountOnActivity")
-  mainPhoto: JSON
-  subPhotos: [JSON!]!
   description: String
+  shortDescription: String
   published: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
   lat: Float
-  long: Float
-  locationAdvice: String; @rename(oldName: "locationDescription")
+  lng: Float
+  formattedAddress: String
+  howToReachLocationExplanation: String
   area: Area @relation(name: "ActivitiesOnArea")
   reservations: [Reservation!]! @relation(name: "ReservationsOnActivity")
   category: Category @relation(name: "ActivityOnCategory")
+  mainPhoto: Json!
+  subPhotos: [Json!]
+  communicationExplanation: String
+  finishAt: String!
+  startsAt: String
+  scheduleExplanation: String
+  departureExplanation: String
+  pickUpLocations: [PickUpLocation!]! @relation(name: "ActivityOnPickUpLocation")
+  rates: [Rate!]! @relation(name: "ActivityOnRate")
+  countryLongName: String
+  countryShortName: String
+  localityShortName: String
+  localityLongName: String
+  administrativeAreaLevel1LongName: String
+  administrativeAreaLevel1ShortName: String
+  administrativeAreaLevel2LongName: String
+  administrativeAreaLevel2ShortName: String
+  administrativeAreaLevel3LongName: String
+  administrativeAreaLevel3ShortName: String
+  administrativeAreaLevel4LongName: String
+  administrativeAreaLevel4ShortName: String
+  neighborhoodLongName: String
+  neightborhoodShortName: String
+  subLocalityShortName: String
+  subLocalityLongName: String
+  routeShortName: String
+  routeLongName: String
+  streetNumberShortName: String
+  streetNumberLongName: String
 }
 
-type Discount implements Node {
-  originalPrice: Float!
-  discountPrice: Float!
-  activity: Activity @relation(name: "DiscountOnActivity")
+type Rate implements Node {
+  originalPrice: Float
+  discountPrice: Float
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
   pendingForApproval: Boolean
   isActive: Boolean
+  amenitiesDescription: String!
+  discountType: DiscountTypeEnum!
+  discountPercentage: Float
+  currency: String!
+  name: String!
+  activity: Activity @relation(name: "ActivityOnRate")
 }
 
 type Subscription implements Node {
@@ -176,6 +201,9 @@ type Reservation implements Node {
   updatedAt: DateTime!
   fee: Float!
   activity: Activity @relation(name: "ReservationsOnActivity")
+  executionDate: DateTime
+  executionTime: String
+  ownerComments: String
 }
 
 type Category implements Node {
@@ -186,4 +214,45 @@ type Category implements Node {
   createdAt: DateTime!
   id: ID! @isUnique
   updatedAt: DateTime!
+}
+
+type PickUpLocation implements Node {
+  lat: Float!
+  lng: Float!
+  name: String
+  mainPhoto: [Json!]
+  subPhotos: [Json!]
+  howToReachLocationExplanation: String
+  formattedAddress: String
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  departureFrequency: String
+  departureTimes: [String!]
+  activities: [Activity!]! @relation(name: "ActivityOnPickUpLocation")
+  countryLongName: String
+  countryShortName: String
+  localityShortName: String
+  localityLongName: String
+  administrativeAreaLevel1LongName: String
+  administrativeAreaLevel1ShortName: String
+  administrativeAreaLevel2LongName: String
+  administrativeAreaLevel2ShortName: String
+  administrativeAreaLevel3LongName: String
+  administrativeAreaLevel3ShortName: String
+  administrativeAreaLevel4LongName: String
+  administrativeAreaLevel4ShortName: String
+  neighborhoodLongName: String
+  neighborhoodShortName: String
+  subLocalityShortName: String
+  subLocalityLongName: String
+  routeShortName: String
+  routeLongName: String
+  streetNumberShortName: String
+  streetNumberLongtName: String
+}
+
+enum DiscountTypeEnum {
+  Percentage
+  Absolute
 }

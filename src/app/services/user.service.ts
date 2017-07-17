@@ -12,9 +12,11 @@ export class UserService {
         $birthDate: Int!,
         $firstName: String!,
         $lastName: String!,
-        $picture: String!
+        $picture: String!,
+        $idToken: String!
       ) {
         createUser(
+          authProvider: {auth0: {idToken: $idToken} },
           email: $email, 
           birthDate: $birthDate,
           firstName: $firstName,

@@ -9,7 +9,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-form',
-  templateUrl: './payment-form.component.html',
+  template: 
+  `
+  <form novalidate [formGroup]="userData" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <md-input-container class="input-full-width">
+            <input mdInput name="cardholder-name" placeholder="Holder Name" formControlName="name">
+          </md-input-container>
+      </div>
+      <div class="group">
+        <label>
+          <span class="d-none d-sm-inline">Card number</span>
+          <div id="card-element" class="field"></div>
+        </label>
+      </div>
+        <button type="submit" class="w-100 text-white" [disabled]="userData.invalid || loading" md-raised-button color="accent">
+          <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> </span>
+            Pay
+        </button>
+      <div class="outcome">
+        <div class="error" [ngClass]="{'visible': error}" >{{errorMsg}}</div>
+      </div>
+  </form>
+  `,
   styleUrls: ['./payment-form.component.css']
 })
 

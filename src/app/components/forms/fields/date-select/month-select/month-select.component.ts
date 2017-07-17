@@ -13,9 +13,7 @@ import * as moment from 'moment';
 export class MonthSelectComponent implements OnInit {
   @Output() monthSelected: EventEmitter<any> = new EventEmitter();
   constructor() { }
-
   ngOnInit() {
-
   }
   get months() {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -24,11 +22,7 @@ export class MonthSelectComponent implements OnInit {
   onChange($event) {
     this.monthSelected.emit($event.value);
   }
-
   displayMonth(month) {
-    const date = moment().month(month -1);
-    const _month  = date.format('MMMM');
-    return _month;
+    return moment().month(month - 1).format('MMMM');;
   }
-
 }

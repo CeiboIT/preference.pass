@@ -16,6 +16,7 @@ import 'rxjs/add/operator/switchMap';
 export class ActivityContainerComponent implements OnInit {
   public id: number;
   public activity$: Observable<any>;
+  public user$: Observable<any>
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

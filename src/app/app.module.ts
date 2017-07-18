@@ -1,4 +1,5 @@
 import { ActivitiesEffects } from './effects/activities';
+import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { ApolloModule } from 'apollo-angular';
 import { AppComponent } from './app.component';
@@ -14,17 +15,16 @@ import { HttpModule } from '@angular/http';
 import { LayoutEffects } from './effects/layout';
 import { MdDialogModule } from '@angular/material';
 import { NgModule } from '@angular/core';
+import { NgxSiemaModule } from 'ngx-siema';
 import { provideClient } from './app.config';
 import { reducer } from './reducers';
 import { routing } from './app.routes';
+import { services as SERVICES } from './services';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
-import { services as SERVICES } from './services';
 import 'hammerjs';
-import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
-import {NgxSiemaModule} from "ngx-siema";
 
 @NgModule({
   declarations: [

@@ -5,7 +5,7 @@ import { FormBuilder } from '@angular/forms';
   selector: 'app-subscription-wizard',
   template: `
   <div class="container full-sm">
-    <md-card class="m0 mb-sm-3">
+    <md-card class="m0 my-sm-3">
       <div class="wz-header d-sm-flex d-none flex-row justify-content-between">
           <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}">
             <span class="mdl-step__label" (click)="step = 1">

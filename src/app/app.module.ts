@@ -24,8 +24,8 @@ import { UserEffects } from './effects/user';
 import { services as SERVICES } from './services';
 import 'hammerjs';
 import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
-import {NgxSiemaModule} from "ngx-siema";
-
+import {NgxSiemaModule} from 'ngx-siema';
+import { FroalaViewModule } from 'angular-froala-wysiwyg';
 @NgModule({
   declarations: [
     AppComponent
@@ -38,6 +38,7 @@ import {NgxSiemaModule} from "ngx-siema";
     MdDialogModule,
     FlexLayoutModule,
     routing,
+    FroalaViewModule.forRoot(),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5

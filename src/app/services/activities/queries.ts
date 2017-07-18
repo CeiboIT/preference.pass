@@ -76,6 +76,11 @@ export class ActivitiesQueries {
                 area {
                     formatedAddress
                 }
+                rates {
+                  name
+                  originalPrice
+                  discountPrice
+                }
                 shortDescription
                 description
                 communicationExplanation
@@ -84,9 +89,12 @@ export class ActivitiesQueries {
                 finishAt
                 scheduleExplanation
                 rates {
-                    name
-                    discountPrice
-                    currency
+                  name
+                  originalPrice
+                  discountPrice
+                  discountType
+                  currency
+                  amenitiesDescription
                 }
                 mainPhoto
                 subPhotos

@@ -28,12 +28,15 @@
         "assets/css/font-awesome.min.css",
         "assets/css/photoswipe/photoswipe.css",
         "assets/css/photoswipe/photoswipe-default-skin.css",
+        "assets/froala/css/froala_editor.pkgd.css",
+        "assets/froala/css/froala_style.css",
         "styles.scss"
       ],
       "scripts": [
         "vendors/js/auth0-7.6.1.min.js",
         "assets/js/photoswipe/photoswipe.min.js",
-        "assets/js/photoswipe/photoswipe-ui-default.min.js"
+        "assets/js/photoswipe/photoswipe-ui-default.min.js",
+        "assets/froala/js/froala_editor.pkgd.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

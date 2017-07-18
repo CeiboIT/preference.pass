@@ -1,6 +1,6 @@
 <!--<div class="activity-detail">
   <div column1 class="activity-image">
-    <img src="{{activity.imageURL}}" layout-fill> 
+    <img src="{{activity.imageURL}}" layout-fill>
   </div>
   <div column2 class="activity-detail-summary">
     <h2>{{activity.name}}</h2>
@@ -19,7 +19,7 @@
 
 <div class="mb-5" *ngIf="activity">
     <div class="detail-banner" style="background-image: url(http://www.excursionesenlarivieramaya.es/wp-content/uploads/2017/01/Cenote-Ik-Kill-Excursiones-Mundo-Maya-3.jpg);">
-    <div class="tolanding-banner text-white">    
+    <div class="tolanding-banner text-white">
         <button class="btn-outline accent" (click)="goToLanding()">
             <i class="fa fa-arrow-circle-left mr-2" aria-hidden="true"></i> Ir a lista de Actividades
         </button>
@@ -37,22 +37,22 @@
             <div class="detail-banner-address">
                 <i class="fa fa-map-o"></i> {{ activity.area?.formatedAddress }}
             </div><!-- /.detail-banner-address -->
-
-            <div class="detail-banner-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half-o"></i>
-            </div><!-- /.detail-banner-rating -->
+          <!--
+          <div class="detail-banner-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+          </div><!-- /.detail-banner-rating -->
 
             <div class="detail-banner-btn bookmark">
-                <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Bookmark</span>
+                <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Book now</span>
             </div><!-- /.detail-claim -->
-
-            <div class="detail-banner-btn heart">
-                <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
-            </div><!-- /.detail-claim -->
+          <!--
+          <div class="detail-banner-btn heart">
+              <i class="fa fa-heart-o"></i> <span data-toggle="I Love It">Give Heart</span>
+          </div><!-- /.detail-claim -->
 
         </div><!-- /.detail-banner-left -->
     </div><!-- /.container -->
@@ -65,36 +65,17 @@
         <div class="detail-gallery mb-3">
             <app-photo-gallery [mainPhoto]="activity.mainPhoto" [subPhotos]="activity.subPhotos"></app-photo-gallery>
         </div><!-- /.detail-gallery -->
-
         <md-card class="mb-3">
-          <h2>About <span class="text-secondary">{{ activity.name }}</span></h2>
+          <h2>Offer Summary </h2>
           {{ activity.description }}
         </md-card>
-
         <md-card class="mb-3">
           <agm-map [latitude]="activity.lat" [longitude]="activity.lng">
             <agm-marker [latitude]="activity.lat" [longitude]="activity.lng"></agm-marker>
           </agm-map>
         </md-card>
-
+        <app-rate (rateSelected)="onRateSelected($event)" *ngFor="let rate of activity.rates" [rate]="rate"></app-rate>
     </div><!-- /.col-sm-7 -->
-
-    <div class="col-sm-5">
-        <md-card class="mb-3">
-          <div class="detail-overview-hearts">
-                <i class="fa fa-heart"></i> <strong>213 </strong>people love it
-            </div>
-            <div class="detail-overview-rating">
-                <i class="fa fa-star"></i> <strong>4.3 / 5 </strong>from <a href="#reviews">316 reviews</a>
-            </div>
-
-            <div class="detail-actions row">
-                <div class="col-sm-4">
-                    <button md-button md-raised-button color="accent" class="text-white">Reservar</button>
-                </div><!-- /.col-sm-4 -->
-            </div><!-- /.detail-actions -->
-        </md-card>
-    </div><!-- /.col-sm-5 -->
 </div><!-- /.row -->
 
 </div>

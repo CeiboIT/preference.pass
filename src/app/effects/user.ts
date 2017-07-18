@@ -21,7 +21,10 @@ export class UserEffects {
     .switchMap((payload) => {
       console.log(payload);
       return this.userService.createUser(payload)
-        .map(result => new CreateUserSuccess({}));
+        .map(result => {
+          console.log(result);
+          return new CreateUserSuccess(result);
+        });
     });
   @Effect()
   CreateUserFromFacebook: Observable<{}> = this.action$

@@ -158,4 +158,10 @@ export class AuthService {
     });
 
   }
+
+  get authObserver() {
+    return this.authStatus;
+
+  }
 }
+

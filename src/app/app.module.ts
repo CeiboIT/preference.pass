@@ -25,7 +25,13 @@ import { StoreModule } from '@ngrx/store';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
+<<<<<<< HEAD
 
+=======
+import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
+import {NgxSiemaModule} from 'ngx-siema';
+import { FroalaViewModule } from 'angular-froala-wysiwyg';
+>>>>>>> emiliano
 @NgModule({
   declarations: [
     AppComponent
@@ -38,6 +44,7 @@ import 'hammerjs';
     MdDialogModule,
     FlexLayoutModule,
     routing,
+    FroalaViewModule.forRoot(),
     StoreModule.provideStore(reducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5

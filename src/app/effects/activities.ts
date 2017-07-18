@@ -22,24 +22,25 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ActivitiesEffects {
   constructor(
-    private action$: Actions, 
+    private action$: Actions,
     private activitiesService: ActivitiesService,
     private activitiesQueries: ActivitiesQueries
   ) {}
 
   @Effect()
-  GetActivitiesList: Observable<{}> = this.action$
-    .ofType(ActionTypes.GET_LIST)
+  GetToursList: Observable<{}> = this.action$
+    .ofType(ActionTypes.GET_TOURS)
     .map(action => action.payload)
     .switchMap((payload) => {
-      return this.activitiesQueries.getAllActivities()
-        .map((result)=>{
-            return new GetListSuccess(
-              result.data['allActivities']
-            )
-          })
-          .catch(() => Observable.of({ type: ActionTypes.GET_LIST_FAILURE }))
+      return this.activitiesQueries.getActivitiesByCategory('tours')
+        .map((result) => {
+          return new GetListSuccess(
+            result.data['allActivities']
+          );
+        })
+        .catch(() => Observable.of({ type: ActionTypes.GET_LIST_FAILURE }));
     });
+
 
   @Effect()
   GetActivityDetail: Observable<{}> = this.action$

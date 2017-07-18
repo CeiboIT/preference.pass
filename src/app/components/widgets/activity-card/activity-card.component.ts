@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import {compress, resize} from '../../../constants/filestack';
 
 @Component({
   selector: 'app-activity-card',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
     `,
   styles: [
     '.activity-card {width:100%;}',
-    '.activity-card-image {height:300px; background-repeat: no-repeat !important; background-size: cover !important;}',
+    '.activity-card-image {height:150px; background-repeat: no-repeat !important; background-size: cover !important;}',
     '.activity-card:hover {cursor:pointer}',
     '.activity-title {font-size:16px;}',
     '.activity-content {font-size:14px;}'
@@ -32,7 +33,7 @@ export class ActivityCardComponent {
     this.router.navigate(['/detail', this.activity.id]);
   }
   get activityPhoto(){
-      return this.activity.mainPhoto.url || '';
+      return resize(this.activity.mainPhoto.url, 500, 500);
   }
 
 }

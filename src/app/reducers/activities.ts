@@ -2,6 +2,9 @@ const reducers = {};
 import { ActionTypes, Actions } from '../actions/activities';
 const initialState = {
   list: [],
+  tours: [],
+  restaurants: [],
+  healthAndBeauty: [],
   detail: {},
   loading: false,
   error: ''

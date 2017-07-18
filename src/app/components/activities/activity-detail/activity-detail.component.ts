@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from '../../../models/activity';
 
@@ -9,9 +9,9 @@ import { Activity } from '../../../models/activity';
 })
 export class ActivityDetailComponent {
   @Input() activity;
+  @Output() selectedRate: EventEmitter<any> = new EventEmitter();
   public lat: number = 51.678418;
   public lng: number = 7.809007;
-
   constructor(
     private router: Router
   ) { }
@@ -19,4 +19,10 @@ export class ActivityDetailComponent {
   goToLanding(): void {
     this.router.navigate(['/landing']);
   }
+
+  onRateSelected($event) {
+    this.selectedRate.emit($event);
+  }
+
+
 }

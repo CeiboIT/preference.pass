@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpModule } from '@angular/http';
 import { LayoutEffects } from './effects/layout';
 import { MdDialogModule } from '@angular/material';
@@ -25,13 +26,6 @@ import { StoreModule } from '@ngrx/store';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
-<<<<<<< HEAD
-
-=======
-import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
-import {NgxSiemaModule} from 'ngx-siema';
-import { FroalaViewModule } from 'angular-froala-wysiwyg';
->>>>>>> emiliano
 @NgModule({
   declarations: [
     AppComponent

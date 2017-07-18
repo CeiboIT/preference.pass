@@ -5,7 +5,7 @@ import {Component, Input, OnInit} from '@angular/core';
   template: `
       
     <div class="scrolling-wrapper-flexbox hidden-md-up">
-      <div class="activities-landing-container col-9" *ngFor="let activity of activities">
+      <div class="activities-landing-container col-11" *ngFor="let activity of activities">
         <app-activity-card [activity]="activity"></app-activity-card>
       </div>
     </div>

@@ -1,4 +1,3 @@
-/*
 import { Injectable } from '@angular/core';
 import {UserAuth, AuthWithEmail } from '../models/auth';
 import {Subject} from 'rxjs/Subject';
@@ -164,11 +163,5 @@ export class AuthService {
     return this.authStatus;
 
   }
-}*/
-
-import { Injectable } from '@angular/core';
-export class AuthService {
-  constructor() {}
-
-
 }
+

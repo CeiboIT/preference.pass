@@ -9,6 +9,9 @@
             <div class="detail-banner-left">
                 <div class="detail-banner-info">
                     <div class="detail-label">{{ activity.category?.name }}</div>
+                    <div class="detail-saving">
+                        <app-saving [rates]="activity.rates"></app-saving>
+                    </div>
                 </div>
                 <h2 class="detail-title">
                     {{ activity.name }}
@@ -17,6 +20,7 @@
                 <div class="detail-banner-address">
                     <i class="fa fa-map-o"></i> {{ activity.area?.formatedAddress }}
                 </div>
+
                 <div class="detail-banner-btn bookmark">
                     <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Book now</span>
                 </div>

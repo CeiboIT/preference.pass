@@ -19,7 +19,7 @@ function generateAvailableDays(diff) {
   selector: 'app-booking-date-selector-form',
   template: `
     <div class="row">
-      <div *ngFor="let day of availableDays"  class="col-md-2 col-10 mt-3">
+      <div *ngFor="let day of availableDays"  class="col-md-2 col-sm-6 mt-3">
         <app-booking-date-element  [day]="day"></app-booking-date-element>
       </div>
     </div>

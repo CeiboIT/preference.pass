@@ -67,6 +67,30 @@ export class ActivitiesQueries {
     })
   }
 
+  getActivityDepartures(id) {
+    const GET_ACTIVITY_DEPARTURES = gql`      
+      query($id: ID!) {
+        Activity(id: $id) {
+          id
+          name
+          departures {
+            times
+            pickUpLocations {
+              name
+              mainPhoto
+              formattedAddress
+            }
+          }
+        }
+      }
+    `;
+
+    return this.client.watchQuery({
+      query: GET_ACTIVITY_DEPARTURES,
+      variables: { id: id }
+    });
+  }
+
   getActivityByID(id) {
        const GET_ACTIVITY = gql`
         query($id: ID!) {
@@ -109,6 +133,6 @@ export class ActivitiesQueries {
     return this.client.watchQuery({
       query: GET_ACTIVITY,
       variables: { id: id }
-    })
+    });
   }
 }

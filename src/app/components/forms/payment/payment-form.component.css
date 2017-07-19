@@ -92,3 +92,13 @@ button {
   font-weight: 500;
   font-size: 13px;
 }
+
+@media screen and (max-width: 480px) {
+  form {
+    width: 100%;
+  }
+
+  .field {
+    width: 100%;
+  }
+}

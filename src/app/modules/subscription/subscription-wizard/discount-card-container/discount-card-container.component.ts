@@ -5,6 +5,9 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-discount-card-container',
   template: `
     <div [formGroup]="parent">
+      <h2>
+        Enter a discount card
+      </h2>
       <app-discount-card-form [parent]="parent"></app-discount-card-form>
       <div class="d-flex justify-content-end">
         <button md-raised-button class="mr-2" (click)="hasDiscountCardChangeStatus()">

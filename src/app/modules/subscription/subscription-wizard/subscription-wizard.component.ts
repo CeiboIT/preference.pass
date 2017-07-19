@@ -4,8 +4,8 @@ import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-subscription-wizard',
   template: `
-  <div class="container">
-    <md-card class="mb-3">
+  <div class="container full-sm">
+    <md-card class="m0 my-sm-3">
       <div class="wz-header d-sm-flex d-none flex-row justify-content-between">
           <div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}">
             <span class="mdl-step__label" (click)="step = 1">
@@ -55,12 +55,12 @@ import { FormBuilder } from '@angular/forms';
             [loading]="payBidLoading$ | async">
         </app-payment-form>
       </div>
-      <div>
+      <!--<div>
         {{ paymentRequest.value | json }}
       </div>
       <div>
         {{ discountCard.value | json }}
-      </div>
+      </div>-->
 
       <div class="d-flex justify-content-between mt-4">
         <button md-button (click)="back()" [disabled]="step === 1 || hasDiscountCard">
@@ -111,6 +111,22 @@ import { FormBuilder } from '@angular/forms';
 
     .mdl-step__label {
       padding: 24px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .full-sm {
+        position: absolute!important;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      .full-sm .mat-card{
+        min-height: 100%;
+        width: 100%;
+      }
     }
 
   `]

@@ -4,7 +4,7 @@ import {Rate} from '../../../../models/rate';
 @Component({
   selector: 'app-rate',
   template: `
-    <md-card class="mt-3">
+    <md-card class="mb-3">
       <h2>{{ rate.name }}  </h2>
       <h3>
         {{ rate.currency}}&nbsp;{{ rate.discountPrice}}&nbsp;

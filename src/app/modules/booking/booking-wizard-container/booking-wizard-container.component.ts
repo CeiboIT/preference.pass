@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-booking-wizard-container',
   template: `
     <div>
-      Booking wizard
+      <app-booking-date-selector-form></app-booking-date-selector-form>
     </div>
   `
 })

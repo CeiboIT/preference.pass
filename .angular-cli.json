@@ -31,6 +31,7 @@
         "assets/css/photoswipe/photoswipe-default-skin.css",
         "assets/froala/css/froala_editor.pkgd.css",
         "assets/froala/css/froala_style.css",
+        "assets/css/swiper.min.css",
         "styles.scss"
       ],
       "scripts": [

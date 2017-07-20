@@ -29,9 +29,11 @@ export class ActivityCardComponent {
   constructor(
     private router: Router
   ){}
+
   gotoDetail(): void {
     this.router.navigate(['/detail', this.activity.id]);
   }
+  
   get activityPhoto(){
       return resize(this.activity.mainPhoto.url, 500, 500);
   }

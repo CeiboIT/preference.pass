@@ -3,15 +3,15 @@ import { Rate } from '../../../../models/rate';
 import * as _ from 'lodash';
 
 @Component({
-	selector: 'app-saving',
+	selector: 'app-price-displayer',
 	template: `
-		<span *ngIf="lowestRate && lowestRate.currency">
-			You save {{ totalDiscount }}
-    	</span>
+		<span *ngIf="lowestRate">
+			{{ displayPrice }}
+		</span>
 	`
 })
 
-export class SavingComponent implements OnInit {
+export class PriceDisplayerComponent implements OnInit {
 	@Input() rates: Rate[];
 	constructor() { }
 
@@ -20,8 +20,8 @@ export class SavingComponent implements OnInit {
 	get lowestRate(): Rate {
     	return _.sortBy(this.rates, 'discountPrice')[0];
 	}
-	
-	get totalDiscount() {
-    	return this.lowestRate.currency + ' ' + ( this.lowestRate.originalPrice - this.lowestRate.discountPrice ) ;
- 	}
+
+	get displayPrice () {
+		return (this.rates.length > 1 ? 'from' : 'at') + ' ' + this.lowestRate.currency + ' ' + this.lowestRate.discountPrice;
+	}
 }

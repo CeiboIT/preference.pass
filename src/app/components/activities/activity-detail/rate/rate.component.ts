@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Rate} from '../../../../models/rate';
+import { Rate } from '../../../../models/rate';
 
 @Component({
   selector: 'app-rate',
@@ -7,7 +7,7 @@ import {Rate} from '../../../../models/rate';
     <md-card class="mb-3">
       <h2>{{ rate.name }}  </h2>
       <h3>
-        {{ rate.currency}}&nbsp;{{ rate.discountPrice}}&nbsp;
+        {{ rate.currency }}&nbsp;{{ rate.discountPrice }}&nbsp;
       </h3>
       <h4><span class="discount-color">You save {{ totalDiscount }} </span></h4>
       <md-card-content>
@@ -23,11 +23,15 @@ import {Rate} from '../../../../models/rate';
 export class RateComponent implements OnInit {
   @Input() rate: Rate;
   @Output() rateSelected: EventEmitter<any> = new EventEmitter();
+  
   constructor() { }
+  
   ngOnInit() { }
+  
   book() {
     this.rateSelected.emit(this.rate);
   }
+
   get totalDiscount() {
     return this.rate.currency + ' ' + ( this.rate.originalPrice - this.rate.discountPrice ) ;
   }

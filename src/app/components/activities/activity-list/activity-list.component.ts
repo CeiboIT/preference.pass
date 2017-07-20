@@ -16,20 +16,19 @@ import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
       </div>
     </div>-->
 
-
-      <div [swiper]="config" (indexChange)="onIndexChange($event)" class="swiper-container" *ngIf="activities.length">
-        <div class="swiper-wrapper">
-            <div *ngFor="let activity of activities" class="swiper-slide">
-              <app-activity-card [activity]="activity"></app-activity-card>
-            </div>
+    <div [swiper]="config" (indexChange)="onIndexChange($event)" class="swiper-container" *ngIf="activities.length">
+      <div class="swiper-wrapper">
+          <div *ngFor="let activity of activities" class="swiper-slide">
+            <app-activity-card [activity]="activity"></app-activity-card>
           </div>
-          <!-- Controls -->
-          <div [hidden]="config.scrollbar != '.swiper-scrollbar'" class="swiper-scrollbar"></div>
-          <div [hidden]="config.pagination != '.swiper-pagination'" class="swiper-pagination"></div>
-          <!-- Arrows -->
-          <div [hidden]="config.nextButton != '.swiper-button-next'" class="swiper-button-next"></div>
-          <div [hidden]="config.prevButton != '.swiper-button-prev'" class="swiper-button-prev"></div>
-      </div>
+        </div>
+        <!-- Controls -->
+        <div [hidden]="config.scrollbar != '.swiper-scrollbar'" class="swiper-scrollbar"></div>
+        <div [hidden]="config.pagination != '.swiper-pagination'" class="swiper-pagination"></div>
+        <!-- Arrows -->
+        <div [hidden]="config.nextButton != '.swiper-button-next'" class="swiper-button-next"></div>
+        <div [hidden]="config.prevButton != '.swiper-button-prev'" class="swiper-button-prev"></div>
+    </div>
 
 
   `,
@@ -46,7 +45,7 @@ export class ActivityListComponent implements OnInit {
         pagination: null,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
-        slidesPerView: 4,
+        slidesPerView: 5,
         centeredSlides: false,
         spaceBetween: 30,
         breakpoints: {
@@ -70,7 +69,7 @@ export class ActivityListComponent implements OnInit {
   };
 
 
-    onIndexChange(index: number) {
+  onIndexChange(index: number) {
     console.log('Swiper index: ' + index);
   }
 }

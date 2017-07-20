@@ -9,23 +9,30 @@ import { AuthModalModule } from './components/widgets/auth-modal/auth-modal.modu
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpModule } from '@angular/http';
 import { LayoutEffects } from './effects/layout';
 import { MdDialogModule } from '@angular/material';
 import { NgModule } from '@angular/core';
-import { NgxSiemaModule } from 'ngx-siema';
 import { provideClient } from './app.config';
 import { reducer } from './reducers';
 import { routing } from './app.routes';
 import { services as SERVICES } from './services';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import { SwiperModule } from 'ngx-swiper-wrapper';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
+
+const SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto',
+  keyboardControl: true
+};
+
 @NgModule({
   declarations: [
     AppComponent
@@ -36,7 +43,6 @@ import 'hammerjs';
     FormsModule,
     HttpModule,
     MdDialogModule,
-    FlexLayoutModule,
     routing,
     FroalaViewModule.forRoot(),
     StoreModule.provideStore(reducer),
@@ -46,15 +52,14 @@ import 'hammerjs';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC0lBxLiH_mL9PAi48ZP5qVzmJiX22yUy8'
     }),
-    NgxSiemaModule.forRoot(),
+    SwiperModule.forRoot(SWIPER_CONFIG),
     ApolloModule.forRoot(provideClient),
     EffectsModule.run(ActivitiesEffects),
     EffectsModule.run(AuthEffects),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     ToolbarModule,
-    AuthModalModule,
-    FlexLayoutModule
+    AuthModalModule
   ],
   providers: [SERVICES],
   bootstrap: [AppComponent],

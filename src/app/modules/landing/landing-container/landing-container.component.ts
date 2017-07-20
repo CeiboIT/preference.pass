@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {GetList, GetTours} from '../../../actions/activities';
+import { GetList, GetTours } from '../../../actions/activities';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 

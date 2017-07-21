@@ -21,7 +21,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
         </div>
       </div>
 
-      <md-toolbar-row class="justify-content-end">
+      <md-toolbar-row class="justify-content-center justify-content-sm-end">
         <div>
           <ul class="d-flex navbar-items">
             <li class="navbar-item">

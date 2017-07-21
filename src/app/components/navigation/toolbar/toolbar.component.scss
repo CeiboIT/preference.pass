@@ -53,6 +53,18 @@ ul.navbar-items {
                     transform: scale(1, 1);
                 }
             }
+
+        }
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    ul.navbar-items {
+        li.navbar-item {
+            a {
+                padding: 9px 14px;
+            }
         }
     }
 }

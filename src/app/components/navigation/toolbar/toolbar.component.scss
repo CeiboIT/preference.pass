@@ -58,6 +58,12 @@ ul.navbar-items {
     }
 }
 
+.logo {
+    img {
+        max-width: 70px;
+    }
+}
+
 
 @media screen and (max-width: 480px) {
     ul.navbar-items {

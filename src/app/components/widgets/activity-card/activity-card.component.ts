@@ -14,7 +14,6 @@ import {compress, resize} from '../../../constants/filestack';
           <div class="col-md-6">
            <app-activity-price [rates]="activity.rates"></app-activity-price>
         </div>
-   
         </div>
         <div class="activity-content">
           {{ activity.headline }}

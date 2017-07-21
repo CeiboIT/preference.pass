@@ -8,6 +8,7 @@ const initialState = {
   activities: [],
   restaurants: [],
   healthAndBeauty: [],
+  nightclubs: [],
   detail: {},
   loading: false,
   error: '',
@@ -54,6 +55,13 @@ reducers[ActionTypes.GET_ACTIVITIES_SUCCESS] = (state, payload) => {
 reducers[ActionTypes.GET_TOURS_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
     tours: payload,
+    loading: false
+  });
+};
+
+reducers[ActionTypes.GET_NIGHTCLUBS_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    nightclubs: payload,
     loading: false
   });
 };

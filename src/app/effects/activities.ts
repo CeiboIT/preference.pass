@@ -7,7 +7,7 @@ import {
   GetDetailSuccess,
   GetList,
   GetListFailure,
-  GetListSuccess, GetToursSuccess
+  GetListSuccess, GetNightClubsSuccess, GetToursSuccess
 } from '../actions/activities';
 import { ActivitiesQueries } from '../services/activities/queries';
 import { ActivitiesService } from '../services/activities/activities.service';
@@ -55,7 +55,9 @@ export class ActivitiesEffects {
               case('TOURS'):
                 return new GetToursSuccess(_data);
               case('ACTIVITIES'):
-                return new GetActivitiesSuccess(_data);
+              return new GetActivitiesSuccess(_data);
+              case('NIGHTCLUBS'):
+                return new GetNightClubsSuccess(_data);
             }
           } else {
             return new GetListSuccess(_data);

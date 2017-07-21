@@ -12,10 +12,14 @@ import { onStateChangeObservable } from '../../../utils/store';
        Tours
       </h3>
       <app-activity-list [activities]="tours$ | async "></app-activity-list>
-      <h3 class="pl-3 pr-3">
+      <h3 class="pl-3 pr-3 pt-3">
         Activities
       </h3>
       <app-activity-list [activities]="activities$ | async "></app-activity-list>
+      <h3 class="pl-3 pr-3 pt-3">
+        Nightclubs
+      </h3>
+      <app-activity-list [activities]="nightclubs$ | async "></app-activity-list>
     </div>
   `
 })
@@ -23,6 +27,7 @@ import { onStateChangeObservable } from '../../../utils/store';
 export class LandingContainerComponent implements OnInit {
   public activities$: Observable<any>;
   public tours$: Observable<any>;
+  public nightclubs$: Observable<any>;
 
   constructor(
     private store: Store<any>
@@ -34,7 +39,9 @@ export class LandingContainerComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new GetActivitiesByCategory({name: 'ACTIVITIES', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'NIGHTCLUBS', fromLanding: true}));
     this.activities$ = onStateChangeObservable(this.store, 'activities.activities');
     this.tours$ = onStateChangeObservable(this.store, 'activities.tours');
+    this.nightclubs$ = onStateChangeObservable(this.store, 'activities.nightclubs');
   }
 }

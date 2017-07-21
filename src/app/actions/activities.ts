@@ -10,6 +10,8 @@ export const ActionTypes = {
   GET_TOURS_FAILURE: type('[Activities] Get Tours Failure'),
   GET_ACTIVITIES_SUCCESS: type('[Activities] Get Activities Success'),
   GET_ACTIVITIES_FAILURE: type('[Activities] Get Activities Failure'),
+  GET_NIGHTCLUBS_SUCCESS: type('[Activities] Get Nightclubs Success'),
+  GET_NIGHTCLUBS_FAILURE: type('[Activities] Get Nightclubs Failure'),
   GET_ACTIVITIES_BY_CATEGORY: type('[Activities] Get Activities by Category'),
   GET_ACTIVITIES_BY_CATEGORY_SUCCESS: type('[Activities] Get Activities by Category Success'),
   GET_ACTIVITIES_BY_CATEGORY_FAILURE: type('[Activities] Get Activities by Category Failure'),
@@ -61,6 +63,16 @@ export class GetActivitiesSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+export class GetNightClubsSuccess implements Action {
+  type = ActionTypes.GET_NIGHTCLUBS_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetNightClubsFailure implements Action {
+  type = ActionTypes.GET_NIGHTCLUBS_FAILURE;
+  constructor(public payload: any) { }
+}
+
 export class GetDetail implements Action {
   type = ActionTypes.GET_DETAIL;
   constructor(public payload: any) { }
@@ -109,4 +121,5 @@ export class GetActivitiesByCategoryFailure implements Action {
 export type Actions = GetList | GetListFailure | GetListSuccess |
 GetDetail | GetDetailFailure | GetDetailSuccess | GetTours | GetToursFailure | GetToursSuccess
 | GetDepartures | GetDeparturesSuccess | GetDeparturesFailure | GetActivitiesFailure | GetActivitiesSuccess
-| GetActivitiesByCategory | GetActivitiesByCategorySuccess | GetActivitiesByCategoryFailure;
+| GetActivitiesByCategory | GetActivitiesByCategorySuccess |
+  GetActivitiesByCategoryFailure | GetNightClubsSuccess | GetNightClubsFailure;

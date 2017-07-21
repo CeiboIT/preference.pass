@@ -8,7 +8,7 @@ import { onStateChangeObservable } from '../../../utils/store';
   selector: 'app-landing-container',
   template: `
     <div class="landing-container mt-3">
-      <h3 class="pl-3 pr-3">
+      <h3 class="px-5 mx-2">
         Tours
       </h3>
       <app-activity-list [activities]="activities$ | async "></app-activity-list>

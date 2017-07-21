@@ -24,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
+import { FooterModule } from './components/navigation/footer/footer.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
 
@@ -59,6 +60,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     ToolbarModule,
+    FooterModule,
     AuthModalModule
   ],
   providers: [SERVICES],

@@ -17,7 +17,7 @@ import {compress, resize} from '../../../constants/filestack';
    
         </div>
         <div class="activity-content">
-          {{ activity.shortDescription }}
+          {{ activity.headline }}
         </div>
       </div>
     `,
@@ -38,7 +38,7 @@ export class ActivityCardComponent {
   gotoDetail(): void {
     this.router.navigate(['/detail', this.activity.id]);
   }
-  
+
   get activityPhoto(){
       return resize(this.activity.mainPhoto.url, 500, 500);
   }

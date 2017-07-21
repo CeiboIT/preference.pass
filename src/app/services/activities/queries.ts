@@ -12,10 +12,10 @@ export class ActivitiesQueries {
             allActivities {
                 id
                 name
+               headline
                 area {
                     formatedAddress
                 }
-                shortDescription
                 startsAt
                 finishAt
                 rates {
@@ -43,10 +43,10 @@ export class ActivitiesQueries {
         }) {
           id
           name
+          headline
           area {
             formatedAddress
           }
-          shortDescription
           startsAt
           finishAt
           rates {

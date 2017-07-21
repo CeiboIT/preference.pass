@@ -16,7 +16,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
       </div>
     </div>-->
 
-    <div [swiper]="config" (indexChange)="onIndexChange($event)" class="swiper-container" *ngIf="activities.length">
+    <div [swiper]="config" class="swiper-container" *ngIf="activities.length">
       <div class="swiper-wrapper">
           <div *ngFor="let activity of activities" class="swiper-slide">
             <app-activity-card [activity]="activity"></app-activity-card>
@@ -68,10 +68,5 @@ export class ActivityListComponent implements OnInit {
             }
         }
   };
-
-
-  onIndexChange(index: number) {
-    console.log('Swiper index: ' + index);
-  }
 }
 

@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   template: `    
     <app-toolbar></app-toolbar>
     <router-outlet></router-outlet>
+    <app-footer></app-footer>
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="pswp__bg"></div>
         <div class="pswp__scroll-wrap">

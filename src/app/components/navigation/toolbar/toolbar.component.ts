@@ -4,34 +4,47 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
 @Component({
   selector: 'app-toolbar',
   template: `    
-    <md-toolbar color="primary" fxFlex>
-      Preference pass
-      <span fxFlex></span>
-      <button md-icon-button *ngIf="isLoggedIn">
-        <md-icon>home</md-icon>
-      </button>
-      <div>
-        <button md-button color="accent" (click)="openLogin()">
-          Login
+    <md-toolbar color="primary">
+    <div class="d-flex w-100 justify-content-between">
+        Preference pass
+        <span></span>
+        <button md-icon-button *ngIf="isLoggedIn">
+          <md-icon>home</md-icon>
         </button>
-        <button md-button color="accent" (click)="openRegister()">
-          Register
-        </button>
+        <div>
+          <button md-button color="accent" (click)="openLogin()">
+            Login
+          </button>
+          <button md-button color="accent" (click)="openRegister()">
+            Register
+          </button>
+        </div>
       </div>
 
-      <md-toolbar-row >
-        <div fxFlex fxFlexAlign.gt-sm="center">
-          <button md-button>Actividades
-          </button>
-          <button md-button>Categorias
-          </button>
-          <button md-button>Lugares
-          </button>
+      <md-toolbar-row class="justify-content-end">
+        <div>
+          <ul class="d-flex navbar-items">
+            <li class="navbar-item">
+              <a routerLink="/" routerLinkActive="active">
+                Actividades
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a>
+                Categorias
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a>
+                Lugares
+              </a>
+            </li>
+          </ul>
         </div>
       </md-toolbar-row>
     </md-toolbar>
-  
-  `
+  `,
+  styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
   public isLoggedIn = false;

@@ -6,9 +6,6 @@ export const ActionTypes = {
   GET_COMPANIONS_SUCCESS: type('[Booking] Get Companions Success'),
   GET_COMPANIONS_FAILURE: type('[Booking] Get Companions Failure'),
   COMPANION_SELECTED: type('[Booking] Companion Selected'),
-  GET_DEPARTURES: type('[Booking] Get Departures'),
-  GET_DEPARTURES_SUCCESS: type('[Booking] Get Departures'),
-  GET_DEPARTURES_FAILURE: type('[Booking] Get Departures'),
   SELECTED_BOOKING_DATE: type('[Booking] Selected Booking Date'),
   SELECTED_DEPARTURE_POINT_AND_TIME: type('[Booking] Selected Departure Point and Time'),
   BOOKING_ATTEMPT: type('[Booking] Attempt'),
@@ -33,21 +30,6 @@ export class GetCompanionsFailure implements Action {
 
 export class CompanionSelected implements Action {
   type = ActionTypes.COMPANION_SELECTED;
-  constructor(public payload: any) { }
-}
-
-export class GetDepartures implements Action {
-  type = ActionTypes.GET_DEPARTURES;
-  constructor(public payload: any) { }
-}
-
-export class GetDeparturesSuccess implements Action {
-  type = ActionTypes.GET_DEPARTURES_SUCCESS;
-  constructor(public payload: any) { }
-}
-
-export class GetDeparturesFailure implements Action {
-  type = ActionTypes.GET_DEPARTURES_FAILURE;
   constructor(public payload: any) { }
 }
 
@@ -80,9 +62,6 @@ export type Actions =  GetCompanions |
 GetCompanionsSuccess |
 GetCompanionsFailure |
 CompanionSelected |
-GetDepartures |
-GetDeparturesSuccess |
-GetDeparturesFailure |
 SelectBookingDate |
 SelectedDeparturePointAndTime |
 BookingAttempt |

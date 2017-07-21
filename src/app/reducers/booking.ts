@@ -1,5 +1,5 @@
 const reducers = {};
-import { ActionTypes, Actions } from '../actions/booking';
+import { ActionTypes, Actions as bookingActions } from '../actions/booking';
 
 const initialState = {
   loadingDepartures: false,

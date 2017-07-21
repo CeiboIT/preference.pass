@@ -8,6 +8,7 @@ import {BookingWizardContainerModule} from './booking-wizard-container/booking-w
     CommonModule,
     routing,
     BookingWizardContainerModule
+
   ],
   declarations: [],
   exports: []

@@ -1,13 +1,18 @@
+import {findDeprecatedUsages} from "graphql";
+
 const reducers = {};
 import { ActionTypes, Actions } from '../actions/activities';
 const initialState = {
   list: [],
   tours: [],
+  activities: [],
   restaurants: [],
   healthAndBeauty: [],
   detail: {},
   loading: false,
-  error: ''
+  error: '',
+  departures: [],
+  loadingDepartures: false
 };
 
 reducers[ActionTypes.GET_LIST] = (state, payload) => {
@@ -38,6 +43,21 @@ reducers[ActionTypes.GET_DETAIL] = (state, payload) => {
   });
 };
 
+
+reducers[ActionTypes.GET_ACTIVITIES_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    activities: payload,
+    loading: false
+  });
+};
+
+reducers[ActionTypes.GET_TOURS_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    tours: payload,
+    loading: false
+  });
+};
+
 reducers[ActionTypes.GET_DETAIL_FAILURE] = (state, payload) => {
   return Object.assign({}, state, {
     detail: {},
@@ -52,6 +72,21 @@ reducers[ActionTypes.GET_DETAIL_SUCCESS] = (state, payload) => {
     loading: false
   });
 };
+
+reducers[ActionTypes.GET_DEPARTURES] = (state, payload) => {
+  return Object.assign({}, state, {
+    loadingDepartures: true
+  });
+};
+
+reducers[ActionTypes.GET_DEPARTURES_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    loadingDepartures: false,
+    departures: payload
+  });
+};
+
+
 
 export default function reducer(state = initialState, action: Actions) {
   return reducers[action.type] && reducers[action.type](state, action.payload) || state;

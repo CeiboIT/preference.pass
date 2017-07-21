@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {Store} from "@ngrx/store";
+import {FormBuilder} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {GetDepartures} from '../../../actions/activities';
+import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute} from '@angular/router';
+import {onStateChangeObservable} from '../../../utils/store';
 
 @Component({
   selector: 'app-booking-wizard-container',
@@ -9,6 +13,11 @@ import {Store} from "@ngrx/store";
       <div class="row">
         <div class="col-10">
           <app-booking-date-selector-form [parent]="booking"></app-booking-date-selector-form>
+          <app-pick-location-and-time-selection-form 
+            [parent]="booking"
+            [departures]="departures$ | async "
+          >
+          </app-pick-location-and-time-selection-form>
         </div>
       </div>
       {{ booking.value | json }}
@@ -17,11 +26,16 @@ import {Store} from "@ngrx/store";
 })
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
-  constructor(private fb: FormBuilder, private store: Store<any>) {
+  public departures$: Observable<any>;
+  constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
      executionTime: ['']
    }) ;
+   this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
   }
-  ngOnInit() { }
+  ngOnInit() {
+    const id = this.activatedRoute.snapshot.params['id'];
+    this.store.dispatch(new GetDepartures(id));
+  }
 }

@@ -70,16 +70,20 @@ export class ActivitiesQueries {
   getActivityDepartures(id) {
     const GET_ACTIVITY_DEPARTURES = gql`      
       query($id: ID!) {
-        Activity(id: $id) {
-          id
+        allPickUpLocations(filter: {
+          AND: [
+            {
+              activities_some: { id: $id},
+              departures_some: {
+                activities_some: { id: $id}
+              }
+            }
+          ]
+        }) {
           name
+          mainPhoto
           departures {
             times
-            pickUpLocations {
-              name
-              mainPhoto
-              formattedAddress
-            }
           }
         }
       }

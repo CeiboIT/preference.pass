@@ -46,7 +46,7 @@ export class ActivitiesEffects {
   GetActivitiesByCategory: Observable<{}> = this.action$
     .ofType(ActionTypes.GET_ACTIVITIES_BY_CATEGORY)
     .map(action => action.payload)
-    .switchMap((payload) => {
+    .mergeMap((payload) => {
       return this.activitiesQueries.getActivitiesByCategory(payload.name)
         .map((result) => {
           const _data = result.data['allActivities'];

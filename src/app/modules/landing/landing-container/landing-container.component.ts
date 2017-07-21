@@ -26,11 +26,14 @@ export class LandingContainerComponent implements OnInit {
 
   constructor(
     private store: Store<any>
-  ) { }
+  ) {
+
+
+  }
 
   ngOnInit() {
-    this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'ACTIVITIES', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
     this.activities$ = onStateChangeObservable(this.store, 'activities.activities');
     this.tours$ = onStateChangeObservable(this.store, 'activities.tours');
   }

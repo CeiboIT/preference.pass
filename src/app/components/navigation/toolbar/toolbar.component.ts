@@ -7,7 +7,9 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
     <md-toolbar color="primary">
     <div class="d-flex w-100 justify-content-between align-items-center">
         <div class="logo">
-          <img src="../../../../assets/imgs/PPLogo.png">
+          <a routerLink="/">
+            <img src="../../../../assets/imgs/PPLogo.png">
+          </a>
         </div>
         <span></span>
         <button md-icon-button *ngIf="isLoggedIn">

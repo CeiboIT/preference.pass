@@ -7,6 +7,14 @@ import { ActionTypes } from '../actions/layout';
 import {LoginWithEmail, RegisterWithEmailAndPassword, RegisterWithFacebook, RegisterWithGoogle,} from '../actions/auth';
 import {Store} from '@ngrx/store';
 
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/toArray';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
+
 function retrieveWidth() {
   if (matchMedia) {
     let isXS = window.matchMedia('(max-width: 480px)');

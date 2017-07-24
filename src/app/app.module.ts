@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpModule } from '@angular/http';
 import { LayoutEffects } from './effects/layout';
+import { SubscriptionEffects } from './effects/subscription';
 import { MdDialogModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { NgxSiemaModule } from 'ngx-siema';
@@ -26,6 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -49,6 +51,7 @@ import 'hammerjs';
     NgxSiemaModule.forRoot(),
     ApolloModule.forRoot(provideClient),
     EffectsModule.run(ActivitiesEffects),
+    EffectsModule.run(SubscriptionEffects),
     EffectsModule.run(AuthEffects),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),

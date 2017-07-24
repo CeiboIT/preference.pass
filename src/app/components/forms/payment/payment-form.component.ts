@@ -101,7 +101,6 @@ export class PaymentFormComponent implements AfterContentInit {
           this.onError(err);
       })
     }
-
   }
 
 }

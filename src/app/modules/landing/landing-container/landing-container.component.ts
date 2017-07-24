@@ -8,12 +8,23 @@ import { onStateChangeObservable } from '../../../utils/store';
   selector: 'app-landing-container',
   template: `
     <div class="landing-container mt-3">
-      <h3 class="px-5 mx-2">
+      <h3 class="title">
         Tours
       </h3>
       <app-activity-list [activities]="activities$ | async "></app-activity-list>
     </div>
-  `
+  `,
+  styles: [ `
+
+    .title {
+        padding: 0 60px;
+    } 
+    @media screen and (max-width: 480px) {
+      .title {
+        padding: 0 10px;
+      } 
+    }
+  ` ]
 })
 
 export class LandingContainerComponent implements OnInit {

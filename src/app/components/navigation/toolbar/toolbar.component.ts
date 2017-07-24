@@ -5,8 +5,12 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
   selector: 'app-toolbar',
   template: `    
     <md-toolbar color="primary">
-    <div class="d-flex w-100 justify-content-between">
-        Preference pass
+    <div class="d-flex w-100 justify-content-between align-items-center">
+        <div class="logo">
+          <a routerLink="/">
+            <img src="../../../../assets/imgs/PPLogo.png">
+          </a>
+        </div>
         <span></span>
         <button md-icon-button *ngIf="isLoggedIn">
           <md-icon>home</md-icon>

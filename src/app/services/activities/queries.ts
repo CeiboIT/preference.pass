@@ -35,6 +35,26 @@ export class ActivitiesQueries {
     })
   }
 
+  getHotDeals() {
+    const GET_HOT_DEALS = gql`
+      query {
+        allHotDeals {
+          id
+          mainPhoto
+          activity {
+            name
+            mainPhoto
+            headline
+          }
+        }
+      }
+    `;
+
+    return this.client.watchQuery({
+      query: GET_HOT_DEALS
+    });
+  }
+
   getActivitiesByCategory(categoryName) {
     const GET_ACTIVITY_BY_CATEGORY = gql`
       query($categoryName: String) {
@@ -80,6 +100,7 @@ export class ActivitiesQueries {
             }
           ]
         }) {
+          id
           name
           mainPhoto
           departures {

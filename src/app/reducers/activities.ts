@@ -1,5 +1,3 @@
-import {findDeprecatedUsages} from "graphql";
-
 const reducers = {};
 import { ActionTypes, Actions } from '../actions/activities';
 const initialState = {
@@ -9,6 +7,7 @@ const initialState = {
   restaurants: [],
   healthAndBeauty: [],
   nightclubs: [],
+  hotDeals: [],
   detail: {},
   loading: false,
   error: '',
@@ -65,6 +64,14 @@ reducers[ActionTypes.GET_NIGHTCLUBS_SUCCESS] = (state, payload) => {
     loading: false
   });
 };
+
+reducers[ActionTypes.GET_HOT_DEALS_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    hotDeals: payload,
+    loading: false
+  });
+};
+
 
 reducers[ActionTypes.GET_DETAIL_FAILURE] = (state, payload) => {
   return Object.assign({}, state, {

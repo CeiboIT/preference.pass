@@ -4,7 +4,7 @@ import {
   ActionTypes, GetActivitiesSuccess, GetDeparturesSuccess,
   GetDetail,
   GetDetailFailure,
-  GetDetailSuccess,
+  GetDetailSuccess, GetHotDealsSuccess,
   GetList,
   GetListFailure,
   GetListSuccess, GetNightClubsSuccess, GetToursSuccess
@@ -28,19 +28,20 @@ export class ActivitiesEffects {
   ) {}
 
   @Effect()
-  GetToursList: Observable<{}> = this.action$
-    .ofType(ActionTypes.GET_TOURS)
-    .map(action => action.payload)
-    .switchMap((payload) => {
-      return this.activitiesQueries.getActivitiesByCategory('tours')
+  GetHotDeals: Observable<{}> = this.action$
+    .ofType(ActionTypes.GET_HOT_DEALS)
+    .switchMap(() => {
+      return this.activitiesQueries.getHotDeals()
         .map((result) => {
-          return new GetListSuccess(
-            result.data['allActivities']
+          return new GetHotDealsSuccess(
+            result.data['allHotDeals']
           );
         })
-        .catch(() => Observable.of({ type: ActionTypes.GET_LIST_FAILURE }));
+        .catch((err) => {
+          console.log(err);
+          return Observable.of({ type: ActionTypes.GET_HOT_DEALS_FAILURE, payload: err });
+        } );
     });
-
 
   @Effect()
   GetActivitiesByCategory: Observable<{}> = this.action$

@@ -10,7 +10,6 @@ import {
   GetListSuccess, GetNightClubsSuccess, GetToursSuccess
 } from '../actions/activities';
 import { ActivitiesQueries } from '../services/activities/queries';
-import { ActivitiesService } from '../services/activities/activities.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/catch';
@@ -18,12 +17,12 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class ActivitiesEffects {
   constructor(
     private action$: Actions,
-    private activitiesService: ActivitiesService,
     private activitiesQueries: ActivitiesQueries
   ) {}
 

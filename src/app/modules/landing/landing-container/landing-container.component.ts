@@ -7,11 +7,13 @@ import { onStateChangeObservable } from '../../../utils/store';
 @Component({
   selector: 'app-landing-container',
   template: `
-    <div class="landing-container mt-3">
-      <h3 class="title">
-        Hot deals
-      </h3>
-      <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
+    <div class="landing-container">
+      <div class="hot-deals py-3 mb-3">
+        <h3 class="title">
+          Hot deals
+        </h3>
+        <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
+      </div>
       <h3 class="title">
         Tours
       </h3>
@@ -30,7 +32,12 @@ import { onStateChangeObservable } from '../../../utils/store';
 
     .title {
         padding: 0 60px;
-    } 
+    }
+
+    .hot-deals {
+      background-color: #f1f1f1;
+    }
+
     @media screen and (max-width: 480px) {
       .title {
         padding: 0 10px;

@@ -8,11 +8,15 @@ import {compress, resize} from '../../../constants/filestack';
       <div class="mt-3 activity-card" (click)="gotoDetail()">
         <div class="activity-card-image m-0" [ngStyle]="{'background': 'url(' + activityPhoto + ')'}"></div>
         <div class="mt-3 mb-3 activity-title">
-          <app-activity-price [rates]="activity.rates"></app-activity-price>
-          {{ activity.name}}
+          <div class="col-md-6">
+            {{ activity.name}}
+          </div>
+          <div class="col-md-6">
+           <app-activity-price [rates]="activity.rates"></app-activity-price>
+        </div>
         </div>
         <div class="activity-content">
-          {{ activity.shortDescription }}
+          {{ activity.headline }}
         </div>
       </div>
     `,
@@ -33,7 +37,7 @@ export class ActivityCardComponent {
   gotoDetail(): void {
     this.router.navigate(['/detail', this.activity.id]);
   }
-  
+
   get activityPhoto(){
       return resize(this.activity.mainPhoto.url, 500, 500);
   }

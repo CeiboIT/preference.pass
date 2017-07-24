@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
+import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 
 @Component({
   selector: 'app-activity-list',
@@ -37,6 +37,7 @@ import { SwiperComponent, SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 export class ActivityListComponent implements OnInit {
   @Input() activities;
+  @Input() isHotDeal;
   constructor() { }
 
   ngOnInit() { }

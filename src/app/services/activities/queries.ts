@@ -12,10 +12,10 @@ export class ActivitiesQueries {
             allActivities {
                 id
                 name
+               headline
                 area {
                     formatedAddress
                 }
-                shortDescription
                 startsAt
                 finishAt
                 rates {
@@ -35,6 +35,26 @@ export class ActivitiesQueries {
     })
   }
 
+  getHotDeals() {
+    const GET_HOT_DEALS = gql`
+      query {
+        allHotDeals {
+          id
+          mainPhoto
+          activity {
+            name
+            mainPhoto
+            headline
+          }
+        }
+      }
+    `;
+
+    return this.client.watchQuery({
+      query: GET_HOT_DEALS
+    });
+  }
+
   getActivitiesByCategory(categoryName) {
     const GET_ACTIVITY_BY_CATEGORY = gql`
       query($categoryName: String) {
@@ -43,10 +63,10 @@ export class ActivitiesQueries {
         }) {
           id
           name
+          headline
           area {
             formatedAddress
           }
-          shortDescription
           startsAt
           finishAt
           rates {
@@ -65,6 +85,35 @@ export class ActivitiesQueries {
       query: GET_ACTIVITY_BY_CATEGORY,
       variables: { categoryName: categoryName }
     })
+  }
+
+  getActivityDepartures(id) {
+    const GET_ACTIVITY_DEPARTURES = gql`      
+      query($id: ID!) {
+        allPickUpLocations(filter: {
+          AND: [
+            {
+              activities_some: { id: $id},
+              departures_some: {
+                activities_some: { id: $id}
+              }
+            }
+          ]
+        }) {
+          id
+          name
+          mainPhoto
+          departures {
+            times
+          }
+        }
+      }
+    `;
+
+    return this.client.watchQuery({
+      query: GET_ACTIVITY_DEPARTURES,
+      variables: { id: id }
+    });
   }
 
   getActivityByID(id) {
@@ -109,6 +158,6 @@ export class ActivitiesQueries {
     return this.client.watchQuery({
       query: GET_ACTIVITY,
       variables: { id: id }
-    })
+    });
   }
 }

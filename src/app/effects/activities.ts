@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
-  ActionTypes,
+  ActionTypes, GetActivitiesSuccess, GetDeparturesSuccess,
   GetDetail,
   GetDetailFailure,
-  GetDetailSuccess,
+  GetDetailSuccess, GetHotDealsSuccess,
   GetList,
   GetListFailure,
-  GetListSuccess
-  } from '../actions/activities';
+  GetListSuccess, GetNightClubsSuccess, GetToursSuccess
+} from '../actions/activities';
 import { ActivitiesQueries } from '../services/activities/queries';
 import { ActivitiesService } from '../services/activities/activities.service';
 import { Observable } from 'rxjs/Observable';
@@ -28,19 +28,44 @@ export class ActivitiesEffects {
   ) {}
 
   @Effect()
-  GetToursList: Observable<{}> = this.action$
-    .ofType(ActionTypes.GET_TOURS)
-    .map(action => action.payload)
-    .switchMap((payload) => {
-      return this.activitiesQueries.getActivitiesByCategory('tours')
+  GetHotDeals: Observable<{}> = this.action$
+    .ofType(ActionTypes.GET_HOT_DEALS)
+    .switchMap(() => {
+      return this.activitiesQueries.getHotDeals()
         .map((result) => {
-          return new GetListSuccess(
-            result.data['allActivities']
+          return new GetHotDealsSuccess(
+            result.data['allHotDeals']
           );
+        })
+        .catch((err) => {
+          console.log(err);
+          return Observable.of({ type: ActionTypes.GET_HOT_DEALS_FAILURE, payload: err });
+        } );
+    });
+
+  @Effect()
+  GetActivitiesByCategory: Observable<{}> = this.action$
+    .ofType(ActionTypes.GET_ACTIVITIES_BY_CATEGORY)
+    .map(action => action.payload)
+    .mergeMap((payload) => {
+      return this.activitiesQueries.getActivitiesByCategory(payload.name)
+        .map((result) => {
+          const _data = result.data['allActivities'];
+          if (payload.fromLanding) {
+            switch (payload.name) {
+              case('TOURS'):
+                return new GetToursSuccess(_data);
+              case('ACTIVITIES'):
+              return new GetActivitiesSuccess(_data);
+              case('NIGHTCLUBS'):
+                return new GetNightClubsSuccess(_data);
+            }
+          } else {
+            return new GetListSuccess(_data);
+          }
         })
         .catch(() => Observable.of({ type: ActionTypes.GET_LIST_FAILURE }));
     });
-
 
   @Effect()
   GetActivityDetail: Observable<{}> = this.action$
@@ -48,12 +73,28 @@ export class ActivitiesEffects {
     .map(action => action.payload)
     .switchMap((payload) => {
       return this.activitiesQueries.getActivityByID(payload)
-        .map((result)=>{
+        .map((result) => {
           console.log(result)
             return new GetDetailSuccess(
               result.data['Activity']
             )
           })
           .catch(() => Observable.of({ type: ActionTypes.GET_DETAIL_FAILURE }))
+    });
+
+  @Effect()
+  GetDepartures: Observable<{}> = this.action$
+    .ofType(ActionTypes.GET_DEPARTURES)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      return this.activitiesQueries.getActivityDepartures(payload)
+        .map((result) => {
+          console.log(result);
+          return new GetDeparturesSuccess(
+            result.data['allPickUpLocations']
+          );
+        })
+        .catch((err) => { console.log(err);
+        return Observable.of({ type: ActionTypes.GET_DETAIL_FAILURE })});
     });
 }

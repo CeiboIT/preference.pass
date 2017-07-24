@@ -1,0 +1,47 @@
+/*==========  Mobile First Method  ==========*/
+
+
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width: 490px) {
+
+}
+
+@media only screen and (max-width : 1200px) {
+  .hot-deal-card-image {
+    height: 478px !important;
+    width: 300px !important;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+  .hot-deal-card-image {
+    height: 478px !important;
+    width: 300px !important;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+  .hot-deal-card-image {
+    height: 264px !important;
+    width: 174px !important;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+  .hot-deal-card-image {
+    height: 264px !important;
+    width: 174px !important;
+  }
+}
+
+
+.hot-deal-card-image-background {
+  background-position: 50% 50% !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}

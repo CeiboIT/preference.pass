@@ -69,7 +69,7 @@ export class ActivityListComponent implements OnInit {
               slidesPerView: 'auto',
               spaceBetween: 10,
             }
-        }
+      }
   };
 }
 

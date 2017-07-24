@@ -61,8 +61,8 @@ export class ActivityListComponent implements OnInit {
                 spaceBetween: 20
             },
             480: {
-                watchSlidesVisibility: true,
                 width: 300,
+                freeMode: true,
                 slidesPerView: 1,
                 spaceBetween: 10
             }

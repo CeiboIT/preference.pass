@@ -7,13 +7,13 @@ import {compress, resize} from '../../../constants/filestack';
   template: `    
       <div class="mt-3 activity-card" (click)="gotoDetail()">
         <div class="activity-card-image m-0" [ngStyle]="{'background': 'url(' + activityPhoto + ')'}"></div>
-        <div class="mt-3 mb-3 activity-title">
-          <div class="col-md-6">
-            {{ activity.name}}
-          </div>
-          <div class="col-md-6">
-           <app-activity-price [rates]="activity.rates"></app-activity-price>
-        </div>
+        <div class="my-3 activity-title d-flex w-100 justify-content-between align-items-center">
+            <div>
+              {{ activity.name}}
+            </div>
+            <div>
+              <app-activity-price [rates]="activity.rates"></app-activity-price>
+            </div>
         </div>
         <div class="activity-content">
           {{ activity.headline }}

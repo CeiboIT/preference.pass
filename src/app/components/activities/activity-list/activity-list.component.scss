@@ -24,6 +24,25 @@
   }
 
   .swiper-slide {
-    //width: 85%!important;
+    width: calc(95% - 10px);
+  }
+}
+
+
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .swiper-slide {
+    width: calc(50% - 20px);
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .swiper-slide {
+    width: calc(33.33% - 30px);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .swiper-slide {
+    width: calc(25% - 40px);
   }
 }

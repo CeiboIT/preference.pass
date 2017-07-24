@@ -47,7 +47,6 @@ export class ActivityListComponent implements OnInit {
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
         slidesPerView: 5,
-        centeredSlides: false,
         spaceBetween: 30,
         breakpoints: {
             1024: {
@@ -63,6 +62,8 @@ export class ActivityListComponent implements OnInit {
                 spaceBetween: 20
             },
             480: {
+                watchSlidesVisibility: true,
+                width: 300,
                 slidesPerView: 1,
                 spaceBetween: 10
             }

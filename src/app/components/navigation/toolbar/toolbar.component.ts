@@ -8,7 +8,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
     <div class="d-flex w-100 justify-content-between align-items-center">
         <div class="logo">
           <a routerLink="/">
-            <img src="../../../../assets/imgs/PPLogo.png">
+            <img src="../../../../assets/imgs/PPLogo_circulo.png">
           </a>
         </div>
         <span></span>

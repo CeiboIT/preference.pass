@@ -8,10 +8,10 @@ import { compress, resize } from '../../../constants/filestack';
       <div class="mt-3 activity-card" (click)="gotoDetail()">
         <div class="activity-card-image m-0" [ngStyle]="{'background': 'url(' + activityPhoto + ')'}"></div>
         <div class="my-3 activity-title d-flex justify-content-between">
-            <div>
+            <div class="w-75">
               {{ activity.name }}
             </div>
-            <div>
+            <div class="w-25 text-right">
               <app-activity-price [rates]="activity.rates"></app-activity-price>
             </div>
         </div>

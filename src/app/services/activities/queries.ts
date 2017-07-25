@@ -21,6 +21,7 @@ export class ActivitiesQueries {
                 rates {
                     name
                     discountPrice
+                    originalPrice
                     currency
                 }
                 mainPhoto
@@ -72,6 +73,7 @@ export class ActivitiesQueries {
           rates {
             name
             discountPrice
+            originalPrice
             currency
           }
           mainPhoto

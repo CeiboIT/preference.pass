@@ -9,7 +9,11 @@ import { Rate } from '../../../../models/rate';
       <h3>
         {{ rate.currency }}&nbsp;{{ rate.discountPrice }}&nbsp;
       </h3>
-      <h4><span class="discount-color">You save {{ totalDiscount }} </span></h4>
+      <h4>
+        <span class="discount-color">
+          <app-activity-saving [rates]="rate"></app-activity-saving>
+        </span>
+      </h4>
       <md-card-content>
         <div [froalaView]="rate.amenitiesDescription"></div>
       </md-card-content>

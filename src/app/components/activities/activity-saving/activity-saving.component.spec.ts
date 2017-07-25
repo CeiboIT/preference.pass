@@ -1,22 +1,22 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { SavingComponent } from './saving.component';
+import { ActivitySavingComponent } from './activity-saving.component';
 
-describe('a saving component', () => {
-	let component: SavingComponent;
+describe('a activity-saving component', () => {
+	let component: ActivitySavingComponent;
 
 	// register all needed dependencies
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
-				SavingComponent
+				ActivitySavingComponent
 			]
 		});
 	});
 
 	// instantiation through framework injection
-	beforeEach(inject([SavingComponent], (SavingComponent) => {
-		component = SavingComponent;
+	beforeEach(inject([ActivitySavingComponent], (ActivitySavingComponent) => {
+		component = ActivitySavingComponent;
 	}));
 
 	it('should have an instance', () => {

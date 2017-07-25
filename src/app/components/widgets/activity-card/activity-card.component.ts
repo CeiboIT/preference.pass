@@ -13,6 +13,9 @@ import { compress, resize } from '../../../constants/filestack';
             </div>
             <div class="w-25 text-right">
               <app-activity-price [rates]="activity.rates"></app-activity-price>
+              <div class="saving">
+                <app-activity-saving [rates]="activity.rates"></app-activity-saving>
+              </div>
             </div>
         </div>
         <div class="activity-content">
@@ -25,6 +28,7 @@ import { compress, resize } from '../../../constants/filestack';
     '.activity-card-image {height:150px; background-repeat: no-repeat !important; background-size: cover !important;}',
     '.activity-card:hover {cursor:pointer}',
     '.activity-title {font-size:16px;}',
+    '.saving {font-size: 70%;color: #c63f3f;}',
     '.activity-content {font-size:14px;}'
   ]
 })

@@ -31,6 +31,7 @@ export class TokenComponent {
           this.router.navigate(['']);
           // }
         }).catch((error) => {
+        console.log(error);
         this.router.navigate(['error']);
       });
     });

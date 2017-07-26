@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-companions-amount-container',
   template: `    
-    <div>
+    <div class="text-center">
       <h2>
         How many companions are coming with you?    
       </h2>

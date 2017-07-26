@@ -28,35 +28,33 @@ export class HotDealsListComponent implements OnInit {
   ngOnInit() { }
 
   public config: SwiperConfigInterface = {
-    pagination: null,
-    nextButton: '.swiper-button-next',
-    prevButton: '.swiper-button-prev',
-    slidesPerView: 6,
-    centeredSlides: false,
-    spaceBetween: 30,
-    breakpoints: {
-      1024: {
-        slidesPerView: 6,
-        spaceBetween: 40
-      },
-      768: {
-        slidesPerView: 4,
-        spaceBetween: 30
-      },
-      767: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      },
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 5
+        pagination: null,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        spaceBetween: 30,
+        slidesPerView: 5,
+         breakpoints: {
+            1024: {
+                //slidesPerView: 4,
+                slidesPerView: 'auto',
+                spaceBetween: 40
+            },
+            768: {
+                //slidesPerView: 3,
+                slidesPerView: 'auto',
+                spaceBetween: 30
+            },
+            767: {
+                //slidesPerView: 2,
+                slidesPerView: 'auto',
+                spaceBetween: 20
+            },
+            480: {
+              //slidesPerView: 1,
+              slidesPerView: 'auto',
+              spaceBetween: 10,
+            }
       }
-    }
   };
-
-
-  onIndexChange(index: number) {
-    console.log('Swiper index: ' + index);
-  }
 }
 

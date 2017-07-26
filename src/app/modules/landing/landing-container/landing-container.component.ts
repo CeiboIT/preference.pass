@@ -8,19 +8,15 @@ import { onStateChangeObservable } from '../../../utils/store';
   selector: 'app-landing-container',
   template: `
     <div class="landing-container mt-3">
-      <h3 class="px-5 mx-2">
-        Hot deals
-      </h3>
-      <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
-      <h3 class="px-5 mx-2">
+      <h3 class="title">
         Tours
       </h3>
       <app-activity-list [activities]="tours$ | async "></app-activity-list>
-      <h3 class="px-5 mx-2">
+      <h3 class="title">
         Activities
       </h3>
       <app-activity-list [activities]="activities$ | async "></app-activity-list>
-      <h3 class="px-5 mx-2">
+      <h3 class="title">
         Nightclubs
       </h3>
       <app-activity-list [activities]="nightclubs$ | async "></app-activity-list>
@@ -30,7 +26,12 @@ import { onStateChangeObservable } from '../../../utils/store';
 
     .title {
         padding: 0 60px;
-    } 
+    }
+
+    .hot-deals {
+      background-color: #f1f1f1;
+    }
+
     @media screen and (max-width: 480px) {
       .title {
         padding: 0 10px;

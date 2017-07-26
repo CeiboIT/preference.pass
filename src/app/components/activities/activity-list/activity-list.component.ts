@@ -46,28 +46,30 @@ export class ActivityListComponent implements OnInit {
         pagination: null,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
-        slidesPerView: 5,
         spaceBetween: 30,
-        breakpoints: {
+        slidesPerView: 5,
+         breakpoints: {
             1024: {
-                slidesPerView: 4,
+                //slidesPerView: 4,
+                slidesPerView: 'auto',
                 spaceBetween: 40
             },
             768: {
-                slidesPerView: 3,
+                //slidesPerView: 3,
+                slidesPerView: 'auto',
                 spaceBetween: 30
             },
             767: {
-                slidesPerView: 2,
+                //slidesPerView: 2,
+                slidesPerView: 'auto',
                 spaceBetween: 20
             },
             480: {
-                watchSlidesVisibility: true,
-                width: 300,
-                slidesPerView: 1,
-                spaceBetween: 10
+              //slidesPerView: 1,
+              slidesPerView: 'auto',
+              spaceBetween: 10,
             }
-        }
+      }
   };
 }
 

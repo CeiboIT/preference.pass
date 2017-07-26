@@ -30,8 +30,10 @@ export class BookingWizardContainerComponent implements OnInit {
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
-     executionTime: ['']
-   }) ;
+     executionTime: [''],
+     pickUpLocationId: [''],
+     pickUpTime: ['']
+   });
    this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
   }
   ngOnInit() {

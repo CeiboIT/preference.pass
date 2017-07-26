@@ -38,6 +38,7 @@ import { FormBuilder } from '@angular/forms';
       <div [hidden]="step !== 2">
         <div class="mb-4" [hidden]="hasDiscountCard">
           <app-subscription-pricing-container [parent]="paymentRequest" 
+                                              [selectPlan]="selectPlan"
                                               (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
           </app-subscription-pricing-container>
         </div>
@@ -46,18 +47,19 @@ import { FormBuilder } from '@angular/forms';
         </app-discount-card-container>
       </div>
       <div [hidden]="step !== 3">
+        <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
         <app-payment-form
             [onSuccess]="onCardChargeSuccess"
             [onError]="onCardChargeError"
             [stripeKey]="stripeKey"
             [error]="displayError$ | async"
-            [errorMsg]="payBidErrorMsg$ | async"
-            [loading]="payBidLoading$ | async">
+            [errorMsg]="payErrorMsg$ | async"
+            [loading]="payLoading$ | async">
         </app-payment-form>
       </div>
-      <div>
+      <!--<div>
         {{ paymentRequest.value | json }}
-      </div>
+      </div>-->
       <!--<div>
         {{ discountCard.value | json }}
       </div>-->
@@ -138,8 +140,10 @@ export class SubscriptionWizardComponent implements OnInit {
   public hasDiscountCard: boolean = false;
   public stripeKey = 'pk_test_zIcomWu5HiVeH9i5FpWWkcQW';
   public displayError$;
-  public payBidErrorMsg$;
-  public payBidLoading$;
+  public payErrorMsg$;
+  public payLoading$;
+  public totalPay = 0;
+  public plan;
   constructor(private fb: FormBuilder) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
@@ -156,7 +160,13 @@ export class SubscriptionWizardComponent implements OnInit {
     console.log('click on success');
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.paymentRequest.valueChanges.subscribe(data => {
+      if(data.plan) {
+        this.calculateTotalToPay();
+      }
+    });
+  }
 
   back() {
     this.step --;
@@ -179,6 +189,23 @@ export class SubscriptionWizardComponent implements OnInit {
 
   hasDiscountCardChange(event) {
     this.hasDiscountCard = event;
+  }
+
+  selectPlan = (plan) => {
+    this.plan = plan;
+    this.calculateTotalToPay();
+  }
+
+  calculateTotalToPay() {
+      let kidsAmount = this.paymentRequest.get('kidsAmount').value || 0;
+      let adultsAmount = this.paymentRequest.get('adultsAmount').value || 0;
+      let plan = this.plan || {};
+
+      let adultsTotalPrice = (adultsAmount + 1) * plan.adultPrice;
+      let kidsTotalPrice = kidsAmount * plan.kidPrice;
+      let total = adultsTotalPrice + kidsTotalPrice || 0;
+
+      this.totalPay = Math.round((total) * 100) / 100;
   }
 
 }

@@ -17,6 +17,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class SubscriptionPricingFormComponent implements OnInit {
   @Input() hasDiscount = false;
+  @Input() changePlan;
   @Input() parent: FormGroup;
   constructor() { }
   ngOnInit() {}
@@ -26,7 +27,7 @@ export class SubscriptionPricingFormComponent implements OnInit {
   }
 
   onPriceSelected($event) {
-    console.log($event);
     this.parent.get('plan').setValue($event.id);
+    this.changePlan($event);
   }
 }

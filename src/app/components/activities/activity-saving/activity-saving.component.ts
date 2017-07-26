@@ -18,7 +18,7 @@ export class ActivitySavingComponent implements OnInit {
 	ngOnInit() { }
 
 	get lowestRate(): Rate {
-    	return this.rates.length ? _.sortBy(this.rates, 'discountPrice')[0] : this.rates;
+    	return (this.rates && this.rates.length) ? _.sortBy(this.rates, 'discountPrice')[0] : this.rates;
 	}
 	
 	get totalDiscount() {

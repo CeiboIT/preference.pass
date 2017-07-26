@@ -59,10 +59,10 @@ import { PostSubscription } from '../../../actions/subscription';
             [loading]="payBidLoading$ | async">
         </app-payment-form>
       </div>
-      <!--<div>
+      <div>
         {{ paymentRequest.value | json }}
       </div>
-      <div>
+      <!--<div>
         {{ discountCard.value | json }}
       </div>-->
 
@@ -151,6 +151,7 @@ export class SubscriptionWizardComponent implements OnInit {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
       adultsAmount: [''],
+      plan: [''],
       cardToken: ['']
     });
     this.discountCard = this.fb.group({

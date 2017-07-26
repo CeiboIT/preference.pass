@@ -7,12 +7,13 @@ import { MdButtonModule, MdCardModule } from '@angular/material';
 import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
 import { PriceDisplayerComponent } from './price-displayer/price-displayer.component';
 import { RateComponent } from './rate/rate.component';
-import { SavingComponent } from './saving/saving.component';
+import { ActivitySavingModule } from '../activity-saving/activity-saving.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AgmCoreModule,
+    ActivitySavingModule,
     FroalaViewModule,
     MdButtonModule,
     MdCardModule
@@ -21,8 +22,7 @@ import { SavingComponent } from './saving/saving.component';
     ActivityDetailComponent, 
     PhotoGalleryComponent, 
     PriceDisplayerComponent,
-    RateComponent, 
-    SavingComponent
+    RateComponent
   ],
   exports: [
     ActivityDetailComponent

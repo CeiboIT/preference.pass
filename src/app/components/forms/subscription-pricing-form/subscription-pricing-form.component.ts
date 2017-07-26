@@ -1,18 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Price} from '../../../models/subscription';
-import {prices} from '../../../constants/prices';
+import { Price } from '../../../models/subscription';
+import { prices } from '../../../constants/prices';
+import { FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-subscription-pricing-form',
   template: `    
       <div class="row">
-        <div class="col-12">
-          <h2>
-            Pricing
-          </h2>
-        </div>
-        
         <app-subscription-pricing-card class="col-md-3 col-sm-12" 
                                        *ngFor="let price of pricesToUse"
+                                       [parent]="parent"
                                        [price]="price" (onCardSelected)="onPriceSelected($event)">
         </app-subscription-pricing-card>
       </div>
@@ -20,13 +17,16 @@ import {prices} from '../../../constants/prices';
 })
 export class SubscriptionPricingFormComponent implements OnInit {
   @Input() hasDiscount = false;
+  @Input() parent: FormGroup;
   constructor() { }
   ngOnInit() {}
+  
   get pricesToUse(): Price[] {
     return (this.hasDiscount) ? prices.withDiscount : prices.normal;
   }
+
   onPriceSelected($event) {
     console.log($event);
-    return $event;
+    this.parent.get('plan').setValue($event.id);
   }
 }

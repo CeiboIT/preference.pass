@@ -8,10 +8,10 @@ import { FormGroup } from '@angular/forms';
       <h2>
         Select a pricing plan
       </h2>
-      <button md-raised-button color="primary" class="mb-2" (click)="hasDiscountCardChangeStatus()">
+      <button md-raised-button color="primary" class="mb-2" (click)="hasDiscountCardChangeStatus()" *ngIf="false">
         I have a discount card
       </button>
-      <app-subscription-pricing-form></app-subscription-pricing-form>
+      <app-subscription-pricing-form [parent]="parent"></app-subscription-pricing-form>
     </div>
   `
 })

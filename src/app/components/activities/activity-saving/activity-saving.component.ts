@@ -1,24 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Rate } from '../../../../models/rate';
+import { Rate } from '../../../models/rate';
 import * as _ from 'lodash';
 
 @Component({
-	selector: 'app-saving',
+	selector: 'app-activity-saving',
 	template: `
 		<span *ngIf="lowestRate && lowestRate.currency">
-			You save {{ totalDiscount }}
+			Save {{ totalDiscount }}
     	</span>
 	`
 })
 
-export class SavingComponent implements OnInit {
+export class ActivitySavingComponent implements OnInit {
 	@Input() rates: Rate[];
 	constructor() { }
 
 	ngOnInit() { }
 
 	get lowestRate(): Rate {
-    	return _.sortBy(this.rates, 'discountPrice')[0];
+    	return this.rates.length ? _.sortBy(this.rates, 'discountPrice')[0] : this.rates;
 	}
 	
 	get totalDiscount() {

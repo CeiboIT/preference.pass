@@ -7,6 +7,7 @@ import { MdButtonModule, MdCardModule } from '@angular/material';
 import { SubscriptionPricingContainerModule } from './subscription-pricing-container/subscription-pricing-container.module';
 import { DiscountCardContainerModule } from './discount-card-container/discount-card-container.module';
 import { PaymentsComponentsModule } from './../../../components/forms/payment/payment-form.module';
+import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
 
 @NgModule({
   imports: [
@@ -20,11 +21,13 @@ import { PaymentsComponentsModule } from './../../../components/forms/payment/pa
   ],
   declarations: [
     SubscriptionWizardComponent, 
-    CompanionsAmountContainerComponent
+    CompanionsAmountContainerComponent,
+    WizardHeaderComponent
   ],
   exports: [
     SubscriptionWizardComponent, 
-    CompanionsAmountContainerComponent
+    CompanionsAmountContainerComponent,
+    WizardHeaderComponent
   ]
 })
 

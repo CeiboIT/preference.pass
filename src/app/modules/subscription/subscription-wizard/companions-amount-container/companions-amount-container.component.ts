@@ -4,8 +4,8 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-companions-amount-container',
   template: `    
-    <div class="text-center">
-      <h2>
+    <div class="d-flex flex-column align-items-center">
+      <h2 class="mb-4 text-center">
         How many companions are coming with you?    
       </h2>
       <app-companion-amount [parent]="parent"></app-companion-amount>

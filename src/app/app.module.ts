@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpModule } from '@angular/http';
 import { LayoutEffects } from './effects/layout';
+import { SubscriptionEffects } from './effects/subscription';
 import { MdDialogModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { provideClient } from './app.config';
@@ -28,6 +29,7 @@ import { FooterModule } from './components/navigation/footer/footer.module';
 import { PhotoswipeModule } from './components/navigation/photoswipe/photoshipe.module'
 import { UserEffects } from './effects/user';
 import 'hammerjs';
+
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -57,6 +59,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     SwiperModule.forRoot(SWIPER_CONFIG),
     ApolloModule.forRoot(provideClient),
     EffectsModule.run(ActivitiesEffects),
+    EffectsModule.run(SubscriptionEffects),
     EffectsModule.run(AuthEffects),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),

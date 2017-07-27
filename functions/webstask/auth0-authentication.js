@@ -17,13 +17,13 @@ function GraphcoolService(req) {
 
 GraphcoolService.prototype.getOrCreateGraphcoolUser = function (req, userId, auth0AccessToken) {
   return this.getGraphcoolUser(userId)
-      .then(graphcoolUser => {
-      if (graphcoolUser === null) {
-    return this.createGraphcoolUser(req, auth0AccessToken);
-  } else {
+    .then((graphcoolUser) => {
+    if (graphcoolUser === null) {
+      return this.createGraphcoolUser(req, auth0AccessToken);
+    } else {
     return graphcoolUser.id;
-  }
-})
+    }
+  })
 }
 
 GraphcoolService.prototype.getGraphcoolUser = function (userId) {
@@ -33,8 +33,8 @@ GraphcoolService.prototype.getGraphcoolUser = function (userId) {
         id
       }
     }`)
-      .then((userQueryResult) => {
-      if (userQueryResult.error) {
+    .then((userQueryResult) => {
+    if (userQueryResult.error) {
     return Promise.reject(userQueryResult.error)
   } else {
     return userQueryResult.User
@@ -65,9 +65,9 @@ GraphcoolService.prototype.createGraphcoolUser = function (req, auth0AccessToken
             id
           }
         }`)
-      .then((userMutationResult) => {
-      return userMutationResult.createUser.id
-    })
+    .then((userMutationResult) => {
+    return userMutationResult.createUser.id
+  })
 })
 }
 
@@ -75,7 +75,7 @@ GraphcoolService.prototype.fetchAuth0UserProfile = function (req, auth0AccessTok
   const profileUrl = `https://${req.webtaskContext.secrets.AUTH0_DOMAIN}/userinfo?access_token=${auth0AccessToken}`;
 
   return fetch(profileUrl)
-      .then(response => response.json())
+    .then(response => response.json())
 }
 
 GraphcoolService.prototype.generateGraphcoolToken = function (graphcoolUserId) {

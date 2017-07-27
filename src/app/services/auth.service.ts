@@ -1,105 +1,78 @@
 import { Injectable } from '@angular/core';
-import {UserAuth, AuthWithEmail } from '../models/auth';
-import {Subject} from 'rxjs/Subject';
-import {tokenNotExpired} from 'angular2-jwt';
-declare const Auth0: any;
+declare var auth0: any;
+import { Subject } from 'rxjs/Subject';
+import { tokenNotExpired } from 'angular2-jwt';
+import { Store } from '@ngrx/store';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import {UserService} from "./user.service";
 
-const redirectTo = 'http://' + location.host + '/access_token';
+// const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
+// const auth0Domain = 'sof.au.auth0.com'; // development
 
-const auth0 = new Auth0({
-  domain:       'preferencepassdevelopment.auth0.com',
-  clientID:     'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1',
-  callbackURL:  redirectTo,
-  responseType: 'token'
-});
+const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+const redirectTo = serverUrl + '/access_token';
+
+const auth0ClientID = 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1'; // production
+const auth0Domain = 'preferencepassdevelopment.auth0.com'; // production
+const PROJECT_ID = 'cj41c9u2zddol0177la66g30g'; // GraphCoolProjectID
+
+
+function getHashValue(key) {
+  var matches = location.hash.match(new RegExp(key + '=([^&]*)'));
+  return matches ? matches[1] : null;
+}
+
+const webAuth = new auth0.WebAuth(
+  {
+    domain: auth0Domain,
+    clientID: auth0ClientID,
+    responseType: 'token',
+    redirectUri: redirectTo
+  }
+);
+
 
 @Injectable()
 export class AuthService {
-  public userProfile;
+
   public authStatus = new Subject();
-  constructor() { }
+  public userProfile;
+  private headers: Headers = new Headers({
+    'content-type': 'application/json'
+  });
+  constructor(private store: Store<{}>, private http: Http, private userService: UserService) {
+    this.getCurrentUser().then((profile) => {
+      if (profile) {
+        this.userProfile = profile;
+        this.authStatus.next(profile);
+      } else {
+        this.authStatus.next(null);
+      }
+    });
 
-  passwordLessEmail(data: UserAuth) {
+  }
+
+  getAuthStatusThread() {
+    return this.authStatus;
+  }
+
+  logOut() {
     return new Promise((resolve, reject) => {
-      auth0.requestMagicLink({
-        email: data.email
-      }, (err) => {
-        if (err) {
-          console.log(err.error_description);
-          reject(err.error_description);
-        } else {
-          resolve();
-        }
-      });
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('access_token');
+      localStorage.setItem('logout', 'true');
+      webAuth.logout({});
+      resolve();
     });
   }
 
-  authWithFacebook(type) {
-    return new Promise((resolve, reject) => {
-      auth0.login({
-        connection: 'facebook',
-        popup: false,
-        sso: false
-      }, (err, result) => {
-        if (err) {
-          reject('Error on signin:' + err.message);
-        } else {
-          console.log('Sucess sign up with Facebook login!');
-          this.getAuthUser(result.idToken)
-            .then((profile) => resolve(profile))
-            .catch((error => reject(error)));
-        }
-      });
-    });
-  }
-
-  authWithGoogle(type) {
-    return new Promise((resolve, reject) => {
-      auth0.login({
-        connection: 'google-oauth2',
-        popup: false,
-        sso: false
-      }, (err, result) => {
-        if (err) {
-          reject('Error on signin:' + err.message);
-        } else {
-          console.log('Sucess sign up with Google login!');
-          this.getAuthUser(result.idToken)
-            .then((profile) => resolve(profile))
-            .catch((error => reject(error)));
-        }
-      });
-    });
-  }
-
-  registerWithEmail(data: AuthWithEmail) {
-    return new Promise((resolve, reject) => {
-      auth0.signup({
-        connection: 'Username-Password-Authentication',
-        username: data.email,
-        password: data.password,
-        popup: false,
-        auto_login: true,
-        sso: false
-      }, (err, result) => {
-        if (err) {
-          reject('Something went wrong: ' + err.message);
-        } else {
-          console.log('Sucess sign up with login login!');
-          this.getAuthUser(result.idToken)
-            .then((profile) => resolve(profile))
-            .catch((error => reject(error)));
-        }
-      });
-    });
-  }
-
-  getCurrentUser = () => {
+  /*getCurrentUser = () => {
     return new Promise((resolve, reject) => {
       // const id = localStorage.getItem('id_token');
       const accessToken = localStorage.getItem('access_token');
       if (accessToken && tokenNotExpired()) {
-        auth0.getProfile(accessToken, (err, user) => {
+        webAuth.client.userInfo(accessToken, (err, user) => {
           if (err) {
             console.log('Getting profile error', err);
             // reject(err);
@@ -120,48 +93,117 @@ export class AuthService {
         resolve();
       }
     });
+  }*/
+
+  getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      this.userService.getCurrentUser()
+        .map((user) => {
+          console.log(user);
+          resolve(user);
+        });
+    });
+  };
+
+  facebookLogin() {
+    return new Promise((resolve, reject) => {
+      webAuth.authorize({
+        connection: 'facebook',
+        responseType: 'token id_token'
+      });
+    });
+  }
+
+  googleLogin() {
+    return new Promise((resolve, reject) => {
+      webAuth.authorize({
+        connection: 'google-oauth2',
+        responseType: 'token id_token'
+      });
+    });
+  }
+
+  passswordLessSignUp(signUpData) {
+    return new Promise((resolve, reject) => {
+      webAuth.passwordlessStart({email: signUpData.email, connection: 'email', send: 'link'}, (err) => {
+        if (err) {
+          alert(err.error_description);
+          reject(err);
+        } else {
+          resolve({success: true});
+        }
+      });
+    });
   }
 
   parseHash = () => {
     return new Promise((resolve, reject) => {
       if (window.location.hash.length) {
-        const result = auth0.parseHash(window.location.hash);
 
-        if (result && result.idToken) {
-          localStorage.setItem('id_token', result.idToken);
-          localStorage.setItem('access_token', result.accessToken);
 
-          this.getCurrentUser()
-            .then((user) => {
-              this.userProfile = user;
-              this.authStatus.next(user);
-              resolve(user);
-            });
+        const idToken = getHashValue('id_token');
+        const accessToken = getHashValue('access_token');
 
-        } else {
-          window.location.replace(window.location.host);
-        }
-      };
+        console.log('idToken', idToken);
+        console.log('accessToken', accessToken);
+
+        const _headers = {'content-type': 'application/json'};
+        const _body = JSON.stringify({
+          query: `
+          mutation authenticateAuth0User($idToken: String!, $accessToken: String!) {
+            authenticateAuth0User(idToken: $idToken, accessToken: $accessToken) {
+              token
+            }
+          }
+        `,
+          variables: {
+            idToken: idToken,
+            accessToken: accessToken,
+          }
+        })
+
+        this.http.post('https://api.graph.cool/simple/v1/' + PROJECT_ID, _body, {headers: this.headers})
+          .toPromise()
+          .then((response) => {
+            const _response = response.json();
+            if (!_response['error']) {
+              localStorage.setItem('idToken', _response['data']['authenticateAuth0User']['token']);
+              this.getCurrentUser().then(user => resolve(user));
+            } else {
+              reject(_response);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+
+        /* webAuth.parseHash(window.location.hash, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            localStorage.setItem('id_token', data.idToken);
+            localStorage.setItem('access_token', data.accessToken);
+
+            this.getCurrentUser()
+              .then((user) => {
+                this.userProfile = user;
+                this.authStatus.next(user);
+                resolve(user);
+              });
+          }
+        }); */
+      } else {
+        window.location.replace(window.location.host);
+      }
     });
-  };
-
-
-  getAuthUser(idToken) {
-    return new Promise((resolve, reject) => {
-      auth0.getProfile(idToken, (err, result) => {
-        if(err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-
   }
 
-  get authObserver() {
-    return this.authStatus;
+  loggedIn = () => {
+    return tokenNotExpired();
+  }
 
+  getAuthToken = () => {
+    return localStorage.getItem('id_token');
   }
 }
-

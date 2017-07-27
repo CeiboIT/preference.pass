@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { PickLocationAndTimeSelectionFormComponent } from './pick-location-and-time-selection-form.component';
 import {ActivityDeparturesModule} from '../../activities/activity-departures/activity-departures.module';
 import {PickupLocationCardModule} from '../../widgets/pickup-location-card/pickup-location-card.module';
-import {MdAutocompleteModule, MdInputModule} from '@angular/material';
+import {MdAutocompleteModule, MdCardModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { PickupTimeElementComponent } from './pickup-time-element/pickup-time-element.component';
 
 @NgModule({
   imports: [
@@ -13,9 +14,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     PickupLocationCardModule,
     MdAutocompleteModule,
     MdInputModule,
+    MdCardModule,
     FormsModule, ReactiveFormsModule
   ],
-  declarations: [PickLocationAndTimeSelectionFormComponent],
+  declarations: [PickLocationAndTimeSelectionFormComponent, PickupTimeElementComponent],
   exports: [PickLocationAndTimeSelectionFormComponent]
 })
 export class PickLocationAndTimeSelectionFormModule { }

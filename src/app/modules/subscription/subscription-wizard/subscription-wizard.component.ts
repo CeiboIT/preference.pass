@@ -100,7 +100,7 @@ export class SubscriptionWizardComponent implements OnInit {
     console.log('click on success');
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.paymentRequest.valueChanges.subscribe(data => {
       if(data.plan) {
         this.calculateTotalToPay();

@@ -16,11 +16,11 @@ export class AuthEffects {
     .map(action => action.payload)
     .switchMap((payload) => {
       console.log(payload);
-      return this.authService.passwordLessEmail(payload)
+      return this.authService.passswordLessSignUp(payload)
         .then(result => new LoginWithEmailSuccess({}))
         .catch(err => new LoginWithEmailFailure({}));
     });
-  @Effect()
+  /*@Effect()
   RegisterWithEmailAndPassword: Observable<{}> = this.action$
     .ofType(ActionTypes.REGISTER_WITH_EMAIL_AND_PASSWORD)
     .map(action => action.payload)
@@ -33,13 +33,13 @@ export class AuthEffects {
       return this.authService.registerWithEmail(registerPayload)
         .then(result => new RegisterWithEmailAndPasswordSuccess(result))
         .catch(err => new RegisterWithEmailAndPasswordFailure(err));
-    });
+    });*/
 
   @Effect()
   AuthWithGoogle: Observable<{}> = this.action$
     .ofType(ActionTypes.REGISTER_WITH_GOOGLE)
     .switchMap((action) => {
-      return this.authService.authWithGoogle({type: action.type})
+      return this.authService.googleLogin()
         .then(result => new RegisterWithEmailAndPasswordSuccess(result))
         .catch(err => new RegisterWithEmailAndPasswordFailure(err));
     });
@@ -48,7 +48,7 @@ export class AuthEffects {
   AuthWithFacebook: Observable<{}> = this.action$
     .ofType(ActionTypes.REGISTER_WITH_FACEBOOK)
     .switchMap((action) => {
-      return this.authService.authWithFacebook({type: action.type})
+      return this.authService.facebookLogin()
         .then(result => new RegisterWithEmailAndPasswordSuccess(result))
         .catch(err => new RegisterWithEmailAndPasswordFailure(err));
     });

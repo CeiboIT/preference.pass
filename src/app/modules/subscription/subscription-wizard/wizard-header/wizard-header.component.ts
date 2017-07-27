@@ -73,7 +73,5 @@ export class WizardHeaderComponent implements OnInit {
 	@Input() step;
 	constructor() { }
 
-	ngOnInit() {
-		console.warn(this.step);
-	 }
+	ngOnInit() { }
 }

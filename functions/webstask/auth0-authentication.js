@@ -43,7 +43,7 @@ GraphcoolService.prototype.getGraphcoolUser = function (userId) {
 }
 
 GraphcoolService.prototype.createGraphcoolUser = function (req, auth0AccessToken) {
-
+  console.log('trying to create user');
   this.fetchAuth0UserProfile(req, auth0AccessToken)
     .then(auth0User => {
     const graphcoolUser = Object.assign({
@@ -67,6 +67,8 @@ GraphcoolService.prototype.createGraphcoolUser = function (req, auth0AccessToken
         }`)
     .then((userMutationResult) => {
     return userMutationResult.createUser.id
+  }).catch((error)=>{
+    console.log(error);
   })
 })
 }

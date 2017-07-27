@@ -5,8 +5,9 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Store } from '@ngrx/store';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {UserService} from "./user.service";
-
+import {UserService} from './user.service';
+import {Apollo} from 'apollo-angular';
+import gql from 'graphql-tag';
 // const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
 // const auth0Domain = 'sof.au.auth0.com'; // development
 
@@ -41,7 +42,7 @@ export class AuthService {
   private headers: Headers = new Headers({
     'content-type': 'application/json'
   });
-  constructor(private store: Store<{}>, private http: Http, private userService: UserService) {
+  constructor(private store: Store<{}>, private http: Http, private userService: UserService, private client: Apollo) {
     this.getCurrentUser().then((profile) => {
       if (profile) {
         this.userProfile = profile;
@@ -98,7 +99,7 @@ export class AuthService {
   getCurrentUser = () => {
     return new Promise((resolve, reject) => {
       this.userService.getCurrentUser()
-        .map((user) => {
+        .then((user) => {
           console.log(user);
           resolve(user);
         });
@@ -166,9 +167,9 @@ export class AuthService {
           .toPromise()
           .then((response) => {
             const _response = response.json();
-            if (!_response['error']) {
+            if (!_response['errors']) {
               localStorage.setItem('idToken', _response['data']['authenticateAuth0User']['token']);
-              this.getCurrentUser().then(user => resolve(user));
+
             } else {
               reject(_response);
             }

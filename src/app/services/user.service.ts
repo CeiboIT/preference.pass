@@ -41,16 +41,24 @@ export class UserService {
   }
 
   getCurrentUser() {
-    const GET_CURRENT_USER = gql`
-      query {
-        user {
-          id
+    return new Promise((resolve, reject) => {
+      const GET_CURRENT_USER = gql`
+        query GetCurrentUser {
+          user {
+            id
+            name 
+            picture
+          }
         }
-      }
-    `;
+      `;
 
-    return this.client.watchQuery({
-      query: GET_CURRENT_USER
+      this.client.query({
+        query: GET_CURRENT_USER
+      }).subscribe((result) => {
+        console.log(result);
+        resolve(result['data']['user']);
+      });
     });
+
   }
 }

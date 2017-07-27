@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { OpenLogin, OpenRegister } from '../../../actions/layout';
 @Component({
@@ -12,10 +12,10 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
           </a>
         </div>
         <span></span>
-        <button md-icon-button *ngIf="isLoggedIn">
-          <md-icon>home</md-icon>
-        </button>
-        <div>
+        <div *ngIf="isLoggedIn">
+          <app-user-menu [user]="user"></app-user-menu>
+        </div>
+        <div *ngIf="!isLoggedIn">
           <button md-button color="accent" (click)="openLogin()">
             Login
           </button>
@@ -51,7 +51,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-  public isLoggedIn = false;
+  @Input() user;
   constructor(private store: Store<any>) { }
 
   ngOnInit() {}
@@ -62,5 +62,9 @@ export class ToolbarComponent implements OnInit {
 
   openRegister() {
     this.store.dispatch(new OpenRegister({}));
+  }
+
+  get isLoggedIn() {
+    return !!this.user.id;
   }
 }

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import {UserService} from './user.service';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
+import {GetUserBasicData} from '../actions/user';
 // const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
 // const auth0Domain = 'sof.au.auth0.com'; // development
 
@@ -20,7 +21,7 @@ const PROJECT_ID = 'cj41c9u2zddol0177la66g30g'; // GraphCoolProjectID
 
 
 function getHashValue(key) {
-  var matches = location.hash.match(new RegExp(key + '=([^&]*)'));
+  const matches = location.hash.match(new RegExp(key + '=([^&]*)'));
   return matches ? matches[1] : null;
 }
 
@@ -43,15 +44,7 @@ export class AuthService {
     'content-type': 'application/json'
   });
   constructor(private store: Store<{}>, private http: Http, private userService: UserService, private client: Apollo) {
-    this.getCurrentUser().then((profile) => {
-      if (profile) {
-        this.userProfile = profile;
-        this.authStatus.next(profile);
-      } else {
-        this.authStatus.next(null);
-      }
-    });
-
+    this.getCurrentUser();
   }
 
   getAuthStatusThread() {
@@ -60,8 +53,7 @@ export class AuthService {
 
   logOut() {
     return new Promise((resolve, reject) => {
-      localStorage.removeItem('id_token');
-      localStorage.removeItem('access_token');
+      localStorage.removeItem('idToken');
       localStorage.setItem('logout', 'true');
       webAuth.logout({});
       resolve();
@@ -97,14 +89,8 @@ export class AuthService {
   }*/
 
   getCurrentUser = () => {
-    return new Promise((resolve, reject) => {
-      this.userService.getCurrentUser()
-        .then((user) => {
-          console.log(user);
-          resolve(user);
-        });
-    });
-  };
+    this.store.dispatch(new GetUserBasicData({}));
+  }
 
   facebookLogin() {
     return new Promise((resolve, reject) => {
@@ -169,7 +155,7 @@ export class AuthService {
             const _response = response.json();
             if (!_response['errors']) {
               localStorage.setItem('idToken', _response['data']['authenticateAuth0User']['token']);
-
+              resolve(response.json());
             } else {
               reject(_response);
             }

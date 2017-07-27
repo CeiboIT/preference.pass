@@ -41,7 +41,6 @@ export class UserService {
   }
 
   getCurrentUser() {
-    return new Promise((resolve, reject) => {
       const GET_CURRENT_USER = gql`
         query GetCurrentUser {
           user {
@@ -52,13 +51,8 @@ export class UserService {
         }
       `;
 
-      this.client.query({
+      return this.client.watchQuery({
         query: GET_CURRENT_USER
-      }).subscribe((result) => {
-        console.log(result);
-        resolve(result['data']['user']);
       });
-    });
-
   }
 }

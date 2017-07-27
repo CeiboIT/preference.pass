@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {
-  ActionTypes, LoginWithEmailFailure, LoginWithEmailSuccess, RegisterWithEmailAndPasswordFailure,
-  RegisterWithEmailAndPasswordSuccess
+  ActionTypes, LoginWithEmailFailure, LoginWithEmailSuccess, LoginWithFacebookFailure, LoginWithFacebookSuccess,
+  LoginWithGoogleFailure,
+  LoginWithGoogleSuccess,
+  RegisterWithEmailAndPasswordFailure,
+  RegisterWithEmailAndPasswordSuccess, RegisterWithFacebookFailure, RegisterWithFacebookSuccess
 } from '../actions/auth';
 import {AuthService} from '../services/auth.service';
 
@@ -45,11 +48,29 @@ export class AuthEffects {
     });
 
   @Effect()
-  AuthWithFacebook: Observable<{}> = this.action$
+  RegisterWithFacebook: Observable<{}> = this.action$
     .ofType(ActionTypes.REGISTER_WITH_FACEBOOK)
     .switchMap((action) => {
       return this.authService.facebookLogin()
-        .then(result => new RegisterWithEmailAndPasswordSuccess(result))
-        .catch(err => new RegisterWithEmailAndPasswordFailure(err));
+        .then(result => new RegisterWithFacebookSuccess(result))
+        .catch(err => new RegisterWithFacebookFailure(err));
+    });
+
+  @Effect()
+  LoginWithFacebook: Observable<{}> = this.action$
+    .ofType(ActionTypes.LOGIN_WITH_FACEBOOK)
+    .switchMap((action) => {
+      return this.authService.facebookLogin()
+        .then(result => new LoginWithFacebookSuccess(result))
+        .catch(err => new LoginWithFacebookFailure(err));
+    });
+
+  @Effect()
+  LoginWithGoogle: Observable<{}> = this.action$
+    .ofType(ActionTypes.LOGIN_WITH_GOOGLE)
+    .switchMap((action) => {
+      return this.authService.googleLogin()
+        .then(result => new LoginWithGoogleSuccess(result))
+        .catch(err => new LoginWithGoogleFailure(err));
     });
 }

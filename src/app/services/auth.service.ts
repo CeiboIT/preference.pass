@@ -38,8 +38,8 @@ export class AuthService {
   public authStatus = new Subject();
   public userProfile;
   private headers: Headers = new Headers({
-    'Content-Type': 'application/json'
-  })
+    'content-type': 'application/json'
+  });
   constructor(private store: Store<{}>, private http: Http) {
     this.getCurrentUser().then((profile) => {
       if (profile) {
@@ -60,7 +60,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       localStorage.removeItem('id_token');
       localStorage.removeItem('access_token');
-      localStorage.setItem('logout', 'true')
+      localStorage.setItem('logout', 'true');
       webAuth.logout({});
       resolve();
     });
@@ -91,8 +91,8 @@ export class AuthService {
       } else {
         resolve();
       }
-    })
-  };
+    });
+  }
 
   facebookLogin() {
     return new Promise((resolve, reject) => {
@@ -151,12 +151,20 @@ export class AuthService {
           }
         })
 
-        this.http.post('https://api.graph.cool/simple/v1/' + PROJECT_ID, _body, {headers: this.headers}
-        )
+        this.http.post('https://api.graph.cool/simple/v1/' + PROJECT_ID, _body, {headers: this.headers})
           .toPromise()
-          .then((response)=> {
-            console.log(response.json());
-            resolve(response.json());
+          .then((response) => {
+            const _response = response.json();
+            if (!_response['error']) {
+              localStorage.setItem('idToken', _response['data']['authenticateAuth0User']['token']);
+              resolve(_response);
+            } else {
+              reject(_response);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
           });
 
         /* webAuth.parseHash(window.location.hash, (err, data) => {
@@ -178,11 +186,11 @@ export class AuthService {
         window.location.replace(window.location.host);
       }
     });
-  };
+  }
 
   loggedIn = () => {
     return tokenNotExpired();
-  };
+  }
 
   getAuthToken = () => {
     return localStorage.getItem('id_token');

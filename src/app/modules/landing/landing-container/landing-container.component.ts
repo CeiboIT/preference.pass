@@ -7,7 +7,13 @@ import { onStateChangeObservable } from '../../../utils/store';
 @Component({
   selector: 'app-landing-container',
   template: `
-    <div class="landing-container mt-3">
+    <div class="landing-container">
+      <div class="hot-deals py-3 mb-3">
+        <h3 class="title">
+          Hot deals
+        </h3>
+        <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
+      </div>
       <h3 class="title">
         Tours
       </h3>

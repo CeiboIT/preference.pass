@@ -5,6 +5,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 import { Store } from '@ngrx/store';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import {UserService} from "./user.service";
 
 // const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
 // const auth0Domain = 'sof.au.auth0.com'; // development
@@ -40,7 +41,7 @@ export class AuthService {
   private headers: Headers = new Headers({
     'content-type': 'application/json'
   });
-  constructor(private store: Store<{}>, private http: Http) {
+  constructor(private store: Store<{}>, private http: Http, private userService: UserService) {
     this.getCurrentUser().then((profile) => {
       if (profile) {
         this.userProfile = profile;
@@ -66,7 +67,7 @@ export class AuthService {
     });
   }
 
-  getCurrentUser = () => {
+  /*getCurrentUser = () => {
     return new Promise((resolve, reject) => {
       // const id = localStorage.getItem('id_token');
       const accessToken = localStorage.getItem('access_token');
@@ -92,7 +93,17 @@ export class AuthService {
         resolve();
       }
     });
-  }
+  }*/
+
+  getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      this.userService.getCurrentUser()
+        .map((user) => {
+          console.log(user);
+          resolve(user);
+        });
+    });
+  };
 
   facebookLogin() {
     return new Promise((resolve, reject) => {
@@ -157,7 +168,7 @@ export class AuthService {
             const _response = response.json();
             if (!_response['error']) {
               localStorage.setItem('idToken', _response['data']['authenticateAuth0User']['token']);
-              resolve(_response);
+              this.getCurrentUser().then(user => resolve(user));
             } else {
               reject(_response);
             }

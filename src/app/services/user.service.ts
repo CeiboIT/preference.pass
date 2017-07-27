@@ -39,4 +39,18 @@ export class UserService {
       }
     });
   }
+
+  getCurrentUser() {
+    const GET_CURRENT_USER = gql`
+      query {
+        user {
+          id
+        }
+      }
+    `;
+
+    return this.client.watchQuery({
+      query: GET_CURRENT_USER
+    });
+  }
 }

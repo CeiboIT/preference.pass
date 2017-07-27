@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-subscription-pricing-form',
   template: `    
       <div class="row">
-        <app-subscription-pricing-card class="col-md-3 col-sm-12" 
+        <app-subscription-pricing-card class="col-md-3 col-sm-12 mb-3" 
                                        *ngFor="let price of pricesToUse"
                                        [parent]="parent"
                                        [price]="price" (onCardSelected)="onPriceSelected($event)">

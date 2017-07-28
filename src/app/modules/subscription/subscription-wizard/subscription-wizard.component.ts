@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { PostSubscription } from '../../../actions/subscription';
 
 @Component({
   selector: 'app-subscription-wizard',
@@ -84,7 +86,10 @@ export class SubscriptionWizardComponent implements OnInit {
   public payLoading$;
   public totalPay = 0;
   public plan;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private store : Store<any>,
+    private fb: FormBuilder
+  ) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
       adultsAmount: [''],
@@ -121,6 +126,8 @@ export class SubscriptionWizardComponent implements OnInit {
   onCardChargeSuccess = (result) => {
     let token = result.token ? result.token.id : null;
     this.paymentRequest.get('cardToken').setValue(token);
+
+    this.store.dispatch(new PostSubscription(this.paymentRequest.value));
 	}
 
 	onCardChargeError = (err) => {

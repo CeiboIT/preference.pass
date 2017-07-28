@@ -16,7 +16,7 @@ import {
   PostSubscriptionFailure,
   PostSubscriptionSuccess
   } from '../actions/subscription';
-import { SubscriptionService } from '../services/subscription.service';
+import { SubscriptionService } from '../services/subscriptions/subscription.service';
 
 @Injectable()
 export class SubscriptionEffects {

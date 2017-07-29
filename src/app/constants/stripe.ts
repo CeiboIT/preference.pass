@@ -1,2 +1,2 @@
 //DEV
-export const stripeKey = 'pk_test_ytilLs2GH1gG6yfhii1Wc7s1';
+export const stripeKey = 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG';

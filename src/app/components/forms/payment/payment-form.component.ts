@@ -23,7 +23,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
         <div id="card-element" class="field"></div>
       </label>
     </div>
-      <button type="submit" class="w-100 text-white" [disabled]="userData.invalid || loading" md-raised-button color="accent">
+      <!--<button type="submit" class="w-100 text-white" [disabled]="userData.invalid || loading" md-raised-button color="accent">-->
+      <button type="submit" class="w-100 text-white" [disabled]="userData.invalid" md-raised-button color="accent">
         <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> </span>
           Pay
       </button>

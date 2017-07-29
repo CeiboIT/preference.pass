@@ -16,7 +16,7 @@ import {
   PostSubscriptionFailure,
   PostSubscriptionSuccess
   } from '../actions/subscription';
-import { SubscriptionService } from '../services/subscription.service';
+import { SubscriptionService } from '../services/subscriptions/subscription.service';
 
 @Injectable()
 export class SubscriptionEffects {
@@ -31,8 +31,8 @@ export class SubscriptionEffects {
     .map(action => action.payload)
     .switchMap((payload) => {
       return this.service.sendSubscription(payload)
-      .then(result => new PostSubscriptionSuccess(result))
-        .catch(err => new PostSubscriptionFailure(err));
+      .then((result) => new PostSubscriptionSuccess(result))
+      .catch(err => new PostSubscriptionFailure(err));
     });
 
 }

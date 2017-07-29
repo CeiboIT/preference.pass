@@ -1,7 +1,7 @@
 import { ActivitiesService } from './activities/';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
-import { SubscriptionService } from './subscription.service';
+import { SubscriptionService } from './subscriptions/subscription.service';
 
 export const services = [
   ActivitiesService,

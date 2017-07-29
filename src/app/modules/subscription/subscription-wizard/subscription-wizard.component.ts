@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription } from '../../../actions/subscription';
+import { stripeKey } from '../../../constants/stripe';
 
 @Component({
   selector: 'app-subscription-wizard',
@@ -76,11 +79,12 @@ import { PostSubscription } from '../../../actions/subscription';
   `]
 })
 export class SubscriptionWizardComponent implements OnInit {
+  public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
   public step = 1;
   public hasDiscountCard: boolean = false;
-  public stripeKey = 'pk_test_zIcomWu5HiVeH9i5FpWWkcQW';
+  public stripeKey = stripeKey;
   public displayError$;
   public payErrorMsg$;
   public payLoading$;
@@ -126,8 +130,8 @@ export class SubscriptionWizardComponent implements OnInit {
   onCardChargeSuccess = (result) => {
     let token = result.token ? result.token.id : null;
     this.paymentRequest.get('cardToken').setValue(token);
-
     this.store.dispatch(new PostSubscription(this.paymentRequest.value));
+    this.subscription$ = onStateChangeObservable(this.store, 'subscription');
 	}
 
 	onCardChargeError = (err) => {

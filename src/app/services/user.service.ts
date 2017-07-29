@@ -47,6 +47,11 @@ export class UserService {
             id
             name 
             picture
+            subscription {
+              adults
+              validity
+              kids
+            }
           }
         }
       `;

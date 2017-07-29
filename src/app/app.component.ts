@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<any>) {}
 
   ngOnInit() {
-    this.user$ = onStateChangeObservable(this.store, 'user.user');
+    this.user$ = onStateChangeObservable(this.store, 'auth.user');
   }
 
 }

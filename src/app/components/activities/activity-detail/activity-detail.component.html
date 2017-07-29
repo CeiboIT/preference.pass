@@ -1,5 +1,8 @@
 <div class="mb-5" *ngIf="activity">
-    <div class="detail-banner" style="background-image: url(http://www.excursionesenlarivieramaya.es/wp-content/uploads/2017/01/Cenote-Ik-Kill-Excursiones-Mundo-Maya-3.jpg);">
+    <div class="detail-banner"
+         [ngStyle]="{'background': 'url(' + activityCover + ')'}"
+
+    >
         <div class="tolanding-banner text-white">
             <button class="btn-outline accent" (click)="goToLanding()">
                 <i class="fa fa-arrow-circle-left mr-2" aria-hidden="true"></i> Ir a lista de Actividades

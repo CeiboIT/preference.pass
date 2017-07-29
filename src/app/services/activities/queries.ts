@@ -149,6 +149,7 @@ export class ActivitiesQueries {
                 }
                 mainPhoto
                 subPhotos
+                coverPhoto
                 category {
                     name			
                 }

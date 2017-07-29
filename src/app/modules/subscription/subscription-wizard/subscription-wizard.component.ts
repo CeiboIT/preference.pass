@@ -87,7 +87,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public stripeKey = stripeKey;
   public displayError$;
   public payErrorMsg$;
-  public payLoading$;
+  public payLoading$: Observable<any>;;
   public totalPay = 0;
   public plan;
   constructor(
@@ -115,6 +115,8 @@ export class SubscriptionWizardComponent implements OnInit {
         this.calculateTotalToPay();
       }
     });
+
+    this.payLoading$ = onStateChangeObservable(this.store, 'subscription.loading');
   }
 
   back() {

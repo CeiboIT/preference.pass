@@ -13,7 +13,6 @@ reducers[ActionTypes.POST_SUBSCRIPTION] = (state, payload) => {
 };
 
 reducers[ActionTypes.POST_SUBSCRIPTION_SUCCESS] = (state, payload) => {
-  console.warn('POST_SUBSCRIPTION_SUCCESS', payload);
   return Object.assign({}, state, {
     subscription: payload,
     loading: false
@@ -22,7 +21,6 @@ reducers[ActionTypes.POST_SUBSCRIPTION_SUCCESS] = (state, payload) => {
 
 
 reducers[ActionTypes.POST_SUBSCRIPTION_FAILURE] = (state, payload) => {
-  console.warn('POST_SUBSCRIPTION_FAILURE', payload);
   return Object.assign({}, state, {
     subscription: [],
     error: payload,

@@ -6,7 +6,7 @@ import {
 } from '../actions/auth';
 
 import {
-  ActionTypes as UserActionTypes, CreateUserSuccess, CreateUserFailure
+  ActionTypes as UserActionTypes, CreateUserSuccess, CreateUserFailure, GetUserBasicDataSuccess
 } from '../actions/user';
 
 import {UserService} from '../services/user.service';
@@ -43,5 +43,15 @@ export class UserEffects {
       console.log(payload);
       return this.userService.createUser(payload)
         .map(result => new CreateUserSuccess({}));
+    });
+
+  @Effect()
+  GetUserBasicData: Observable<{}> = this.action$
+    .ofType(AuthActionTypes.REGISTER_WITH_GOOGLE_SUCCESS, AuthActionTypes.REGISTER_WITH_FACEBOOK_SUCCESS, UserActionTypes.GET_USER_BASIC_DATA)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      console.log(payload);
+      return this.userService.getCurrentUser()
+        .map(result => new GetUserBasicDataSuccess(result['data']['user']));
     });
 }

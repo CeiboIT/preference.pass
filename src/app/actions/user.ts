@@ -6,7 +6,10 @@ export const ActionTypes = {
   CREATE_USER: type('[User] Create'),
   CREATE_USER_SUCCESS: type('[User] Create success'),
   CREATE_USER_FAILURE: type('[User] Create failure'),
-  LOAD_USER: type('[User] Load')
+  LOAD_USER: type('[User] Load'),
+  GET_USER_BASIC_DATA: type('[User] Get Basic Data'),
+  GET_USER_BASIC_DATA_SUCCESS: type('[User] Get Basic Data Success'),
+  GET_USER_BASIC_DATA_FAILURE: type('[User] Get Basic Data Failure')
 };
 
 export class LoadUser implements Action {
@@ -29,4 +32,20 @@ export class CreateUserSuccess implements Action {
   constructor(public payload: any) {}
 }
 
-export type Actions = LoadUser | CreateUser | CreateUserFailure | CreateUserSuccess;
+export class GetUserBasicData implements Action {
+  type = ActionTypes.GET_USER_BASIC_DATA;
+  constructor(public payload: any) {}
+}
+
+export class GetUserBasicDataSuccess implements Action {
+  type = ActionTypes.GET_USER_BASIC_DATA_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetUserBasicDataFailure implements Action {
+  type = ActionTypes.GET_USER_BASIC_DATA_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export type Actions = LoadUser | CreateUser | CreateUserFailure | CreateUserSuccess | GetUserBasicData
+  | GetUserBasicDataSuccess | GetUserBasicDataFailure;

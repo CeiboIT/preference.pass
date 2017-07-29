@@ -9,6 +9,7 @@ import { Activity } from '../../../models/activity';
 })
 export class ActivityDetailComponent {
   @Input() activity;
+  @Input() user;
   @Output() selectedRate: EventEmitter<any> = new EventEmitter();
   constructor(
     private router: Router
@@ -20,6 +21,13 @@ export class ActivityDetailComponent {
 
   onRateSelected($event) {
     this.selectedRate.emit($event);
+  }
+  get activityCover() {
+    if (this.activity.coverPhoto) {
+      return this.activity.coverPhoto.url;
+    } else {
+      return '';
+    }
   }
 
 }

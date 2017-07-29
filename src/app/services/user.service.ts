@@ -41,16 +41,23 @@ export class UserService {
   }
 
   getCurrentUser() {
-    const GET_CURRENT_USER = gql`
-      query {
-        user {
-          id
+      const GET_CURRENT_USER = gql`
+        query GetCurrentUser {
+          user {
+            id
+            name 
+            picture
+            subscription {
+              adults
+              validity
+              kids
+            }
+          }
         }
-      }
-    `;
+      `;
 
-    return this.client.watchQuery({
-      query: GET_CURRENT_USER
-    });
+      return this.client.watchQuery({
+        query: GET_CURRENT_USER
+      });
   }
 }

@@ -4,7 +4,10 @@ import {Observable} from 'rxjs/Observable';
 import {MdDialog} from '@angular/material';
 import {AuthModalComponent} from '../components/widgets/auth-modal/auth-modal.component';
 import { ActionTypes } from '../actions/layout';
-import {LoginWithEmail, RegisterWithEmailAndPassword, RegisterWithFacebook, RegisterWithGoogle,} from '../actions/auth';
+import {
+  LoginWithEmail, LoginWithFacebook, LoginWithGoogle, RegisterWithEmailAndPassword, RegisterWithFacebook,
+  RegisterWithGoogle,
+} from '../actions/auth';
 import {Store} from '@ngrx/store';
 
 import 'rxjs/add/operator/do';
@@ -70,10 +73,16 @@ export class LayoutEffects {
         this.store.dispatch(new LoginWithEmail({email: data.email}));
         break;
       case('GoogleRegister'):
-        this.store.dispatch(new RegisterWithGoogle({type: type }));
-        break;
+      this.store.dispatch(new RegisterWithGoogle({type: type }));
+      break;
       case('FacebookRegister'):
         this.store.dispatch(new RegisterWithFacebook({type: type}));
+        break;
+      case('GoogleLogin'):
+        this.store.dispatch(new LoginWithGoogle({type: type }));
+        break;
+      case('FacebookLogin'):
+        this.store.dispatch(new LoginWithFacebook({type: type}));
         break;
     }
   }

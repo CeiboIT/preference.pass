@@ -11,7 +11,6 @@ import {FormGroup} from '@angular/forms';
       <app-person-type-selector [parent]="parent"></app-person-type-selector>   
       <app-user-fullname [parent]="parent"></app-user-fullname>
       <app-email-input [parent]="parent"></app-email-input>
-      
       <button md-raised-button color="accent" type="submit">
         Add
       </button>

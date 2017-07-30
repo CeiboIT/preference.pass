@@ -1,18 +1,26 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
-const timeRegexp = /^([01]\d|2[0-3]):?([0-5]\d)$/;
+const timeRegexp = /([01]\d|2[0-3]):?([0-5]\d)/;
 function generateDepartureTimes(departures) {
  let _times = [];
   departures.forEach((departure) => {
     departure.times.forEach((time) => {
+      console.log(time);
       if (timeRegexp.test(time)) {
-        console.log('Entered with: ', time);
-        _times.push(time);
+        const _time = time.match(timeRegexp)[0];
+        console.log('Entered with: ', _time);
+        _times.push(_time);
       }
     });
   });
-  return _times.filter((value, index, self) => self.indexOf(value) === index);
+  const _filtered = _times.filter((value, index, self) => self.indexOf(value) === index);
+  const _sorted = _filtered.sort((a, b) => {
+    const _a = new Date('1970/01/01 ' + a).valueOf();
+    const _b = new Date('1970/01/01 ' + b).valueOf();
+    return _a - _b;
+  });
+  return _sorted;
 }
 
 

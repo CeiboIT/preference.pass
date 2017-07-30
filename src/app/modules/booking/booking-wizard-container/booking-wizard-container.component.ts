@@ -18,14 +18,23 @@ import {onStateChangeObservable} from '../../../utils/store';
             [departures]="departures$ | async "
           >
           </app-pick-location-and-time-selection-form>
+          <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
         </div>
       </div>
+      
+      <pre>
       {{ booking.value | json }}
+      <h2>
+        Companion
+      </h2>
+      {{ companion.value | json }}
+      </pre>
     </div>
   `
 })
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
+  public companion;
   public departures$: Observable<any>;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
@@ -35,7 +44,14 @@ export class BookingWizardContainerComponent implements OnInit {
      pickUpTime: ['']
    });
    this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
+
+    this.companion = this.fb.group({
+      fullName: [''],
+      email: [''],
+      type: ['']
+    });
   }
+
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDepartures(id));

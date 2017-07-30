@@ -18,6 +18,7 @@ import { UserBirthDateComponent } from './user-birth-date/user-birth-date.compon
 import { UserFirstNameInputComponent } from './user-first-name-input/user-first-name-input.component';
 import { UserLastNameInputComponent } from './user-last-name-input/user-last-name-input.component';
 import { PersonTypeSelectorComponent } from './person-type-selector/person-type-selector.component';
+import { UserFullnameComponent } from './user-fullname/user-fullname.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { PersonTypeSelectorComponent } from './person-type-selector/person-type-
     UserFirstNameInputComponent,
     UserLastNameInputComponent,
     PersonTypeSelectorComponent,
+    UserFullnameComponent,
   ],
   exports: [
     AmountInputComponent,
@@ -52,7 +54,8 @@ import { PersonTypeSelectorComponent } from './person-type-selector/person-type-
     UserBirthDateComponent,
     UserFirstNameInputComponent,
     UserLastNameInputComponent,
-    PersonTypeSelectorComponent
+    PersonTypeSelectorComponent,
+    UserFullnameComponent
   ]
 })
 export class FieldsModule { }

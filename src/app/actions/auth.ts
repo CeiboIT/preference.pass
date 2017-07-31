@@ -22,7 +22,10 @@ export const ActionTypes = {
   REGISTER_WITH_FACEBOOK_SUCCESS: type('[Auth] Register with Facebook Success'),
   REGISTER_WITH_GOOGLE: type('[Auth] Register with Google'),
   REGISTER_WITH_GOOGLE_FAILURE: type('[Auth] Register with Google Failure'),
-  REGISTER_WITH_GOOGLE_SUCCESS: type('[Auth] Register with Google Success')
+  REGISTER_WITH_GOOGLE_SUCCESS: type('[Auth] Register with Google Success'),
+  LOGOUT: type('[Auth] Logout'),
+  LOGOUT_SUCCESS: type('[Auth] Logout Success'),
+  LOGOUT_FAILURE: type('[Auth] Logout Failure'),
 };
 
 export class LoginWithEmail implements Action {
@@ -99,7 +102,22 @@ export class RegisterWithFacebookFailure implements Action {
   constructor(public payload: any) {};
 }
 
+export class AuthLogOut implements Action {
+  type = ActionTypes.LOGOUT;
+  constructor(public payload: any) {};
+}
+
+export class AuthLogOutSuccess implements Action {
+  type = ActionTypes.LOGOUT_SUCCESS;
+  constructor(public payload: any) {};
+}
+
+export class AuthLogOutFailure implements Action {
+  type = ActionTypes.LOGOUT_FAILURE;
+  constructor(public payload: any) {};
+}
+
 export type Actions = LoginWithEmail | LoginWithEmailFailure | LoginWithEmailSuccess |
 RegisterWithEmailAndPassword | RegisterWithEmailAndPasswordFailure | RegisterWithEmailAndPasswordSuccess |
   RegisterWithGoogle | RegisterWithFacebook | LoginWithFacebook | LoginWithFacebookSuccess| LoginWithFacebookFailure |
-  LoginWithGoogle | LoginWithGoogleSuccess | LoginWithGoogleFailure;
+  LoginWithGoogle | LoginWithGoogleSuccess | LoginWithGoogleFailure | AuthLogOut | AuthLogOutSuccess | AuthLogOutFailure ;

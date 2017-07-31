@@ -25,6 +25,13 @@ reducers[UserActionTypes.GET_USER_BASIC_DATA_SUCCESS] = (state, payload) => {
     loading: false
   });
 };
+
+reducers[ActionTypes.LOGOUT_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    user: {},
+    loading: false
+  });
+};
 export default function reducer(state = initialState, action: Actions) {
   return reducers[action.type] && reducers[action.type](state, action.payload) || state;
 };

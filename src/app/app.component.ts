@@ -5,7 +5,7 @@ import {Store} from '@ngrx/store';
 @Component({
   selector: 'app-root',
   template: `    
-    <app-toolbar [user]="user$ | async "></app-toolbar>
+    <app-toolbar [user]="user$ | async " ></app-toolbar>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
     <app-photoswipe></app-photoswipe>

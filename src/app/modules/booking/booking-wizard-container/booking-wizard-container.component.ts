@@ -36,6 +36,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public booking;
   public companion;
   public departures$: Observable<any>;
+  public activity$: Observable<any>;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],

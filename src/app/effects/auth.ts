@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import {Observable} from 'rxjs/Observable';
 import {
-  ActionTypes, LoginWithEmailFailure, LoginWithEmailSuccess, LoginWithFacebookFailure, LoginWithFacebookSuccess,
+  ActionTypes, AuthLogOutFailure, AuthLogOutSuccess, LoginWithEmailFailure, LoginWithEmailSuccess,
+  LoginWithFacebookFailure,
+  LoginWithFacebookSuccess,
   LoginWithGoogleFailure,
   LoginWithGoogleSuccess,
   RegisterWithEmailAndPasswordFailure,
@@ -72,5 +74,14 @@ export class AuthEffects {
       return this.authService.googleLogin()
         .then(result => new LoginWithGoogleSuccess(result))
         .catch(err => new LoginWithGoogleFailure(err));
+    });
+
+  @Effect()
+  LogOut: Observable<{}> = this.action$
+    .ofType(ActionTypes.LOGOUT)
+    .switchMap((action) => {
+      return this.authService.logOut()
+        .then(result => new AuthLogOutSuccess({}))
+        .catch(err => new AuthLogOutFailure({}));
     });
 }

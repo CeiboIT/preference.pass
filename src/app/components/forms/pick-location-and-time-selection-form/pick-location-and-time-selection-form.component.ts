@@ -27,9 +27,10 @@ function generateDepartureTimes(departures) {
 @Component({
   selector: 'app-pick-location-and-time-selection-form',
   template: `
-    <div>
-      <div>
+    <div class="row">
+      <div class="col-12">
         <h1>Select your departure location</h1>
+      </div>
         <md-input-container>
           <input mdInput placeholder="Departure location" [mdAutocomplete]="auto" [formControl]="departuresCtrl">
         </md-input-container>
@@ -43,6 +44,9 @@ function generateDepartureTimes(departures) {
           <h1>
             Select departure time
           </h1>
+          <div class="row">
+            
+          </div>
           <app-pickup-time-element [time]="time" *ngFor="let time of times"
             (onTimeSelected)="onTimeSelected($event)"
           ></app-pickup-time-element>

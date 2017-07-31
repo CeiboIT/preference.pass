@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { OpenLogin, OpenRegister } from '../../../actions/layout';
+import {AuthLogOut} from "../../../actions/auth";
 @Component({
   selector: 'app-toolbar',
   template: `    
@@ -13,7 +14,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
         </div>
         <span></span>
         <div *ngIf="isLoggedIn">
-          <app-user-menu [user]="user"></app-user-menu>
+          <app-user-menu [user]="user" (onUserLogOut)="onUserLogOut()"></app-user-menu>
         </div>
         <div *ngIf="!isLoggedIn">
           <button md-button color="accent" (click)="openLogin()">
@@ -52,6 +53,7 @@ import { OpenLogin, OpenRegister } from '../../../actions/layout';
 })
 export class ToolbarComponent implements OnInit {
   @Input() user;
+  @Output() onLogOut: EventEmitter<any> = new EventEmitter();
   constructor(private store: Store<any>) { }
 
   ngOnInit() {}
@@ -64,7 +66,11 @@ export class ToolbarComponent implements OnInit {
     this.store.dispatch(new OpenRegister({}));
   }
 
+  onUserLogOut() {
+    this.store.dispatch(new AuthLogOut({}));
+  }
+
   get isLoggedIn() {
-    return !!this.user.id;
+    return this.user && this.user.id;
   }
 }

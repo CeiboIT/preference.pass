@@ -97,6 +97,7 @@ export class SubscriptionWizardComponent implements OnInit {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
       adultsAmount: [''],
+      isComingAlone: [''],
       plan: [''],
       cardToken: ['']
     });

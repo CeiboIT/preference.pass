@@ -19,6 +19,7 @@ import { UserFirstNameInputComponent } from './user-first-name-input/user-first-
 import { UserLastNameInputComponent } from './user-last-name-input/user-last-name-input.component';
 import { PersonTypeSelectorComponent } from './person-type-selector/person-type-selector.component';
 import { UserFullnameComponent } from './user-fullname/user-fullname.component';
+import { SubscriptionComingAloneComponent } from './subscription-coming-alone/subscription-coming-alone.component';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { UserFullnameComponent } from './user-fullname/user-fullname.component';
     UserLastNameInputComponent,
     PersonTypeSelectorComponent,
     UserFullnameComponent,
+    SubscriptionComingAloneComponent,
   ],
   exports: [
     AmountInputComponent,
@@ -55,7 +57,8 @@ import { UserFullnameComponent } from './user-fullname/user-fullname.component';
     UserFirstNameInputComponent,
     UserLastNameInputComponent,
     PersonTypeSelectorComponent,
-    UserFullnameComponent
+    UserFullnameComponent,
+    SubscriptionComingAloneComponent
   ]
 })
 export class FieldsModule { }

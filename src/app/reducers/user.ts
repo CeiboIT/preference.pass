@@ -5,6 +5,16 @@ const initialState = {
   loading: false
 };
 
+const mockSubscription = {
+  kids: 1,
+  adults: 1,
+  isComingAlone: false
+};
+
+const mockSubscription2 = {
+  isComingAlone: true
+};
+
 
 reducers[ActionTypes.REGISTER_WITH_EMAIL_AND_PASSWORD] = (state, payload) => {
   return Object.assign({}, state, {

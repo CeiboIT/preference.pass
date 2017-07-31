@@ -8,7 +8,7 @@ import {
   MdCardModule,
   MdCheckboxModule,
   MdIconModule,
-  MdInputModule, MdRadioModule
+  MdInputModule, MdRadioModule, MdSelectModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { PasswordComponent } from './password/password.component';
@@ -20,6 +20,7 @@ import { UserLastNameInputComponent } from './user-last-name-input/user-last-nam
 import { PersonTypeSelectorComponent } from './person-type-selector/person-type-selector.component';
 import { UserFullnameComponent } from './user-fullname/user-fullname.component';
 import { SubscriptionComingAloneComponent } from './subscription-coming-alone/subscription-coming-alone.component';
+import {CompanionsSelectorComponent} from './companions-selector/companions-selector.component';
 
 @NgModule({
   imports: [
@@ -29,10 +30,11 @@ import { SubscriptionComingAloneComponent } from './subscription-coming-alone/su
     MdButtonModule,
     MdCardModule,
     MdCheckboxModule,
+    MdSelectModule,
     MdIconModule,
     MdInputModule,
     MdRadioModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AmountInputComponent,
@@ -46,6 +48,7 @@ import { SubscriptionComingAloneComponent } from './subscription-coming-alone/su
     PersonTypeSelectorComponent,
     UserFullnameComponent,
     SubscriptionComingAloneComponent,
+    CompanionsSelectorComponent
   ],
   exports: [
     AmountInputComponent,
@@ -58,7 +61,8 @@ import { SubscriptionComingAloneComponent } from './subscription-coming-alone/su
     UserLastNameInputComponent,
     PersonTypeSelectorComponent,
     UserFullnameComponent,
-    SubscriptionComingAloneComponent
+    SubscriptionComingAloneComponent,
+    CompanionsSelectorComponent
   ]
 })
 export class FieldsModule { }

@@ -53,10 +53,17 @@ export class UserService {
               kids
               isComingAlone
               companions {
+                id
                 fullName
                 type
                 email
               }
+            }
+            companions {
+              id
+              fullName
+              email
+              type
             }
           }
         }
@@ -65,5 +72,23 @@ export class UserService {
       return this.client.watchQuery({
         query: GET_CURRENT_USER
       });
+  }
+
+  getUserCompanions() {
+    const GET_USER_COMPANIONS = gql`
+      query{
+        user {
+          id
+          companions {
+            fullName
+            email
+            type
+          }
+        }
+      }
+    `;
+    this.client.watchQuery({
+      query: GET_USER_COMPANIONS
+    });
   }
 }

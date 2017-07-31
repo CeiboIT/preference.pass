@@ -18,7 +18,9 @@ import {isComingAlone} from '../../../utils/user';
             [departures]="departures$ | async "
           >
           </app-pick-location-and-time-selection-form>
-          <app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>
+          <!--<app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>-->
+          <app-companions-selection-form [parent]="booking" [companions]="subscriptionCompanions"></app-companions-selection-form>
+          <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
         </div>
       </div>
       
@@ -35,6 +37,7 @@ import {isComingAlone} from '../../../utils/user';
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
   public companion;
+  public subscriptionCompanions;
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
@@ -45,7 +48,8 @@ export class BookingWizardContainerComponent implements OnInit {
      executionDate: [''],
      executionTime: [''],
      pickUpLocationId: [''],
-     pickUpTime: ['']
+     pickUpTime: [''],
+     companionsIds: ['']
    });
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
@@ -59,6 +63,7 @@ export class BookingWizardContainerComponent implements OnInit {
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
+    this.user$.subscribe((user) => this.subscriptionCompanions = user.subscription.companions);
   }
 
   ngOnInit() {

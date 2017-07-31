@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CompanionsSelectionFormComponent } from './companions-selection-form.component';
+import {FieldsModule} from '../fields/fields.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FieldsModule
   ],
-  declarations: [CompanionsSelectionFormComponent]
+  declarations: [CompanionsSelectionFormComponent],
+  exports: [CompanionsSelectionFormComponent]
 })
 export class CompanionsSelectionFormModule { }

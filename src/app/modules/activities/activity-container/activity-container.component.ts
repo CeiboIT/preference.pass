@@ -37,6 +37,10 @@ export class ActivityContainerComponent implements OnInit {
     this.activity$.subscribe(activity => this.activity = activity);
   }
 
+  bookNow($event) {
+    this.router.navigate(['booking/wizard/' + this.activity.id]);
+  }
+
   onRateSelected($event) {
     console.log('Rate selected on Container', $event);
     /*if (!isSubscriptionValid(this.user)) {

@@ -22,6 +22,11 @@ export class ActivityDetailComponent {
   onRateSelected($event) {
     this.selectedRate.emit($event);
   }
+
+  bookNow($event) {
+    console.log('Book now');
+    this.selectedRate.emit($event);
+  }
   get activityCover() {
     if (this.activity.coverPhoto) {
       return this.activity.coverPhoto.url;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { OpenLogin, OpenRegister } from '../../../actions/layout';
-import {AuthLogOut} from "../../../actions/auth";
+import {AuthLogOut} from '../../../actions/auth';
 @Component({
   selector: 'app-toolbar',
   template: `    

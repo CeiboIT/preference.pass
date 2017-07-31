@@ -31,7 +31,7 @@ function generateAvailableDays(diff) {
 export class BookingDateSelectorFormComponent implements OnInit {
   @Input() validUntil = moment().add(5, 'day');
   @Input() parent: FormGroup;
-  @Input() activity = { name: 'xcaret'};
+  @Input() activity;
   public availableDays;
   public daySelected: EventEmitter<any> = new EventEmitter();
   constructor() { }

@@ -60,37 +60,9 @@ export class AuthService {
     });
   }
 
-  /*getCurrentUser = () => {
-    return new Promise((resolve, reject) => {
-      // const id = localStorage.getItem('id_token');
-      const accessToken = localStorage.getItem('access_token');
-      if (accessToken && tokenNotExpired()) {
-        webAuth.client.userInfo(accessToken, (err, user) => {
-          if (err) {
-            console.log('Getting profile error', err);
-            // reject(err);
-            localStorage.setItem('id_token', JSON.parse(localStorage.getItem('user')).token);
-            resolve(JSON.parse(localStorage.getItem('user')));
-          } else {
-            user.token = localStorage.getItem('id_token');
-            localStorage.setItem('user', JSON.stringify(user));
-            resolve(user);
-          }
-        });
-      } else if (accessToken && !tokenNotExpired()) {
-        const previousUser = JSON.parse(localStorage.getItem('user'));
-        if (previousUser) {
-          resolve(previousUser);
-        }
-      } else {
-        resolve();
-      }
-    });
-  }*/
-
   getCurrentUser = () => {
     this.store.dispatch(new GetUserBasicData({}));
-  }
+  };
 
   facebookLogin() {
     return new Promise((resolve, reject) => {
@@ -147,7 +119,7 @@ export class AuthService {
             idToken: idToken,
             accessToken: accessToken,
           }
-        })
+        });
 
         this.http.post('https://api.graph.cool/simple/v1/' + PROJECT_ID, _body, {headers: this.headers})
           .toPromise()

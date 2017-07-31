@@ -52,6 +52,11 @@ export class UserService {
               validity
               kids
               isComingAlone
+              companions {
+                fullName
+                type
+                email
+              }
             }
           }
         }

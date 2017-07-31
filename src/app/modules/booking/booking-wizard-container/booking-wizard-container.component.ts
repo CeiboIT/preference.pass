@@ -37,7 +37,15 @@ import {isComingAlone} from '../../../utils/user';
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
   public companion;
-  public subscriptionCompanions;
+  public subscriptionCompanions= [{
+    id: '123',
+    fullName: 'Emiliano Potignano',
+    type: 'Adult'
+  }, {
+    id: '3455',
+    fullName: 'Ayrton Potignano',
+    type: 'Kid'
+  }];
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
@@ -63,7 +71,11 @@ export class BookingWizardContainerComponent implements OnInit {
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
-    this.user$.subscribe((user) => this.subscriptionCompanions = user.subscription.companions);
+    this.user$.subscribe((user) => {
+      if (user && user.id && user.subscription) {
+        this.subscriptionCompanions = user.subscription.companions;
+      }
+    });
   }
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import {FormGroup} from '@angular/forms';
     <div>
       <app-amount-input [parent]="parent" [parentKey]="'kidsAmount'" [placeholder]="'Kids'"></app-amount-input>
       <app-amount-input [parent]="parent" [parentKey]="'adultsAmount'" [placeholder]="'Adults'"></app-amount-input>
+      <app-subscription-coming-alone [parent]="parent"></app-subscription-coming-alone>
     </div>
   `
 })

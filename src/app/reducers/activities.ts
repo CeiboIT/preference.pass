@@ -8,7 +8,7 @@ const initialState = {
   healthAndBeauty: [],
   nightclubs: [],
   hotDeals: [],
-  detail: {},
+  selectedActivity: {},
   loading: false,
   error: '',
   departures: [],
@@ -83,7 +83,7 @@ reducers[ActionTypes.GET_DETAIL_FAILURE] = (state, payload) => {
 
 reducers[ActionTypes.GET_DETAIL_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
-    detail: payload,
+    selectedActivity: payload,
     loading: false
   });
 };

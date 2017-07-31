@@ -31,17 +31,22 @@ export class ActivityContainerComponent implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDetail(id));
-    this.activity$ = onStateChangeObservable(this.store, 'activities.detail');
+    this.activity$ = onStateChangeObservable(this.store, 'activities.selectedActivity');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.user$.subscribe(user => this.user = user);
     this.activity$.subscribe(activity => this.activity = activity);
   }
 
+  bookNow($event) {
+    this.router.navigate(['booking/wizard/' + this.activity.id]);
+  }
+
   onRateSelected($event) {
     console.log('Rate selected on Container', $event);
-    if (!isSubscriptionValid(this.user)) {
+    /*if (!isSubscriptionValid(this.user)) {
       this.router.navigate(['subscription/wizard']);
-    }
+    }*/
+    this.router.navigate(['booking/wizard/' + this.activity.id]);
   }
 
 }

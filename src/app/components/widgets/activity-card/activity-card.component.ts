@@ -28,7 +28,7 @@ import { compress, resize } from '../../../constants/filestack';
     '.activity-card-image {height:150px; background-repeat: no-repeat !important; background-size: cover !important;}',
     '.activity-card:hover {cursor:pointer}',
     '.activity-title {font-size:16px;}',
-    '.saving {font-size: 70%;color: #c63f3f;}',
+    '.saving {font-size: 1.35em; color: #c63f3f;}',
     '.activity-content {font-size:14px;}'
   ]
 })

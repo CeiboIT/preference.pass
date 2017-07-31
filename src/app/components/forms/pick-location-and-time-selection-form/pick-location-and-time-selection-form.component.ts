@@ -51,8 +51,6 @@ function generateDepartureTimes(departures) {
             (onTimeSelected)="onTimeSelected($event)"
           ></app-pickup-time-element>
         </div>
-        
-      </div>
     </div>
   `,
 })
@@ -90,6 +88,4 @@ export class PickLocationAndTimeSelectionFormComponent implements OnInit {
     return val ? this.departures.filter(s => s.name.toLowerCase().indexOf(val.toLowerCase()) === 0)
       : this.departures;
   }
-
-
 }

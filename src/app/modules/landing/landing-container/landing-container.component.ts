@@ -12,7 +12,7 @@ import { onStateChangeObservable } from '../../../utils/store';
         <h3 class="title">
           Hot deals
         </h3>
-        <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
+        <app-hot-deals-list [hotDeals]="tours$ | async "></app-hot-deals-list>
       </div>
       <h3 class="title">
         Tours

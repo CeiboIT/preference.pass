@@ -49,7 +49,7 @@ export class HotDealCardComponent implements OnInit {
     if (this.hotDeal.title) {
       _title = this.hotDeal.title;
     } else {
-      _title = this.hotDeal.activity.name;
+      _title = this.hotDeal.name;
     }
     return _title;
   }

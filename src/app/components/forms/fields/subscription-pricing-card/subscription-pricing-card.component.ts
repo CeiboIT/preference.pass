@@ -39,7 +39,18 @@ import { FormGroup } from '@angular/forms';
       </md-card-footer>
   
     </md-card>
-  `
+  `,
+  styles: [
+    `
+      md-card {
+        border: 1px solid transparent;
+      }
+
+      md-card.active {
+        border: 1px solid #2196F3;
+      }
+    `
+  ]
 })
 export class SubscriptionPricingCardComponent implements OnInit {
   @Input() price: Price;

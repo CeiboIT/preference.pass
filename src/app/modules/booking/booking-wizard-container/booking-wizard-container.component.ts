@@ -11,7 +11,7 @@ import {isComingAlone} from '../../../utils/user';
   template: `
     <div class="container-fluid">
       <div class="row">
-        <div class="col-10">
+        <form class="col-10" novalidate (ngSubmit)="onBookingSubmit($event)">
           <app-booking-date-selector-form [activity]="activity$ | async" [parent]="booking"></app-booking-date-selector-form>
           <app-pick-location-and-time-selection-form *ngIf="departures$ | async"
             [parent]="booking"
@@ -21,7 +21,12 @@ import {isComingAlone} from '../../../utils/user';
           <!--<app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>-->
           <app-companions-selection-form [parent]="booking" [companions]="subscriptionCompanions"></app-companions-selection-form>
           <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
-        </div>
+          <div class="col-12">
+            <button md-raised-button color="primary" type="submit">
+              Finish Booking
+            </button>            
+          </div>
+        </form>
       </div>
       
       <pre>
@@ -51,6 +56,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public user$: Observable<any>;
   public user;
   public departures;
+  public activity;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -76,6 +82,8 @@ export class BookingWizardContainerComponent implements OnInit {
         this.subscriptionCompanions = user.subscription.companions;
       }
     });
+
+    this.activity$.subscribe(activity => this.activity = activity);
   }
 
   ngOnInit() {
@@ -92,5 +100,13 @@ export class BookingWizardContainerComponent implements OnInit {
 
   get isComingAlone() {
      return isComingAlone(this.user);
+  }
+
+  onBookingSubmit(e) {
+    e.preventDefault();
+    let _booking = this.booking.value;
+    _booking.activitiyId = this.activity.id;
+    _booking.owner = this.user.id;
+    console.log(_booking);
   }
 }

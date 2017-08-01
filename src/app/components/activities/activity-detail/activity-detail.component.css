@@ -1,15 +1,16 @@
 .detail-banner {
+  background-repeat: no-repeat;
   background-position: center center;
-  background-size: 100% auto;
+  background-size: cover;
   height: 500px;
-  position: relative; 
+  position: relative;
 }
 
 @media (max-width: 767px) {
   .detail-banner {
     height: 400px;
-    background-size: 100% 100%; 
-  } 
+    background-size: 100% 100%;
+  }
 }
 
 .detail-banner:before {
@@ -22,12 +23,12 @@
   position: absolute;
   right: 0px;
   top: 0px;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .detail-banner .container {
   height: 100%;
-  position: relative; 
+  position: relative;
 }
 .detail-banner .tolanding-banner {
   position: absolute;
@@ -43,41 +44,41 @@
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
-  z-index: 1; 
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
   .detail-banner .detail-banner-left {
-    margin-left: 15px; 
-  } 
+    margin-left: 15px;
+  }
 }
 
 .detail-banner .detail-banner-left {
-  left: 15px; 
+  left: 15px;
 }
-  
+
 .detail-banner h2 {
   color: #fff;
   font-size: 36px;
   text-shadow: 0px 0px 20px #000;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 @media (max-width: 767px) {
   .detail-banner h2 {
-    font-size: 30px; 
-  } 
+    font-size: 30px;
+  }
 }
 
 .detail-banner .detail-banner-address {
   color: #fff;
   font-weight: 300;
-  text-shadow: 0px 0px 20px #000; 
+  text-shadow: 0px 0px 20px #000;
 }
 .detail-banner .detail-banner-address i {
-  margin-right: 10px; 
+  margin-right: 10px;
 }
-  
+
 .detail-banner .detail-banner-btn {
   text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
   border: 1px solid #fff;
@@ -87,29 +88,29 @@
   margin-right: 20px;
   padding: 9px 15px;
   cursor: pointer;
-  transition: all linear .15s; 
+  transition: all linear .15s;
 }
 
 .detail-banner .detail-banner-btn i {
   font-size: 16px;
-  margin-right: 5px; 
+  margin-right: 5px;
 }
 
 .detail-banner .detail-banner-btn:hover {
   background-color: #fff;
   color: #363636;
-  text-shadow: none; 
+  text-shadow: none;
 }
 
 .detail-banner .detail-banner-btn.bookmark.marked {
   background-color: #fff;
   color: #444;
-  text-shadow: none; 
+  text-shadow: none;
 }
-  
+
 .detail-banner .detail-banner-btn.bookmark.marked i:before {
   content: "\f02e";
-  color: #009f8b; 
+  color: #009f8b;
 }
 
 .detail-label {
@@ -136,5 +137,5 @@
   color: #363636;
   font-weight: 300;
   margin: 0 0px 30px 0px;
-  padding-bottom: 20px; 
+  padding-bottom: 20px;
 }

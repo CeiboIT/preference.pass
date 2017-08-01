@@ -8,7 +8,7 @@ const uri = 'subscription/new';
 @Injectable()
 export class SubscriptionService {
   private endpoint = server + uri;
-  
+
   constructor(private http: Http) { }
 
   createAuthorizationHeader(headers:Headers) {
@@ -17,23 +17,23 @@ export class SubscriptionService {
 
   sendSubscription(body) {
     return new Promise((resolve, reject) => {
-      var headers = new Headers();
+      var headers = new Headers({
+        'Content-Type': 'application/json'
+      });
       this.createAuthorizationHeader(headers);
-      headers.append('Content-Type', 'application/json');
-
       let subscription = JSON.stringify(body);
       this.http.post(this.endpoint, subscription, {
         headers: headers
-      }) 
+      })
       .map((response: Response) => response.json())
       .subscribe(
-        data => { 
+        data => {
           console.log(data);
           resolve(data);
         },
         err => {
           console.log(err);
-          reject(err)
+          reject(err);
         }
       );
     })

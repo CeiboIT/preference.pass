@@ -91,4 +91,28 @@ export class UserService {
       query: GET_USER_COMPANIONS
     });
   }
+
+  createUserCompanion(companionData, userId) {
+      const CREATE_COMPANION = gql`
+        mutation NewCompanion(
+          $fullName: String!
+          $email: String
+          $type: String!
+          $companionOwnerId: String
+        ) {
+          createCompanion(
+            fullName: $fullName
+            email: $email
+            type: $type
+            companionOwnerId: $companionOwnerId
+          ) {
+            id
+          }
+        }
+      `;
+
+      return this.client.mutate({
+        mutation: CREATE_COMPANION
+      });
+    }
 }

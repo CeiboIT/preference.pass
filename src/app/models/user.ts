@@ -6,6 +6,12 @@ export interface User {
   birthDate: number;
 }
 
+export interface CompanionCreation {
+    fullName: string;
+    email: string;
+    type: string;
+}
+
 /*
 type User implements Node {
   createdAt: DateTime!

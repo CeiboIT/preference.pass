@@ -31,28 +31,28 @@ export class HotDealsListComponent implements OnInit {
         pagination: null,
         nextButton: '.swiper-button-next',
         prevButton: '.swiper-button-prev',
-        spaceBetween: 30,
-        slidesPerView: 5,
+        spaceBetween: 16,
+        slidesPerView: 6,
          breakpoints: {
             1024: {
                 //slidesPerView: 4,
                 slidesPerView: 'auto',
-                spaceBetween: 40
+                spaceBetween: 16
             },
             768: {
                 //slidesPerView: 3,
                 slidesPerView: 'auto',
-                spaceBetween: 30
+                spaceBetween: 16
             },
             767: {
                 //slidesPerView: 2,
                 slidesPerView: 'auto',
-                spaceBetween: 20
+                spaceBetween: 12
             },
             480: {
               //slidesPerView: 1,
               slidesPerView: 'auto',
-              spaceBetween: 10,
+              spaceBetween: 12,
             }
       }
   };

@@ -1,5 +1,34 @@
 .activity-card {width:100%;}
-.activity-card-image {height:150px; background-repeat: no-repeat !important; background-size: cover !important;}
+.activity-card-image {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center;
+}
 .activity-card:hover {cursor:pointer}
 .activity-title {font-size:16px;}
 .activity-content {font-size:14px;}
+
+
+@media screen and (max-width: 480px) {
+    .activity-card-image { 
+        height: 245px;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    .activity-card-image { 
+        height: 270px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .activity-card-image { 
+        height: 316px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+  .activity-card-image { 
+        height: 375px;
+    }
+}

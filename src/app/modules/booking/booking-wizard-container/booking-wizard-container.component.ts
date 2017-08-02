@@ -16,7 +16,7 @@ import * as moment from 'moment';
           <app-booking-date-selector-form [activity]="activity$ | async" [parent]="booking"
               [validUntil]="subscriptionValidity" *ngIf="user && subscriptionValidity"
           ></app-booking-date-selector-form>
-          <app-pick-location-and-time-selection-form *ngIf="departures$ | async"
+          <app-pick-location-and-time-selection-form *ngIf="(departures$ | async)?.length"
             [parent]="booking"
             [departures]="departures$ | async "
           >

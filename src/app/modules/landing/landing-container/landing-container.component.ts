@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import {GetList, GetTours, GetActivitiesByCategory, GetHotDealsFailure, GetHotDeals} from '../../../actions/activities';
+import {
+  GetActivitiesByCategory,
+  GetHotDeals,
+  GetHotDealsFailure,
+  GetList,
+  GetTours
+  } from '../../../actions/activities';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-landing-container',

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Rate } from '../../../../models/rate';
+import { Rate } from '../../../models/rate';
 import * as _ from 'lodash';
 
 @Component({

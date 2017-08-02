@@ -6,13 +6,16 @@ import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
 import {isComingAlone} from '../../../utils/user';
+import * as moment from 'moment';
 @Component({
   selector: 'app-booking-wizard-container',
   template: `
     <div class="container-fluid">
       <div class="row">
         <form class="col-10" novalidate (ngSubmit)="onBookingSubmit($event)">
-          <app-booking-date-selector-form [activity]="activity$ | async" [parent]="booking"></app-booking-date-selector-form>
+          <app-booking-date-selector-form [activity]="activity$ | async" [parent]="booking"
+              [validUntil]="subscriptionValidity" *ngIf="user && subscriptionValidity"
+          ></app-booking-date-selector-form>
           <app-pick-location-and-time-selection-form *ngIf="departures$ | async"
             [parent]="booking"
             [departures]="departures$ | async "
@@ -57,6 +60,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public user;
   public departures;
   public activity;
+  public subscriptionValidity;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -80,6 +84,7 @@ export class BookingWizardContainerComponent implements OnInit {
     this.user$.subscribe((user) => {
       if (user && user.id && user.subscription) {
         this.subscriptionCompanions = user.subscription.companions;
+        this.subscriptionValidity = moment(user.subscription.validity);
       }
     });
 

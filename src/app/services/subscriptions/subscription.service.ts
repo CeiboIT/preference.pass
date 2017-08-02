@@ -20,6 +20,7 @@ export class SubscriptionService {
       var headers = new Headers({
         'Content-Type': 'application/json'
       });
+
       this.createAuthorizationHeader(headers);
       let subscription = JSON.stringify(body);
       this.http.post(this.endpoint, subscription, {

@@ -9,7 +9,7 @@ declare var PhotoSwipeUI_Default;
 		`
 			<img [src]="mainPhoto?.url" (click)="openGallery(0)">
 			<md-card>
-				<ul class="sub-photos">
+				<ul class="sub-photos" *ngIf="subPhotos">
 					<div class="item" *ngFor="let subPhoto of subPhotos; let i = index">
 						<li>
 							<a (click)="openGallery(i + 1)">

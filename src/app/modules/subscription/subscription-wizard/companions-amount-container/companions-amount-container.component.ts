@@ -17,9 +17,6 @@ export class CompanionsAmountContainerComponent implements OnInit {
   @Input() successClicked: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
-  ngOnInit() {
-  }
-
-
+  ngOnInit() { }
 
 }

@@ -10,12 +10,12 @@ import { Component, OnInit, Input } from '@angular/core';
               {{ title }}
             </div>
             <div class="w-25 text-right">
-              <app-activity-price [rates]="hotDeal.rates"></app-activity-price>
+              <app-activity-price [rates]="rates"></app-activity-price>
             </div>
         </div>
         <div class="text-center mt-1">
           <div class="saving">
-            <app-activity-saving [rates]="hotDeal.rates"></app-activity-saving>
+            <app-activity-saving [rates]="rates"></app-activity-saving>
           </div>
         </div>
         <div class="activity-content mt-1">
@@ -57,8 +57,18 @@ export class HotDealCardComponent implements OnInit {
     if (this.hotDeal.title) {
       _title = this.hotDeal.title;
     } else {
-      _title = this.hotDeal.name;
+      _title = this.hotDeal.activity.name;
     }
     return _title;
+  }
+
+  get rates() {
+    let _rates = '';
+    if (this.hotDeal.rates) {
+      _rates = this.hotDeal.rates;
+    } else {
+      _rates = this.hotDeal.activity.rates;
+    }
+    return _rates;
   }
 }

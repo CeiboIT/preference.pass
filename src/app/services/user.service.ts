@@ -59,6 +59,10 @@ export class UserService {
                 email
               }
             }
+            
+            preferencePassCard {
+              code
+            }
             companions {
               id
               fullName

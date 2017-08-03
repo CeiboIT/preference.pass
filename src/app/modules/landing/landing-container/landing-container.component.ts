@@ -18,7 +18,7 @@ import { Store } from '@ngrx/store';
         <h3 class="title mb-4">
           Hot deals
         </h3>
-        <app-hot-deals-list [hotDeals]="tours$ | async "></app-hot-deals-list>
+        <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
       </div>
       
       <div class="my-5">

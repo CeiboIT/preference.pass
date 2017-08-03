@@ -26,6 +26,8 @@ export const ActionTypes = {
   LOGOUT: type('[Auth] Logout'),
   LOGOUT_SUCCESS: type('[Auth] Logout Success'),
   LOGOUT_FAILURE: type('[Auth] Logout Failure'),
+  USER_NOT_SESSION: type('[Auth] User has not session'),
+  REDIRECT_TO_LANDING: type('[Auth] Redirect to landing')
 };
 
 export class LoginWithEmail implements Action {

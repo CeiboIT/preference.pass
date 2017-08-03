@@ -5,18 +5,20 @@ import { Component, OnInit, Input } from '@angular/core';
   template: `
       <div class="activity-card">
         <div class="activity-card-image m-0" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
-        <div class="my-3 activity-title d-flex justify-content-between">
+        <div class="mt-1 activity-title d-flex justify-content-between">
             <div class="w-75">
               {{ title }}
             </div>
             <div class="w-25 text-right">
               <app-activity-price [rates]="hotDeal.rates"></app-activity-price>
-              <div class="saving">
-                <app-activity-saving [rates]="hotDeal.rates"></app-activity-saving>
-              </div>
             </div>
         </div>
-        <div class="activity-content">
+        <div class="text-center mt-1">
+          <div class="saving">
+            <app-activity-saving [rates]="hotDeal.rates"></app-activity-saving>
+          </div>
+        </div>
+        <div class="activity-content mt-1">
           {{ headline }}
         </div>
       </div>

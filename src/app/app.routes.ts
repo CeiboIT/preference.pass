@@ -1,5 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: 'app/modules/landing/landing.module#LandingModule' },

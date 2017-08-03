@@ -163,6 +163,6 @@ export class AuthService {
   }
 
   getAuthToken = () => {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem('idToken');
   }
 }

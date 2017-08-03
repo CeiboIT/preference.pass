@@ -4,22 +4,23 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 @Component({
   selector: 'app-activity-list',
   template: `
-      
-    <!--<div class="scrolling-wrapper-flexbox hidden-md-up">
-      <div class="activities-landing-container col-11" *ngFor="let activity of activities">
-        <app-activity-card [activity]="activity"></app-activity-card>
-      </div>
-    </div>
-    <div class="scrolling-wrapper-flexbox hidden-md-down">
-      <div class="activities-landing-container col-3" *ngFor="let activity of activities">
-        <app-activity-card [activity]="activity"></app-activity-card>
-      </div>
-    </div>-->
-
     <div [swiper]="config" class="swiper-container" *ngIf="activities.length">
       <div class="swiper-wrapper">
           <div *ngFor="let activity of activities" class="swiper-slide">
-            <app-activity-card [activity]="activity"></app-activity-card>
+            <!--<app-activity-card [activity]="activity"></app-activity-card>-->
+              <div class="timeline-wrapper">
+                <div class="timeline-item">
+                    <div class="animated-background img"></div>
+                    <div class="my-3 w-100 d-flex">
+                      <div class="animated-background title w-75 mr-5"></div>
+                      <div class="animated-background price w-25"></div>
+                    </div>
+                    <div class="animated-background description mb-1"></div>
+                    <div class="animated-background description w-75"></div>
+                </div>
+            </div>
+
+
           </div>
         </div>
         <!-- Controls -->

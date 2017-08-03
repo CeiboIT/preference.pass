@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-hot-deal-card',
   template: `
-      <div class="mt-3 activity-card">
+      <div class="activity-card">
         <div class="activity-card-image m-0" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
         <div class="my-3 activity-title d-flex justify-content-between">
             <div class="w-75">

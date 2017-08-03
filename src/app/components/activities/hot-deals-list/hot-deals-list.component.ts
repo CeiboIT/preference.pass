@@ -17,13 +17,24 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
       <div [hidden]="config.nextButton != '.swiper-button-next'" class="swiper-button-next"></div>
       <div [hidden]="config.prevButton != '.swiper-button-prev'" class="swiper-button-prev"></div>
     </div>
+
+    <div [swiper]="config" class="swiper-container" *ngIf="!hotDeals.length">
+      <div class="swiper-wrapper">
+          <div *ngFor="let item of items" class="swiper-slide">
+            <hot-deals-card-loader></hot-deals-card-loader>  
+          </div>
+        </div>
+    </div>  
   `,
   styleUrls: ['./hot-deals-list.scss']
 })
 
 export class HotDealsListComponent implements OnInit {
   @Input() hotDeals;
-  constructor() { }
+  public items;
+  constructor() { 
+    this.items = Array(6).fill(0).map((x,i)=>i);
+  }
 
   ngOnInit() { }
 

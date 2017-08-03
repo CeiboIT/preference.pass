@@ -43,6 +43,7 @@ export class ActivitiesQueries {
           id
           mainPhoto
           activity {
+            id
             name
             mainPhoto
             headline

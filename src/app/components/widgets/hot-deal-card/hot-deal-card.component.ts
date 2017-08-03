@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-hot-deal-card',
   template: `
-      <div class="activity-card">
+      <div class="activity-card" (click)="gotoDetail()">
         <div class="activity-card-image m-0" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
         <div class="mt-1 activity-title d-flex justify-content-between">
             <div class="w-75">
@@ -27,7 +28,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HotDealCardComponent implements OnInit {
   @Input() hotDeal;
-  constructor(){}
+  constructor(
+    private router: Router
+  ){}
 
   ngOnInit() {
   }
@@ -70,5 +73,9 @@ export class HotDealCardComponent implements OnInit {
       _rates = this.hotDeal.activity.rates;
     }
     return _rates;
+  }
+
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.hotDeal.activity.id]);
   }
 }

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HotDealsListComponent } from './hot-deals-list.component';
-import {HotDealCardModule} from '../../widgets/hot-deal-card/hot-deal-card.module';
-import {SwiperModule} from 'ngx-swiper-wrapper';
-import {MdButtonModule} from '@angular/material';
+import { HotDealCardModule} from '../../widgets/hot-deal-card/hot-deal-card.module';
+import { HotDealsCardLoaderModule } from '../../loaders/hot-deals-card-loader/hot-deals-card-loader.module'
+import { SwiperModule } from 'ngx-swiper-wrapper';
 
 @NgModule({
   imports: [
     CommonModule,
     HotDealCardModule,
-    MdButtonModule,
+    HotDealsCardLoaderModule,
     SwiperModule
   ],
   declarations: [HotDealsListComponent],

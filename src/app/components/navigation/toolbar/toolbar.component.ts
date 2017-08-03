@@ -6,14 +6,14 @@ import { AuthLogOut } from '../../../actions/auth';
 @Component({
   selector: 'app-toolbar',
   template: `    
-    <md-toolbar color="primary">
+  <md-toolbar color="primary">
     <div class="d-flex w-100 justify-content-between align-items-center">
-        <div class="logo">
+        <div class="logo d-flex flex-row align-items-center">
           <a routerLink="/">
             <img src="../../../../assets/imgs/PPLogo_circulo.png">
           </a>
+          <span class="hidden-xs-down ml-2" routerLink="/"><h2>Preference pass</h2></span>
         </div>
-        <span></span>
         <div *ngIf="isLoggedIn">
           <app-user-menu [user]="user" (onUserLogOut)="onUserLogOut()"></app-user-menu>
         </div>

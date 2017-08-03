@@ -5,7 +5,7 @@ import { compress, resize } from '../../../constants/filestack';
 @Component({
   selector: 'app-activity-card',
   template: `    
-      <div class="mt-3 activity-card" (click)="gotoDetail()">
+      <div class="activity-card" (click)="gotoDetail()">
         <div class="activity-card-image m-0" [ngStyle]="{'background-image': 'url(' + activityPhoto + ')'}"></div>
         <div class="mt-1 activity-title d-flex justify-content-between">
             <div class="w-75">

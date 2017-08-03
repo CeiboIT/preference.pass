@@ -14,24 +14,33 @@ import { Store } from '@ngrx/store';
   selector: 'app-landing-container',
   template: `
     <div class="landing-container">
-      <div class="hot-deals py-3 mb-3">
-        <h3 class="title">
+      <div class="hot-deals py-5">
+        <h3 class="title mb-4">
           Hot deals
         </h3>
         <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
       </div>
-      <h3 class="title">
-        Tours
-      </h3>
-      <app-activity-list [activities]="tours$ | async "></app-activity-list>
-      <h3 class="title">
-        Activities
-      </h3>
-      <app-activity-list [activities]="activities$ | async "></app-activity-list>
-      <h3 class="title">
-        Nightclubs
-      </h3>
-      <app-activity-list [activities]="nightclubs$ | async "></app-activity-list>
+      
+      <div class="my-5">
+        <h3 class="title mb-4">
+          Tours
+        </h3>
+        <app-activity-list [activities]="tours$ | async "></app-activity-list>
+      </div>
+
+      <div class="my-5">
+        <h3 class="title mb-4">
+          Activities
+        </h3>
+        <app-activity-list [activities]="activities$ | async "></app-activity-list>
+      </div>
+
+      <div class="my-5">
+        <h3 class="title mb-4">
+          Nightclubs
+        </h3>
+        <app-activity-list [activities]="nightclubs$ | async "></app-activity-list>
+      </div>
     </div>
   `,
   styles: [ `

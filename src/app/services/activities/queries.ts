@@ -46,6 +46,12 @@ export class ActivitiesQueries {
             name
             mainPhoto
             headline
+            rates {
+              name
+              discountPrice
+              originalPrice
+              currency
+            }
           }
         }
       }

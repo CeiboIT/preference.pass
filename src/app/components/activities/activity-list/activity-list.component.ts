@@ -7,8 +7,8 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
     <div [swiper]="config" class="swiper-container" *ngIf="activities.length">
       <div class="swiper-wrapper">
           <div *ngFor="let activity of activities" class="swiper-slide">
-            <!--<app-activity-card [activity]="activity"></app-activity-card>-->
-              <div class="timeline-wrapper">
+            <app-activity-card [activity]="activity"></app-activity-card>
+              <!--<div class="timeline-wrapper">
                 <div class="timeline-item">
                     <div class="animated-background img"></div>
                     <div class="my-3 w-100 d-flex">
@@ -18,7 +18,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
                     <div class="animated-background description mb-1"></div>
                     <div class="animated-background description w-75"></div>
                 </div>
-            </div>
+              </div>-->
 
 
           </div>

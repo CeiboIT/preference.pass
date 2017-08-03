@@ -60,7 +60,8 @@ GraphcoolService.prototype.createGraphcoolUser = function (req, auth0AccessToken
             givenName: "${graphcoolUser.given_name}"
             picture: "${graphcoolUser.picture}"
             email: "${graphcoolUser.email}"
-            emailVerified: ${graphcoolUser.email_verified}
+            emailVerified: ${graphcoolUser.email_verified},
+            role: Customer
           ){
             id
           }

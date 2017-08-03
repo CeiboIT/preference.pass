@@ -29,6 +29,7 @@ import { FooterModule } from './components/navigation/footer/footer.module';
 import { PhotoswipeModule } from './components/navigation/photoswipe/photoshipe.module'
 import { UserEffects } from './effects/user';
 import 'hammerjs';
+import {AuthGuard} from './auth.guard';
 
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
@@ -68,7 +69,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     PhotoswipeModule,
     AuthModalModule
   ],
-  providers: [SERVICES],
+  providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [AuthModalComponent]
 })

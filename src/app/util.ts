@@ -18,3 +18,7 @@ export function type<T>(label: T | ''): T {
 
   return <T>label;
 }
+
+export function composeActions(ActionTypes, key, value) {
+  ActionTypes[key] = type(value);
+};

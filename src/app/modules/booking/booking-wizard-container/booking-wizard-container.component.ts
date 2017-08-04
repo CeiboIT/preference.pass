@@ -24,7 +24,7 @@ import * as moment from 'moment';
           <!--<app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>-->
           <app-companions-selection-form [parent]="booking" [companions]="subscriptionCompanions"></app-companions-selection-form>
           <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
-          <app-preference-pass-card-form [parent]="card">
+          <app-preference-pass-card-form [parent]="card" (onValid)="onCardFormValid($event)">
             
           </app-preference-pass-card-form>
           <div class="col-12">
@@ -121,5 +121,9 @@ export class BookingWizardContainerComponent implements OnInit {
     _booking.activitiyId = this.activity.id;
     _booking.owner = this.user.id;
     console.log(_booking);
+  }
+
+  onCardFormValid($event) {
+    console.log('Event in form', $event);
   }
 }

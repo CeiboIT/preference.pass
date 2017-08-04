@@ -31,7 +31,7 @@ import { Component, OnInit } from '@angular/core';
         </ul>
 
         <div class="logo mb-2">
-          <img src="../../../../assets/imgs/logoPPblanco-3.png">
+          <img src="../../../../assets/imgs/PPLogo-full_white.svg">
         </div>
 
         <p>

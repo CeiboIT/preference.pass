@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {GetDepartures, GetDetail} from '../../../actions/activities';
 import {Observable} from 'rxjs/Observable';
@@ -24,6 +24,9 @@ import * as moment from 'moment';
           <!--<app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>-->
           <app-companions-selection-form [parent]="booking" [companions]="subscriptionCompanions"></app-companions-selection-form>
           <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
+          <app-preference-pass-card-form [parent]="card">
+            
+          </app-preference-pass-card-form>
           <div class="col-12">
             <button md-raised-button color="primary" type="submit">
               Finish Booking
@@ -45,6 +48,7 @@ import * as moment from 'moment';
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
   public companion;
+  public card;
   public subscriptionCompanions= [{
     id: '123',
     fullName: 'Emiliano Potignano',
@@ -76,6 +80,10 @@ export class BookingWizardContainerComponent implements OnInit {
       fullName: [''],
       email: [''],
       type: ['']
+    });
+
+    this.card = this.fb.group({
+      code: ['']
     });
 
     this.user$.subscribe((user) => this.user = user);

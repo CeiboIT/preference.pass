@@ -9,7 +9,10 @@ export const ActionTypes = {
   LOAD_USER: type('[User] Load'),
   GET_USER_BASIC_DATA: type('[User] Get Basic Data'),
   GET_USER_BASIC_DATA_SUCCESS: type('[User] Get Basic Data Success'),
-  GET_USER_BASIC_DATA_FAILURE: type('[User] Get Basic Data Failure')
+  GET_USER_BASIC_DATA_FAILURE: type('[User] Get Basic Data Failure'),
+  ASK_USER_FOR_DISCOUNT_CARD: type('[User] Ask user for discount card'),
+  ASK_USER_FOR_SUBSCRIPTION: type('[User] Ask user for subscription'),
+  ASK_USER_FOR_AUTH: type('[User] ask for Auth')
 };
 
 export class LoadUser implements Action {

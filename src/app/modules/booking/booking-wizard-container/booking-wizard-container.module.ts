@@ -7,6 +7,7 @@ import {CompanionChargeFormModule} from '../../../components/forms/companion-cha
 import {CompanionsSelectionFormModule} from '../../../components/forms/companions-selection-form/companions-selection-form.module';
 import {MdButtonModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {PreferencePassCardFormModule} from '../../../components/forms/preference-pass-card-form/preference-pass-card-form.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     PickLocationAndTimeSelectionFormModule,
     CompanionsSelectionFormModule,
     CompanionChargeFormModule,
+    PreferencePassCardFormModule,
     MdButtonModule,
     FormsModule,
     ReactiveFormsModule

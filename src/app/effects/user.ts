@@ -9,7 +9,12 @@ import {
   ActionTypes as UserActionTypes, CreateUserSuccess, CreateUserFailure, GetUserBasicDataSuccess
 } from '../actions/user';
 
+import {
+  ActionTypes as LayoutActions
+} from '../actions/layout';
+
 import {UserService} from '../services/user.service';
+import {User} from "../models/user";
 
 @Injectable()
 export class UserEffects {
@@ -54,4 +59,24 @@ export class UserEffects {
       return this.userService.getCurrentUser()
         .map(result => new GetUserBasicDataSuccess(result['data']['user']));
     });
+  /*
+  @Effect()
+  AskUserFor: Observable<{}> = this.action$
+    .ofType(UserActionTypes.ASK_USER_FOR_AUTH, UserActionTypes.ASK_USER_FOR_DISCOUNT_CARD, UserActionTypes.ASK_USER_FOR_SUBSCRIPTION)
+    .switchMap((action) => {
+      switch(action.type) {
+        case(UserActionTypes.ASK_USER_FOR_AUTH):
+          return new
+        break;
+        case(UserActionTypes.ASK_USER_FOR_DISCOUNT_CARD):
+          return
+        break;
+        case(UserActionTypes.ASK_USER_FOR_SUBSCRIPTION):
+          return
+        break;
+
+      }
+    });*/
+
+
 }

@@ -17,6 +17,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
+    this.user$.subscribe((user) => {
+      console.log('User on app module', user);
+
+
+    });
   }
 
 }

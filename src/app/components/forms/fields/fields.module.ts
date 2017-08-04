@@ -21,6 +21,7 @@ import { PersonTypeSelectorComponent } from './person-type-selector/person-type-
 import { UserFullnameComponent } from './user-fullname/user-fullname.component';
 import { SubscriptionComingAloneComponent } from './subscription-coming-alone/subscription-coming-alone.component';
 import {CompanionsSelectorComponent} from './companions-selector/companions-selector.component';
+import { PreferencePassCardInputComponent } from './preference-pass-card-input/preference-pass-card-input.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import {CompanionsSelectorComponent} from './companions-selector/companions-sele
     PersonTypeSelectorComponent,
     UserFullnameComponent,
     SubscriptionComingAloneComponent,
-    CompanionsSelectorComponent
+    CompanionsSelectorComponent,
+    PreferencePassCardInputComponent
   ],
   exports: [
     AmountInputComponent,
@@ -62,7 +64,8 @@ import {CompanionsSelectorComponent} from './companions-selector/companions-sele
     PersonTypeSelectorComponent,
     UserFullnameComponent,
     SubscriptionComingAloneComponent,
-    CompanionsSelectorComponent
+    CompanionsSelectorComponent,
+    PreferencePassCardInputComponent
   ]
 })
 export class FieldsModule { }

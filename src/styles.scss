@@ -81,6 +81,70 @@ agm-map {
   }
 }
 
+/*LOADER*/
+.loading {
+    opacity: 1;
+    transition: opacity .8s ease-in-out;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #ffc14a;
+    z-index: 9999;
+    &.hidden {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 1s, opacity 1s ease-in;
+    }
+
+    .loader-container {
+        height: 100vh;
+        line-height: 100vh;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            max-width: 100px;
+        }
+
+        .loader-ring {
+            position: absolute;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+            border: 2px solid #ffa800;
+            border-radius: 50%;
+            border-top: 2px solid #f3f3f3;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 
 

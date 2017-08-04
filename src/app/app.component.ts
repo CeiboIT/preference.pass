@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
   ngAfterViewInit() {
     var loading = <HTMLInputElement>document.getElementById('loading');
     loading.className += " hidden";
-    console.warn(loading);
   } 
 
 }

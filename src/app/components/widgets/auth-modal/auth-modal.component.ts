@@ -124,7 +124,10 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
           Continuar con, acepto las Condiciones del servicio, 
           la Política de Privacidad de Prefence Pass.
         </div>
-      
+        
+        <div class="separator" *ngIf="!isLogin">
+            <hr class="hr-separator">
+          </div>
         <div class="d-flex justify-content-between align-items-center" *ngIf="!isLogin">
           Already have an account? <button class="btn-outline accent" (click)="changeToLogin()"> Login</button>
         </div>

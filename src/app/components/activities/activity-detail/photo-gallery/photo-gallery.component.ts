@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { compress, resize } from '../../../../constants/filestack';
 
 declare var PhotoSwipe;
 declare var PhotoSwipeUI_Default;
@@ -7,13 +8,13 @@ declare var PhotoSwipeUI_Default;
 	selector: 'app-photo-gallery',
 	template:
 		`
-			<img [src]="mainPhoto?.url" (click)="openGallery(0)">
+			<img [src]="resizeImg(mainPhoto?.url, 650, 650)" (click)="openGallery(0)">
 			<md-card>
 				<ul class="sub-photos" *ngIf="subPhotos">
 					<div class="item" *ngFor="let subPhoto of subPhotos; let i = index">
 						<li>
 							<a (click)="openGallery(i + 1)">
-								<img [src]="subPhoto?.url">
+								<img [src]="resizeImg(subPhoto?.url, 90, 70)">
 							</a>
 						</li>
 					</div>
@@ -43,7 +44,7 @@ export class PhotoGalleryComponent implements OnInit {
 		})
 
 		this.subPhotos.map((subPhoto) => {
-			var src = subPhoto.url;
+			var src = compress(subPhoto.url);
 
 			items.push({
 				src: src,
@@ -54,6 +55,10 @@ export class PhotoGalleryComponent implements OnInit {
 		});
 
 		return items
+	}
+
+	resizeImg(url, w, h) {
+		return resize(url, w, h);
 	}
 
   openGallery(index) {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from '../../../models/activity';
+import { compress } from '../../../constants/filestack';
 
 @Component({
   selector: 'app-activity-detail',
@@ -29,7 +30,7 @@ export class ActivityDetailComponent {
   }
   get activityCover() {
     if (this.activity.coverPhoto) {
-      return this.activity.coverPhoto.url;
+      return compress(this.activity.coverPhoto.url);
     } else {
       return '';
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { resize } from '../../../constants/filestack';
 
 @Component({
   selector: 'app-hot-deal-card',
@@ -42,8 +43,17 @@ export class HotDealCardComponent implements OnInit {
     } else {
       _img = this.hotDeal.activity.mainPhoto.url;
     }
-    return _img;
+    
+    return resize(_img, 300, 300);
   }
+
+  // get imageLarge (){
+  //   return resize(this.image, 300, 300);
+  // }
+
+  // get imageSmall (){
+  //   return resize(this.image, 50, 50);
+  // }
 
   get headline() {
     let _headline = '';

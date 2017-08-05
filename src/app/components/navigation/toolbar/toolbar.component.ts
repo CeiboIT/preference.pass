@@ -27,7 +27,7 @@ import { AuthLogOut } from '../../../actions/auth';
         </div>
       </div>
 
-      <md-toolbar-row class="justify-content-center justify-content-sm-end">
+      <md-toolbar-row class="justify-content-center justify-content-sm-end align-items-end">
         <div>
           <ul class="d-flex navbar-items">
             <li class="navbar-item">

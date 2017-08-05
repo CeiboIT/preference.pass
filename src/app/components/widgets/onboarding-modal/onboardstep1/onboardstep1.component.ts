@@ -17,7 +17,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class Onboardstep1Component implements OnInit {
   @Output() onValid: EventEmitter<any> = new EventEmitter();
   @Output() changeStep: EventEmitter<any> = new EventEmitter();
-  @Input() feedback: CardValidationResponse = {};
+  @Input() feedback= {};
   public card: FormGroup;
   constructor(private fb: FormBuilder) { }
 

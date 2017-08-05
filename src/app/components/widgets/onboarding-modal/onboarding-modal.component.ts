@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {SubscriptionService} from '../../../services/subscriptions/subscription.service';
+import {CardValidationResponse} from '../../../models/subscription';
 
 @Component({
   selector: 'app-onboarding-modal',
@@ -10,9 +11,12 @@ import {SubscriptionService} from '../../../services/subscriptions/subscription.
         <button md-button md-dialog-close class="pull-right mb-2" style="min-width: auto;"><i class="fa fa-close"></i></button>
       </div>
       <app-onboardstep1 *ngIf="isStep1" (onValid)="onStep1Valid($event)"
-      (changeStep)="onStep1Change()" [feedback]="step1Feedback"
+      (changeStep)="changeToStep2()" [feedback]="step1Feedback"
       >
       </app-onboardstep1>
+      <app-onboardstep2 *ngIf="isStep2">
+        
+      </app-onboardstep2>
     </div>
   `,
   styles: [`
@@ -23,7 +27,7 @@ import {SubscriptionService} from '../../../services/subscriptions/subscription.
 })
 export class OnboardingModalComponent implements OnInit {
   public step;
-  public step1Feedback;
+  public step1Feedback = {};
   constructor(private store: Store<any>, private subscriptionService: SubscriptionService) { }
   ngOnInit() {
     this.calculateInitialStep();
@@ -31,18 +35,27 @@ export class OnboardingModalComponent implements OnInit {
   calculateInitialStep() {
     this.step = 1;
   }
-  onStep1Change() {
+  changeToStep2() {
     this.step = 2;
   }
   get isStep1() {
     return this.step === 1;
   }
-  onStep1Valid($event) {
-    console.log($event);
 
+  get isStep2() {
+    return this.step === 2;
+  }
+
+  onStep1Valid($event) {
     this.subscriptionService.validatePPCard($event)
-      .then(res => {
-        console.log(res);
+      .then((res: CardValidationResponse) => {
+        if (!res.validCard) {
+          Object.assign(this.step1Feedback, {}, {
+            invalid: !res.validCard
+          });
+        } else {
+          this.changeToStep2();
+        }
       })
       .catch(err => {
         console.log(err);

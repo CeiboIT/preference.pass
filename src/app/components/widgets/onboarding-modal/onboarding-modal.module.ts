@@ -6,6 +6,7 @@ import {PreferencePassCardFormModule} from '../../forms/preference-pass-card-for
 import {SubscriptionService} from '../../../services/subscriptions/subscription.service';
 import {MdButtonModule, MdDialogModule} from '@angular/material';
 import { Step1feedbackComponent } from './onboardstep1/step1feedback/step1feedback.component';
+import { Onboardstep2Component } from './onboardstep2/onboardstep2.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { Step1feedbackComponent } from './onboardstep1/step1feedback/step1feedba
     MdButtonModule,
     MdDialogModule
   ],
-  declarations: [OnboardingModalComponent, Onboardstep1Component, Step1feedbackComponent],
+  declarations: [OnboardingModalComponent, Onboardstep1Component, Step1feedbackComponent, Onboardstep2Component],
   exports: [OnboardingModalComponent],
   providers: [SubscriptionService],
 

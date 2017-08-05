@@ -4,14 +4,13 @@ import {CardValidationResponse} from '../../../../../models/subscription';
 @Component({
   selector: 'app-step1feedback',
   template: `
-    <div>
-      <h2>Feedback</h2>
+    <div class="text-danger">
+      <p *ngIf="feedback?.invalid"> Card number not valid</p>
     </div>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class Step1feedbackComponent implements OnInit {
-  @Input() feedback: CardValidationResponse;
+  @Input() feedback;
   constructor() { }
 
   ngOnInit() {

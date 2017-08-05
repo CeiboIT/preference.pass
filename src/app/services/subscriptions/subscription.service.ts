@@ -54,7 +54,7 @@ export class SubscriptionService {
       this.http.post(this.cardsEndpoint, payload, {
         headers: headers
       }).toPromise()
-        .then(response => resolve(response))
+        .then(response => resolve(response.json()))
         .catch(err => reject(err));
     });
   }

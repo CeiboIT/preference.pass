@@ -17,13 +17,17 @@ export class PreferencePassCardFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  ngAfterViewInit() {
     this.validityObserver = new Observable(observer => {
       this.parent.statusChanges.subscribe((status) => {
         if (status === 'VALID') {
           observer.next(this.parent.value);
         }
       });
-    }).debounceTime(500).map(val => val);
+    })
 
     this.validityObserver.subscribe((value) => {
       console.log(value);

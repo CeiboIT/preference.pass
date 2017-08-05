@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
 import {isComingAlone} from '../../../utils/user';
 import * as moment from 'moment';
+import {SearchPPCard} from "../../../actions/subscription";
 @Component({
   selector: 'app-booking-wizard-container',
   template: `
@@ -82,9 +83,7 @@ export class BookingWizardContainerComponent implements OnInit {
       type: ['']
     });
 
-    this.card = this.fb.group({
-      code: ['']
-    });
+
 
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
@@ -125,5 +124,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
   onCardFormValid($event) {
     console.log('Event in form', $event);
+    const _code = $event.value.code;
+    this.store.dispatch(new SearchPPCard(_code));
   }
 }

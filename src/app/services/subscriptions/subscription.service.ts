@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from "rxjs/Rx";
+import gql from 'graphql-tag';
+import {Apollo} from 'apollo-angular';
 
 const server = 'http://localhost:3030/';
 const uri = 'subscription/new';
@@ -8,8 +10,8 @@ const uri = 'subscription/new';
 @Injectable()
 export class SubscriptionService {
   private endpoint = server + uri;
-
-  constructor(private http: Http) { }
+  private cardsEndpoint = 'http://localhost:3000';
+  constructor(private http: Http, private client: Apollo) { }
 
   createAuthorizationHeader(headers:Headers) {
     headers.append('Authorization', `Bearer ${localStorage.getItem('idToken')}`);
@@ -37,7 +39,26 @@ export class SubscriptionService {
           reject(err);
         }
       );
-    })
+    });
   }
+
+  validatePPCard(code) {
+    return new Promise((resolve, reject) => {
+      const headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      this.createAuthorizationHeader(headers);
+      const payload = JSON.stringify({
+        code: code
+      });
+      this.http.post(this.cardsEndpoint, payload, {
+        headers: headers
+      }).toPromise()
+        .then(response => resolve(response.json()))
+        .catch(err => reject(err));
+    });
+  }
+
+
 
 }

@@ -12,10 +12,9 @@ import 'rxjs/add/operator/map';
 
 import {
   ActionTypes,
-  PostSubscription,
   PostSubscriptionFailure,
-  PostSubscriptionSuccess
-  } from '../actions/subscription';
+  PostSubscriptionSuccess, SearchPPCardFailure, SearchPPCardSuccess
+} from '../actions/subscription';
 import { SubscriptionService } from '../services/subscriptions/subscription.service';
 
 @Injectable()
@@ -35,4 +34,13 @@ export class SubscriptionEffects {
       .catch(err => new PostSubscriptionFailure(err));
     });
 
+  @Effect()
+  CheckPPCard: Observable<{}> = this.action$
+    .ofType(ActionTypes.SEARCH_PP_CARD)
+    .map(action => action.payload)
+    .switchMap(payload => {
+      return this.service.validatePPCard(payload)
+        .then(res => new SearchPPCardSuccess(res))
+        .catch(err => new SearchPPCardFailure(err));
+    });
 }

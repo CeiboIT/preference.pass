@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from './utils/store';
-import { Store } from '@ngrx/store';
-
+import {Store} from '@ngrx/store';
+import {OpenOnBoarding} from "./actions/layout";
 @Component({
   selector: 'app-root',
   template: `    
@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.user$.subscribe((user) => {
       console.log('User on app module', user);
+      if (!user.subscription && !user.preferencePassCard) {
+        this.store.dispatch(new OpenOnBoarding({starOn: 1}));
+      }
     });
   }
 

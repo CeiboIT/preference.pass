@@ -3,7 +3,8 @@ import { ActionTypes, Actions } from '../actions/subscription';
 const initialState = {
   subscription: [],
   loading: false,
-  error: ''
+  error: '',
+  validPPCard: false
 };
 
 reducers[ActionTypes.POST_SUBSCRIPTION] = (state, payload) => {
@@ -25,6 +26,19 @@ reducers[ActionTypes.POST_SUBSCRIPTION_FAILURE] = (state, payload) => {
     subscription: [],
     error: payload,
     loading: false
+  });
+};
+
+reducers[ActionTypes.SEARCH_PP_CARD] = (state, payload) => {
+  return Object.assign({}, state, {
+    loading: true
+  });
+};
+
+reducers[ActionTypes.SEARCH_PP_CARD_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    loading: false,
+    validPPCard: (payload &&  payload.id && !payload.user)
   });
 };
 

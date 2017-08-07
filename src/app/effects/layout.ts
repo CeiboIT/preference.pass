@@ -17,6 +17,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import {OnboardingModalComponent} from '../components/widgets/onboarding-modal/onboarding-modal.component';
 
 function retrieveWidth() {
   if (matchMedia) {
@@ -64,6 +65,22 @@ export class LayoutEffects {
       });
     });
 
+  @Effect({dispatch: false})
+  openOnBoardingModal: Observable<{}> = this.action$
+    .ofType(ActionTypes.OPEN_ON_BOARDING)
+    .do(() => {
+      let modalConfig = {
+        data: {type: 'register'}
+      };
+      retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
+        'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
+
+      this.dialog.open(OnboardingModalComponent, modalConfig)
+        .afterClosed().subscribe(result => {
+        this.dispatchAuthAction(result.type, result.data);
+      });
+
+    })
   dispatchAuthAction(type, data){
     switch (type) {
       case('EmailRegister'):

@@ -20,15 +20,6 @@ export class PreferencePassCardInputComponent implements OnInit {
 
   ngOnInit() {
     this.parent.get('code').setValidators([Validators.required, Validators.minLength(16), Validators.maxLength(16)]);
-    this.parent.get('code').valueChanges.subscribe((changes) => {
-      console.log(changes);
-      console.log(this.parent.get('code').hasError('minLength'));
-
-    });
-
-    this.parent.get('code').statusChanges.subscribe((change) => {
-      console.log(change);
-    });
   }
 
 }

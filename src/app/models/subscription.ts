@@ -5,3 +5,10 @@ export interface Price {
   kidPrice: number;
   currency: string;
 }
+
+
+export interface CardValidationResponse {
+  assignedToOtherUser?: boolean;
+  validCard?: boolean;
+  assigned?: boolean;
+}

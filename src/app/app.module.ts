@@ -1,5 +1,4 @@
 import { ActivitiesEffects } from './effects/activities';
-import { ActivityListComponent } from './components/activities/activity-list/activity-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { ApolloModule } from 'apollo-angular';
 import { AppComponent } from './app.component';
@@ -26,10 +25,12 @@ import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { SwiperModule } from 'ngx-swiper-wrapper';
 import { ToolbarModule } from './components/navigation/toolbar/toolbar.module';
 import { FooterModule } from './components/navigation/footer/footer.module';
-import { PhotoswipeModule } from './components/navigation/photoswipe/photoshipe.module'
+import { PhotoswipeModule } from './components/navigation/photoswipe/photoshipe.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
 import {AuthGuard} from './auth.guard';
+import {OnboardingModalModule} from './components/widgets/onboarding-modal/onboarding-modal.module';
+import {OnboardingModalComponent} from './components/widgets/onboarding-modal/onboarding-modal.component';
 
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
@@ -67,10 +68,11 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     ToolbarModule,
     FooterModule,
     PhotoswipeModule,
-    AuthModalModule
+    AuthModalModule,
+    OnboardingModalModule
   ],
   providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AuthModalComponent]
+  entryComponents: [AuthModalComponent, OnboardingModalComponent]
 })
 export class AppModule { }

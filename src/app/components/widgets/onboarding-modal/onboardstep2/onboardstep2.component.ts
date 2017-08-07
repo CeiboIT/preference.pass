@@ -1,18 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-onboardstep2',
   template: `
-    <div>
-      <p>
-        Step 2
-      </p>
-    </div>
-  
+    <app-subscription-wizard>
+      
+    </app-subscription-wizard>
   `
 })
 export class Onboardstep2Component implements OnInit {
-
+  @Output() back: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
   ngOnInit() {

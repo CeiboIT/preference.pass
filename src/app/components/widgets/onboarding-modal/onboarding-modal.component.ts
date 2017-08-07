@@ -14,7 +14,9 @@ import {CardValidationResponse} from '../../../models/subscription';
       (changeStep)="changeToStep2()" [feedback]="step1Feedback"
       >
       </app-onboardstep1>
-      <app-onboardstep2 *ngIf="isStep2">
+      <app-onboardstep2 *ngIf="isStep2"
+                        
+      >
         
       </app-onboardstep2>
     </div>

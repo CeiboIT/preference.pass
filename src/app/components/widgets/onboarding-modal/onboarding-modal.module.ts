@@ -7,13 +7,15 @@ import {SubscriptionService} from '../../../services/subscriptions/subscription.
 import {MdButtonModule, MdDialogModule} from '@angular/material';
 import { Step1feedbackComponent } from './onboardstep1/step1feedback/step1feedback.component';
 import { Onboardstep2Component } from './onboardstep2/onboardstep2.component';
+import {SubscriptionWizardModule} from '../../../modules/subscription/subscription-wizard/subscription-wizard.module';
 
 @NgModule({
   imports: [
     CommonModule,
     PreferencePassCardFormModule,
     MdButtonModule,
-    MdDialogModule
+    MdDialogModule,
+    SubscriptionWizardModule
   ],
   declarations: [OnboardingModalComponent, Onboardstep1Component, Step1feedbackComponent, Onboardstep2Component],
   exports: [OnboardingModalComponent],

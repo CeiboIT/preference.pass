@@ -20,8 +20,10 @@ export class AppComponent implements OnInit {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.user$.subscribe((user) => {
       console.log('User on app module', user);
+      if (!user.subscription && !user.preferencePassCard) {
+        this.store.dispatch(new OpenOnBoarding({starOn: 1}));
+      }
     });
-    this.store.dispatch(new OpenOnBoarding({}));
   }
 
 }

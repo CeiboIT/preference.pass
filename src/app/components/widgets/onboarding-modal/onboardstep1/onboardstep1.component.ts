@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
     <div>
       <app-preference-pass-card-form [parent]="card" (onValid)="onCardFormValid($event)"></app-preference-pass-card-form>
       <app-step1feedback [feedback]="feedback"></app-step1feedback>
-      <button md-raised-button color="primary">
+      <button md-raised-button color="primary" (click)="onNotHave()">
         I don't have
       </button>
     </div>
@@ -31,6 +31,10 @@ export class Onboardstep1Component implements OnInit {
     console.log('Event in form', $event);
     const _code = $event.value.code;
     this.onValid.emit(_code);
+  }
+
+  onNotHave() {
+    this.changeStep.emit();
   }
 
 }

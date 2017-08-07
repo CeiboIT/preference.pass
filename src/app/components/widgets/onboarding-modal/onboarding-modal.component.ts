@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {SubscriptionService} from '../../../services/subscriptions/subscription.service';
 import {CardValidationResponse} from '../../../models/subscription';
+import {MD_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-onboarding-modal',
@@ -15,10 +16,8 @@ import {CardValidationResponse} from '../../../models/subscription';
       >
       </app-onboardstep1>
       <app-onboardstep2 *ngIf="isStep2"
-                        
-      >
-        
-      </app-onboardstep2>
+        (onSuccess)="step2Success($event)"
+      ></app-onboardstep2>
     </div>
   `,
   styles: [`
@@ -30,9 +29,11 @@ import {CardValidationResponse} from '../../../models/subscription';
 export class OnboardingModalComponent implements OnInit {
   public step;
   public step1Feedback = {};
-  constructor(private store: Store<any>, private subscriptionService: SubscriptionService) { }
+  constructor(private store: Store<any>, private subscriptionService: SubscriptionService,  @Inject(MD_DIALOG_DATA) public data: any) {
+    this.step = this.data.startOnStep;
+  }
   ngOnInit() {
-    this.calculateInitialStep();
+
   }
   calculateInitialStep() {
     this.step = 1;
@@ -40,6 +41,7 @@ export class OnboardingModalComponent implements OnInit {
   changeToStep2() {
     this.step = 2;
   }
+
   get isStep1() {
     return this.step === 1;
   }
@@ -47,6 +49,11 @@ export class OnboardingModalComponent implements OnInit {
   get isStep2() {
     return this.step === 2;
   }
+
+  step2Success($event) {
+    console.log($event);
+  }
+
 
   onStep1Valid($event) {
     this.subscriptionService.validatePPCard($event)

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -79,6 +79,8 @@ import { stripeKey } from '../../../constants/stripe';
   `]
 })
 export class SubscriptionWizardComponent implements OnInit {
+  @Output() subscriptionSuccess: EventEmitter<any> = new EventEmitter();
+  @Output() subscriptionError: EventEmitter<any> = new EventEmitter();
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
@@ -135,12 +137,12 @@ export class SubscriptionWizardComponent implements OnInit {
     this.paymentRequest.get('cardToken').setValue(token);
     this.store.dispatch(new PostSubscription(this.paymentRequest.value));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
+    this.subscriptionSuccess.emit({success: true});
 	}
-
 	onCardChargeError = (err) => {
 		console.log(err);
+		this.subscriptionError.emit({err: err});
 	}
-
   hasDiscountCardChange(event) {
     this.hasDiscountCard = event;
   }

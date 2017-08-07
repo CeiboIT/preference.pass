@@ -68,9 +68,10 @@ export class LayoutEffects {
   @Effect({dispatch: false})
   openOnBoardingModal: Observable<{}> = this.action$
     .ofType(ActionTypes.OPEN_ON_BOARDING)
-    .do(() => {
+    .map(action => action.payload)
+    .do((payload) => {
       let modalConfig = {
-        data: {type: 'register'}
+        data: {startOnStep: payload.startOnStep}
       };
       retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
         'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});

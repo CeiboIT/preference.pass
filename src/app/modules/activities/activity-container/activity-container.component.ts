@@ -7,6 +7,7 @@ import { GetDetail } from '../../../actions/activities';
 import { onStateChangeObservable } from '../../../utils/store';
 import 'rxjs/add/operator/switchMap';
 import { isSubscriptionValid } from '../../../utils/user';
+import {UserService} from "../../../services/user.service";
 @Component({
   selector: 'app-activity-container',
   template: `
@@ -25,7 +26,8 @@ export class ActivityContainerComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private store: Store<any>
+    private store: Store<any>,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,11 @@ export class ActivityContainerComponent implements OnInit {
   }
 
   bookNow($event) {
-    this.router.navigate(['booking/wizard/' + this.activity.id]);
+    this.userService.checkUserCompletion(this.user, (next) => {
+      if (next) {
+        this.router.navigate(['booking/wizard/' + this.activity.id]);
+      }
+    });
   }
 
   onRateSelected($event) {

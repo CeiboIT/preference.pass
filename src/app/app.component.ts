@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from './utils/store';
 import {Store} from '@ngrx/store';
-import {OpenOnBoarding} from "./actions/layout";
+import {UserService} from "./services/user.service";
+
 @Component({
   selector: 'app-root',
   template: `    
@@ -14,19 +15,13 @@ import {OpenOnBoarding} from "./actions/layout";
 })
 export class AppComponent implements OnInit {
   public user$: Observable<any>;
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<any>, private userService: UserService) {}
 
   ngOnInit() {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.user$.subscribe((user) => {
       console.log('User on app module', user);
-      if (user.id && !user.subscription && !user.preferencePassCard) {
-        this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
-      }
-
-      if(user.id && !user.subscription && user.preferencePassCard) {
-        this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
-      }
+      this.userService.checkUserCompletion(user);
     });
   }
 

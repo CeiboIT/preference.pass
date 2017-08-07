@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Apollo, ApolloQueryObservable } from 'apollo-angular';
 import gql from 'graphql-tag';
 import {User} from '../models/user';
+import {Store} from '@ngrx/store';
+import {OpenOnBoarding} from '../actions/layout';
 @Injectable()
 export class UserService {
-  constructor(private client: Apollo) { }
+  constructor(private client: Apollo, private store: Store<any>) { }
   createUser(userData: User) {
     const _createUser =  gql`
       mutation userCreation(
@@ -119,4 +121,20 @@ export class UserService {
         mutation: CREATE_COMPANION
       });
     }
+
+    checkUserCompletion(user, cb?) {
+      let goToNext = true;
+      if (user.id && !user.subscription && !user.preferencePassCard) {
+        this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
+        goToNext = false;
+      }
+      if (user.id && !user.subscription && user.preferencePassCard) {
+        this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
+        goToNext = false;
+      }
+      if (cb) {
+        cb(goToNext);
+      }
+    }
+
 }

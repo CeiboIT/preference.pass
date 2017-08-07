@@ -37,11 +37,12 @@ export class LayoutEffects {
    .do(() => {
     let modalConfig = {
       data: {
-        type: 'login'
-      }
+        type: 'login',
+      },
+      panelClass: 'md-dialog-fullscreen-xs'
     };
-     retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
-         'height': '100%'}) : Object.assign(modalConfig, {'width': '30%', height: '50%'});
+    //  retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
+    //      'height': '100%'}) : Object.assign(modalConfig, {'width': '30%', height: '50%'});
 
     this.dialog.open(AuthModalComponent, modalConfig)
       .afterClosed().subscribe(result => {
@@ -54,10 +55,11 @@ export class LayoutEffects {
     .ofType(ActionTypes.OPEN_REGISTER)
     .do(() => {
       let modalConfig = {
-        data: {type: 'register'}
+        data: {type: 'register'},
+        panelClass: 'md-dialog-fullscreen-xs'
       };
-      retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
-        'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
+      // retrieveWidth() ? Object.assign(modalConfig, {'width': '100%',
+      //   'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
 
       this.dialog.open(AuthModalComponent, modalConfig)
         .afterClosed().subscribe(result => {
@@ -70,10 +72,11 @@ export class LayoutEffects {
     .ofType(ActionTypes.OPEN_ON_BOARDING)
     .do(() => {
       let modalConfig = {
-        data: {type: 'register'}
+        data: {type: 'register'},
+        panelClass: 'md-dialog-fullscreen-xs',
       };
-      retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
-        'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
+      // retrieveWidth() ? Object.assign(modalConfig, {'width': '100%',
+      //   'height': '100%'}) : Object.assign(modalConfig, {'width': '50%'});
 
       this.dialog.open(OnboardingModalComponent, modalConfig)
         .afterClosed().subscribe(result => {

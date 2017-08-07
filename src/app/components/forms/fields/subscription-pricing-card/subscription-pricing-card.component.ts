@@ -6,48 +6,85 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-subscription-pricing-card',
   template:  `    
     <md-card [ngClass]="{'active': parentValue === price.id }">
-      <md-card-title>
-        <h3 class="text-info">
+        <div class="mat-card-image">
           {{days}}
-        </h3>
-      </md-card-title>
+        </div>
       <md-card-content>
-        <div class="row">
-          <div class="col-12">
-            <h2 class="col-12">
+        <div>
+          <div>
+            <!--<h2>
               {{ price.currency }} {{ price.adultPrice }}
             </h2>     
             <p>
               Per adult
-            </p>
+            </p>-->
+            <div class="price"><sup> {{ price.currency }}</sup>{{ price.adultPrice }}<sub>/adult</sub></div>
           </div>
-          <div class="col-12">
-            <h3 class="col-12">
+          <div>
+            <!--<h3>
               {{ price.currency }} {{ price.kidPrice }}
             </h3>
-            <div class="col-12">
+            <div>
               Per kid
-            </div>
+            </div>-->
+            <div class="price"><sup> {{ price.currency }}</sup>{{ price.kidPrice }}<sub>/kid</sub></div>
           </div>
         </div>
 
       </md-card-content>
-      <md-card-footer>
-        <button md-raised-button color="primary" class="w-100" (click)="select(price)">
+      <md-card-actions>
+        <button md-raised-button color="primary" (click)="select(price)">
           Select
         </button>
-      </md-card-footer>
+      </md-card-actions>
   
     </md-card>
   `,
   styles: [
     `
-      md-card {
-        border: 1px solid transparent;
+      md-card.active {
+        border: 1px solid #03a9f4;
+        box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
       }
 
-      md-card.active {
-        border: 1px solid #2196F3;
+      .mat-card-image {
+        background: #03a9f4;
+        font-size: 1.8rem;
+        line-height: 4rem;
+        color: #fff;
+        font-weight: 300;
+        text-align: center;
+      }
+
+      .mat-card-actions {
+        border-top: 1px solid rgba(160,160,160,0.2);
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      .price {
+        position: relative;
+        font-size: 1.4rem;
+        line-height: 1.6em;
+        padding: 10px 0px;
+        font-weight: 300;
+        text-align: center;
+      }
+
+      sup {
+        font-weight: 100;
+        font-size: .8rem;
+        line-height: 1.6em;
+        top: -7px;
+        margin-right: 2px;
+      }
+
+      sub {
+        font-weight: 100;
+        font-size: .8rem;
+        line-height: 1.6em;
+        top: 0;
+        margin-left: 2px;
       }
     `
   ]

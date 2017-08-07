@@ -7,7 +7,7 @@ import {CardValidationResponse} from '../../../models/subscription';
   selector: 'app-onboarding-modal',
   template: `    
     <div class="modal-container justify-content-center">
-      <div class="w-100" class="o-hidden d-block d-sm-none">
+      <div class="w-100" class="o-hidden d-block hidden-md-up">
         <button md-button md-dialog-close class="pull-right mb-2" style="min-width: auto;"><i class="fa fa-close"></i></button>
       </div>
       <app-onboardstep1 *ngIf="isStep1" (onValid)="onStep1Valid($event)"
@@ -20,12 +20,7 @@ import {CardValidationResponse} from '../../../models/subscription';
         
       </app-onboardstep2>
     </div>
-  `,
-  styles: [`
-      .modal-container {
-        min-height: 30vh;
-      }
-  `]
+  `
 })
 export class OnboardingModalComponent implements OnInit {
   public step;

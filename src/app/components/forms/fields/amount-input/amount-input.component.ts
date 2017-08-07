@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-amount-input',
   template: `
-    <div class="row" [formGroup]="parent">
+    <div [formGroup]="parent">
       <button md-icon-button color="primary" (click)="clickOnRemove.emit()">
         <md-icon>
           remove

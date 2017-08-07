@@ -9,8 +9,8 @@ import { stripeKey } from '../../../constants/stripe';
 @Component({
   selector: 'app-subscription-wizard',
   template: `
-  <div class="container full-sm">
-    <md-card class="m0 my-sm-3">
+  <div>
+    <md-card>
       <wizard-header [step]="step"></wizard-header>
       <div [hidden]="step !== 1">
         <app-companions-amount-container [parent]="paymentRequest"
@@ -58,21 +58,14 @@ import { stripeKey } from '../../../constants/stripe';
   </div>
   `,
   styles: [`
-    @media screen and (max-width: 480px) {
-      .full-sm {
-        position: absolute!important;
-        top: 0;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        z-index: 9999;
-      }
+    md-card {
+      margin: -24px;
+    }
 
-      .full-sm .mat-card{
-        min-height: 100%;
-        width: 100%;
-        border-radius: 0;
+    @media screen and (max-width: 768px) {
+      md-card {
+        margin: -16px -24px;
+        box-shadow: none!important;
       }
     }
 

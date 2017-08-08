@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import {User} from '../models/user';
 import {Store} from '@ngrx/store';
 import {OpenOnBoarding} from '../actions/layout';
+import {hasPreferencePassCard, hasSubscription, isSubscriptionValid} from "../utils/user";
 @Injectable()
 export class UserService {
   constructor(private client: Apollo, private store: Store<any>) { }
@@ -50,6 +51,7 @@ export class UserService {
             name 
             picture
             subscription {
+              id
               adults
               validity
               kids
@@ -63,6 +65,7 @@ export class UserService {
             }
             
             preferencePassCard {
+              id
               code
             }
             companions {
@@ -122,13 +125,25 @@ export class UserService {
       });
     }
 
+    checkSubscription = (user, cb?) => {
+      let valid = false;
+      if (user.id && hasSubscription(user) && isSubscriptionValid(user)) {
+        valid = true;
+      }
+      if (cb) {
+        cb(valid);
+      } else {
+        return valid;
+      }
+    };
+
     checkUserCompletion(user, cb?) {
       let goToNext = true;
-      if (user.id && !user.subscription && !user.preferencePassCard) {
+      if (user.id && !hasSubscription(user) && !hasPreferencePassCard(user)) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
         goToNext = false;
       }
-      if (user.id && !user.subscription && user.preferencePassCard) {
+      if (user.id && hasPreferencePassCard(user) && !hasSubscription(user)) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
         goToNext = false;
       }

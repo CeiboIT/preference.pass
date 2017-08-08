@@ -9,3 +9,11 @@ export const isSubscriptionValid = (user) => {
 export const isComingAlone = (user) => {
   return ( user.subscription && user.subscription.isComingAlone);
 };
+
+export const hasSubscription = (user) => {
+  return (user && user.id && user.subscription && user.subscription.id);
+};
+
+export const hasPreferencePassCard = (user) => {
+  return (user && user.id && user.preferencePassCard && user.preferencePassCard.id);
+};

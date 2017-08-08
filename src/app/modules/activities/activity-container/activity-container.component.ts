@@ -40,11 +40,9 @@ export class ActivityContainerComponent implements OnInit {
   }
 
   bookNow($event) {
-    this.userService.checkUserCompletion(this.user, (next) => {
-      if (next) {
-        this.router.navigate(['booking/wizard/' + this.activity.id]);
-      }
-    });
+    if (this.userService.checkSubscription(this.user)) {
+      this.router.navigate(['booking/wizard/' + this.activity.id]);
+    };
   }
 
   onRateSelected($event) {

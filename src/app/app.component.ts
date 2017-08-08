@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from './utils/store';
 import {Store} from '@ngrx/store';
-import {UserService} from "./services/user.service";
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',

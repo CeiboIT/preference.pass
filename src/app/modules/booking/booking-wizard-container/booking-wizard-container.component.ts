@@ -25,9 +25,6 @@ import {SearchPPCard} from "../../../actions/subscription";
           <!--<app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>-->
           <app-companions-selection-form [parent]="booking" [companions]="subscriptionCompanions"></app-companions-selection-form>
           <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
-          <app-preference-pass-card-form [parent]="card" (onValid)="onCardFormValid($event)">
-            
-          </app-preference-pass-card-form>
           <div class="col-12">
             <button md-raised-button color="primary" type="submit">
               Finish Booking

@@ -121,29 +121,28 @@ export class UserService {
       `;
 
       return this.client.mutate({
-        mutation: CREATE_COMPANION
+        mutation: CREATE_COMPANION,
+        variables: companionData
       });
     }
 
-    checkSubscription = (user, cb?) => {
+    checkSubscription = (user, openModal, cb?) => {
       let valid = false;
       if (user.id && hasSubscription(user) && isSubscriptionValid(user)) {
         valid = true;
       }
-      if (cb) {
+      if (cb && !openModal) {
         cb(valid);
-      } else {
-        return valid;
       }
-    };
+    }
 
-    checkUserCompletion(user, cb?) {
+    checkUserCompletion(user, cb?, notOpenModal?) {
       let goToNext = true;
-      if (user.id && !hasSubscription(user) && !hasPreferencePassCard(user)) {
+      if (user.id && !hasSubscription(user) && !hasPreferencePassCard(user) && !notOpenModal) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
         goToNext = false;
       }
-      if (user.id && hasPreferencePassCard(user) && !hasSubscription(user)) {
+      if (user.id && hasPreferencePassCard(user) && !hasSubscription(user) && !notOpenModal) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
         goToNext = false;
       }

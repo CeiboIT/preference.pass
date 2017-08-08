@@ -67,12 +67,11 @@ import { FormGroup } from '@angular/forms';
         font-size: 1.4rem;
         line-height: 1.6em;
         padding: 10px 0px;
-        font-weight: 300;
         text-align: center;
       }
 
       sup {
-        font-weight: 100;
+        font-weight: 300;
         font-size: .8rem;
         line-height: 1.6em;
         top: -7px;
@@ -80,7 +79,7 @@ import { FormGroup } from '@angular/forms';
       }
 
       sub {
-        font-weight: 100;
+        font-weight: 300;
         font-size: .8rem;
         line-height: 1.6em;
         top: 0;

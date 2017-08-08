@@ -44,10 +44,6 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
       width: 50px;
       text-align: center;
     }
-
-    .modal-container {
-      min-height: 30vh;
-    }
   `],
   template: `
     <div class="modal-container justify-content-center">
@@ -120,9 +116,9 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
         </div>
         
         <div class="my-2" *ngIf="!isLogin">
-          Al hacer clic en Registrarse o en 
-          Continuar con, acepto las Condiciones del servicio, 
-          la Política de Privacidad de Prefence Pass.
+          <div>Al hacer clic en Registrarse o en </div>
+          <div>Continuar con, acepto las Condiciones del servicio, </div>
+          <div>la Política de Privacidad de Prefence Pass.</div>
         </div>
         
         <div class="separator" *ngIf="!isLogin">

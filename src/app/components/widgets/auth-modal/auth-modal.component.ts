@@ -51,8 +51,8 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
   `],
   template: `
     <div class="modal-container justify-content-center">
-      <div class="w-100 hidden-md-up">
-        <button md-button md-dialog-close class="pull-right mb-2 close"><i class="fa fa-close"></i></button>
+      <div class="w-100 text-right hidden-md-up">
+        <button md-button md-dialog-close class="mb-2 close"><i class="fa fa-close"></i></button>
       </div>
       <div>
         <div *ngIf="isLogin">

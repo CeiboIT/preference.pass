@@ -29,15 +29,17 @@ import { stripeKey } from '../../../constants/stripe';
         </app-discount-card-container>
       </div>
       <div [hidden]="step !== 3">
-        <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
-        <app-payment-form
-            [onSuccess]="onCardChargeSuccess"
-            [onError]="onCardChargeError"
-            [stripeKey]="stripeKey"
-            [error]="displayError$ | async"
-            [errorMsg]="payErrorMsg$ | async"
-            [loading]="payLoading$ | async">
-        </app-payment-form>
+        <div class="d-flex flex-column w-100">
+          <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
+          <app-payment-form
+              [onSuccess]="onCardChargeSuccess"
+              [onError]="onCardChargeError"
+              [stripeKey]="stripeKey"
+              [error]="displayError$ | async"
+              [errorMsg]="payErrorMsg$ | async"
+              [loading]="payLoading$ | async">
+          </app-payment-form>
+        </div>
       </div>
       <!--<div>
         {{ paymentRequest.value | json }}

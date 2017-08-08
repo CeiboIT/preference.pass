@@ -4,8 +4,8 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-subscription-pricing-container',
   template: `    
-    <div>
-      <h2 class="mb-4 text-center">
+    <div class="d-flex flex-column text-center w-100">
+      <h2 class="mb-4">
         Select a pricing plan
       </h2>
       <button md-raised-button color="primary" class="mb-2" (click)="hasDiscountCardChangeStatus()" *ngIf="false">

@@ -139,6 +139,7 @@ export class UserService {
 
     checkUserCompletion(user, cb?) {
       let goToNext = true;
+      console.warn(user);
       if (user && user.id && !hasSubscription(user) && !hasPreferencePassCard(user)) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
         goToNext = false;

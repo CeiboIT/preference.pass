@@ -139,11 +139,11 @@ export class UserService {
 
     checkUserCompletion(user, cb?) {
       let goToNext = true;
-      if (user.id && !hasSubscription(user) && !hasPreferencePassCard(user)) {
+      if (user && user.id && !hasSubscription(user) && !hasPreferencePassCard(user)) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
         goToNext = false;
       }
-      if (user.id && hasPreferencePassCard(user) && !hasSubscription(user)) {
+      if (user && user.id && hasPreferencePassCard(user) && !hasSubscription(user)) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
         goToNext = false;
       }

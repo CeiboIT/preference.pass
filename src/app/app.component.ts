@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from './utils/store';
-import {Store} from '@ngrx/store';
-import {UserService} from './services/user.service';
-import {OpenOnBoarding} from "./actions/layout";
+import { Store } from '@ngrx/store';
+import { UserService } from './services/user.service';
+import { OpenOnBoarding } from "./actions/layout";
 @Component({
   selector: 'app-root',
   template: `    
@@ -15,7 +16,14 @@ import {OpenOnBoarding} from "./actions/layout";
 })
 export class AppComponent implements OnInit {
   public user$: Observable<any>;
-  constructor(private store: Store<any>, private userService: UserService) {}
+  constructor(private router: Router, private store: Store<any>, private userService: UserService) {
+    this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0);
+    });
+  }
 
   ngOnInit() {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');

@@ -54,10 +54,14 @@ export class ActivityContainerComponent implements OnInit {
       this.router.navigate(['subscription/wizard']);
     }*/
 
+    const navigateTo = 'booking/wizard/' + this.activity.id;
+
     this.userService.checkUserCompletion(this.user, (goToNext) => {
       if (goToNext) {
-        this.router.navigate(['booking/wizard/' + this.activity.id]);
+        this.router.navigate([navigateTo]);
       }
+    }, false, {
+      onSuccessRedirect: navigateTo
     });
   }
 

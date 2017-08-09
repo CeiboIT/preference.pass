@@ -5,6 +5,13 @@ import {User} from '../models/user';
 import {Store} from '@ngrx/store';
 import {OpenOnBoarding} from '../actions/layout';
 import {hasPreferencePassCard, hasSubscription, isSubscriptionValid} from "../utils/user";
+
+
+interface ModalCallOptions {
+  onErrorRedirect?: string;
+  onSuccessRedirect?: string;
+}
+
 @Injectable()
 export class UserService {
   constructor(private client: Apollo, private store: Store<any>) { }
@@ -136,14 +143,14 @@ export class UserService {
       }
     }
 
-    checkUserCompletion(user, cb?, notOpenModal?) {
+    checkUserCompletion(user, cb?, notOpenModal?, options?: ModalCallOptions) {
       let goToNext = true;
       if (user.id && !hasSubscription(user) && !hasPreferencePassCard(user) && !notOpenModal) {
-        this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
+        this.store.dispatch(new OpenOnBoarding({startOnStep: 1, options}));
         goToNext = false;
       }
       if (user.id && hasPreferencePassCard(user) && !hasSubscription(user) && !notOpenModal) {
-        this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
+        this.store.dispatch(new OpenOnBoarding({startOnStep: 2, options}));
         goToNext = false;
       }
       if (cb) {

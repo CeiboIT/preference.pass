@@ -8,6 +8,7 @@
                 <i class="fa fa-arrow-circle-left mr-2" aria-hidden="true"></i> Ir a lista de Actividades
             </button>
         </div>
+        
         <div class="container" @fadeLeftAnimation>
             <div class="detail-banner-left">
                 <div class="detail-banner-info fadeLeft">
@@ -32,7 +33,7 @@
     </div>
 </div>
 
-<div class="container" @fadeUpAnimation>
+<div class="container" [@fadeUpAnimation]="activity.id">
     <div class="row detail-content">
         <div class="col-sm-7 fadeUp">
             <div class="detail-gallery mb-3">

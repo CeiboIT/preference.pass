@@ -8,8 +8,8 @@ import {MD_DIALOG_DATA} from '@angular/material';
   selector: 'app-onboarding-modal',
   template: `    
     <div class="modal-container justify-content-center">
-      <div class="w-100" class="o-hidden d-block hidden-md-up">
-        <button md-button md-dialog-close class="pull-right mb-2" style="min-width: auto;"><i class="fa fa-close"></i></button>
+      <div class="w-100 text-right hidden-md-up">
+        <button md-button md-dialog-close class="mb-2 close"><i class="fa fa-close"></i></button>
       </div>
       <app-onboardstep1 *ngIf="isStep1" (onValid)="onStep1Valid($event)"
       (changeStep)="changeToStep2()" [feedback]="step1Feedback"
@@ -19,7 +19,13 @@ import {MD_DIALOG_DATA} from '@angular/material';
         (onSuccess)="step2Success($event)"
       ></app-onboardstep2>
     </div>
-  `
+  `,
+  styles: [`
+    .close {
+      margin: -15px -15px 0 0;
+      min-width: auto;
+    }
+  `],
 })
 export class OnboardingModalComponent implements OnInit {
   public step;

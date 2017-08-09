@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
 	selector: 'wizard-header',
 	template: `
-		<div class="wz-header d-sm-flex d-none flex-row justify-content-between">
+		<div class="wz-header d-md-flex d-none flex-row justify-content-between">
 			<div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}">
 				<span class="mdl-step__label">
 				<span class="mdl-step__title">

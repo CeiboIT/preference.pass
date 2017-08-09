@@ -12,21 +12,9 @@ import { FormGroup } from '@angular/forms';
       <md-card-content>
         <div>
           <div>
-            <!--<h2>
-              {{ price.currency }} {{ price.adultPrice }}
-            </h2>     
-            <p>
-              Per adult
-            </p>-->
             <div class="price"><sup> {{ price.currency }}</sup>{{ price.adultPrice }}<sub>/adult</sub></div>
           </div>
           <div>
-            <!--<h3>
-              {{ price.currency }} {{ price.kidPrice }}
-            </h3>
-            <div>
-              Per kid
-            </div>-->
             <div class="price"><sup> {{ price.currency }}</sup>{{ price.kidPrice }}<sub>/kid</sub></div>
           </div>
         </div>

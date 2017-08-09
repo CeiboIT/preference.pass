@@ -11,7 +11,7 @@ import { trigger,style,transition,animate,query,stagger } from '@angular/animati
   animations: [
     trigger('fadeLeftAnimation', [
       transition('* => *', [
-        query('.fadeLeft', style({ opacity: 0, transform: 'translateX(-15px)' })),
+        query('.fadeLeft', style({ opacity: 0, transform: 'translateX(-10px)' })),
 
         query('.fadeLeft', stagger('100ms', [
           animate('800ms .5s ease-in', style({ opacity: 1, transform: 'translateX(0)' })),
@@ -25,7 +25,7 @@ import { trigger,style,transition,animate,query,stagger } from '@angular/animati
     ]),
     trigger('fadeUpAnimation', [
       transition('* => *', [
-        query('.fadeUp', style({ opacity: 0, transform: 'translateY(15px)' })),
+        query('.fadeUp', style({ opacity: 0, transform: 'translateY(10px)' })),
 
         query('.fadeUp', stagger('100ms', [
           animate('800ms .5s ease-in', style({ opacity: 1, transform: 'translateY(0)' })),

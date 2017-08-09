@@ -13,8 +13,11 @@ import {UserService} from "../../../services/user.service";
   template: `
     <app-activity-detail [activity]="activity$ | async" 
                          [user]="user$ | async" 
-                         (selectedRate)="onRateSelected($event)">
+                         (selectedRate)="onRateSelected($event)" *ngIf="activity.id">
     </app-activity-detail>
+    <div *ngIf="!activity.id" class="my-5 py-5 text-center">
+      <img src="../../../../assets/imgs/loader.svg" style="max-width: 100px;">
+    </div>
   `
 })
 export class ActivityContainerComponent implements OnInit {
@@ -37,10 +40,12 @@ export class ActivityContainerComponent implements OnInit {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.user$.subscribe(user => this.user = user);
     this.activity$.subscribe(activity => this.activity = activity);
+    this.activity = {};
   }
 
   bookNow($event) {
     console.log('Booking now');
+    console.warn(this.activity);
     this.userService.checkUserCompletion(this.user, (goToNext) => {
       if (goToNext) {
         this.router.navigate(['booking/wizard/' + this.activity.id]);

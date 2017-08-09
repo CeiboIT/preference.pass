@@ -40,9 +40,12 @@ export class ActivityContainerComponent implements OnInit {
   }
 
   bookNow($event) {
-    if (this.userService.checkSubscription(this.user)) {
-      this.router.navigate(['booking/wizard/' + this.activity.id]);
-    };
+    console.log('Booking now');
+    this.userService.checkUserCompletion(this.user, (goToNext) => {
+      if (goToNext) {
+        this.router.navigate(['booking/wizard/' + this.activity.id]);
+      }
+    });
   }
 
   onRateSelected($event) {
@@ -50,6 +53,15 @@ export class ActivityContainerComponent implements OnInit {
     /*if (!isSubscriptionValid(this.user)) {
       this.router.navigate(['subscription/wizard']);
     }*/
-    this.router.navigate(['booking/wizard/' + this.activity.id]);
+
+    const navigateTo = 'booking/wizard/' + this.activity.id;
+
+    this.userService.checkUserCompletion(this.user, (goToNext) => {
+      if (goToNext) {
+        this.router.navigate([navigateTo]);
+      }
+    }, false, {
+      onSuccessRedirect: navigateTo
+    });
   }
 }

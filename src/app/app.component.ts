@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from './utils/store';
 import { Store } from '@ngrx/store';
 import { UserService } from './services/user.service';
-import { OpenOnBoarding } from "./actions/layout";
 @Component({
   selector: 'app-root',
   template: `    

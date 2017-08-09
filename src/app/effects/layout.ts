@@ -18,6 +18,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import {OnboardingModalComponent} from '../components/widgets/onboarding-modal/onboarding-modal.component';
+import {Router} from "@angular/router";
 
 function retrieveWidth() {
   if (matchMedia) {
@@ -29,7 +30,7 @@ function retrieveWidth() {
 
 @Injectable()
 export class LayoutEffects {
-  constructor(private action$: Actions, private dialog: MdDialog, private store: Store<any>) {}
+  constructor(private action$: Actions, private dialog: MdDialog, private store: Store<any>, private router: Router) {}
 
    @Effect({dispatch: false})
  openAuthDialog: Observable<{}> = this.action$
@@ -81,10 +82,11 @@ export class LayoutEffects {
 
       this.dialog.open(OnboardingModalComponent, modalConfig)
         .afterClosed().subscribe(result => {
-        this.dispatchAuthAction(result.type, result.data);
+          if (payload && payload.onSuccessRedirect) {
+            this.router.navigate([payload.onSuccessRedirect]);
+          }
       });
-
-    })
+  });
   dispatchAuthAction(type, data){
     switch (type) {
       case('EmailRegister'):

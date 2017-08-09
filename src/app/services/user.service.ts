@@ -5,6 +5,13 @@ import {User} from '../models/user';
 import {Store} from '@ngrx/store';
 import {OpenOnBoarding} from '../actions/layout';
 import {hasPreferencePassCard, hasSubscription, isSubscriptionValid} from "../utils/user";
+
+
+interface ModalCallOptions {
+  onErrorRedirect?: string;
+  onSuccessRedirect?: string;
+}
+
 @Injectable()
 export class UserService {
   constructor(private client: Apollo, private store: Store<any>) { }
@@ -121,31 +128,29 @@ export class UserService {
       `;
 
       return this.client.mutate({
-        mutation: CREATE_COMPANION
+        mutation: CREATE_COMPANION,
+        variables: companionData
       });
     }
 
-    checkSubscription = (user, cb?) => {
+    checkSubscription = (user, openModal, cb?) => {
       let valid = false;
       if (user.id && hasSubscription(user) && isSubscriptionValid(user)) {
         valid = true;
       }
-      if (cb) {
+      if (cb && !openModal) {
         cb(valid);
-      } else {
-        return valid;
       }
-    };
+    }
 
-    checkUserCompletion(user, cb?) {
+    checkUserCompletion(user, cb?, notOpenModal?, options?: ModalCallOptions) {
       let goToNext = true;
-      console.warn(user);
-      if (user && user.id && !hasSubscription(user) && !hasPreferencePassCard(user)) {
-        this.store.dispatch(new OpenOnBoarding({startOnStep: 1}));
+      if (user && user.id && !hasSubscription(user) && !hasPreferencePassCard(user) && !notOpenModal) {
+        this.store.dispatch(new OpenOnBoarding({startOnStep: 1, options}));
         goToNext = false;
       }
-      if (user && user.id && hasPreferencePassCard(user) && !hasSubscription(user)) {
-        this.store.dispatch(new OpenOnBoarding({startOnStep: 2}));
+      if (user && user.id && hasPreferencePassCard(user) && !hasSubscription(user) && !notOpenModal) {
+        this.store.dispatch(new OpenOnBoarding({startOnStep: 2, options}));
         goToNext = false;
       }
       if (cb) {

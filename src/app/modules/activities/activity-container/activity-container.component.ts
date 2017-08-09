@@ -15,8 +15,8 @@ import {UserService} from "../../../services/user.service";
                          [user]="user$ | async" 
                          (selectedRate)="onRateSelected($event)" *ngIf="activity.id">
     </app-activity-detail>
-    <div *ngIf="!activity.id" class="my-5 py-5 text-center">
-      <img src="../../../../assets/imgs/loader.svg" style="max-width: 100px;">
+    <div *ngIf="!activity.id" class="mb-5">
+      <activity-detail-loader></activity-detail-loader>
     </div>
   `
 })

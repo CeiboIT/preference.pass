@@ -15,7 +15,7 @@ import {UserService} from "../../../services/user.service";
                          [user]="user$ | async" 
                          (selectedRate)="onRateSelected($event)" *ngIf="activity.id">
     </app-activity-detail>
-    <div *ngIf="!activity.id" class="mb-5">
+    <div *ngIf="!ctivity.id" class="mb-5">
       <activity-detail-loader></activity-detail-loader>
     </div>
   `

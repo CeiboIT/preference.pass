@@ -52,5 +52,4 @@ export class ActivityContainerComponent implements OnInit {
     }*/
     this.router.navigate(['booking/wizard/' + this.activity.id]);
   }
-
 }

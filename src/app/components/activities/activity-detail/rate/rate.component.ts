@@ -22,7 +22,7 @@ import { Rate } from '../../../../models/rate';
       </md-card-actions>
     </md-card>
   `,
-  styles: [ '.discount-color { color: red}']
+  styles: [ ':host { display: block} .discount-color { color: red}']
 })
 export class RateComponent implements OnInit {
   @Input() rate: Rate;

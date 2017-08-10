@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'subscription', loadChildren: 'app/modules/subscription/subscription.module#SubscriptionModule' },
   { path: 'booking', loadChildren: 'app/modules/booking/booking.module#BookingModule' },
   { path: 'access_token', loadChildren: 'app/modules/token/token.module#TokenModule' },
-  { path: 'user', loadChildren: 'app/modules/user/user.module#UserModule' },
+  { path: 'user',  canActivate: [AuthGuard], loadChildren: 'app/modules/user/user.module#UserModule' },
   { path: 'error', loadChildren: 'app/modules/errors/errors.module#ErrorsModule' },
   { path: '**', redirectTo: '' }
 

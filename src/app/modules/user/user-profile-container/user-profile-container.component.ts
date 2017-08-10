@@ -19,9 +19,5 @@ export class UserProfileContainerComponent implements OnInit {
 		this.user$ = onStateChangeObservable(this.store, 'auth.user');
 	}
 
-	ngOnInit() { 
-		this.user$.subscribe(user => {
-			console.warn(user);
-		})
-	}
+	ngOnInit() { }
 }

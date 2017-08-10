@@ -1,1 +1,25 @@
-user profile
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4 col-lg-3">
+            <md-card class="mb-3">
+                <img [src]="currentUser?.picture" class="avatar mb-3">
+                <h4 class="text-center">{{ currentUser?.name }}</h4>
+            </md-card>
+
+            <md-card>
+                <ul class="menu">
+                    <li><a href="#"><i class="fa fa-pencil"></i> Submit Listing</a></li>
+                    <li class="active"><a href="#"><i class="fa fa-user"></i> Edit Profile</a></li>
+                    <li><a href="#"><i class="fa fa-key"></i> Password</a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </md-card>
+        </div>
+
+        <div class="col-sm-8 col-lg-9">
+            <md-card>
+                content
+            </md-card>
+        </div>
+    </div>
+</div>

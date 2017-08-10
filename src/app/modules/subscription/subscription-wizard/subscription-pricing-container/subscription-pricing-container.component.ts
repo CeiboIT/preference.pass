@@ -8,16 +8,17 @@ import { FormGroup } from '@angular/forms';
       <h2 class="mb-4">
         Select a pricing plan
       </h2>
-      <button md-raised-button color="primary" class="mb-2" (click)="hasDiscountCardChangeStatus()" *ngIf="false">
-        I have a discount card
-      </button>
-      <app-subscription-pricing-form [parent]="parent" [changePlan]="changePlan"></app-subscription-pricing-form>
+      <app-subscription-pricing-form [hasDiscount]="hasDiscount" 
+                                     [parent]="parent" 
+                                     [changePlan]="changePlan">
+      </app-subscription-pricing-form>
     </div>
   `
 })
 export class SubscriptionPricingContainerComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() selectPlan;
+  @Input() hasDiscount;
   @Output() hasDiscountCardChangeEvent: EventEmitter<any> = new EventEmitter();
   constructor() { }
 

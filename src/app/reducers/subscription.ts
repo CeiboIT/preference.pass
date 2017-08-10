@@ -3,8 +3,10 @@ import { ActionTypes, Actions } from '../actions/subscription';
 const initialState = {
   subscription: [],
   loading: false,
+  validatingDiscountCode: false,
   error: '',
-  validPPCard: false
+  validPPCard: false,
+  hasUnusedDiscount: false
 };
 
 reducers[ActionTypes.POST_SUBSCRIPTION] = (state, payload) => {
@@ -39,6 +41,18 @@ reducers[ActionTypes.SEARCH_PP_CARD_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
     loading: false,
     validPPCard: (payload &&  payload.id && !payload.user)
+  });
+};
+
+reducers[ActionTypes.VALIDATE_DISCOUNT_CODE] = (state, payload) => {
+  return Object.assign({}, state, {
+    validatingDiscountCode: true
+  });
+};
+
+reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    validatingDiscountCode: false
   });
 };
 

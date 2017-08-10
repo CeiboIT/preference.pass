@@ -7,6 +7,13 @@ import { PostSubscription, ValidateCode } from '../../../actions/subscription';
 import { stripeKey } from '../../../constants/stripe';
 import {SubscriptionService} from '../../../services/subscriptions/subscription.service';
 
+interface DiscountValidationResponse {
+  err?: any;
+  valid?: boolean;
+  assigned?: boolean;
+}
+
+
 @Component({
   selector: 'app-subscription-wizard',
   template: `
@@ -23,6 +30,11 @@ import {SubscriptionService} from '../../../services/subscriptions/subscription.
           <app-discount-code-form [parent]="discountCode"
             (onValid)="onDiscountFormValidity($event)"
           ></app-discount-code-form>
+          <div *ngIf="discountCardValidationLoading">
+            <span>
+              Validating code
+            </span>
+          </div>
         </div>
         <div *ngIf="!claimDiscount">
           <div >
@@ -33,12 +45,11 @@ import {SubscriptionService} from '../../../services/subscriptions/subscription.
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
                                                 [selectPlan]="selectPlan"
-                                                (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
+                                                (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
+                                                [hasDiscount]="hasDiscount"
+            >
             </app-subscription-pricing-container>
           </div>
-          <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard"
-                                       (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
-          </app-discount-card-container>
         </div>
 
       </div>
@@ -94,10 +105,12 @@ export class SubscriptionWizardComponent implements OnInit {
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
-  public discountValidationError;
+  public discountCardValidationLoading = false;
+  public discountResponse: DiscountValidationResponse;
   public discountCode;
   public step = 1;
   public hasDiscountCard = false;
+  public hasDiscount = false;
   public stripeKey = stripeKey;
   public displayError$;
   public payErrorMsg$;
@@ -144,14 +157,8 @@ export class SubscriptionWizardComponent implements OnInit {
   }
 
   onDiscountFormValidity($event) {
-    console.log('Event in form', $event);
     const _code = $event.value.code;
-    console.log(_code);
-    this.subscriptionService.validateDiscountCode(_code).then((result) => {
-      console.log(result);
-    }).catch((err) => {
-      this.discountValidationError = err;
-    });
+    this.store.dispatch(new ValidateCode(_code));
   }
 
   back() {

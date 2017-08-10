@@ -3,8 +3,16 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
-import { PostSubscription } from '../../../actions/subscription';
+import { PostSubscription, ValidateCode } from '../../../actions/subscription';
 import { stripeKey } from '../../../constants/stripe';
+import {SubscriptionService} from '../../../services/subscriptions/subscription.service';
+
+interface DiscountValidationResponse {
+  err?: any;
+  valid?: boolean;
+  assigned?: boolean;
+}
+
 
 @Component({
   selector: 'app-subscription-wizard',
@@ -18,15 +26,32 @@ import { stripeKey } from '../../../constants/stripe';
         ></app-companions-amount-container>
       </div>
       <div [hidden]="step !== 2">
-        <div class="mb-4" [hidden]="hasDiscountCard">
-          <app-subscription-pricing-container [parent]="paymentRequest" 
-                                              [selectPlan]="selectPlan"
-                                              (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
-          </app-subscription-pricing-container>
+        <div *ngIf="claimDiscount">
+          <app-discount-code-form [parent]="discountCode"
+            (onValid)="onDiscountFormValidity($event)"
+          ></app-discount-code-form>
+          <div *ngIf="discountCardValidationLoading">
+            <span>
+              Validating code
+            </span>
+          </div>
         </div>
-        <app-discount-card-container [parent]="discountCard" [hidden]="!hasDiscountCard" 
-                                     (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)">
-        </app-discount-card-container>
+        <div *ngIf="!claimDiscount">
+          <div >
+            <button md-button color="primary" (click)="claim()">
+              Claim discount
+            </button>   
+          </div>
+          <div class="mb-4" [hidden]="hasDiscountCard">
+            <app-subscription-pricing-container [parent]="paymentRequest"
+                                                [selectPlan]="selectPlan"
+                                                (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
+                                                [hasDiscount]="hasDiscount"
+            >
+            </app-subscription-pricing-container>
+          </div>
+        </div>
+
       </div>
       <div [hidden]="step !== 3">
         <div class="d-flex flex-column w-100">
@@ -76,20 +101,27 @@ import { stripeKey } from '../../../constants/stripe';
 export class SubscriptionWizardComponent implements OnInit {
   @Output() subscriptionSuccess: EventEmitter<any> = new EventEmitter();
   @Output() subscriptionError: EventEmitter<any> = new EventEmitter();
+  @Output() onDiscountFormValid: EventEmitter<any> = new EventEmitter();
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
+  public discountCardValidationLoading = false;
+  public discountResponse: DiscountValidationResponse;
+  public discountCode;
   public step = 1;
-  public hasDiscountCard: boolean = false;
+  public hasDiscountCard = false;
+  public hasDiscount = false;
   public stripeKey = stripeKey;
   public displayError$;
   public payErrorMsg$;
   public payLoading$: Observable<any>;;
   public totalPay = 0;
   public plan;
+  public claimDiscount: boolean = false;
   constructor(
-    private store : Store<any>,
-    private fb: FormBuilder
+    private store: Store<any>,
+    private fb: FormBuilder,
+    private subscriptionService: SubscriptionService
   ) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],
@@ -101,10 +133,18 @@ export class SubscriptionWizardComponent implements OnInit {
     this.discountCard = this.fb.group({
       discountCardCode: ['']
     });
+
+    this.discountCode = this.fb.group({
+      code: ['']
+    });
   }
 
   onCompanionFormSuccessClick($event) {
     console.log('click on success');
+  }
+
+  claim() {
+    this.claimDiscount = true;
   }
 
   ngOnInit() {
@@ -113,8 +153,12 @@ export class SubscriptionWizardComponent implements OnInit {
         this.calculateTotalToPay();
       }
     });
-
     this.payLoading$ = onStateChangeObservable(this.store, 'subscription.loading');
+  }
+
+  onDiscountFormValidity($event) {
+    const _code = $event.value.code;
+    this.store.dispatch(new ValidateCode(_code));
   }
 
   back() {

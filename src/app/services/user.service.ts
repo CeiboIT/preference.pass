@@ -51,13 +51,23 @@ export class UserService {
   }
 
   getCurrentUser() {
-      const GET_CURRENT_USER = gql`
-        query GetCurrentUser {
+    const _now = new Date().toISOString();
+
+    const GET_CURRENT_USER = gql`
+        query GetCurrentUser($now: DateTime!) {
           user {
             id
             name 
             picture
-            subscription {
+            discountCodes(filter: {
+              used: false
+            }) {
+              id
+            }
+            
+            subscription(filter: {
+              validity_gt: $now
+            }) {
               id
               adults
               validity
@@ -86,7 +96,10 @@ export class UserService {
       `;
 
       return this.client.watchQuery({
-        query: GET_CURRENT_USER
+        query: GET_CURRENT_USER,
+        variables: {
+          now: _now
+        }
       });
   }
 
@@ -105,6 +118,44 @@ export class UserService {
     `;
     this.client.watchQuery({
       query: GET_USER_COMPANIONS
+    });
+  }
+
+  getUserSubscriptionAndDiscounts() {
+    const _now = new Date().toISOString();
+    const GET_SUBSCRIPTION = gql`
+      query GetSubscription($now: DateTime!) {
+        user {
+          subscription(filter: {
+            validity_gt: $now
+          }) {
+            id
+            adults
+            validity
+            kids
+            isComingAlone
+            companions {
+              id
+              fullName
+              type
+              email
+            }
+          }
+        }
+        discountCodes(filter: {
+          used: false
+        }) {
+          id
+        }
+        
+      }
+    `;
+
+    return this.client.watchQuery({
+      query: GET_SUBSCRIPTION,
+      variables: {
+        now: _now
+      }
     });
   }
 
@@ -135,13 +186,13 @@ export class UserService {
 
     checkSubscription = (user, openModal, cb?) => {
       let valid = false;
-      if (user.id && hasSubscription(user) && isSubscriptionValid(user)) {
+      if (user && user.id && hasSubscription(user) && isSubscriptionValid(user)) {
         valid = true;
       }
       if (cb && !openModal) {
         cb(valid);
       }
-    }
+    };
 
     checkUserCompletion(user, cb?, notOpenModal?, options?: ModalCallOptions) {
       let goToNext = true;

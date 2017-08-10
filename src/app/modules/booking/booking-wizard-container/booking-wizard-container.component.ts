@@ -47,6 +47,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public booking;
   public companion;
   public card;
+  public subscription;
   public subscriptionCompanions= [{
     id: '123',
     fullName: 'Emiliano Potignano',
@@ -63,6 +64,8 @@ export class BookingWizardContainerComponent implements OnInit {
   public departures;
   public activity;
   public subscriptionValidity;
+  public subscriptionKids;
+  public subscriptionAdults;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -80,8 +83,6 @@ export class BookingWizardContainerComponent implements OnInit {
       type: ['']
     });
 
-
-
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
@@ -89,6 +90,8 @@ export class BookingWizardContainerComponent implements OnInit {
       if (user && user.id && user.subscription) {
         this.subscriptionCompanions = user.subscription.companions;
         this.subscriptionValidity = moment(user.subscription.validity);
+        this.subscriptionKids =  user.subscription.kids;
+        this.subscriptionAdults =  user.subscription.adults;
       }
     });
 

@@ -8,6 +8,9 @@ export const ActionTypes = {
   SEARCH_PP_CARD: type('[Subscription] Search PP Card'),
   SEARCH_PP_CARD_FAILURE: type('[Subscription] Search PP Card Failure'),
   SEARCH_PP_CARD_SUCCESS: type('[Subscription] Search PP Card Success'),
+  VALIDATE_DISCOUNT_CODE: type('[Subscription] Discount Code'),
+  VALIDATE_DISCOUNT_CODE_FAILURE: type('[Subscription] Discount Code Failure'),
+  VALIDATE_DISCOUNT_CODE_SUCCESS: type('[Subscription] Discount Code Success')
 };
 
 export class PostSubscription implements Action {
@@ -40,5 +43,20 @@ export class SearchPPCardSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+export class ValidateCode implements Action {
+  type = ActionTypes.VALIDATE_DISCOUNT_CODE;
+  constructor(public payload: any) { }
+}
+
+export class ValidateCodeSuccess implements Action {
+  type = ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class ValidateCodeFailure implements Action {
+  type = ActionTypes.VALIDATE_DISCOUNT_CODE_FAILURE;
+  constructor(public payload: any) { }
+}
+
 export type Actions = PostSubscription | PostSubscriptionFailure | PostSubscriptionSuccess |
-SearchPPCard  | SearchPPCardFailure | SearchPPCardSuccess;
+SearchPPCard  | SearchPPCardFailure | SearchPPCardSuccess | ValidateCode |ValidateCodeSuccess | ValidateCodeFailure;

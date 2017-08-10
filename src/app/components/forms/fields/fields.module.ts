@@ -22,6 +22,7 @@ import { UserFullnameComponent } from './user-fullname/user-fullname.component';
 import { SubscriptionComingAloneComponent } from './subscription-coming-alone/subscription-coming-alone.component';
 import {CompanionsSelectorComponent} from './companions-selector/companions-selector.component';
 import { PreferencePassCardInputComponent } from './preference-pass-card-input/preference-pass-card-input.component';
+import { DiscountCodeInputComponent } from './discount-code-input/discount-code-input.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { PreferencePassCardInputComponent } from './preference-pass-card-input/p
     UserFullnameComponent,
     SubscriptionComingAloneComponent,
     CompanionsSelectorComponent,
-    PreferencePassCardInputComponent
+    PreferencePassCardInputComponent,
+    DiscountCodeInputComponent
   ],
   exports: [
     AmountInputComponent,
@@ -65,7 +67,8 @@ import { PreferencePassCardInputComponent } from './preference-pass-card-input/p
     UserFullnameComponent,
     SubscriptionComingAloneComponent,
     CompanionsSelectorComponent,
-    PreferencePassCardInputComponent
+    PreferencePassCardInputComponent,
+    DiscountCodeInputComponent
   ]
 })
 export class FieldsModule { }

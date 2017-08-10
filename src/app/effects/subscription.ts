@@ -43,4 +43,14 @@ export class SubscriptionEffects {
         .then(res => new SearchPPCardSuccess(res))
         .catch(err => new SearchPPCardFailure(err));
     });
+
+  @Effect()
+  CheckDiscountCode: Observable<{}> = this.action$
+    .ofType(ActionTypes.VALIDATE_DISCOUNT_CODE)
+    .map(action => action.payload)
+    .switchMap(payload => {
+      return this.service.validateDiscountCode(payload)
+        .then(res => new SearchPPCardSuccess(res))
+        .catch(err => new SearchPPCardFailure(err));
+    });
 }

@@ -135,21 +135,21 @@ export class UserService {
 
     checkSubscription = (user, openModal, cb?) => {
       let valid = false;
-      if (user.id && hasSubscription(user) && isSubscriptionValid(user)) {
+      if (user && user.id && hasSubscription(user) && isSubscriptionValid(user)) {
         valid = true;
       }
       if (cb && !openModal) {
         cb(valid);
       }
-    }
+    };
 
     checkUserCompletion(user, cb?, notOpenModal?, options?: ModalCallOptions) {
       let goToNext = true;
-      if (user.id && !hasSubscription(user) && !hasPreferencePassCard(user) && !notOpenModal) {
+      if (user && user.id && !hasSubscription(user) && !hasPreferencePassCard(user) && !notOpenModal) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 1, options}));
         goToNext = false;
       }
-      if (user.id && hasPreferencePassCard(user) && !hasSubscription(user) && !notOpenModal) {
+      if (user && user.id && hasPreferencePassCard(user) && !hasSubscription(user) && !notOpenModal) {
         this.store.dispatch(new OpenOnBoarding({startOnStep: 2, options}));
         goToNext = false;
       }

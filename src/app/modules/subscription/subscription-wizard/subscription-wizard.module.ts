@@ -8,6 +8,7 @@ import { SubscriptionPricingContainerModule } from './subscription-pricing-conta
 import { DiscountCardContainerModule } from './discount-card-container/discount-card-container.module';
 import { PaymentsComponentsModule } from './../../../components/forms/payment/payment-form.module';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
+import {DiscountCodeFormModule} from "../../../components/forms/discount-code-form/discount-code-form.module";
 
 @NgModule({
   imports: [
@@ -15,17 +16,18 @@ import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
     CompanionAmountModule,
     SubscriptionPricingContainerModule,
     DiscountCardContainerModule,
+    DiscountCodeFormModule,
     PaymentsComponentsModule,
     MdButtonModule,
     MdCardModule
   ],
   declarations: [
-    SubscriptionWizardComponent, 
+    SubscriptionWizardComponent,
     CompanionsAmountContainerComponent,
     WizardHeaderComponent
   ],
   exports: [
-    SubscriptionWizardComponent, 
+    SubscriptionWizardComponent,
     CompanionsAmountContainerComponent,
     WizardHeaderComponent
   ]

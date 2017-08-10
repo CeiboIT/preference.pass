@@ -146,6 +146,7 @@ export class SubscriptionWizardComponent implements OnInit {
   onDiscountFormValidity($event) {
     console.log('Event in form', $event);
     const _code = $event.value.code;
+    console.log(_code);
     this.subscriptionService.validateDiscountCode(_code).then((result) => {
       console.log(result);
     }).catch((err) => {

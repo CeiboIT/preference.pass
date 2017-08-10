@@ -67,6 +67,7 @@ export class SubscriptionService {
       const headers = new Headers({
         'Content-Type': 'application/json'
       });
+      console.log('code in service:' , code);
       this.createAuthorizationHeader(headers);
       const payload = JSON.stringify({
         code: code

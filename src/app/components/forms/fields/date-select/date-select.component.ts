@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, EventEmitter} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import * as moment from 'moment';
 @Component({
   selector: 'app-date-select',
@@ -11,14 +11,20 @@ import * as moment from 'moment';
                           [monthObserver]="monthSelectionObserver"
                           [yearObserver]="yearSelectionObserver"
                           (daySelected)="onDaySelected($event)"
+                          [parent]="dateGroup"
           >
           </app-day-select>
         </div>
         <div>
-          <app-month-select *ngIf="p == 'month'" (monthSelected)="onMonthSelected($event)" ></app-month-select>
+          <app-month-select *ngIf="p == 'month'" (monthSelected)="onMonthSelected($event)"
+                            [parent]="dateGroup"
+          ></app-month-select>
         </div>
         <div>
-          <app-year-select *ngIf="p == 'year'" (yearSelected)="onYearSelected($event)" ></app-year-select>
+          <app-year-select *ngIf="p == 'year'" [years]="years" (yearSelected)="onYearSelected($event)"
+                           [parent]="dateGroup"
+          >
+          </app-year-select>
         </div>
       </div>
     </div>
@@ -27,17 +33,36 @@ import * as moment from 'moment';
 export class DateSelectComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() parentKey: string;
+  @Input() years;
+  @Input() limitDate;
+  @Input() startDate;
+  @Input() initialDate;
   @Input() format: string[] = [
     'month', 'day', 'year'
   ];
+
+  public dateGroup: FormGroup;
   public monthSelectionObserver: EventEmitter<any> = new EventEmitter();
   public yearSelectionObserver: EventEmitter<any> = new EventEmitter();
   private day;
   private month;
   private year;
   private date;
-  constructor() { }
-  ngOnInit() { }
+  constructor(private fb: FormBuilder) {
+    this.dateGroup = this.fb.group({
+      day: [''],
+      month: [''],
+      year: ['']
+    });
+  }
+  ngOnInit() {
+    if (this.initialDate) {
+     const _init =  moment(this.initialDate);
+      this.dateGroup.get('year').setValue(_init.year());
+      this.dateGroup.get('month').setValue(_init.month());
+      this.dateGroup.get('day').setValue(10);
+    }
+  }
   onMonthSelected($event) {
     this.monthSelectionObserver.emit($event);
     this.month = $event;

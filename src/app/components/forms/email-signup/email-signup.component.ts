@@ -19,7 +19,7 @@ import {FormGroup} from '@angular/forms';
             <app-password [parent]="parent"></app-password>
         </div>
         <div class="py-sm-3">
-           <app-date-select [parent]="parent" [parentKey]="'birthDate'"></app-date-select>
+           <app-date-select [parent]="parent" [parentKey]="'birthDate'" [years]="years"></app-date-select>
         </div>
       </div>
     </div>
@@ -29,5 +29,14 @@ export class EmailSignupComponent implements OnInit {
   @Input() parent: FormGroup;
   constructor() { }
   ngOnInit() {}
+
+  get years() {
+    let _years = [];
+    const initialYear = 1900;
+    for (let i = initialYear; i <= new Date().getFullYear(); i++) {
+      _years.unshift(i);
+    };
+    return _years;
+  }
 
 }

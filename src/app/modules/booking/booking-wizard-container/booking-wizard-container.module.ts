@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PreferencePassCardFormModule} from '../../../components/forms/preference-pass-card-form/preference-pass-card-form.module';
 import {CompanionAmountModule} from '../../../components/forms/companion-amount/companion-amount.module';
 import {TotalSavingModule} from '../../../components/booking/total-saving/total-saving.module';
+import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {TotalSavingModule} from '../../../components/booking/total-saving/total-
     MdButtonModule,
     TotalSavingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DateSelectModule
   ],
   declarations: [BookingWizardContainerComponent],
   exports: [BookingWizardContainerComponent]

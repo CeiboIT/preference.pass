@@ -11,13 +11,10 @@ import {MD_DIALOG_DATA} from '@angular/material';
       <div class="w-100 text-right hidden-md-up">
         <button md-button md-dialog-close class="mb-2 close"><i class="fa fa-close"></i></button>
       </div>
-      <app-onboardstep1 *ngIf="isStep1" (onValid)="onStep1Valid($event)"
-      (changeStep)="changeToStep2()" [feedback]="step1Feedback"
+      <app-onboardstep1 *ngIf="isStep1"
+                        (onSuccess)="step1Success($event)"
       >
       </app-onboardstep1>
-      <app-onboardstep2 *ngIf="isStep2"
-        (onSuccess)="step2Success($event)"
-      ></app-onboardstep2>
     </div>
   `,
   styles: [`
@@ -51,11 +48,11 @@ export class OnboardingModalComponent implements OnInit {
     return this.step === 2;
   }
 
-  step2Success($event) {
+  step1Success($event) {
     console.log($event);
   }
 
-
+  /*
   onStep1Valid($event) {
     this.subscriptionService.validatePPCard($event)
       .then((res: CardValidationResponse) => {
@@ -70,6 +67,6 @@ export class OnboardingModalComponent implements OnInit {
       .catch(err => {
         console.log(err);
       });
-  }
+  }*/
 
 }

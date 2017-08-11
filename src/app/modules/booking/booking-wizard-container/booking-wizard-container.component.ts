@@ -14,6 +14,11 @@ import {SearchPPCard} from "../../../actions/subscription";
     <div class="container-fluid">
       <div class="row">
         <form class="col-10" novalidate (ngSubmit)="onBookingSubmit($event)">
+          <app-companion-amount [parent]="booking"></app-companion-amount>
+          <app-total-saving [rate]="rate" 
+                            [amountOfKids]="kidsAmount" 
+                            [amountOfAdults]="adultsAmount">
+          </app-total-saving>
           <app-booking-date-selector-form [activity]="activity$ | async" [parent]="booking"
               [validUntil]="subscriptionValidity" *ngIf="user && subscriptionValidity"
           ></app-booking-date-selector-form>
@@ -22,12 +27,9 @@ import {SearchPPCard} from "../../../actions/subscription";
             [departures]="departures$ | async "
           >
           </app-pick-location-and-time-selection-form>
-          <!--<app-companion-charge-form [parent]="companion" *ngIf="!isComingAlone"></app-companion-charge-form>-->
-          <app-companions-selection-form [parent]="booking" [companions]="subscriptionCompanions"></app-companions-selection-form>
-          <app-companion-charge-form [parent]="companion"></app-companion-charge-form>
           <div class="col-12">
             <button md-raised-button color="primary" type="submit">
-              Finish Booking
+              Book now
             </button>            
           </div>
         </form>
@@ -72,7 +74,10 @@ export class BookingWizardContainerComponent implements OnInit {
      executionTime: [''],
      pickUpLocationId: [''],
      pickUpTime: [''],
-     companionsIds: ['']
+     companionsIds: [''],
+     isComingAlone: [''],
+     kidsAmount: [''],
+     adultsAmount: ['']
    });
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
@@ -110,8 +115,22 @@ export class BookingWizardContainerComponent implements OnInit {
     });
   }
 
+  get kidsAmount() {
+    return this.booking.get('kidsAmount').value;
+  }
+
+  get adultsAmount() {
+    return this.booking.get('adultsAmount').value;
+  }
+
   get isComingAlone() {
      return isComingAlone(this.user);
+  }
+
+  get rate() {
+    if (this.activity &&  this.activity.rates && this.activity.rates.length === 1) {
+      return this.activity.rates[0];
+    }
   }
 
   onBookingSubmit(e) {

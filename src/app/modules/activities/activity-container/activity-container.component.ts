@@ -53,16 +53,15 @@ export class ActivityContainerComponent implements OnInit {
     /*if (!isSubscriptionValid(this.user)) {
       this.router.navigate(['subscription/wizard']);
     }*/
-
     const navigateTo = 'booking/wizard/' + this.activity.id;
-
-    this.userService.checkUserCompletion(this.user, (goToNext) => {
+    this.router.navigate([navigateTo]);
+    /*this.userService.checkUserCompletion(this.user, (goToNext) => {
       if (goToNext) {
         this.router.navigate([navigateTo]);
       }
     }, false, {
       onSuccessRedirect: navigateTo
-    });
+    });*/
   }
 
 }

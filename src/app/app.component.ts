@@ -18,9 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
-    this.user$.subscribe((user) => {
-      this.userService.checkUserCompletion(user);
-    });
   }
 
   ngAfterViewInit() {

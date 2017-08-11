@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
 import { stripeKey } from '../../../constants/stripe';
-import {SubscriptionService} from '../../../services/subscriptions/subscription.service';
 
 interface DiscountValidationResponse {
   err?: any;
@@ -21,11 +20,6 @@ interface DiscountValidationResponse {
     <md-card>
       <wizard-header [step]="step"></wizard-header>
       <div [hidden]="step !== 1">
-        <app-companions-amount-container [parent]="paymentRequest"
-          (successClicked)="onCompanionFormSuccessClick($event)"
-        ></app-companions-amount-container>
-      </div>
-      <div [hidden]="step !== 2">
         <div *ngIf="claimDiscount">
           <app-discount-code-form [parent]="discountCode"
             (onValid)="onDiscountFormValidity($event)"
@@ -53,7 +47,7 @@ interface DiscountValidationResponse {
         </div>
 
       </div>
-      <div [hidden]="step !== 3">
+      <div [hidden]="step !== 2">
         <div class="d-flex flex-column w-100">
           <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
           <app-payment-form
@@ -105,8 +99,6 @@ export class SubscriptionWizardComponent implements OnInit {
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
-  public discountCardValidationLoading = false;
-  public discountResponse: DiscountValidationResponse;
   public discountCode;
   public step = 1;
   public hasDiscountCard = false;
@@ -120,8 +112,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public claimDiscount: boolean = false;
   constructor(
     private store: Store<any>,
-    private fb: FormBuilder,
-    private subscriptionService: SubscriptionService
+    private fb: FormBuilder
   ) {
     this.paymentRequest = this.fb.group({
       kidsAmount: [''],

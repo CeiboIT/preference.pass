@@ -60,7 +60,7 @@ export class DateSelectComponent implements OnInit {
      const _init =  moment(this.initialDate);
       this.dateGroup.get('year').setValue(_init.year());
       this.dateGroup.get('month').setValue(_init.month());
-      this.dateGroup.get('day').setValue(10);
+      this.dateGroup.get('day').setValue(_init.day());
     }
   }
   onMonthSelected($event) {

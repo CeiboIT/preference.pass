@@ -40,6 +40,7 @@ console.log(_inthreemonths);
               [parentKey]="'executionDate'"
               [years]="years"
               [initialDate]="today"
+              [limitDate]="limitDate"
             >
             </app-date-select>
           </div>
@@ -80,6 +81,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public card;
   public subscription;
   public today = _today;
+  public limitDate = _inthreemonths;
   public subscriptionCompanions= [{
     id: '123',
     fullName: 'Emiliano Potignano',

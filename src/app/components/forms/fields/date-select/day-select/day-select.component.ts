@@ -34,6 +34,7 @@ export class DaySelectComponent implements OnInit {
   @Input() yearObserver: EventEmitter<any>;
   @Output() daySelected: EventEmitter<any> = new EventEmitter();
   @Input() parent: FormGroup;
+  @Input() limitDate;
   public days = [];
   private month;
   private year;

@@ -12,17 +12,20 @@ import * as moment from 'moment';
                           [yearObserver]="yearSelectionObserver"
                           (daySelected)="onDaySelected($event)"
                           [parent]="dateGroup"
+                          [limitDate]="limitDate"
           >
           </app-day-select>
         </div>
         <div>
           <app-month-select *ngIf="p == 'month'" (monthSelected)="onMonthSelected($event)"
                             [parent]="dateGroup"
+                            [limitDate]="limitDate"
           ></app-month-select>
         </div>
         <div>
           <app-year-select *ngIf="p == 'year'" [years]="years" (yearSelected)="onYearSelected($event)"
                            [parent]="dateGroup"
+                           [limitDate]="limitDate"
           >
           </app-year-select>
         </div>
@@ -62,6 +65,10 @@ export class DateSelectComponent implements OnInit {
       this.dateGroup.get('month').setValue(_init.month());
       this.dateGroup.get('day').setValue(_init.day());
     }
+  }
+
+  generateDates() {
+
   }
   onMonthSelected($event) {
     this.monthSelectionObserver.emit($event);

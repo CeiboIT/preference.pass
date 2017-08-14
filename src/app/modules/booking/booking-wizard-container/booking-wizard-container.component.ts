@@ -57,7 +57,10 @@ console.log(_inthreemonths);
           </div>
         </form>
       </div>
-      <app-companions-form [availableCompanions]="subscriptionCompanions" [parent]="selectedCompanions">
+      <app-companions-form [availableCompanions]="subscriptionCompanions" 
+                           [parent]="booking.get('companionsIds')"
+                           [entityKey]="'id'"
+      >
       </app-companions-form>
       
       <pre>

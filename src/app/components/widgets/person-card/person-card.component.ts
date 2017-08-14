@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 declare var document;
 declare var MaterialAvatar;
 @Component({
   selector: 'app-person-card',
   template: `    
-    <md-card>
+    <md-card class="person-card" (click)="cardSelected()">
       <md-card-content>
         <div class="row">
           <div class="col-3">
@@ -15,7 +15,7 @@ declare var MaterialAvatar;
           <div class="col-9">
             <div class="row">
               <div class="col-12">
-                <div class="person__name">
+                <div class="person-card__name">
                   <strong>
                     {{ person.fullName }}
                   </strong>
@@ -32,8 +32,12 @@ declare var MaterialAvatar;
     </md-card>
   `,
   styles: [
-    `
-      .person__name {
+    `      
+      .person-card:hover {
+        cursor: hand;
+      }
+      
+      .person-card__name {
         font-size: 1.2em;
       }
     `
@@ -42,7 +46,13 @@ declare var MaterialAvatar;
 })
 export class PersonCardComponent implements OnInit {
   @Input() person;
+  @Input() selectedPersons;
+  @Output() onPersonCardSelected: EventEmitter<any> = new EventEmitter();
   constructor() { }
+
+  cardSelected() {
+    this.onPersonCardSelected.emit(this.person);
+  }
 
   ngOnInit() {
     console.log('Material Avatar: ', MaterialAvatar);

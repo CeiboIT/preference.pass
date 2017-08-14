@@ -7,18 +7,23 @@ import {FormGroup, FormBuilder} from '@angular/forms';
     <form action="" novalidate>
       <h2>Select companions</h2>
         <app-companion-charge-form [parent]="newCompanion">
+          
         </app-companion-charge-form>
-        <app-persons-list [list]="availableCompanions"></app-persons-list>
+        <app-persons-list [list]="availableCompanions"
+          [parent]="parent"
+          [entityKey]="entityKey"
+        >
+        </app-persons-list>
     </form>
   `
 })
 export class CompanionsFormComponent implements OnInit {
   @Input() parent: FormGroup;
+  @Input() entityKey;
   @Input() availableCompanions;
   @Output() companionAdded;
   @Output() onCompanionSelectionSubmit;
   public newCompanion: FormGroup;
-
   constructor(private fb: FormBuilder) {
     this.newCompanion = fb.group({
       fullName: [''],
@@ -26,7 +31,6 @@ export class CompanionsFormComponent implements OnInit {
       personType: ['']
     });
   }
-
   ngOnInit() {
   }
 

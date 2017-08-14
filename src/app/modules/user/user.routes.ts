@@ -3,7 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { UserContainerComponent } from './user.component'
 import { UserProfileContainerComponent } from './user-profile-container/user-profile-container.component';
 import { BookingsContainerComponent } from './bookings-container/bookings-container.component';
-
+import { SubscriptionsContainerComponent } from "./subscriptions-container/subscriptions-container.component";
 
 const routes: Routes = [
   { path : '', component: UserContainerComponent,
@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'profile', component: UserProfileContainerComponent },
       { path: 'bookings', component: BookingsContainerComponent },
+      { path: 'subscriptions', component: SubscriptionsContainerComponent },
     ] 
   }
 ];

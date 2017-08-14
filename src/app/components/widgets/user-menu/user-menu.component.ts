@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
+      <button routerLink="/user/profile" md-menu-item>Profile</button>
       <button (click)="logOut()" md-menu-item>Logout</button>
     </md-menu>
   `,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../utils/store';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-setings',
@@ -16,10 +17,10 @@ import { onStateChangeObservable } from '../../utils/store';
 
                 <md-card class="menu">      
                     <ul>
-                        <li class="active"><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"><i class="fa fa-map-marker"></i> Bookings</a></li>
-                        <li><a href="#"><i class="fa fa-tag"></i> Subscriptions</a></li>
-                        <li><a href="#"><i class="fa fa-users"></i> Companions</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/profile"><i class="fa fa-user"></i> Profile</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/bookings"><i class="fa fa-map-marker"></i> Bookings</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/subscriptions"><i class="fa fa-tag"></i> Subscriptions</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/companions"><i class="fa fa-users"></i> Companions</a></li>
                     </ul>
                 </md-card>
             </div>
@@ -38,7 +39,7 @@ import { onStateChangeObservable } from '../../utils/store';
 
 export class UserContainerComponent implements OnInit {
     public user$: Observable<any>;
-	constructor(private store: Store<any>) { 
+	constructor(private router: Router, private store: Store<any>) { 
 		this.user$ = onStateChangeObservable(this.store, 'auth.user');
 	}
 

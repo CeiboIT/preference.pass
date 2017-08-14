@@ -9,8 +9,6 @@ import { onStateChangeObservable } from '../../../utils/store';
 		`
 			<app-user-profile [currentUser]="user$ | async"></app-user-profile>
 		`
-	,
-	styleUrls: ['./user-profile-container.component.scss']
 })
 
 export class UserProfileContainerComponent implements OnInit {

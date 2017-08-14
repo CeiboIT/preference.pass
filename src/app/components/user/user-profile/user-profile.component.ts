@@ -2,8 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
 	selector: 'app-user-profile',
-	templateUrl: './user-profile.component.html',
-	styleUrls: ['./user-profile.component.scss']
+	template: `
+		<h1>profile</h1>
+	`
 })
 
 export class UserProfileComponent implements OnInit {

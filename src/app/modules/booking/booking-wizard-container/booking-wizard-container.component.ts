@@ -57,6 +57,8 @@ console.log(_inthreemonths);
           </div>
         </form>
       </div>
+      <app-companions-form [availableCompanions]="subscriptionCompanions" [parent]="selectedCompanions">
+      </app-companions-form>
       
       <pre>
       {{ booking.value | json }}
@@ -82,14 +84,17 @@ export class BookingWizardContainerComponent implements OnInit {
   public subscription;
   public today = _today;
   public limitDate = _inthreemonths;
+  public
   public subscriptionCompanions= [{
     id: '123',
     fullName: 'Emiliano Potignano',
-    type: 'Adult'
+    email: 'epotignano@gmail.com',
+    personType: 'Adult'
   }, {
     id: '3455',
     fullName: 'Ayrton Potignano',
-    type: 'Kid'
+    email: 'carlos@gmail.com',
+    personType: 'Kid'
   }];
   public departures$: Observable<any>;
   public activity$: Observable<any>;

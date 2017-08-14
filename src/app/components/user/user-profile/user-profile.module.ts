@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfileComponent } from './user-profile.component';
-import { MdButtonModule, MdCardModule } from '@angular/material';
+import { MdButtonModule, MdCardModule, MdListModule, MdIconModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     MdButtonModule, 
-    MdCardModule 
+    MdCardModule,
+    MdListModule,
+    MdIconModule
   ],
   declarations: [
     UserProfileComponent

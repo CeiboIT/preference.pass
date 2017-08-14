@@ -63,7 +63,8 @@ export class DateSelectComponent implements OnInit {
      const _init =  moment(this.initialDate);
       this.dateGroup.get('year').setValue(_init.year());
       this.dateGroup.get('month').setValue(_init.month());
-      this.dateGroup.get('day').setValue(_init.day());
+      this.dateGroup.get('day').setValue(_init.date());
+      this.tryToSetDate();
     }
   }
 
@@ -86,21 +87,23 @@ export class DateSelectComponent implements OnInit {
   }
 
   tryToSetDate() {
-    if (this.month && this.year && this.day) {
+
+    const dateVal = this.dateGroup.value;
+
+    if (dateVal.month && dateVal.year && dateVal.day) {
       let _day;
       let _month;
-      if (this.day <= 10) {
-        _day = '0' + this.day;
+      if (dateVal.day <= 10) {
+        _day = '0' + dateVal.day;
       } else {
-        _day = this.day;
+        _day = dateVal.day;
       }
-      if (this.month <= 10) {
-        _month = '0' + this.month;
+      if (dateVal.month <= 10) {
+        _month = '0' + dateVal.month;
       } else {
-        _month = this.month;
+        _month = dateVal.month;
       }
-      this.date = moment('' + this.year + _month + _day, 'YYYYMMDD').valueOf();
-      console.log(this.date);
+      this.date = moment('' + dateVal.year + _month + _day, 'YYYYMMDD').toISOString();
       this.parent.get(this.parentKey).setValue(this.date);
     }
   }

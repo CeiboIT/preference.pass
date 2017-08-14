@@ -26,7 +26,7 @@ export class YearSelectComponent implements OnInit {
       let _limit = moment(this.limitDate);
       let _years = [];
       _years.push(_today.year());
-
+      this.parent.get('year').setValue(_today.year());
       if (_today.year() !== _limit.year()) {
         _years.push(_limit.year());
       }

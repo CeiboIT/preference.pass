@@ -20,8 +20,7 @@ export class PersonTypeSelectorComponent implements OnInit {
   }
 
   onChange($event) {
-    console.log($event);
-    this.parent.get('type').setValue($event.value);
+    this.parent.get('personType').setValue($event.value);
   }
 
 }

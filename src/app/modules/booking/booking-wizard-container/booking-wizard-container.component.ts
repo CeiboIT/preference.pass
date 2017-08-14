@@ -8,6 +8,8 @@ import {onStateChangeObservable} from '../../../utils/store';
 import {isComingAlone} from '../../../utils/user';
 import * as moment from 'moment';
 import {SearchPPCard} from '../../../actions/subscription';
+import {AddCompanion} from "../../../actions/user";
+
 const _today = moment();
 const _inthreemonths = _today.clone();
 _inthreemonths.add(3, 'months');
@@ -60,6 +62,7 @@ console.log(_inthreemonths);
       <app-companions-form [availableCompanions]="subscriptionCompanions" 
                            [parent]="booking.get('companionsIds')"
                            [entityKey]="'id'"
+                           (onAddCompanionSubmit)="addCompanion($event)"
       >
       </app-companions-form>
       
@@ -157,7 +160,6 @@ export class BookingWizardContainerComponent implements OnInit {
 
   get years() {
     const actualYear = new Date().getFullYear();
-    console.log(_inthreemonths);
     let _years = [actualYear];
 
     if (_inthreemonths.year() !== actualYear) {
@@ -204,5 +206,10 @@ export class BookingWizardContainerComponent implements OnInit {
     console.log('Event in form', $event);
     const _code = $event.value.code;
     this.store.dispatch(new SearchPPCard(_code));
+  }
+
+  addCompanion(comp) {
+    console.log(comp);
+    this.store.dispatch(new AddCompanion(comp));
   }
 }

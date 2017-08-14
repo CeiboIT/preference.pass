@@ -13,7 +13,8 @@ import 'rxjs/add/operator/map';
 import {
   ActionTypes,
   PostSubscriptionFailure,
-  PostSubscriptionSuccess, SearchPPCardFailure, SearchPPCardSuccess
+  PostSubscriptionSuccess, SearchPPCardFailure, SearchPPCardSuccess,
+  ValidateCodeFailure, ValidateCodeSuccess, ValidateCodeSuccessInvalid, ValidateCodeSuccessValid
 } from '../actions/subscription';
 import { SubscriptionService } from '../services/subscriptions/subscription.service';
 
@@ -50,7 +51,13 @@ export class SubscriptionEffects {
     .map(action => action.payload)
     .switchMap(payload => {
       return this.service.validateDiscountCode(payload)
-        .then(res => new SearchPPCardSuccess(res))
+        .then(res => {
+          if (!res['valid']) {
+            return new ValidateCodeSuccessInvalid(res);
+          } else {
+            return new ValidateCodeSuccessValid(res);
+          }
+        })
         .catch(err => new SearchPPCardFailure(err));
     });
 }

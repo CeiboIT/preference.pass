@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Onboardstep2Component } from './onboardstep2.component';
+import { SubscriptionStep2Component } from './subscription-step-2.component';
 
-describe('Onboardstep2Component', () => {
-  let component: Onboardstep2Component;
-  let fixture: ComponentFixture<Onboardstep2Component>;
+describe('SubscriptionStep2Component', () => {
+  let component: SubscriptionStep2Component;
+  let fixture: ComponentFixture<SubscriptionStep2Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Onboardstep2Component ]
+      declarations: [ SubscriptionStep2Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Onboardstep2Component);
+    fixture = TestBed.createComponent(SubscriptionStep2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

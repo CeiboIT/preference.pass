@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import * as moment from 'moment';
+import {FormGroup} from "@angular/forms";
 function getDaysInMonth(year, month) {
   let daysInMonth;
   if (month < 10) {
@@ -16,17 +17,24 @@ function getDaysInMonth(year, month) {
 @Component({
   selector: 'app-day-select',
   template: `
-    <md-select placeholder="Days" (change)="onChange($event)" class="input-full-width">
-      <md-option *ngFor="let day of days" [value]="day">
-        {{ day }}
-      </md-option>
-    </md-select>
+    <div [formGroup]="parent">
+      <md-select placeholder="Days" (change)="onChange($event)" class="input-full-width"
+        formControlName="day"
+      >
+        <md-option *ngFor="let day of days" [value]="day">
+          {{ day }}
+        </md-option>
+      </md-select>      
+    </div>
+
   `
 })
 export class DaySelectComponent implements OnInit {
   @Input() monthObserver: EventEmitter<any>;
   @Input() yearObserver: EventEmitter<any>;
   @Output() daySelected: EventEmitter<any> = new EventEmitter();
+  @Input() parent: FormGroup;
+  @Input() limitDate;
   public days = [];
   private month;
   private year;
@@ -46,6 +54,13 @@ export class DaySelectComponent implements OnInit {
       const daysInMonth = getDaysInMonth(this.year, _month);
       this.generateDaysInMonth(daysInMonth);
     });
+
+    if (this.parent.get('month').value && this.parent.get('year').value) {
+      this.month = this.parent.get('month').value;
+      this.year = this.parent.get('year').value;
+      const daysInMonth = getDaysInMonth(this.year, this.month);
+      this.generateDaysInMonth(daysInMonth);
+    }
 
   }
   onChange($event) {

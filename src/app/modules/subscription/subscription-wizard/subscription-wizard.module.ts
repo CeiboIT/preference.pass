@@ -8,7 +8,10 @@ import { SubscriptionPricingContainerModule } from './subscription-pricing-conta
 import { DiscountCardContainerModule } from './discount-card-container/discount-card-container.module';
 import { PaymentsComponentsModule } from './../../../components/forms/payment/payment-form.module';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
-import {DiscountCodeFormModule} from "../../../components/forms/discount-code-form/discount-code-form.module";
+import {DiscountCodeFormModule} from '../../../components/forms/discount-code-form/discount-code-form.module';
+import { SubscriptionStep1Component } from './subscription-step-1/subscription-step-1.component';
+import { SubscriptionStep2Component } from './subscription-step-2/subscription-step-2.component';
+import { SubscriptionStep3Component } from './subscription-step-3/subscription-step-3.component';
 
 @NgModule({
   imports: [
@@ -24,7 +27,10 @@ import {DiscountCodeFormModule} from "../../../components/forms/discount-code-fo
   declarations: [
     SubscriptionWizardComponent,
     CompanionsAmountContainerComponent,
-    WizardHeaderComponent
+    WizardHeaderComponent,
+    SubscriptionStep1Component,
+    SubscriptionStep2Component,
+    SubscriptionStep3Component
   ],
   exports: [
     SubscriptionWizardComponent,

@@ -5,10 +5,11 @@ import { MonthSelectComponent } from './month-select/month-select.component';
 import { YearSelectComponent } from './year-select/year-select.component';
 import {MdSelectModule} from '@angular/material';
 import { DateSelectComponent } from './date-select.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule, MdSelectModule
+    CommonModule, MdSelectModule, ReactiveFormsModule
   ],
   declarations: [DaySelectComponent, MonthSelectComponent, YearSelectComponent, DateSelectComponent],
   exports: [DateSelectComponent]

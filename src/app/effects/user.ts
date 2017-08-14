@@ -6,15 +6,14 @@ import {
 } from '../actions/auth';
 
 import {
-  ActionTypes as UserActionTypes, CreateUserSuccess, CreateUserFailure, GetUserBasicDataSuccess
+  ActionTypes as UserActionTypes, CreateUserSuccess, GetUserBasicDataSuccess
 } from '../actions/user';
 
 import {
-  ActionTypes as LayoutActions
-} from '../actions/layout';
+  ActionTypes as SubscriptionActions
+} from '../actions/subscription';
 
 import {UserService} from '../services/user.service';
-import {User} from "../models/user";
 
 @Injectable()
 export class UserEffects {
@@ -52,10 +51,12 @@ export class UserEffects {
 
   @Effect()
   GetUserBasicData: Observable<{}> = this.action$
-    .ofType(AuthActionTypes.REGISTER_WITH_GOOGLE_SUCCESS, AuthActionTypes.REGISTER_WITH_FACEBOOK_SUCCESS, UserActionTypes.GET_USER_BASIC_DATA)
-    .map(action => action.payload)
-    .switchMap((payload) => {
-      console.log(payload);
+    .ofType(AuthActionTypes.REGISTER_WITH_GOOGLE_SUCCESS,
+      AuthActionTypes.REGISTER_WITH_FACEBOOK_SUCCESS,
+      UserActionTypes.GET_USER_BASIC_DATA,
+      SubscriptionActions.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID
+      )
+    .switchMap((action) => {
       return this.userService.getCurrentUser()
         .map(result => new GetUserBasicDataSuccess(result['data']['user']));
     });

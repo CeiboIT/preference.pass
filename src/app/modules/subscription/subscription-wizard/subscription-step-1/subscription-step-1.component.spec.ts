@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Step1feedbackComponent } from './step1feedback.component';
+import { SubscriptionStep1Component } from './subscription-step-1.component';
 
-describe('Step1feedbackComponent', () => {
-  let component: Step1feedbackComponent;
-  let fixture: ComponentFixture<Step1feedbackComponent>;
+describe('SubscriptionStep1Component', () => {
+  let component: SubscriptionStep1Component;
+  let fixture: ComponentFixture<SubscriptionStep1Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Step1feedbackComponent ]
+      declarations: [ SubscriptionStep1Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Step1feedbackComponent);
+    fixture = TestBed.createComponent(SubscriptionStep1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

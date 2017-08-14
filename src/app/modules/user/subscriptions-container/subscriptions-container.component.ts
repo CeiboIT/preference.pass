@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 	selector: 'app-subscriptions-container',
 	template: `
 		<h1>Subscriptions</h1>
+		<app-user-subscriptions></app-user-subscriptions>
 	`,
 })
 

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookingsContainerComponent } from './bookings-container.component';
-//import { UserProfileModule } from '../../../components/user/user-profile/user-profile.module';
+import { UserBookingsModule } from '../../../components/user/user-bookings/user-bookings.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    UserBookingsModule
   ],
   exports: [
     BookingsContainerComponent

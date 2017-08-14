@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 	selector: 'app-bookings-container',
 	template: `
 		<h1>Bookings</h1>
+		<app-user-bookings></app-user-bookings>
 	`
 })
 

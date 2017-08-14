@@ -6,6 +6,7 @@ import { UserContainerComponent } from './user.component';
 import { UserProfileContainerModule } from './user-profile-container/user-profile-container.module';
 import { BookingsContainerModule } from './bookings-container/bookings-container.module';
 import { SubscriptionsContainerModule } from "./subscriptions-container/subscriptions-container.module";
+import { CompanionsContainerModule } from "./companions-container/companions-container.module";
 import { MdButtonModule, MdCardModule } from '@angular/material';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MdButtonModule, MdCardModule } from '@angular/material';
     MdCardModule,
     UserProfileContainerModule,
     BookingsContainerModule,
-    SubscriptionsContainerModule
+    SubscriptionsContainerModule,
+    CompanionsContainerModule
   ],
   exports: [
     UserContainerComponent

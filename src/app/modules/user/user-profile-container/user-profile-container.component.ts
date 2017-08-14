@@ -7,6 +7,7 @@ import { onStateChangeObservable } from '../../../utils/store';
 	selector: 'app-user-profile-container',
 	template: 
 		`
+			<h1>Profile</h1>
 			<app-user-profile [currentUser]="user$ | async"></app-user-profile>
 		`
 })

@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
     template: `
     <div class="container mt-5">
         <div class="row">
-            <div class="col-sm-4 col-lg-3">
+            <div class="col-md-4 col-lg-3">
                 <md-card class="mb-3">
                     <img [src]="(user$ | async)?.picture" class="avatar mb-3">
                     <h4 class="text-center">{{ (user$ | async)?.name }}</h4>
                 </md-card>
 
-                <md-card class="menu">      
+                <md-card class="menu mb-3">      
                     <ul>
                         <li routerLinkActive="active"><a routerLink="/user/profile"><i class="fa fa-user"></i> Profile</a></li>
                         <li routerLinkActive="active"><a routerLink="/user/bookings"><i class="fa fa-map-marker"></i> Bookings</a></li>
@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
                 </md-card>
             </div>
 
-            <div class="col-sm-8 col-lg-9">
+            <div class="col-md-8 col-lg-9">
                 <md-card>
                     <router-outlet></router-outlet>
                 </md-card>

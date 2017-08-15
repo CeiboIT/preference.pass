@@ -24,12 +24,12 @@ export class TokenComponent {
       this.authService.parseHash()
         .then((result) => {
           localStorage.removeItem('logout');
-          // this.store.dispatch(new userActions.SaveUser(result));
-          /*if(localStorage.getItem(lastVisitedUrl)){
-           this.router.navigateByUrl(localStorage.getItem(lastVisitedUrl))
-           } else {*/
+
           this.router.navigate(['']);
-          // }
+          setTimeout(function () {
+            location.reload();
+          }, 300);
+
         }).catch((error) => {
         console.log(error);
         this.router.navigate(['error']);

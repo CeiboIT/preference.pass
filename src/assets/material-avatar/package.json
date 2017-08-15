@@ -1,0 +1,114 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "material-avatar",
+        "scope": null,
+        "escapedName": "material-avatar",
+        "name": "material-avatar",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/epotignano/Desarrollo/Preference-pass/preference-pass-client"
+    ]
+  ],
+  "_from": "material-avatar@latest",
+  "_id": "material-avatar@0.3.5",
+  "_inCache": true,
+  "_location": "/material-avatar",
+  "_nodeVersion": "6.11.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/material-avatar-0.3.5.tgz_1501182701021_0.161039698170498"
+  },
+  "_npmUser": {
+    "name": "hellsan631",
+    "email": "matkle414@gmail.com"
+  },
+  "_npmVersion": "5.2.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "material-avatar",
+    "scope": null,
+    "escapedName": "material-avatar",
+    "name": "material-avatar",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/material-avatar/-/material-avatar-0.3.5.tgz",
+  "_shasum": "956a84332c849586fd8d5acf09907715b50c2c97",
+  "_shrinkwrap": null,
+  "_spec": "material-avatar",
+  "_where": "/Users/epotignano/Desarrollo/Preference-pass/preference-pass-client",
+  "authors": [
+    "Mathew Kleppin <mathew.kleppin@gmail.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/hellsan631/material-avatar/issues"
+  },
+  "dependencies": {},
+  "description": "simple material design avatars using canvas",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-webserver": "^0.9.1",
+    "randomcolor": "~0.4.0"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-JuC0osXvBUmcRgMr5bOJhLQ5EaegEwy/ds5UwGpVbZaHkhAOM8yoxR1XhTtBwCKilKS7e4OIfidG7BEg8kYXsw==",
+    "shasum": "956a84332c849586fd8d5acf09907715b50c2c97",
+    "tarball": "https://registry.npmjs.org/material-avatar/-/material-avatar-0.3.5.tgz"
+  },
+  "files": [
+    "sample",
+    "material-avatar.js",
+    "material-avatar.min.js",
+    "package.json",
+    "README.md"
+  ],
+  "gitHead": "c3358fc80afed0444b346dd8ef2559ed872c6186",
+  "homepage": "https://github.com/hellsan631/material-avatar#readme",
+  "keywords": [
+    "avatar",
+    "material",
+    "canvas",
+    "javascript",
+    "vanilla",
+    "google",
+    "initials",
+    "html5",
+    "design",
+    "icon",
+    "initials",
+    "jquery"
+  ],
+  "license": "MIT",
+  "main": "material-avatar.js",
+  "maintainers": [
+    {
+      "name": "hellsan631",
+      "email": "matkle414@gmail.com"
+    }
+  ],
+  "name": "material-avatar",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hellsan631/material-avatar.git"
+  },
+  "scripts": {
+    "post-install": "bower install",
+    "start": "gulp serve"
+  },
+  "version": "0.3.5"
+}

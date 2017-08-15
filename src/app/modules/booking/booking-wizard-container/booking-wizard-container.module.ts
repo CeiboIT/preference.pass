@@ -11,6 +11,7 @@ import {PreferencePassCardFormModule} from '../../../components/forms/preference
 import {CompanionAmountModule} from '../../../components/forms/companion-amount/companion-amount.module';
 import {TotalSavingModule} from '../../../components/booking/total-saving/total-saving.module';
 import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
+import {CompanionsFormModule} from '../../../components/forms/companions-form/companions-form.module';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {DateSelectModule} from '../../../components/forms/fields/date-select/dat
     TotalSavingModule,
     FormsModule,
     ReactiveFormsModule,
-    DateSelectModule
+    DateSelectModule,
+    CompanionsFormModule
   ],
   declarations: [BookingWizardContainerComponent],
   exports: [BookingWizardContainerComponent]

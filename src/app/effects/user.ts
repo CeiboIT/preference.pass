@@ -6,7 +6,7 @@ import {
 } from '../actions/auth';
 
 import {
-  ActionTypes as UserActionTypes, CreateUserSuccess, GetUserBasicDataSuccess
+  ActionTypes as UserActionTypes, AddCompanionSuccess, CreateUserSuccess, GetUserBasicDataSuccess
 } from '../actions/user';
 
 import {
@@ -14,6 +14,7 @@ import {
 } from '../actions/subscription';
 
 import {UserService} from '../services/user.service';
+import {getUserIdFromToken} from "../utils/user";
 
 @Injectable()
 export class UserEffects {
@@ -59,6 +60,16 @@ export class UserEffects {
     .switchMap((action) => {
       return this.userService.getCurrentUser()
         .map(result => new GetUserBasicDataSuccess(result['data']['user']));
+    });
+
+  @Effect()
+  AddCompanion: Observable<{}> = this.action$
+    .ofType(UserActionTypes.ADD_COMPANION)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      const userId = getUserIdFromToken();
+     return this.userService.createUserCompanion(payload, userId)
+       .map(result => new AddCompanionSuccess(result['data']['createCompanion']));
     });
   /*
   @Effect()

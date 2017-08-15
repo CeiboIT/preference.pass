@@ -164,13 +164,13 @@ export class UserService {
         mutation NewCompanion(
           $fullName: String!
           $email: String
-          $type: String!
-          $companionOwnerId: String
+          $personType: PersonType!
+          $companionOwnerId: ID!
         ) {
           createCompanion(
             fullName: $fullName
             email: $email
-            type: $type
+            personType: $personType
             companionOwnerId: $companionOwnerId
           ) {
             id
@@ -180,7 +180,12 @@ export class UserService {
 
       return this.client.mutate({
         mutation: CREATE_COMPANION,
-        variables: companionData
+        variables: {
+          fullName: companionData.fullName,
+          email: companionData.email,
+          personType: companionData.personType,
+          companionOwnerId: userId
+        }
       });
     }
 

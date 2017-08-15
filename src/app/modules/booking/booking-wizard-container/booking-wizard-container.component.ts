@@ -8,6 +8,8 @@ import {onStateChangeObservable} from '../../../utils/store';
 import {isComingAlone} from '../../../utils/user';
 import * as moment from 'moment';
 import {SearchPPCard} from '../../../actions/subscription';
+import {AddCompanion} from "../../../actions/user";
+
 const _today = moment();
 const _inthreemonths = _today.clone();
 _inthreemonths.add(3, 'months');
@@ -57,6 +59,12 @@ console.log(_inthreemonths);
           </div>
         </form>
       </div>
+      <app-companions-form [availableCompanions]="subscriptionCompanions" 
+                           [parent]="booking.get('companionsIds')"
+                           [entityKey]="'id'"
+                           (onAddCompanionSubmit)="addCompanion($event)"
+      >
+      </app-companions-form>
       
       <pre>
       {{ booking.value | json }}
@@ -85,11 +93,13 @@ export class BookingWizardContainerComponent implements OnInit {
   public subscriptionCompanions= [{
     id: '123',
     fullName: 'Emiliano Potignano',
-    type: 'Adult'
+    email: 'epotignano@gmail.com',
+    personType: 'Adult'
   }, {
     id: '3455',
     fullName: 'Ayrton Potignano',
-    type: 'Kid'
+    email: 'carlos@gmail.com',
+    personType: 'Kid'
   }];
   public departures$: Observable<any>;
   public activity$: Observable<any>;
@@ -196,5 +206,10 @@ export class BookingWizardContainerComponent implements OnInit {
     console.log('Event in form', $event);
     const _code = $event.value.code;
     this.store.dispatch(new SearchPPCard(_code));
+  }
+
+  addCompanion(comp) {
+    console.log(comp);
+    this.store.dispatch(new AddCompanion(comp));
   }
 }

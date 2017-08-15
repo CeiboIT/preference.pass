@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import * as moment from 'moment';
-import {FormGroup} from "@angular/forms";
+import {FormGroup} from '@angular/forms';
 function getDaysInMonth(year, month) {
   let daysInMonth;
   if (month < 10) {

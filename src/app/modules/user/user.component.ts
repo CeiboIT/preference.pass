@@ -17,10 +17,10 @@ import { Router } from '@angular/router';
 
                 <md-card class="menu mb-3">      
                     <ul>
-                        <li routerLinkActive="active"><a routerLink="/user/profile"><i class="fa fa-user"></i> Profile</a></li>
-                        <li routerLinkActive="active"><a routerLink="/user/bookings"><i class="fa fa-map-marker"></i> Bookings</a></li>
-                        <li routerLinkActive="active"><a routerLink="/user/subscriptions"><i class="fa fa-tag"></i> Subscriptions</a></li>
-                        <li routerLinkActive="active"><a routerLink="/user/companions"><i class="fa fa-users"></i> Companions</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/profile"><i class="fa fa-user"></i>Profile</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/bookings"><i class="fa fa-map-marker"></i>Bookings</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/subscriptions"><i class="fa fa-tag"></i>Subscriptions</a></li>
+                        <li routerLinkActive="active"><a routerLink="/user/companions"><i class="fa fa-users"></i>Companions</a></li>
                     </ul>
                 </md-card>
             </div>

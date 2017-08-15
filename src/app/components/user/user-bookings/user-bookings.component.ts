@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { resize } from '../../../constants/filestack';
 
 @Component({
 	selector: 'app-user-bookings',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 	<div class="bookigns">
 		<div class="booking" *ngFor="let booking of bookings">
 			<div class="booking-image mr-xl-4 mb-4 mb-xl-0">
-				<img [src]="booking?.mainPhoto?.url" alt="{{ booking?.name }}">
+				<img [src]="bookingPhoto(booking?.mainPhoto?.url)" alt="{{ booking?.name }}">
 			</div>
 			<div class="booking-content">
 				<h2 class="mt-0 mb-1">
@@ -33,4 +34,8 @@ export class UserBookingsComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() { }
+
+	bookingPhoto(url){
+		return resize(url, 500, 500);
+	}
 }

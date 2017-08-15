@@ -12,6 +12,7 @@ import {CompanionAmountModule} from '../../../components/forms/companion-amount/
 import {TotalSavingModule} from '../../../components/booking/total-saving/total-saving.module';
 import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
 import {CompanionsFormModule} from '../../../components/forms/companions-form/companions-form.module';
+import { BookingStep1Component } from './booking-step-1/booking-step-1.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import {CompanionsFormModule} from '../../../components/forms/companions-form/co
     DateSelectModule,
     CompanionsFormModule
   ],
-  declarations: [BookingWizardContainerComponent],
+  declarations: [BookingWizardContainerComponent, BookingStep1Component],
   exports: [BookingWizardContainerComponent]
 })
 export class BookingWizardContainerModule { }

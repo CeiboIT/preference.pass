@@ -8,95 +8,27 @@ import {onStateChangeObservable} from '../../../utils/store';
 import {isComingAlone} from '../../../utils/user';
 import * as moment from 'moment';
 import {SearchPPCard} from '../../../actions/subscription';
-import {AddCompanion} from "../../../actions/user";
+import {AddCompanion} from '../../../actions/user';
 
-const _today = moment();
-const _inthreemonths = _today.clone();
-_inthreemonths.add(3, 'months');
-console.log(_inthreemonths);
 @Component({
   selector: 'app-booking-wizard-container',
   template: `
     <div class="container-fluid py-5">
       <div class="row" *ngIf="step === 1">
-        <form class="col-8 offset-2" novalidate (ngSubmit)="onBookingSubmit($event)">
-          <div class="text-center">
-            <h1 class="saving">
-              {{ savingMessage }}
-              <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
-            </h1>
-          </div>
-          
-          
-          <md-card>
-            <md-card-content>
-              <h2>
-                How many people is coming with you?
-              </h2>
-              <app-companion-amount [parent]="booking"></app-companion-amount>
-            </md-card-content>
-          </md-card>
-          
-          <md-card class="mt-3">
-            <md-card-content>
-              <h2>
-                When do you wanna go to {{ activity?.name}}
-              </h2>
-              <app-date-select
-                [parent]="booking"
-                [parentKey]="'executionDate'"
-                [years]="years"
-                [initialDate]="today"
-                [limitDate]="limitDate"
-              >
-              </app-date-select>
-            </md-card-content>
-          </md-card>
-          
-          <md-card class="mt-3">
-            <md-card-content>
-              <app-pick-location-and-time-selection-form *ngIf="(departures$ | async)?.length"
-                                                         [parent]="booking"
-                                                         [departures]="departures$ | async "
-              >
-              </app-pick-location-and-time-selection-form>
-            </md-card-content>
-          </md-card>
-          
-
-          <div class="row">
-            <div class="col-12 text-center">
-              <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit">
-                Book&nbsp;now&nbsp;and&nbsp;save <app-total-saving 
-                [rate]="rate" 
-                [amountOfKids]="kidsAmount" 
-                [amountOfAdults]="adultsAmount">
-                
-              </app-total-saving>
-
-              </button>
-            </div>
-          </div>
-        </form>
+        <app-booking-step-1 
+          class="col-12"
+          [parent]="booking"
+          [activity]="activity$ | async "
+          [departures]="departures$ | async "
+          [rate]="rate"
+        >
+        </app-booking-step-1>
       </div>
     </div>
-  `,
-  styles: [
-    `
-      .saving {
-        color: green;
-      }
-      .button-success {
-        color: white;
-        background-color: green;
-      }
-    `
-  ]
+  `
 })
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
-  public today = _today;
-  public limitDate = _inthreemonths;
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
@@ -138,39 +70,9 @@ export class BookingWizardContainerComponent implements OnInit {
     });
   }
 
-  get years() {
-    const actualYear = new Date().getFullYear();
-    let _years = [actualYear];
-
-    if (_inthreemonths.year() !== actualYear) {
-      _years.push(_inthreemonths.year());
-    }
-    return _years;
-  }
-
-  get kidsAmount() {
-    return this.booking.get('kidsAmount').value;
-  }
-
-  get adultsAmount() {
-    return this.booking.get('adultsAmount').value +  1;
-  }
-
-  get isComingAlone() {
-     return isComingAlone(this.user);
-  }
-
   get rate() {
     if (this.activity &&  this.activity.rates && this.activity.rates.length === 1) {
       return this.activity.rates[0];
-    }
-  }
-
-  get savingMessage() {
-    if (!this.booking.get('adultsAmount').value && !this.booking.get('kidsAmount').value)  {
-      return 'Booking alone you are saving';
-    } else {
-      return 'Booking you are saving';
     }
   }
 

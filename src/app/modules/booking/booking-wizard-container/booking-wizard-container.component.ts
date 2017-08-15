@@ -17,62 +17,68 @@ console.log(_inthreemonths);
 @Component({
   selector: 'app-booking-wizard-container',
   template: `
-    <div class="container-fluid">
-      <div class="row">
-        <form class="col-10" novalidate (ngSubmit)="onBookingSubmit($event)">
-          <div>
-            <h2 class="saving">
+    <div class="container-fluid py-5">
+      <div class="row" *ngIf="step === 1">
+        <form class="col-8 offset-2" novalidate (ngSubmit)="onBookingSubmit($event)">
+          <div class="text-center">
+            <h1 class="saving">
               {{ savingMessage }}
               <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
-            </h2>
-          </div>
-          <div>
-            <h2>
-              How many people is coming with you?
-            </h2>
-            <app-companion-amount [parent]="booking"></app-companion-amount>  
+            </h1>
           </div>
           
-          <div>
-            <h2>
-              When do you wanna go to {{ activity?.name}}
-            </h2>
-            <app-date-select
-              [parent]="booking"
-              [parentKey]="'executionDate'"
-              [years]="years"
-              [initialDate]="today"
-              [limitDate]="limitDate"
-            >
-            </app-date-select>
-          </div>
           
-          <app-pick-location-and-time-selection-form *ngIf="(departures$ | async)?.length"
-            [parent]="booking"
-            [departures]="departures$ | async "
-          >
-          </app-pick-location-and-time-selection-form>
-          <div class="col-12">
-            <button md-raised-button color="primary" type="submit">
-              Book now
-            </button>            
+          <md-card>
+            <md-card-content>
+              <h2>
+                How many people is coming with you?
+              </h2>
+              <app-companion-amount [parent]="booking"></app-companion-amount>
+            </md-card-content>
+          </md-card>
+          
+          <md-card class="mt-3">
+            <md-card-content>
+              <h2>
+                When do you wanna go to {{ activity?.name}}
+              </h2>
+              <app-date-select
+                [parent]="booking"
+                [parentKey]="'executionDate'"
+                [years]="years"
+                [initialDate]="today"
+                [limitDate]="limitDate"
+              >
+              </app-date-select>
+            </md-card-content>
+          </md-card>
+          
+          <md-card class="mt-3">
+            <md-card-content>
+              <app-pick-location-and-time-selection-form *ngIf="(departures$ | async)?.length"
+                                                         [parent]="booking"
+                                                         [departures]="departures$ | async "
+              >
+              </app-pick-location-and-time-selection-form>
+            </md-card-content>
+          </md-card>
+          
+
+          <div class="row">
+            <div class="col-12 text-center">
+              <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit">
+                Book&nbsp;now&nbsp;and&nbsp;save <app-total-saving 
+                [rate]="rate" 
+                [amountOfKids]="kidsAmount" 
+                [amountOfAdults]="adultsAmount">
+                
+              </app-total-saving>
+
+              </button>
+            </div>
           </div>
         </form>
       </div>
-      <app-companions-form [availableCompanions]="subscriptionCompanions" 
-                           [parent]="booking.get('companionsIds')"
-                           [entityKey]="'id'"
-                           (onAddCompanionSubmit)="addCompanion($event)"
-      >
-      </app-companions-form>
-      
-      <pre>
-      {{ booking.value | json }}
-      <h2>
-        Companion
-      </h2>
-      {{ companion.value | json }}
-      </pre>
     </div>
   `,
   styles: [
@@ -80,37 +86,24 @@ console.log(_inthreemonths);
       .saving {
         color: green;
       }
+      .button-success {
+        color: white;
+        background-color: green;
+      }
     `
   ]
 })
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
-  public companion;
-  public card;
-  public subscription;
   public today = _today;
   public limitDate = _inthreemonths;
-  public
-  public subscriptionCompanions= [{
-    id: '123',
-    fullName: 'Emiliano Potignano',
-    email: 'epotignano@gmail.com',
-    personType: 'Adult'
-  }, {
-    id: '3455',
-    fullName: 'Ayrton Potignano',
-    email: 'carlos@gmail.com',
-    personType: 'Kid'
-  }];
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
   public user;
   public departures;
   public activity;
-  public subscriptionValidity;
-  public subscriptionKids;
-  public subscriptionAdults;
+  public step = 1;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -125,23 +118,10 @@ export class BookingWizardContainerComponent implements OnInit {
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.activity$ = onStateChangeObservable(this.store, 'activities.selectedActivity');
-    this.companion = this.fb.group({
-      fullName: [''],
-      email: [''],
-      type: ['']
-    });
 
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
-    this.user$.subscribe((user) => {
-      if (user && user.id && user.subscription) {
-        this.subscriptionCompanions = user.subscription.companions;
-        this.subscriptionValidity = moment(user.subscription.validity);
-        this.subscriptionKids =  user.subscription.kids;
-        this.subscriptionAdults =  user.subscription.adults;
-      }
-    });
 
     this.activity$.subscribe(activity => this.activity = activity);
   }
@@ -188,9 +168,9 @@ export class BookingWizardContainerComponent implements OnInit {
 
   get savingMessage() {
     if (!this.booking.get('adultsAmount').value && !this.booking.get('kidsAmount').value)  {
-      return 'Coming alone you are saving';
+      return 'Booking alone you are saving';
     } else {
-      return 'You are saving';
+      return 'Booking you are saving';
     }
   }
 

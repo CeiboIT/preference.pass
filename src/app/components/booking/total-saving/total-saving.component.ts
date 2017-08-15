@@ -7,7 +7,7 @@ import { Component, OnInit, Input} from '@angular/core';
   selector: 'app-total-saving',
   template: `
     <span>
-      {{ savings }}
+      {{ rate.currency }} {{ savings }}
     </span>
   `
 })

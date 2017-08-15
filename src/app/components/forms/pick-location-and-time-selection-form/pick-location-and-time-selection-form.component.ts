@@ -29,9 +29,10 @@ function generateDepartureTimes(departures) {
   template: `
     <div class="row">
       <div class="col-12">
-        <h1>Select your departure location</h1>
+        <h2>Select your departure location</h2>
       </div>
-        <md-input-container>
+      <div class="col-12">
+        <md-input-container class="w-100">
           <input mdInput placeholder="Departure location" [mdAutocomplete]="auto" [formControl]="departuresCtrl">
         </md-input-container>
         <md-autocomplete #auto="mdAutocomplete">
@@ -40,17 +41,17 @@ function generateDepartureTimes(departures) {
             {{ departure.name }}
           </md-option>
         </md-autocomplete>
-        <div>
-          <h1>
-            Select departure time
-          </h1>
-          <div class="row">
-            
-          </div>
-          <app-pickup-time-element [time]="time" *ngFor="let time of times"
-            (onTimeSelected)="onTimeSelected($event)"
-          ></app-pickup-time-element>
+      </div>
+      <div class="col-12" *ngIf="times && times.length">
+        <h2>
+          Select departure time
+        </h2>
+        <div class="col-12">
+          <app-pickup-time-list [times]="times"  
+          (onTimeSelected)="onTimeSelected($event)">
+          </app-pickup-time-list>
         </div>
+      </div>
     </div>
   `,
 })

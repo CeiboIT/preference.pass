@@ -5,7 +5,6 @@ import * as userActions from '../../actions/user';
 import { Store } from '@ngrx/store';
 import { trigger,style,transition,animate,query,stagger } from '@angular/animations';
 declare const LocalStorage: any;
-// import { lastVisitedUrl } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-token',

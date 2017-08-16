@@ -4,8 +4,7 @@ import gql from 'graphql-tag';
 import {User} from '../models/user';
 import {Store} from '@ngrx/store';
 import {OpenOnBoarding} from '../actions/layout';
-import {hasPreferencePassCard, hasSubscription, isSubscriptionValid} from "../utils/user";
-
+import {hasSubscription, isSubscriptionValid} from '../utils/user';
 
 interface ModalCallOptions {
   onErrorRedirect?: string;

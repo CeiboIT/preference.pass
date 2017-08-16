@@ -112,6 +112,9 @@ export class ActivitiesQueries {
           id
           name
           mainPhoto
+          lng
+          lat
+          formattedAddress
           departures {
             times
           }

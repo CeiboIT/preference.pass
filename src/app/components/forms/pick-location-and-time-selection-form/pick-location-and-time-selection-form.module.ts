@@ -5,7 +5,7 @@ import {ActivityDeparturesModule} from '../../activities/activity-departures/act
 import {PickupLocationCardModule} from '../../widgets/pickup-location-card/pickup-location-card.module';
 import {MdAutocompleteModule, MdCardModule, MdInputModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { PickupTimeElementComponent } from './pickup-time-element/pickup-time-element.component';
+import {PickupTimeListModule} from './pickup-time-list/pickup-time-list.module';
 
 @NgModule({
   imports: [
@@ -15,9 +15,11 @@ import { PickupTimeElementComponent } from './pickup-time-element/pickup-time-el
     MdAutocompleteModule,
     MdInputModule,
     MdCardModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    PickupTimeListModule
   ],
-  declarations: [PickLocationAndTimeSelectionFormComponent, PickupTimeElementComponent],
+  declarations: [PickLocationAndTimeSelectionFormComponent],
   exports: [PickLocationAndTimeSelectionFormComponent]
 })
 export class PickLocationAndTimeSelectionFormModule { }

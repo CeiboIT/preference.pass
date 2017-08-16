@@ -3,7 +3,9 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 @Component({
   selector: 'app-pickup-time-element',
   template: `
-    <md-card (click)="selectedTime()" class="row text-center">
+    <md-card
+      [ngClass]="{'active': selectedTime === time }"
+      (click)="onSelected()" class="row text-center">
       <md-card-content>
         <h1 class="col-12">
           {{ time }}
@@ -14,10 +16,12 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 })
 export class PickupTimeElementComponent implements OnInit {
   @Input() time;
+  @Input() selectedTime;
   @Output() onTimeSelected: EventEmitter<any> = new EventEmitter();
   constructor() { }
   ngOnInit() { }
-  selectedTime() {
+
+  onSelected() {
     this.onTimeSelected.emit(this.time);
   }
 }

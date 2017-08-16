@@ -5,7 +5,7 @@ import {FormGroup} from '@angular/forms';
   selector: 'app-amount-input',
   template: `
     <div [formGroup]="parent">
-      <button md-icon-button color="primary" (click)="clickOnRemove.emit()">
+      <button md-icon-button color="primary" type="button" (click)="clickOnRemove.emit()">
         <md-icon>
           remove
         </md-icon>
@@ -13,7 +13,7 @@ import {FormGroup} from '@angular/forms';
       <md-input-container>
         <input mdInput type="number" [placeholder]="placeholder" value="0" [formControlName]="parentKey">
       </md-input-container>
-      <button md-icon-button color="primary" (click)="clickOnAdd.emit()">
+      <button md-icon-button type="button" color="primary" (click)="clickOnAdd.emit()">
         <md-icon>
           add
         </md-icon>

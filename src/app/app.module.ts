@@ -31,6 +31,7 @@ import 'hammerjs';
 import {AuthGuard} from './auth.guard';
 import {OnboardingModalModule} from './components/widgets/onboarding-modal/onboarding-modal.module';
 import {OnboardingModalComponent} from './components/widgets/onboarding-modal/onboarding-modal.component';
+import {BookingEffects} from './effects/booking';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -64,6 +65,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     EffectsModule.run(AuthEffects),
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
+    EffectsModule.run(BookingEffects),
     ToolbarModule,
     FooterModule,
     PhotoswipeModule,

@@ -60,10 +60,6 @@ import {Component, Input, OnInit} from '@angular/core';
             </agm-map>
         </div>
       </div>
-      
-      <div class="col-12">
-
-      </div>
     </div>
   
   `,

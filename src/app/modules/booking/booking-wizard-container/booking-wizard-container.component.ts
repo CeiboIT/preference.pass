@@ -5,24 +5,11 @@ import {GetDepartures, GetDetail} from '../../../actions/activities';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
-import {isComingAlone} from '../../../utils/user';
-import * as moment from 'moment';
+import { BookingStep1 } from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
-import {AddCompanion} from '../../../actions/user';
 
 @Component({
   selector: 'app-booking-wizard-container',
-  styles: [
-    `
-      .saving {
-        color: green;
-      }
-      .button-success {
-        color: white;
-        background-color: green;
-      }
-    `
-  ],
   template: `
     <div class="container-fluid py-5">
       <div class="row" *ngIf="step === 1">
@@ -65,7 +52,18 @@ import {AddCompanion} from '../../../actions/user';
         </app-booking-step-2>
       </div>
     </div>
-  `
+  `,
+  styles: [
+    `
+      .saving {
+        color: green;
+      }
+      .button-success {
+        color: white;
+        background-color: green;
+      }
+    `
+  ]
 })
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
@@ -125,7 +123,8 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   step2Success($event) {
-
+    console.log($event);
+    this.store.dispatch(new BookingStep1($event));
   }
 
   get savingMessage() {

@@ -13,6 +13,8 @@ import {TotalSavingModule} from '../../../components/booking/total-saving/total-
 import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
 import {CompanionsFormModule} from '../../../components/forms/companions-form/companions-form.module';
 import { BookingStep1Component } from './booking-step-1/booking-step-1.component';
+import { BookingStep2Component } from './booking-step-2/booking-step-2.component';
+import {BookingPreviewModule} from "../../../components/booking/booking-preview/booking-preview.module";
 
 @NgModule({
   imports: [
@@ -29,9 +31,10 @@ import { BookingStep1Component } from './booking-step-1/booking-step-1.component
     FormsModule,
     ReactiveFormsModule,
     DateSelectModule,
-    CompanionsFormModule
+    CompanionsFormModule,
+    BookingPreviewModule
   ],
-  declarations: [BookingWizardContainerComponent, BookingStep1Component],
+  declarations: [BookingWizardContainerComponent, BookingStep1Component, BookingStep2Component],
   exports: [BookingWizardContainerComponent]
 })
 export class BookingWizardContainerModule { }

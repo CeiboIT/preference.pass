@@ -12,17 +12,57 @@ import {AddCompanion} from '../../../actions/user';
 
 @Component({
   selector: 'app-booking-wizard-container',
+  styles: [
+    `
+      .saving {
+        color: green;
+      }
+      .button-success {
+        color: white;
+        background-color: green;
+      }
+    `
+  ],
   template: `
     <div class="container-fluid py-5">
       <div class="row" *ngIf="step === 1">
-        <app-booking-step-1 
+        <div class="col-md-8 offset-md-2">
+          <app-booking-step-1
+            class="col-12"
+            [parent]="booking"
+            [activity]="activity$ | async "
+            [departures]="departures$ | async "
+            [rate]="rate"
+            (onSubmit)="onStep1Submit($event)"
+          >
+          </app-booking-step-1>
+        </div>
+      </div>
+      
+      <div class="col-md-8 offset-md-2" *ngIf="step === 2">
+        <div class="col-12">
+          <button md-button color="primary" type="button" (click)="changeToStep(1)">
+            Back
+          </button>
+          <h1 class="saving text-center">
+            {{ savingMessage }}
+            <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
+          </h1>
+          
+        </div>        
+        
+        <h2 class="col-12 text-center">
+          Details
+        </h2>
+        <app-booking-step-2
           class="col-12"
-          [parent]="booking"
+          [booking]="booking.value"
           [activity]="activity$ | async "
           [departures]="departures$ | async "
           [rate]="rate"
+          (onSuccess)="step2Success($event)"
         >
-        </app-booking-step-1>
+        </app-booking-step-2>
       </div>
     </div>
   `
@@ -70,28 +110,56 @@ export class BookingWizardContainerComponent implements OnInit {
     });
   }
 
+  get kidsAmount() {
+    return this.booking.get('kidsAmount').value;
+  }
+
+  get adultsAmount() {
+    return this.booking.get('adultsAmount').value +  1;
+  }
+
   get rate() {
     if (this.activity &&  this.activity.rates && this.activity.rates.length === 1) {
       return this.activity.rates[0];
     }
   }
 
-  onBookingSubmit(e) {
+  step2Success($event) {
+
+  }
+
+  get savingMessage() {
+    if (!this.booking.get('adultsAmount').value && !this.booking.get('kidsAmount').value)  {
+      return 'Booking alone you are saving';
+    } else {
+      return 'Booking you are saving';
+    }
+  }
+
+  onStep1Submit(e) {
     e.preventDefault();
     let _booking = this.booking.value;
     _booking.activitiyId = this.activity.id;
     _booking.owner = this.user.id;
-    console.log(_booking);
+    const _rate = this.rate;
+    _booking.rate = {
+      currency: _rate.currency,
+      discountPrice: _rate.discountPrice,
+      name: _rate.name
+    };
+
+    console.log('Booking data so far', _booking);
+    localStorage.setItem('booking', _booking);
+    this.changeToStep(2);
   }
+
+  changeToStep = (step) => {
+    this.step = step;
+  };
 
   onCardFormValid($event) {
     console.log('Event in form', $event);
     const _code = $event.value.code;
     this.store.dispatch(new SearchPPCard(_code));
-  }
-
-  addCompanion(comp) {
-    console.log(comp);
-    this.store.dispatch(new AddCompanion(comp));
   }
 }

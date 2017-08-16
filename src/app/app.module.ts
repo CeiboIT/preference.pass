@@ -32,7 +32,6 @@ import {AuthGuard} from './auth.guard';
 import {OnboardingModalModule} from './components/widgets/onboarding-modal/onboarding-modal.module';
 import {OnboardingModalComponent} from './components/widgets/onboarding-modal/onboarding-modal.component';
 
-
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
   slidesPerView: 'auto',
@@ -41,7 +40,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

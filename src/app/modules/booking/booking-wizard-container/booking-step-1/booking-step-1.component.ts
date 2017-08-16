@@ -1,7 +1,6 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import * as moment from 'moment';
-import {OutputDef} from "@angular/core/src/view";
 
 const _today = moment();
 const _inthreemonths = _today.clone();
@@ -11,7 +10,7 @@ _inthreemonths.add(3, 'months');
   selector: 'app-booking-step-1',
   template: `
     <div class="row">
-      <form class="col-8 offset-2" novalidate (ngSubmit)="onStep1Submit($event)">
+      <form class="col-12" novalidate (ngSubmit)="onStep1Submit($event)">
         <div class="text-center">
           <h1 class="saving">
             {{ savingMessage }}
@@ -43,9 +42,9 @@ _inthreemonths.add(3, 'months');
           </md-card-content>
         </md-card>
 
-        <md-card class="mt-3">
+        <md-card class="mt-3" *ngIf="departures?.length">
           <md-card-content>
-            <app-pick-location-and-time-selection-form *ngIf="departures?.length"
+            <app-pick-location-and-time-selection-form
                                                        [parent]="parent"
                                                        [departures]="departures"
             >
@@ -57,7 +56,7 @@ _inthreemonths.add(3, 'months');
         <div class="row">
           <div class="col-12 text-center">
             <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit">
-              Book&nbsp;now&nbsp;and&nbsp;save <app-total-saving
+              Continue&nbsp;and&nbsp;save <app-total-saving
               [rate]="rate"
               [amountOfKids]="kidsAmount"
               [amountOfAdults]="adultsAmount">
@@ -87,7 +86,7 @@ export class BookingStep1Component implements OnInit {
   @Input() departures;
   @Input() rate;
   @Input() activity;
-  @Output()
+  @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
   public today = _today;
   public limitDate = _inthreemonths;
@@ -114,8 +113,8 @@ export class BookingStep1Component implements OnInit {
     return this.parent.get('adultsAmount').value +  1;
   }
 
-  onStep1Submit() {
-
+  onStep1Submit($event) {
+    this.onSubmit.emit($event);
   }
 
 

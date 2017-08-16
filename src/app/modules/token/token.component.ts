@@ -42,15 +42,10 @@ export class TokenComponent {
       this.authService.parseHash()
         .then((result) => {
           localStorage.removeItem('logout');
-
           this.router.navigate(['']);
-          setTimeout(function () {
-            location.reload();
-          }, 300);
-
         }).catch((error) => {
-        console.log(error);
-        this.router.navigate(['error']);
+          console.log(error);
+          this.router.navigate(['error']);
       });
     });
   }

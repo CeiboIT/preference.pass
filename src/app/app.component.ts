@@ -16,12 +16,12 @@ import { UserService } from './services/user.service';
 export class AppComponent implements OnInit {
   public user$: Observable<any>;
   constructor(private router: Router, private store: Store<any>, private userService: UserService) {
-    this.router.events.subscribe((evt) => {
-      if (!(evt instanceof NavigationEnd)) {
-          return;
-      }
-      window.scrollTo(0, 0);
-  });
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        window.scrollTo(0, 0);
+      });
   }
 
   ngOnInit() {

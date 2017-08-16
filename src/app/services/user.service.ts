@@ -16,6 +16,8 @@ interface ModalCallOptions {
 export class UserService {
   constructor(private client: Apollo, private store: Store<any>) { }
   createUser(userData: User) {
+    console.warn('createUser ',userData);
+
     const _createUser =  gql`
       mutation userCreation(
         $email: String!,
@@ -52,7 +54,6 @@ export class UserService {
 
   getCurrentUser() {
     const _now = new Date().toISOString();
-
     const GET_CURRENT_USER = gql`
         query GetCurrentUser($now: DateTime!) {
           user {
@@ -99,7 +100,9 @@ export class UserService {
         query: GET_CURRENT_USER,
         variables: {
           now: _now
-        }
+        },
+        fetchPolicy: "network-only"
+
       });
   }
 
@@ -208,6 +211,24 @@ export class UserService {
       if (cb) {
         cb(goToNext);
       }
+    }
+
+    authenticateUser(idToken, accessToken) {
+      const AUTHENTICATE_USER = gql`
+        mutation authenticateAuth0User($idToken: String!, $accessToken: String!) {
+          authenticateAuth0User(idToken: $idToken, accessToken: $accessToken) {
+            token
+          }
+        }
+      `;
+
+      return this.client.mutate({
+        mutation: AUTHENTICATE_USER,
+        variables: {
+          idToken: idToken,
+          accessToken: accessToken
+        }
+      });
     }
 
 }

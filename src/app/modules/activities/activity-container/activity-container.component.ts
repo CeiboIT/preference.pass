@@ -45,7 +45,6 @@ export class ActivityContainerComponent implements OnInit {
 
   bookNow($event) {
     console.log('Booking now');
-    console.warn(this.activity);
     this.userService.checkUserCompletion(this.user, (goToNext) => {
       if (goToNext) {
         this.router.navigate(['booking/wizard/' + this.activity.id]);

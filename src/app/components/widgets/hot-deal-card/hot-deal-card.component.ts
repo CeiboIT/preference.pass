@@ -44,7 +44,7 @@ export class HotDealCardComponent implements OnInit {
       _img = this.hotDeal.activity.mainPhoto.url;
     }
     
-    return resize(_img, 300, 300);
+    return resize(_img, 600, 600);
   }
 
   // get imageLarge (){

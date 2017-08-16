@@ -28,7 +28,7 @@ import { FooterModule } from './components/navigation/footer/footer.module';
 import { PhotoswipeModule } from './components/navigation/photoswipe/photoshipe.module';
 import { UserEffects } from './effects/user';
 import 'hammerjs';
-import {AuthGuard} from './auth.guard';
+import { AuthGuard } from './auth.guard';
 import { OnboardingModalModule } from './components/widgets/onboarding-modal/onboarding-modal.module';
 import { OnboardingModalComponent } from './components/widgets/onboarding-modal/onboarding-modal.component';
 

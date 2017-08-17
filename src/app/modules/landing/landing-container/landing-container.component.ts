@@ -45,6 +45,10 @@ import { Store } from '@ngrx/store';
   `,
   styles: [ `
 
+    .landing-container {
+      background-color: white;
+    }
+
     .title {
         padding: 0 60px;
     }

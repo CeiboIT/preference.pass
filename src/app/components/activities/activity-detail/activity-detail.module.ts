@@ -8,6 +8,7 @@ import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
 import { PriceDisplayerComponent } from './price-displayer/price-displayer.component';
 import { RateComponent } from './rate/rate.component';
 import { ActivitySavingModule } from '../activity-saving/activity-saving.module';
+import { LocationMapModule } from "../../widgets/location-map/location-map.module";
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ActivitySavingModule } from '../activity-saving/activity-saving.module'
     AgmCoreModule,
     ActivitySavingModule,
     FroalaViewModule,
+    LocationMapModule,
     MdButtonModule,
     MdCardModule
   ],

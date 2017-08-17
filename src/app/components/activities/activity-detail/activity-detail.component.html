@@ -46,9 +46,7 @@
                 {{ activity.description }}
             </md-card>
             <md-card class="mb-3">
-                <agm-map [latitude]="activity.lat" [longitude]="activity.lng">
-                    <agm-marker [latitude]="activity.lat" [longitude]="activity.lng"></agm-marker>
-                </agm-map>
+                <app-location-map [location]="activity"></app-location-map>
             </md-card>
         </div>
         <div class="col-sm-5 fadeUp">

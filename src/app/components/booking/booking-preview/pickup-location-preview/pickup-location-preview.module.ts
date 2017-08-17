@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AgmCoreModule} from '@agm/core';
-import {PickupLocationPreviewComponent} from './pickup-location-preview.component';
-import {MdCardModule} from '@angular/material';
+import { AgmCoreModule } from '@agm/core';
+import { PickupLocationPreviewComponent } from './pickup-location-preview.component';
+import { MdCardModule } from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -12,4 +13,5 @@ import {MdCardModule} from '@angular/material';
   declarations: [PickupLocationPreviewComponent],
   exports: [PickupLocationPreviewComponent]
 })
+
 export class PickupLocationPreviewModule { }

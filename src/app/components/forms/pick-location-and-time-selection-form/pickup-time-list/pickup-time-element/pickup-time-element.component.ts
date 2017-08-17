@@ -12,7 +12,14 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
         </h1>
       </md-card-content>
     </md-card>
-  `
+  `,
+  styles: [
+    `
+      :host {
+        cursor: pointer;
+      }
+    `
+  ]
 })
 export class PickupTimeElementComponent implements OnInit {
   @Input() time;

@@ -5,7 +5,7 @@ import {GetDepartures, GetDetail} from '../../../actions/activities';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
-import { BookingStep1 } from '../../../actions/booking';
+import { BookingStep1, MoveToStep } from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
 
 @Component({
@@ -54,10 +54,11 @@ import {SearchPPCard} from '../../../actions/subscription';
         </div>
       </div>
       
-      <div *ngIf="bookingStep === 'Subscription'">
+      <div *ngIf="bookingStep === 'Subscription'" class="col-md-8 offset-md-2">
         <app-subscription-wizard
           [kidsAmount]="booking.value.kidsAmount"
           [adultsAmount]="booking.value.adultsAmount"
+          [startsAt]="booking.value.executionDate"
           (subscriptionSuccess)="onSubscriptionSuccess($event)"
           (subscriptionError)="onSubscriptionError($event)"
         >
@@ -144,7 +145,8 @@ export class BookingWizardContainerComponent implements OnInit {
   step2Success($event) {
     console.log($event);
     console.log('Booking so far: ', $event);
-    this.store.dispatch(new BookingStep1($event));
+    //this.store.dispatch(new BookingStep1($event));
+    this.store.dispatch(new MoveToStep({ step:'Subscription' }));
   }
 
   get savingMessage() {

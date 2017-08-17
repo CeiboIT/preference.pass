@@ -12,6 +12,7 @@ import {DiscountCodeFormModule} from '../../../components/forms/discount-code-fo
 import { SubscriptionStep1Component } from './subscription-step-1/subscription-step-1.component';
 import { SubscriptionStep2Component } from './subscription-step-2/subscription-step-2.component';
 import { SubscriptionStep3Component } from './subscription-step-3/subscription-step-3.component';
+import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SubscriptionStep3Component } from './subscription-step-3/subscription-s
     DiscountCodeFormModule,
     PaymentsComponentsModule,
     MdButtonModule,
-    MdCardModule
+    MdCardModule,
+    DateSelectModule
   ],
   declarations: [
     SubscriptionWizardComponent,

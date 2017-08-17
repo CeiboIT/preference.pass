@@ -87,24 +87,13 @@ export class DateSelectComponent implements OnInit {
   }
 
   tryToSetDate() {
-
     const dateVal = this.dateGroup.value;
-
     if (dateVal.month && dateVal.year && dateVal.day) {
-      let _day;
-      let _month;
-      if (dateVal.day <= 10) {
-        _day = '0' + dateVal.day;
-      } else {
-        _day = dateVal.day;
-      }
-      if (dateVal.month <= 10) {
-        _month = '0' + dateVal.month;
-      } else {
-        _month = dateVal.month;
-      }
-      this.date = moment('' + dateVal.year + _month + _day, 'YYYYMMDD').toISOString();
-      this.parent.get(this.parentKey).setValue(this.date);
+      this.date = moment().set(
+        {'year': dateVal.year, 'month': dateVal.month, 'date': dateVal.day
+      });
+      console.log(this.date);
+      this.parent.get(this.parentKey).setValue(this.date.toISOString());
     }
   }
 

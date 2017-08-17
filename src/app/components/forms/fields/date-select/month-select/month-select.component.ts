@@ -22,13 +22,15 @@ export class MonthSelectComponent implements OnInit {
   @Input() month;
   @Input() parent: FormGroup;
   @Input() limitDate;
+  @Input() initialDate;
   public months;
   constructor() { }
   ngOnInit() {
     if (!this.limitDate) {
-      this.months =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      this.months =  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     } else {
       const _limit = moment(this.limitDate);
+      console.log(_today);
       this.months = this.generateMonths(_today.month(), _limit.month());
     }
   }
@@ -45,6 +47,6 @@ export class MonthSelectComponent implements OnInit {
     this.monthSelected.emit($event.value);
   }
   displayMonth(month) {
-    return moment().month(month - 1).format('MMMM');;
+    return moment().month(month).format('MMMM');
   }
 }

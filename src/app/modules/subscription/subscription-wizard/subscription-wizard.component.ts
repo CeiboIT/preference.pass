@@ -5,7 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
 import { stripeKey } from '../../../constants/stripe';
-
+import * as moment from 'moment';
+const _today = moment();
+const _inthreemonths = _today.clone();
+_inthreemonths.add(3, 'months');
 interface DiscountValidationResponse {
   err?: any;
   valid?: boolean;
@@ -37,7 +40,13 @@ interface DiscountValidationResponse {
             </button>   
           </div>
           <div>
+            <h2>
+              How many companions do you want to add to your subscription?
+            </h2>
             <app-companion-amount [parent]="paymentRequest"></app-companion-amount>
+            <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"
+              [initialDate]="startsAt" [limitDate]="limitDate"
+            ></app-date-select>
           </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
@@ -101,6 +110,8 @@ export class SubscriptionWizardComponent implements OnInit {
   @Output() onDiscountFormValid: EventEmitter<any> = new EventEmitter();
   @Input() kidsAmount;
   @Input() adultsAmount;
+  @Input() startsAt = _today;
+  public limitDate = _inthreemonths;
 
   public subscription$: Observable<any>;
   public paymentRequest;
@@ -135,6 +146,7 @@ export class SubscriptionWizardComponent implements OnInit {
     this.paymentRequest = this.fb.group({
       kidsAmount: [this.kidsAmount || ''],
       adultsAmount: [this.adultsAmount || ''],
+      startsAt: [this.startsAt || ''],
       isComingAlone: [false],
       plan: [''],
       cardToken: ['']
@@ -148,7 +160,7 @@ export class SubscriptionWizardComponent implements OnInit {
     });
 
     this.paymentRequest.valueChanges.subscribe(data => {
-      if(data.plan) {
+      if (data.plan) {
         this.calculateTotalToPay();
       }
     });

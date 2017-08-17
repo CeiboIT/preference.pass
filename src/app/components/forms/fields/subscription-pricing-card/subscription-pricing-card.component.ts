@@ -30,10 +30,10 @@ import { FormGroup } from '@angular/forms';
   `,
   styles: [
     `
-      md-card.active {
+      /*md-card.active {
         border: 1px solid #03a9f4;
         box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-      }
+      }*/
 
       .mat-card-image {
         background: #03a9f4;

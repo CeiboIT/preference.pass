@@ -30,7 +30,15 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
       .button-success {
         color: white;
         background-color: green;
-      }`
+        font-size: 1.6em;
+      }
+      
+      @media (max-width: 767px) {
+        .button-success {
+          font-size: 1.1em;
+        }
+      }
+      `
   ]
 })
 export class BookingStep2Component implements OnInit {

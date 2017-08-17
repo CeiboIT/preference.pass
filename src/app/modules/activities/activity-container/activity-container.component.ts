@@ -7,7 +7,8 @@ import { GetDetail } from '../../../actions/activities';
 import { onStateChangeObservable } from '../../../utils/store';
 import 'rxjs/add/operator/switchMap';
 import { isSubscriptionValid } from '../../../utils/user';
-import {UserService} from "../../../services/user.service";
+import {UserService} from '../../../services/user.service';
+import {MoveToStep} from '../../../actions/booking';
 @Component({
   selector: 'app-activity-container',
   template: `
@@ -54,6 +55,8 @@ export class ActivityContainerComponent implements OnInit {
 
   onRateSelected($event) {
     console.log('Rate selected on Container', $event);
+    this.store.dispatch(new MoveToStep({step: 'Details'}));
+
     /*if (!isSubscriptionValid(this.user)) {
       this.router.navigate(['subscription/wizard']);
     }*/

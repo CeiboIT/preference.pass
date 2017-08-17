@@ -88,18 +88,20 @@ export class BookingService {
         user {
           subscriptions(filter: {
             validity_gt: $bookingDate,
-            startAt_lt: $bookingDate
+            startsAt_lt: $bookingDate
           }) {
             id
             kids
             adults
             isComingAlone
           }
+          
+          id
         }
       }
     `;
 
-      return this.client.query({
+      return this.client.watchQuery({
         query: GET_SUBSCRIPTIONS,
         variables: {
           bookingDate: bookingDate

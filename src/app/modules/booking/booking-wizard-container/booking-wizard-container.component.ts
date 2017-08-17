@@ -12,44 +12,56 @@ import {SearchPPCard} from '../../../actions/subscription';
   selector: 'app-booking-wizard-container',
   template: `
     <div class="container-fluid py-5">
-      <div class="row" *ngIf="step === 1">
-        <div class="col-md-8 offset-md-2">
-          <app-booking-step-1
+      <div *ngIf=" bookingStep === 'Details'">
+        <div class="row" *ngIf="step === 1">
+          <div class="col-md-8 offset-md-2">
+            <app-booking-step-1
+              class="col-12"
+              [parent]="booking"
+              [activity]="activity$ | async "
+              [departures]="departures$ | async "
+              [rate]="rate"
+              (onSubmit)="onStep1Submit($event)"
+            >
+            </app-booking-step-1>
+          </div>
+        </div>
+
+        <div class="col-md-8 offset-md-2" *ngIf="step === 2">
+          <div class="col-12">
+            <button md-button color="primary" type="button" (click)="changeToStep(1)">
+              Back
+            </button>
+            <h1 class="saving text-center">
+              {{ savingMessage }}
+              <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
+            </h1>
+
+          </div>
+
+          <h2 class="col-12 text-center">
+            Details
+          </h2>
+          <app-booking-step-2
             class="col-12"
-            [parent]="booking"
+            [booking]="booking.value"
             [activity]="activity$ | async "
             [departures]="departures$ | async "
             [rate]="rate"
-            (onSubmit)="onStep1Submit($event)"
+            (onSuccess)="step2Success($event)"
           >
-          </app-booking-step-1>
+          </app-booking-step-2>
         </div>
       </div>
       
-      <div class="col-md-8 offset-md-2" *ngIf="step === 2">
-        <div class="col-12">
-          <button md-button color="primary" type="button" (click)="changeToStep(1)">
-            Back
-          </button>
-          <h1 class="saving text-center">
-            {{ savingMessage }}
-            <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
-          </h1>
-          
-        </div>        
-        
-        <h2 class="col-12 text-center">
-          Details
-        </h2>
-        <app-booking-step-2
-          class="col-12"
-          [booking]="booking.value"
-          [activity]="activity$ | async "
-          [departures]="departures$ | async "
-          [rate]="rate"
-          (onSuccess)="step2Success($event)"
+      <div *ngIf="bookingStep === 'Subscription'">
+        <app-subscription-wizard
+          [kidsAmount]="booking.value.kidsAmount"
+          [adultsAmount]="booking.value.adultsAmount"
+          (subscriptionSuccess)="onSubscriptionSuccess($event)"
+          (subscriptionError)="onSubscriptionError($event)"
         >
-        </app-booking-step-2>
+        </app-subscription-wizard>
       </div>
     </div>
   `,
@@ -70,10 +82,12 @@ export class BookingWizardContainerComponent implements OnInit {
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
+  public bookingStep$: Observable<any>;
   public user;
   public departures;
   public activity;
   public step = 1;
+  public bookingStep = '';
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -88,7 +102,7 @@ export class BookingWizardContainerComponent implements OnInit {
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.activity$ = onStateChangeObservable(this.store, 'activities.selectedActivity');
-
+    this.bookingStep$ = onStateChangeObservable(this.store, 'booking');
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
@@ -99,11 +113,16 @@ export class BookingWizardContainerComponent implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDepartures(id));
-
     this.activity$.subscribe((data) => {
       console.log(data);
       if (data && !data.id) {
         this.store.dispatch(new GetDetail(id));
+      }
+    });
+
+    this.bookingStep$.subscribe((booking) => {
+      if (booking.currentStep) {
+        this.bookingStep = booking.currentStep;
       }
     });
   }

@@ -46,7 +46,7 @@ export class BookingEffects {
         return this.bookingService.getValidSubscription(payload.executionDate)
           .map((result) => {
           const _user = result.data['user'];
-          if (_user.subscriptions && _user.subscriptions.length) {
+          if (!_user.subscriptions || (_user.subscriptions && !_user.subscriptions.length)) {
             return new MoveToStep({step: 'Subscription' });
           } else {
             return new MoveToStep({step: 'Companions' });

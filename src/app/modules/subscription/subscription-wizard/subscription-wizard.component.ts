@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -96,6 +96,9 @@ export class SubscriptionWizardComponent implements OnInit {
   @Output() subscriptionSuccess: EventEmitter<any> = new EventEmitter();
   @Output() subscriptionError: EventEmitter<any> = new EventEmitter();
   @Output() onDiscountFormValid: EventEmitter<any> = new EventEmitter();
+  @Input() kidsAmount;
+  @Input() adultsAmount;
+
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
@@ -114,20 +117,7 @@ export class SubscriptionWizardComponent implements OnInit {
     private store: Store<any>,
     private fb: FormBuilder
   ) {
-    this.paymentRequest = this.fb.group({
-      kidsAmount: [''],
-      adultsAmount: [''],
-      isComingAlone: [false],
-      plan: [''],
-      cardToken: ['']
-    });
-    this.discountCard = this.fb.group({
-      discountCardCode: ['']
-    });
 
-    this.discountCode = this.fb.group({
-      code: ['']
-    });
   }
 
   onCompanionFormSuccessClick($event) {
@@ -139,6 +129,21 @@ export class SubscriptionWizardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paymentRequest = this.fb.group({
+      kidsAmount: [this.kidsAmount || ''],
+      adultsAmount: [this.adultsAmount || ''],
+      isComingAlone: [false],
+      plan: [''],
+      cardToken: ['']
+    });
+    this.discountCard = this.fb.group({
+      discountCardCode: ['']
+    });
+
+    this.discountCode = this.fb.group({
+      code: ['']
+    });
+
     this.paymentRequest.valueChanges.subscribe(data => {
       if(data.plan) {
         this.calculateTotalToPay();

@@ -25,9 +25,6 @@ reducers[ActionTypes.MOVE_TO_STEP] = (state, payload) => {
   });
 };
 
-
-
-
 export default function reducer(state = initialState, action: Actions) {
   return reducers[action.type] && reducers[action.type](state, action.payload) || state;
 };

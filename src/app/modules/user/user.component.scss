@@ -1,0 +1,52 @@
+.avatar {
+    width: 100%;
+}
+
+.menu {
+    padding: 10px 0;
+
+    ul {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+
+        li {
+            margin: 0px;
+            position: relative;
+            border-left: 3px solid transparent;
+            transition: all .15s linear;
+
+            &.active {
+                border-color: #F9BA3F;
+                background: rgba(0,0,0,0.04);
+            }
+
+            &:after {
+                color: #b6b7b8;
+                content: '\f054';
+                font-family: 'FontAwesome';
+                font-size: 10px;
+                position: absolute;
+                right: 15px;
+                top: 15px;
+            }
+
+            a {
+                color: #444;
+                display: block;
+                padding: 10px 15px;
+
+                &:hover, &:focus{
+                    text-decoration: none;
+                }
+
+                .fa {
+                    color: #b6b7b8;
+                    font-size: 15px;
+                    width: 20px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-<div class="mb-5" *ngIf="activity">
+<div class="mb-5">
     <div class="detail-banner"
          [ngStyle]="{'background-image': 'url(' + activityCover + ')'}"
 
@@ -8,33 +8,36 @@
                 <i class="fa fa-arrow-circle-left mr-2" aria-hidden="true"></i> Ir a lista de Actividades
             </button>
         </div>
-        <div class="container">
+        
+        <div class="container" @fadeLeftAnimation>
             <div class="detail-banner-left">
-                <div class="detail-banner-info">
+                <div class="detail-banner-info fadeLeft">
                     <div class="detail-label">{{ activity.category?.name }}</div>
                     <div class="detail-saving">
                         <app-activity-saving [rates]="activity.rates"></app-activity-saving>
                     </div>
                 </div>
-                <h2 class="detail-title">
+                <h2 class="detail-title fadeLeft">
                     {{ activity.name }} <app-price-displayer [rates]="activity.rates"></app-price-displayer>
                 </h2>
 
-                <div class="detail-banner-address">
+                <div class="detail-banner-address fadeLeft">
                     <i class="fa fa-map-o"></i> {{ activity.area?.formatedAddress }}
                 </div>
 
-                <div class="detail-banner-btn bookmark" (click)="bookNow()">
-                    <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Book now</span>
+                <div class="fadeLeft">
+                    <div class="detail-banner-btn bookmark" (click)="bookNow()">
+                        <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Book now</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div class="container" [@fadeUpAnimation]="activity.id">
     <div class="row detail-content">
-        <div class="col-sm-7">
+        <div class="col-sm-7 fadeUp">
             <div class="detail-gallery mb-3">
                 <app-photo-gallery [mainPhoto]="activity.mainPhoto" [subPhotos]="activity.subPhotos"></app-photo-gallery>
             </div>
@@ -43,12 +46,10 @@
                 {{ activity.description }}
             </md-card>
             <md-card class="mb-3">
-                <agm-map [latitude]="activity.lat" [longitude]="activity.lng">
-                    <agm-marker [latitude]="activity.lat" [longitude]="activity.lng"></agm-marker>
-                </agm-map>
+                <app-location-map [location]="activity"></app-location-map>
             </md-card>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-5 fadeUp">
             <app-rate (rateSelected)="onRateSelected($event)" *ngFor="let rate of activity.rates" [rate]="rate"></app-rate>
         </div>
     </div>

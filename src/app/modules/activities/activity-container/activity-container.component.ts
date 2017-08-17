@@ -13,8 +13,11 @@ import {UserService} from "../../../services/user.service";
   template: `
     <app-activity-detail [activity]="activity$ | async" 
                          [user]="user$ | async" 
-                         (selectedRate)="onRateSelected($event)">
+                         (selectedRate)="onRateSelected($event)" *ngIf="activity.id">
     </app-activity-detail>
+    <div *ngIf="!activity.id" class="mb-5">
+      <activity-detail-loader></activity-detail-loader>
+    </div>
   `
 })
 export class ActivityContainerComponent implements OnInit {
@@ -37,6 +40,7 @@ export class ActivityContainerComponent implements OnInit {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.user$.subscribe(user => this.user = user);
     this.activity$.subscribe(activity => this.activity = activity);
+    this.activity = {};
   }
 
   bookNow($event) {
@@ -63,5 +67,4 @@ export class ActivityContainerComponent implements OnInit {
       onSuccessRedirect: navigateTo
     });*/
   }
-
 }

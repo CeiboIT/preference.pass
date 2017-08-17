@@ -73,7 +73,6 @@ export class ActivitiesEffects {
     .switchMap((payload) => {
       return this.activitiesQueries.getActivityByID(payload)
         .map((result) => {
-          console.log(result)
             return new GetDetailSuccess(
               result.data['Activity']
             )

@@ -36,6 +36,9 @@ interface DiscountValidationResponse {
               Claim discount
             </button>   
           </div>
+          <div>
+            <app-companion-amount [parent]="paymentRequest"></app-companion-amount>
+          </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
                                                 [selectPlan]="selectPlan"

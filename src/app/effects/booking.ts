@@ -51,7 +51,6 @@ export class BookingEffects {
           } else {
             return new MoveToStep({step: 'Companions' });
           };
-
         });
     });
 }

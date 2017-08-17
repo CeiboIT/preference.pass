@@ -124,6 +124,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
   step2Success($event) {
     console.log($event);
+    console.log('Booking so far: ', $event);
     this.store.dispatch(new BookingStep1($event));
   }
 
@@ -138,7 +139,7 @@ export class BookingWizardContainerComponent implements OnInit {
   onStep1Submit(e) {
     e.preventDefault();
     let _booking = this.booking.value;
-    _booking.activitiyId = this.activity.id;
+    _booking.activityId = this.activity.id;
     _booking.owner = this.user.id;
     const _rate = this.rate;
     _booking.rate = {

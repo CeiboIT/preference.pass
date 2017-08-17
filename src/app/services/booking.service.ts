@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
+import {Observable} from "rxjs/Observable";
+import {isComingAlone} from "../utils/user";
 
 /*
 {
@@ -22,12 +24,16 @@ import gql from 'graphql-tag';
 }
  */
 
+function checkIfComingAlone(payload) {
+  return (!payload.kidsAmount && !payload.adultsAmount);
+}
+
 @Injectable()
 export class BookingService {
 
   constructor(private client: Apollo) { }
 
-  bookintStep1(payload) {
+  bookingStep1(payload) {
     const STEP1_MUTATION = gql`
       mutation bookingStep1(
         $executionDate: DateTime!
@@ -50,11 +56,13 @@ export class BookingService {
           status: $status
         ) {
           id
+          executionDate
+          kidsAmount
+          adultsAmount
         }
       }
 
     `;
-
 
     return this.client.mutate({
       mutation: STEP1_MUTATION,
@@ -64,11 +72,39 @@ export class BookingService {
         activityId: payload.activityId,
         ownerId: payload.owner,
         rate: payload.rate,
-        kidsAmount: payload.kidsAmount + 1,
+        kidsAmount: payload.kidsAmount,
         adultsAmount: payload.adultsAmount,
+        isComingAlone: checkIfComingAlone(payload),
         status: "Details"
       }
     });
+
+  }
+
+
+  getValidSubscription(bookingDate) {
+    const GET_SUBSCRIPTIONS = gql`
+      query GetActiveSubscriptions($bookingDate: DateTime!) {
+        user {
+          subscriptions(filter: {
+            validity_gt: $bookingDate,
+            startAt_lt: $bookingDate
+          }) {
+            id
+            kids
+            adults
+            isComingAlone
+          }
+        }
+      }
+    `;
+
+      return this.client.query({
+        query: GET_SUBSCRIPTIONS,
+        variables: {
+          bookingDate: bookingDate
+        }
+      });
 
   }
 }

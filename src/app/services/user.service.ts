@@ -5,6 +5,8 @@ import {User} from '../models/user';
 import {Store} from '@ngrx/store';
 import {OpenOnBoarding} from '../actions/layout';
 import {hasSubscription, isSubscriptionValid} from '../utils/user';
+import {Observable} from 'rxjs/Observable';
+const _now = new Date().toISOString();
 
 interface ModalCallOptions {
   onErrorRedirect?: string;
@@ -50,7 +52,6 @@ export class UserService {
   }
 
   getCurrentUser() {
-    const _now = new Date().toISOString();
 
     const GET_CURRENT_USER = gql`
         query GetCurrentUser($now: DateTime!) {
@@ -187,6 +188,7 @@ export class UserService {
         }
       });
     }
+
 
     checkSubscription = (user, openModal, cb?) => {
       let valid = false;

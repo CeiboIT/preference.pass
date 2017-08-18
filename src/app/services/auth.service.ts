@@ -3,10 +3,9 @@ declare var auth0: any;
 import { Subject } from 'rxjs/Subject';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Store } from '@ngrx/store';
-import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {UserService} from './user.service';
-import {Apollo} from 'apollo-angular';
+import { UserService} from './user.service';
+import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { GetUserBasicData } from '../actions/user';
 import { onStateChangeObservable } from '../utils/store';
@@ -44,7 +43,7 @@ export class AuthService {
   private headers: Headers = new Headers({
     'content-type': 'application/json'
   });
-  constructor(private store: Store<{}>, private http: Http, private userService: UserService, private client: Apollo) {
+  constructor(private store: Store<{}>, private userService: UserService, private client: Apollo) {
     this.getCurrentUser();
   }
 
@@ -97,51 +96,20 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       if (window.location.hash.length) {
 
-
         const idToken = getHashValue('id_token');
         const accessToken = getHashValue('access_token');
 
         this.userService.authenticateUser(idToken, accessToken).subscribe((result) => {
-          
           let token = result['data']['authenticateAuth0User']['token'];
           localStorage.setItem('idToken', token);
           this.getCurrentUser();
 
           resolve(result);
-        })
-        // const _headers = {'content-type': 'application/json'};
-        // const _body = JSON.stringify({
-        //   query: `
-        //   mutation authenticateAuth0User($idToken: String!, $accessToken: String!) {
-        //     authenticateAuth0User(idToken: $idToken, accessToken: $accessToken) {
-        //       token
-        //     }
-        //   }
-        // `,
-        //   variables: {
-        //     idToken: idToken,
-        //     accessToken: accessToken,
-        //   }
-        // });
-
-        // this.http.post('https://api.graph.cool/simple/v1/' + PROJECT_ID, _body, {headers: this.headers})
-        //   .toPromise()
-        //   .then((response) => {
-        //     const _response = response.json();
-        //     if (!_response['errors']) {
-        //       localStorage.setItem('idToken', _response['data']['authenticateAuth0User']['token']);
-        //       this.getCurrentUser();
-        //       resolve(_response);
-        //     } else {
-        //       reject(_response);
-        //     }
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //     reject(err);
-        //   });
-
-
+        },
+          (err) => {
+            resolve(err);
+          }
+        );
       } else {
         window.location.replace(window.location.host);
       }

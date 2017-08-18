@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
-import {Observable} from 'rxjs/Observable';
-import {MdDialog} from '@angular/material';
-import {AuthModalComponent} from '../components/widgets/auth-modal/auth-modal.component';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { MdDialog } from '@angular/material';
+import { Actions, Effect } from '@ngrx/effects';
 import { ActionTypes } from '../actions/layout';
-import {
-  LoginWithEmail, LoginWithFacebook, LoginWithGoogle, RegisterWithEmailAndPassword, RegisterWithFacebook,
-  RegisterWithGoogle,
-} from '../actions/auth';
-import {Store} from '@ngrx/store';
-
+import { AuthModalComponent } from '../components/widgets/auth-modal/auth-modal.component';
+import { Observable } from 'rxjs/Observable';
+import { OnboardingModalComponent } from '../components/widgets/onboarding-modal/onboarding-modal.component';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-import {OnboardingModalComponent} from '../components/widgets/onboarding-modal/onboarding-modal.component';
-import {Router} from "@angular/router";
+import 'rxjs/add/operator/toArray';
+import {
+  LoginWithEmail, 
+  LoginWithFacebook, 
+  LoginWithGoogle, 
+  RegisterWithEmailAndPassword, 
+  RegisterWithFacebook,
+  RegisterWithGoogle,
+} from '../actions/auth';
+
 
 function retrieveWidth() {
   if (matchMedia) {
@@ -32,24 +36,22 @@ function retrieveWidth() {
 export class LayoutEffects {
   constructor(private action$: Actions, private dialog: MdDialog, private store: Store<any>, private router: Router) {}
 
-   @Effect({dispatch: false})
- openAuthDialog: Observable<{}> = this.action$
-   .ofType(ActionTypes.OPEN_LOGIN)
-   .do(() => {
-    let modalConfig = {
-      data: {
-        type: 'login',
-      },
-      panelClass: 'md-dialog-fullscreen-xs'
-    };
-    //  retrieveWidth()  ? Object.assign(modalConfig, {'width': '100%',
-    //      'height': '100%'}) : Object.assign(modalConfig, {'width': '30%', height: '50%'});
+  @Effect({dispatch: false})
+  openAuthDialog: Observable<{}> = this.action$
+    .ofType(ActionTypes.OPEN_LOGIN)
+    .do(() => {
+      let modalConfig = {
+        data: {
+          type: 'login',
+        },
+        panelClass: 'md-dialog-fullscreen-xs'
+      };
 
-    this.dialog.open(AuthModalComponent, modalConfig)
-      .afterClosed().subscribe(result => {
-        this.dispatchAuthAction(result.type, result.data);
+      this.dialog.open(AuthModalComponent, modalConfig)
+        .afterClosed().subscribe(result => {
+          this.dispatchAuthAction(result.type, result.data);
+      });
     });
-   });
 
   @Effect({dispatch: false})
   openRegisterDialog: Observable<{}> = this.action$
@@ -59,8 +61,6 @@ export class LayoutEffects {
         data: {type: 'register'},
         panelClass: 'md-dialog-fullscreen-xs'
       };
-      // retrieveWidth() ? Object.assign(modalConfig, {'width': '100%',
-      //   'height': '100%'}) : Object.assign(modalConfig, {'width': '30%'});
 
       this.dialog.open(AuthModalComponent, modalConfig)
         .afterClosed().subscribe(result => {
@@ -77,9 +77,6 @@ export class LayoutEffects {
         panelClass: 'md-dialog-fullscreen-xs',
         data: {startOnStep: payload.startOnStep}
       };
-      // retrieveWidth() ? Object.assign(modalConfig, {'width': '100%',
-      //   'height': '100%'}) : Object.assign(modalConfig, {'width': '50%'});
-
       this.dialog.open(OnboardingModalComponent, modalConfig)
         .afterClosed().subscribe(result => {
           if (payload && payload.onSuccessRedirect) {
@@ -96,13 +93,13 @@ export class LayoutEffects {
         this.store.dispatch(new LoginWithEmail({email: data.email}));
         break;
       case('GoogleRegister'):
-      this.store.dispatch(new RegisterWithGoogle({type: type }));
+      this.store.dispatch(new RegisterWithGoogle({type: type}));
       break;
       case('FacebookRegister'):
         this.store.dispatch(new RegisterWithFacebook({type: type}));
         break;
       case('GoogleLogin'):
-        this.store.dispatch(new LoginWithGoogle({type: type }));
+        this.store.dispatch(new LoginWithGoogle({type: type}));
         break;
       case('FacebookLogin'):
         this.store.dispatch(new LoginWithFacebook({type: type}));

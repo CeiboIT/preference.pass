@@ -9,7 +9,7 @@ import {FormGroup} from '@angular/forms';
         <div>
           <app-email-input [parent]="parent"></app-email-input>
         </div>
-        <div>
+        <!--<div>
           <app-user-first-name-input [parent]="parent"></app-user-first-name-input>
         </div>
         <div>
@@ -20,7 +20,7 @@ import {FormGroup} from '@angular/forms';
         </div>
         <div class="py-sm-3">
            <app-date-select [parent]="parent" [parentKey]="'birthDate'" [years]="years"></app-date-select>
-        </div>
+        </div>-->
       </div>
     </div>
   `

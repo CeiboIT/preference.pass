@@ -8,9 +8,9 @@ import {FormGroup} from '@angular/forms';
       <div class="col-12">
         <app-email-input [parent]="parent" [required]="mailRequired"></app-email-input>
       </div>
-      <div class="col-12">
+      <!--<div class="col-12">
         <app-password [parent]="parent"></app-password>
-      </div>
+      </div>-->
     </div>
   `
 })
@@ -18,7 +18,6 @@ export class EmailLoginComponent implements OnInit {
   @Input() parent: FormGroup;
   public mailRequired = true;
   constructor() { }
-  ngOnInit() {
-  }
 
+  ngOnInit() { }
 }

@@ -89,9 +89,6 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
         </div>
 
         <div *ngIf="!isLogin && isRegisterWithEmail">
-          <div class="mb-2">
-            Register with Facebook or Google
-          </div>
           <form novalidate [formGroup]="register">
             <div>
               <app-email-signup [parent]="register"></app-email-signup>

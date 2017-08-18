@@ -90,7 +90,7 @@ export class LayoutEffects {
   dispatchAuthAction(type, data){
     switch (type) {
       case('EmailRegister'):
-        this.store.dispatch(new RegisterWithEmailAndPassword(data));
+        this.store.dispatch(new LoginWithEmail({email: data.email}));
         break;
       case('EmailLogin'):
         this.store.dispatch(new LoginWithEmail({email: data.email}));

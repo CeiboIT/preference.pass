@@ -64,6 +64,13 @@ import {SearchPPCard} from '../../../actions/subscription';
         >
         </app-subscription-wizard>
       </div>
+
+      <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
+        <h2>
+          Companions
+        </h2>
+      </div>
+      
     </div>
   `,
   styles: [
@@ -145,8 +152,7 @@ export class BookingWizardContainerComponent implements OnInit {
   step2Success($event) {
     console.log($event);
     console.log('Booking so far: ', $event);
-    //this.store.dispatch(new BookingStep1($event));
-    this.store.dispatch(new MoveToStep({ step:'Subscription' }));
+    this.store.dispatch(new BookingStep1($event));
   }
 
   get savingMessage() {

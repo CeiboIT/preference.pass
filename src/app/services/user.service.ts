@@ -130,9 +130,7 @@ export class UserService {
     const GET_SUBSCRIPTION = gql`
       query GetSubscription($now: DateTime!) {
         user {
-          subscription(filter: {
-            validity_gt: $now
-          }) {
+          subscriptions {
             id
             adults
             validity

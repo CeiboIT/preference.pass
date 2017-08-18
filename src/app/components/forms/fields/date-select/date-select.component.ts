@@ -90,8 +90,8 @@ export class DateSelectComponent implements OnInit {
     const dateVal = this.dateGroup.value;
     if (dateVal.month && dateVal.year && dateVal.day) {
       this.date = moment().set(
-        {'year': dateVal.year, 'month': dateVal.month, 'date': dateVal.day
-      });
+        {'year': dateVal.year, 'month': dateVal.month, 'date': dateVal.day});
+
       console.log(this.date);
       this.parent.get(this.parentKey).setValue(this.date.toISOString());
     }

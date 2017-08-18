@@ -44,8 +44,13 @@ interface DiscountValidationResponse {
               How many companions do you want to add to your subscription?
             </h2>
             <app-companion-amount [parent]="paymentRequest"></app-companion-amount>
+          </div>
+          <div>
+            <h2>
+              Select your subscription start date
+            </h2>
             <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"
-              [initialDate]="startsAt" [limitDate]="limitDate"
+                             [initialDate]="startsAt" [limitDate]="limitDate"
             ></app-date-select>
           </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
@@ -72,12 +77,6 @@ interface DiscountValidationResponse {
           </app-payment-form>
         </div>
       </div>
-      <!--<div>
-        {{ paymentRequest.value | json }}
-      </div>-->
-      <!--<div>
-        {{ discountCard.value | json }}
-      </div>-->
 
       <div class="d-flex justify-content-between mt-4">
         <button md-button (click)="back()" [disabled]="step === 1 || hasDiscountCard">
@@ -189,10 +188,12 @@ export class SubscriptionWizardComponent implements OnInit {
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});
 	}
+
 	onCardChargeError = (err) => {
 		console.log(err);
 		this.subscriptionError.emit({err: err});
-	}
+	};
+
   hasDiscountCardChange(event) {
     this.hasDiscountCard = event;
   }
@@ -206,11 +207,9 @@ export class SubscriptionWizardComponent implements OnInit {
       let kidsAmount = this.paymentRequest.get('kidsAmount').value || 0;
       let adultsAmount = this.paymentRequest.get('adultsAmount').value || 0;
       let plan = this.plan || {};
-
       let adultsTotalPrice = (adultsAmount + 1) * plan.adultPrice;
       let kidsTotalPrice = kidsAmount * plan.kidPrice;
       let total = adultsTotalPrice + kidsTotalPrice || 0;
-
       this.totalPay = Math.round((total) * 100) / 100;
   }
 

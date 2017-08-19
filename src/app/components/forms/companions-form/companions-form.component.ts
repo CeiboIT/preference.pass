@@ -4,22 +4,60 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-companions-form',
   template: `    
-    <form action="" novalidate>
+    <form class="row" action="" novalidate>
       <h2>Select companions</h2>
-        <app-companion-charge-form [parent]="newCompanion" (onCompanionSubmit)="submitCompanion($event)">
-        </app-companion-charge-form>
-        <app-persons-list [list]="availableCompanions"
-          [parent]="parent"
-          [entityKey]="entityKey"
-        >
-        </app-persons-list>
+        <div class="row">
+          <h2 class="col-12">
+            Add new companions
+          </h2>
+          <div class="col-12">
+            <app-companion-charge-form
+              *ngIf="!isLimitReached"
+              [parent]="newCompanion"
+              (onCompanionSubmit)="submitCompanion($event)"
+            >
+            </app-companion-charge-form>
+          </div>
+        </div>
+      <div 
+        class="row"
+        *ngIf="previouslyChargedCompanions && previouslyChargedCompanions.length">
+        <h2>
+          Previously added companions
+        </h2>
+        <div class="col-12">
+          <app-persons-list [list]="previouslyChargedCompanions"
+                            [parent]="parent"
+                            [entityKey]="entityKey"
+                            *ngIf="!isLimitReached"
+          >
+          </app-persons-list>
+        </div>
+      </div>
+      
+      <div class="row">
+        <h2 class="col-12">
+          Added companions for this trip
+        </h2>
+        <div class="col-12">
+          <app-persons-list
+            [list]="subscriptionCompanions"
+            [parent]="parent"
+            [entityKey]="entityKey"
+            *ngIf="!isLimitReached"
+          >
+          </app-persons-list>
+        </div>
+      </div>
+      {{ subscription  | json }}
     </form>
   `
 })
 export class CompanionsFormComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() entityKey;
-  @Input() availableCompanions;
+  @Input() subscription;
+  @Input() previouslyChargedCompanions;
   @Output() onAddCompanionSubmit: EventEmitter<any> = new EventEmitter();
   public newCompanion: FormGroup;
   constructor(private fb: FormBuilder) {
@@ -36,5 +74,16 @@ export class CompanionsFormComponent implements OnInit {
   }
   ngOnInit() {
   }
+
+  get isLimitReached() {
+    return false;
+  }
+
+  get subscriptionCompanions() {
+    if ( this.subscription && this.subscription.companions ) {
+      return this.subscription.companions;
+    }
+    return [];
+  };
 
 }

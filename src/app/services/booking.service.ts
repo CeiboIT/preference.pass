@@ -3,30 +3,32 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {Observable} from "rxjs/Observable";
 import {isComingAlone} from "../utils/user";
-
-/*
-{
-"executionDate": "2017-07-20T05:00:00.000Z",
-"executionTime": "",
-"pickUpLocationId": "cj54k0273lnxk01843amzulx2",
-"pickUpTime": "14:10",
-"companionsIds": "",
-"isComingAlone": "",
-"kidsAmount": 1,
-"adultsAmount": 1,
-"activityId": "cj52y0wknh4sb01849quuqwtu",
-"owner": "cj5wv1qg27bn10152zpagr55t",
-"rate": {
-"currency": "USD",
-"discountPrice": 106,
-"name": "BASIC"
-}
-}
- */
-
 function checkIfComingAlone(payload) {
   return (!payload.kidsAmount && !payload.adultsAmount);
 }
+
+const GET_VALID_SUBSCRIPTION = gql`
+  query GetBookingFittingSubscription($bookingDate: DateTime!) {
+    user {
+      subscriptions(filter: {
+        validity_gt: $bookingDate,
+        startsAt_lt: $bookingDate
+      }) {
+        id
+        kids
+        adults
+        isComingAlone
+        companions {
+          id
+          fullName
+          email
+        }
+      }
+
+      id
+    }
+  }
+`;
 
 @Injectable()
 export class BookingService {
@@ -83,30 +85,11 @@ export class BookingService {
 
 
   getValidSubscription(bookingDate) {
-    const GET_SUBSCRIPTIONS = gql`
-      query GetActiveSubscriptions($bookingDate: DateTime!) {
-        user {
-          subscriptions(filter: {
-            validity_gt: $bookingDate,
-            startsAt_lt: $bookingDate
-          }) {
-            id
-            kids
-            adults
-            isComingAlone
-          }
-          
-          id
-        }
-      }
-    `;
-
       return this.client.watchQuery({
-        query: GET_SUBSCRIPTIONS,
+        query: GET_VALID_SUBSCRIPTION,
         variables: {
           bookingDate: bookingDate
         }
       });
-
   }
 }

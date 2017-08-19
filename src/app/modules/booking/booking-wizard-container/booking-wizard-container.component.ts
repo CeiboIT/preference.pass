@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
 import { BookingStep1, MoveToStep } from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
+import {AddCompanion} from "../../../actions/user";
 
 @Component({
   selector: 'app-booking-wizard-container',
@@ -67,8 +68,14 @@ import {SearchPPCard} from '../../../actions/subscription';
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
         <h2>
-          Companions
+          Charge companions to your subscription
         </h2>
+        
+        <app-companions-form [parent]="booking"
+          (onAddCompanionSubmit)="addCompanion($event)"
+          [subscription]="activeSubscription$ | async"
+        >
+        </app-companions-form>
       </div>
       
     </div>
@@ -91,7 +98,9 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity$: Observable<any>;
   public user$: Observable<any>;
   public bookingStep$: Observable<any>;
+  public activeSubscription$: Observable<any>;
   public user;
+  public subscription;
   public departures;
   public activity;
   public step = 1;
@@ -111,10 +120,10 @@ export class BookingWizardContainerComponent implements OnInit {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.activity$ = onStateChangeObservable(this.store, 'activities.selectedActivity');
     this.bookingStep$ = onStateChangeObservable(this.store, 'booking');
+    this.activeSubscription$ = onStateChangeObservable(this.store, 'booking.activeSubscription');
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
-
     this.activity$.subscribe(activity => this.activity = activity);
   }
 
@@ -132,6 +141,10 @@ export class BookingWizardContainerComponent implements OnInit {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
       }
+    });
+
+    this.activeSubscription$.subscribe((subscription) => {
+      this.subscription = subscription
     });
   }
 
@@ -161,6 +174,12 @@ export class BookingWizardContainerComponent implements OnInit {
     } else {
       return 'Booking you are saving';
     }
+  }
+
+  addCompanion($event) {
+    console.log($event);
+    this.store.dispatch(new AddCompanion({companion: $event, subscriptionId: this.subscription.id,
+      executionDate: this.booking.value.executionDate}));
   }
 
   onStep1Submit(e) {

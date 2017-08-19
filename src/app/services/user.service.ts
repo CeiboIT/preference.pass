@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import {User} from '../models/user';
 import {Store} from '@ngrx/store';
 import {OpenOnBoarding} from '../actions/layout';
-import {hasSubscription, isSubscriptionValid} from '../utils/user';
+import {getUserIdFromToken, hasSubscription, isSubscriptionValid} from '../utils/user';
 import {Observable} from 'rxjs/Observable';
 const _now = new Date().toISOString();
 
@@ -12,6 +12,36 @@ interface ModalCallOptions {
   onErrorRedirect?: string;
   onSuccessRedirect?: string;
 }
+
+
+const CREATE_COMPANION = gql`
+  mutation NewCompanion(
+  $fullName: String!
+  $email: String
+  $personType: PersonType!
+  $companionOwnerId: ID!
+  ) {
+    createCompanion(
+      fullName: $fullName
+      email: $email
+      personType: $personType
+      companionOwnerId: $companionOwnerId
+    ) {
+      id
+    }
+  }
+`;
+
+const ADD_COMPANION_TO_SUBSCRIPTION = gql`
+  mutation addCompanionToSubscription($subscriptionId: ID! $companionId: ID!) {
+    addToSubscriptionOnCompanion(
+      companionsCompanionId: $companionId
+      subscriptionsSubscriptionId: $subscriptionId) {
+      companionsCompanion { id }
+      subscriptionsSubscription {id}
+    }
+  }
+`;
 
 @Injectable()
 export class UserService {
@@ -161,25 +191,8 @@ export class UserService {
     });
   }
 
-  createUserCompanion(companionData, userId) {
-      const CREATE_COMPANION = gql`
-        mutation NewCompanion(
-          $fullName: String!
-          $email: String
-          $personType: PersonType!
-          $companionOwnerId: ID!
-        ) {
-          createCompanion(
-            fullName: $fullName
-            email: $email
-            personType: $personType
-            companionOwnerId: $companionOwnerId
-          ) {
-            id
-          }
-        }
-      `;
-
+  createUserCompanion(companionData) {
+      const userId = getUserIdFromToken();
       return this.client.mutate({
         mutation: CREATE_COMPANION,
         variables: {
@@ -190,7 +203,6 @@ export class UserService {
         }
       });
     }
-
 
     checkSubscription = (user, openModal, cb?) => {
       let valid = false;
@@ -211,6 +223,33 @@ export class UserService {
       if (cb) {
         cb(goToNext);
       }
+    }
+
+    addCompanionToSubscriptionAndUser(companionData, subscriptionId) {
+      const userId = getUserIdFromToken();
+      return Observable.create(observer => {
+        this.client.mutate({
+          mutation: CREATE_COMPANION,
+          variables: {
+            fullName: companionData.fullName,
+            email: companionData.email,
+            personType: companionData.personType,
+            companionOwnerId: userId
+          }
+        }).toPromise()
+          .then((result) => {
+            const _data = result.data['createCompanion'];
+            this.client.mutate({
+              mutation: ADD_COMPANION_TO_SUBSCRIPTION,
+              variables: {
+                companionId: _data.id,
+                subscriptionId: subscriptionId
+              }
+            }).toPromise().then(compResult => {
+              observer.next(compResult);
+            });
+          });
+      });
     }
 
     authenticateUser(idToken, accessToken) {

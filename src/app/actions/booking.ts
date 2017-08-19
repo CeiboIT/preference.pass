@@ -23,6 +23,9 @@ export const ActionTypes = {
   MOVE_TO_STEP: type('[Booking] Move the next step'),
   MOVE_TO_STEP_SUCCESS: type('[Booking] Move the next step success'),
   MOVE_TO_STEP_FAILURE: type('[Booking] Move the next step failure'),
+  GET_VALID_SUBSCRIPTION_COMPANIONS: type('[Booking] Get Subscription Companions'),
+  GET_VALID_SUBSCRIPTION_COMPANIONS_FAILURE: type('[Booking] Get Subscription Companions Failure'),
+  GET_VALID_SUBSCRIPTION_COMPANIONS_SUCCESS: type('[Booking] Get Subscription Companions Success')
 };
 
 export class GetCompanions implements Action {
@@ -100,6 +103,21 @@ export class MoveToStepSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+export class GetValidSubscriptionCompanions implements Action {
+  type = ActionTypes.GET_VALID_SUBSCRIPTION_COMPANIONS;
+  constructor(public payload: any) { }
+}
+
+export class GetValidSubscriptionCompanionsFailure implements Action {
+  type = ActionTypes.GET_VALID_SUBSCRIPTION_COMPANIONS_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class GetValidSubscriptionCompanionsSuccess implements Action {
+  type = ActionTypes.GET_VALID_SUBSCRIPTION_COMPANIONS_SUCCESS;
+  constructor(public payload: any) { }
+}
+
 export type Actions =  GetCompanions |
 GetCompanionsSuccess |
 GetCompanionsFailure |
@@ -109,4 +127,5 @@ SelectedDeparturePointAndTime |
 BookingAttempt |
 BookingAttemptSuccess |
  MoveToStep | MoveToStepFailure | MoveToStepSuccess |
-BookingAttemptFailure | BookingStep1  |  BookingStep1Success | BookingStep1Failure;
+BookingAttemptFailure | BookingStep1  |  BookingStep1Success | BookingStep1Failure |
+GetValidSubscriptionCompanions  |  GetValidSubscriptionCompanionsFailure | GetValidSubscriptionCompanionsSuccess;

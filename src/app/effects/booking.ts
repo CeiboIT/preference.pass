@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
-  ActionTypes, BookingStep1Success, MoveToStep
+  ActionTypes, BookingStep1Success, GetValidSubscriptionCompanionsSuccess, MoveToStep
 } from '../actions/booking';
 import { BookingService } from '../services/booking.service';
 import { Observable } from 'rxjs/Observable';
@@ -49,8 +49,22 @@ export class BookingEffects {
           if (!_user.subscriptions || (_user.subscriptions && !_user.subscriptions.length)) {
             return new MoveToStep({step: 'Subscription' });
           } else {
-            return new MoveToStep({step: 'Companions' });
+            return new MoveToStep({step: 'Companions', subscription: _user.subscriptions[0]});
           };
         });
     });
+
+  /*@Effect()
+  GetValidSubscriptionCompanions: Observable<{}> = this.action$
+    .ofType(ActionTypes.GET_VALID_SUBSCRIPTION_COMPANIONS)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+        this.bookingService.getValidSubscription(payload.executionDate).map(result => {
+          const _user = result.data['user'];
+          if (_user.subscriptions && _user.subscriptions.length) {
+            return new GetValidSubscriptionCompanionsSuccess({companions: _user.subscription.companions});
+          }
+          return new GetValidSubscriptionCompanionsSuccess({companions: []});
+        });
+    });*/
 }

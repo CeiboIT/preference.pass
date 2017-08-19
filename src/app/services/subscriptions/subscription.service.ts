@@ -43,6 +43,24 @@ export class SubscriptionService {
     });
   }
 
+  getCompanions(subscriptionId) {
+    const GET_SUBSCRIPTION_COMPANIONS = gql`      
+        query getSubscriptionCompanions($subscriptionId: ID!) {
+          Subscription(id: $subscriptionId) {
+            id
+            fullName
+            email
+          }
+        }
+    `;
+    return this.client.watchQuery({
+      query: GET_SUBSCRIPTION_COMPANIONS,
+      variables: {
+        subscriptionId: subscriptionId
+      }
+    });
+  }
+
   validatePPCard(code) {
     return new Promise((resolve, reject) => {
       const headers = new Headers({

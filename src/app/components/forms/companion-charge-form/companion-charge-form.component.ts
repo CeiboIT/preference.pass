@@ -5,9 +5,6 @@ import {FormGroup} from '@angular/forms';
   selector: 'app-companion-charge-form',
   template: `
     <form [formGroup]="parent" (ngSubmit)="onSubmitForm($event)">
-      <h2>
-        Charge companion
-      </h2>
       <app-person-type-selector [parent]="parent"></app-person-type-selector>   
       <app-user-fullname [parent]="parent"></app-user-fullname>
       <app-email-input [parent]="parent"></app-email-input>

@@ -67,9 +67,11 @@ export class UserEffects {
     .ofType(UserActionTypes.ADD_COMPANION)
     .map(action => action.payload)
     .switchMap((payload) => {
-      const userId = getUserIdFromToken();
-     return this.userService.createUserCompanion(payload, userId)
-       .map(result => new AddCompanionSuccess(result['data']['createCompanion']));
+     return this.userService.addCompanionToSubscriptionAndUser(payload.companion, payload.subscriptionId)
+       .map(result => {
+          console.log(result);
+          return new AddCompanionSuccess({result: result, executionDate: payload.executionDate });
+       });
     });
   /*
   @Effect()

@@ -25,21 +25,6 @@ export class AuthEffects {
         .then(result => new LoginWithEmailSuccess({}))
         .catch(err => new LoginWithEmailFailure({}));
     });
-  /*@Effect()
-  RegisterWithEmailAndPassword: Observable<{}> = this.action$
-    .ofType(ActionTypes.REGISTER_WITH_EMAIL_AND_PASSWORD)
-    .map(action => action.payload)
-    .switchMap((payload) => {
-      console.log(payload);
-      const registerPayload = {
-        email: payload.email,
-        password: payload.password
-      };
-      return this.authService.registerWithEmail(registerPayload)
-        .then(result => new RegisterWithEmailAndPasswordSuccess(result))
-        .catch(err => new RegisterWithEmailAndPasswordFailure(err));
-    });*/
-
   @Effect()
   AuthWithGoogle: Observable<{}> = this.action$
     .ofType(ActionTypes.REGISTER_WITH_GOOGLE)

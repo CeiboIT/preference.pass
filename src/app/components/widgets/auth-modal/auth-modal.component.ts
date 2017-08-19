@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
 
 @Component({
@@ -75,7 +75,7 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
           <form novalidate [formGroup]="auth">
             <app-email-login [parent]="auth"></app-email-login>
             <div class="my-2">
-              <button type="submit" class="submit-button w-100 text-white" [md-dialog-close]="loginWithEmail()" md-raised-button color="accent">
+              <button type="submit" class="submit-button w-100 text-white" [md-dialog-close]="loginWithEmail()" md-raised-button color="accent" [disabled]="auth.invalid">
                 Login with email
               </button>
             </div>
@@ -89,12 +89,9 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
         </div>
 
         <div *ngIf="!isLogin && isRegisterWithEmail">
-          <div class="mb-2">
-            Register with Facebook or Google
-          </div>
-          <form novalidate [formGroup]="register">
+          <form novalidate [formGroup]="auth">
             <div>
-              <app-email-signup [parent]="register"></app-email-signup>
+              <app-email-signup [parent]="auth"></app-email-signup>
               <button type="submit" class="submit-button w-100 my-2 text-white" [md-dialog-close]="registerWithEmail()" md-raised-button color="accent">
                 Register with email
               </button>
@@ -136,20 +133,13 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
   `
 })
 export class AuthModalComponent {
+  private EMAIL_REGEXP = '^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$';
   public auth = this.fb.group({
-    email: [''],
-    password: ['']
+    email: ['', [Validators.required, Validators.pattern(this.EMAIL_REGEXP)]]
   });
   public modalType: string;
   public isAuthWithEmail = false;
   public registerType = 'social';
-  public register = this.fb.group({
-    email: [''],
-    password: [''],
-    firstName: [''],
-    lastName: [''],
-    birthDate: ['']
-  });
 
   constructor(private fb: FormBuilder, private dialogRef: MdDialogRef<AuthModalComponent>,
     @Inject(MD_DIALOG_DATA) public data: any) {
@@ -166,7 +156,7 @@ export class AuthModalComponent {
   registerWithEmail () {
     return {
      type: 'EmailRegister',
-     data: this.register.value
+     data: this.auth.value
     };
   }
 

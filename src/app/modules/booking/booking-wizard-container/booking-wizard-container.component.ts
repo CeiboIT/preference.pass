@@ -25,10 +25,18 @@ const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marco
     "subscriptions": [], "__typename": "Companion" }
 ]
 
-const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults": 3, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
+const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 1, "adults": 1, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
   { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
 
 ], "__typename": "Subscription" };
+
+
+const _mockBooking = {
+  kidsAmount: 1,
+  adultsAmount: 1,
+  isComingAlone: false
+};
+
 
 @Component({
   selector: 'app-booking-wizard-container',
@@ -97,9 +105,12 @@ const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults
           (onAddCompanionSubmit)="addCompanion($event)"
           [subscription]=" mockSubscription"
           [companions]=" mockCompanions"
+          [booking]="mockBooking"
         >
         </app-companions-form>
       </div>
+      
+      {{ booking.value | json }}
       
     </div>
   `,
@@ -129,6 +140,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
+  public mockBooking = _mockBooking;
   public mockSubscription = mockSubscription;
   public mockCompanions = mockCompanions;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {

@@ -103,14 +103,13 @@ const _mockBooking = {
         </div>
         <app-companions-form [parent]="booking"
           (onAddCompanionSubmit)="addCompanion($event)"
-          [subscription]=" mockSubscription"
-          [companions]=" mockCompanions"
-          [booking]="mockBooking"
+          [subscription]=" activeSubscription$ | async"
+          [companions]=" companions$ | async "
+          [booking]="booking.value"
         >
         </app-companions-form>
       </div>
       
-      {{ booking.value | json }}
       
     </div>
   `,
@@ -169,7 +168,6 @@ export class BookingWizardContainerComponent implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDepartures(id));
-    this.store.dispatch(new MoveToStep({step: 'Companions'}));
     this.activity$.subscribe((data) => {
       console.log(data);
       if (data && !data.id) {
@@ -205,7 +203,7 @@ export class BookingWizardContainerComponent implements OnInit {
   step2Success($event) {
     console.log($event);
     console.log('Booking so far: ', $event);
-    this.store.dispatch(new MoveToStep({step: 'Companions'}));
+    this.store.dispatch(new BookingStep1($event));
   }
 
   get savingMessage() {
@@ -214,6 +212,10 @@ export class BookingWizardContainerComponent implements OnInit {
     } else {
       return 'Booking you are saving';
     }
+  }
+
+  onSubscriptionSuccess($event) {
+    this.store.dispatch(new MoveToStep('Compaions'));
   }
 
   addCompanion($event) {

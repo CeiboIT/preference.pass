@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Observable } from "rxjs/Rx";
 import gql from 'graphql-tag';
 import {Apollo} from 'apollo-angular';
 
@@ -50,6 +49,7 @@ export class SubscriptionService {
             id
             fullName
             email
+            personType
           }
         }
     `;

@@ -75,8 +75,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       webAuth.authorize({
         connection: 'google-oauth2',
-        responseType: 'token id_token',
-        scope: 'openid profile email',
+        responseType: 'token id_token'
       });
     });
   }

@@ -10,6 +10,9 @@ import {
   RegisterWithEmailAndPasswordFailure,
   RegisterWithEmailAndPasswordSuccess, RegisterWithFacebookFailure, RegisterWithFacebookSuccess
 } from '../actions/auth';
+
+import { OpenAlert } from "../actions/layout";
+
 import {AuthService} from '../services/auth.service';
 
 @Injectable()
@@ -22,7 +25,9 @@ export class AuthEffects {
     .switchMap((payload) => {
       console.log(payload);
       return this.authService.passswordLessSignUp(payload)
-        .then(result => new LoginWithEmailSuccess({}))
+        .then(result => (
+          new LoginWithEmailSuccess({}), new OpenAlert({type: 'success', title: 'Success!', message: 'Please check your e-mail.'}))
+        )
         .catch(err => new LoginWithEmailFailure({}));
     });
   @Effect()

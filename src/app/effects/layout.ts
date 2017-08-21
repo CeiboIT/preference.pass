@@ -5,6 +5,7 @@ import { MdDialog } from '@angular/material';
 import { Actions, Effect } from '@ngrx/effects';
 import { ActionTypes } from '../actions/layout';
 import { AuthModalComponent } from '../components/widgets/auth-modal/auth-modal.component';
+import { AlertComponent } from "../components/widgets/alert/alert.component";
 import { Observable } from 'rxjs/Observable';
 import { OnboardingModalComponent } from '../components/widgets/onboarding-modal/onboarding-modal.component';
 import 'rxjs/add/operator/do';
@@ -106,4 +107,24 @@ export class LayoutEffects {
         break;
     }
   }
+
+  @Effect({dispatch: false})
+  openAlertDialog: Observable<{}> = this.action$
+    .ofType(ActionTypes.OPEN_ALERT)
+    .map(action => action.payload)
+    .do((payload) => {
+      let modalConfig = {
+        panelClass: 'md-dialog-fullscreen-xs',
+        data: {
+          type: payload.type,
+          title: payload.title,
+          message: payload.message
+        }
+      };
+
+      this.dialog.open(AlertComponent, modalConfig)
+        .afterClosed().subscribe(result => {
+          console.log(result);
+      });
+    });
 }

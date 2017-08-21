@@ -9,7 +9,8 @@ const initialState = {
   loadingDepartures: false,
   loadingBooking: false,
   booking: {},
-  sending: false
+  sending: false,
+  activeSubscription: ''
 };
 
 reducers[ActionTypes.BOOKING_STEP1] = (state, payload) => {
@@ -19,10 +20,11 @@ reducers[ActionTypes.BOOKING_STEP1] = (state, payload) => {
 };
 
 reducers[ActionTypes.MOVE_TO_STEP] = (state, payload) => {
-  return Object.assign({}, state, {
-    sending: false,
-    currentStep: payload.step
-  });
+    return Object.assign({}, state, {
+      sending: false,
+      currentStep: payload.step,
+      activeSubscription: payload.subscription
+    });
 };
 
 export default function reducer(state = initialState, action: Actions) {

@@ -4,6 +4,7 @@ import { CompanionsFormComponent } from './companions-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CompanionChargeFormModule} from '../companion-charge-form/companion-charge-form.module';
 import {PersonsListModule} from '../../widgets/persons-list/persons-list.module';
+import {CompanionsListModule} from '../../companions/companions-list/companions-list.module';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {PersonsListModule} from '../../widgets/persons-list/persons-list.module'
     ReactiveFormsModule,
     FormsModule,
     PersonsListModule,
-    CompanionChargeFormModule
+    CompanionChargeFormModule,
+    CompanionsListModule
   ],
   declarations: [CompanionsFormComponent],
   exports: [CompanionsFormComponent]

@@ -9,6 +9,27 @@ import { BookingStep1, MoveToStep } from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
 import {AddCompanion} from "../../../actions/user";
 
+const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano",
+  "email": "mpotignano@gmail.com", "personType": 'Adult',
+  "subscriptions": [ { "id": "cj6i4pv0fb7x80110zl5fnkjf", "__typename": "Subscription" }], "__typename": "Companion" },
+  { "id": "cj6jep4k7m35d0111936g1hxx", "fullName": "Juan Carlos Potignano",
+    "email": "jcpotignano@gmail.com", "personType": 'Adult',
+    "subscriptions": [], "__typename": "Companion" },
+
+  { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano",
+    "email": "lpotignano@gmail.com", "personType": 'Kid',
+    "subscriptions": [ { "id": "cj6i4pv0fb7x80110zl5fnkjf", "__typename": "Subscription" }], "__typename": "Companion" },
+
+  { "id": "cj6jep4k7m35d0111936g1hee", "fullName": "Laura Potignano",
+    "email": "lpotignano@gmail.com", "personType": 'Kid',
+    "subscriptions": [], "__typename": "Companion" }
+]
+
+const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults": 3, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
+  { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
+
+], "__typename": "Subscription" };
+
 @Component({
   selector: 'app-booking-wizard-container',
   template: `
@@ -67,13 +88,15 @@ import {AddCompanion} from "../../../actions/user";
       </div>
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
-        <h2>
-          Charge companions to your subscription
-        </h2>
-        
+        <div class="row">
+          <h2>
+            Charge companions to your subscription
+          </h2>
+        </div>
         <app-companions-form [parent]="booking"
           (onAddCompanionSubmit)="addCompanion($event)"
-          [subscription]="activeSubscription$ | async"
+          [subscription]=" mockSubscription"
+          [companions]=" mockCompanions"
         >
         </app-companions-form>
       </div>
@@ -97,6 +120,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
+  public companions$: Observable<any>;
   public bookingStep$: Observable<any>;
   public activeSubscription$: Observable<any>;
   public user;
@@ -105,6 +129,8 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
+  public mockSubscription = mockSubscription;
+  public mockCompanions = mockCompanions;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -118,6 +144,7 @@ export class BookingWizardContainerComponent implements OnInit {
    });
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
+    this.companions$ = onStateChangeObservable(this.store, 'auth.user.companions');
     this.activity$ = onStateChangeObservable(this.store, 'activities.selectedActivity');
     this.bookingStep$ = onStateChangeObservable(this.store, 'booking');
     this.activeSubscription$ = onStateChangeObservable(this.store, 'booking.activeSubscription');
@@ -130,6 +157,7 @@ export class BookingWizardContainerComponent implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDepartures(id));
+    this.store.dispatch(new MoveToStep({step: 'Companions'}));
     this.activity$.subscribe((data) => {
       console.log(data);
       if (data && !data.id) {
@@ -144,7 +172,7 @@ export class BookingWizardContainerComponent implements OnInit {
     });
 
     this.activeSubscription$.subscribe((subscription) => {
-      this.subscription = subscription
+      this.subscription = subscription;
     });
   }
 
@@ -165,7 +193,7 @@ export class BookingWizardContainerComponent implements OnInit {
   step2Success($event) {
     console.log($event);
     console.log('Booking so far: ', $event);
-    this.store.dispatch(new BookingStep1($event));
+    this.store.dispatch(new MoveToStep({step: 'Companions'}));
   }
 
   get savingMessage() {

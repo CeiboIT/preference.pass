@@ -16,6 +16,8 @@ import {FormGroup} from '@angular/forms';
 })
 export class CompanionChargeFormComponent implements OnInit {
   @Input() parent: FormGroup;
+  @Input() adultsLimitReached;
+  @Input() kidsLimitReached;
   @Output() onCompanionSubmit: EventEmitter<any> = new EventEmitter();
   constructor() { }
 

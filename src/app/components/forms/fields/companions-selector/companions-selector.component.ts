@@ -4,22 +4,17 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-companions-selector',
   template: `
-    <md-select placeholder="Select adults" [multiple]="true" (change)="onAdultSelected($event)" name="companionsSelect">
-      <md-option *ngFor="let companion of adults" [value]="companion.id">
-        {{companion.fullName}}
-      </md-option>
-    </md-select>
-
-    <md-select placeholder="Select kids" [multiple]="true" (change)="onKidSelected($event)" name="companionsSelect">
-      <md-option *ngFor="let companion of kids" [value]="companion.id">
-        {{companion.fullName}}
-      </md-option>
-    </md-select>
+    <div>
+      
+      
+      
+    </div>
   `
 })
 export class CompanionsSelectorComponent implements OnInit {
   @Input() companions;
   @Input() parent: FormGroup;
+  @Input() isActive = false;
   public kids = [];
   public adults = [];
   public selectedCompanions = [];

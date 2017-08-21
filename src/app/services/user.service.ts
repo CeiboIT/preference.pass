@@ -109,6 +109,7 @@ export class UserService {
                 id
                 fullName
                 type
+                personType
                 email
               }
             }
@@ -121,7 +122,11 @@ export class UserService {
               id
               fullName
               email
+              personType
               type
+              subscriptions {
+                id
+              }
             }
           }
         }
@@ -143,15 +148,21 @@ export class UserService {
         user {
           id
           companions {
+            id
             fullName
             email
             type
+            personType
+            subscriptions {
+              id
+            }
           }
         }
       }
     `;
     this.client.watchQuery({
-      query: GET_USER_COMPANIONS
+      query: GET_USER_COMPANIONS,
+      fetchPolicy: "network-only"
     });
   }
 
@@ -169,8 +180,9 @@ export class UserService {
             companions {
               id
               fullName
-              type
               email
+              type
+              personType
             }
           }
         }

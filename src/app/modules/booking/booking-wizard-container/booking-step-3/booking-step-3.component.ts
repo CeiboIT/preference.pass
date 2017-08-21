@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-booking-step-3',
-  templateUrl: './booking-step-3.component.html',
-  styleUrls: ['./booking-step-3.component.css']
+  template: `
+    <div>
+      
+    </div>
+  `
 })
 export class BookingStep3Component implements OnInit {
 

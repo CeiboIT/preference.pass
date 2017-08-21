@@ -9,6 +9,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { GetUserBasicData } from '../actions/user';
 import { onStateChangeObservable } from '../utils/store';
+import { getUserIdFromToken } from "../utils/user";
 // const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
 // const auth0Domain = 'sof.au.auth0.com'; // development
 
@@ -74,7 +75,8 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       webAuth.authorize({
         connection: 'google-oauth2',
-        responseType: 'token id_token'
+        responseType: 'token id_token',
+        scope: 'openid profile email',
       });
     });
   }
@@ -102,7 +104,8 @@ export class AuthService {
         this.userService.authenticateUser(idToken, accessToken).subscribe((result) => {
           let token = result['data']['authenticateAuth0User']['token'];
           localStorage.setItem('idToken', token);
-          this.getCurrentUser();
+
+          getUserIdFromToken() == 'undefined' ? this.parseHash() : this.getCurrentUser();
 
           resolve(result);
         },

@@ -5,7 +5,8 @@ export const ActionTypes = {
   OPEN_LOGIN: type('[Layout] Open Login'),
   OPEN_REGISTER: type('[Layout] Open Register'),
   OPEN_CARD_INTRODUCTION: type('[Layout] Open Card'),
-  OPEN_ON_BOARDING: type('[Layout] Open On boarding')
+  OPEN_ON_BOARDING: type('[Layout] Open On boarding'),
+  OPEN_ALERT: type('[Layout] Open Alert')
 };
 
 export class OpenLogin implements Action {
@@ -27,4 +28,9 @@ export class OpenOnBoarding implements Action {
   constructor(public payload: any) {}
 }
 
-export type Actions = OpenLogin | OpenRegister | OpenCardIntroduction | OpenOnBoarding;
+export class OpenAlert implements Action {
+  type = ActionTypes.OPEN_ALERT;
+  constructor(public payload: any) {}
+}
+
+export type Actions = OpenLogin | OpenRegister | OpenCardIntroduction | OpenOnBoarding | OpenAlert;

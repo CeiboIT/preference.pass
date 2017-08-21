@@ -31,6 +31,8 @@ import 'hammerjs';
 import {AuthGuard} from './auth.guard';
 import {OnboardingModalModule} from './components/widgets/onboarding-modal/onboarding-modal.module';
 import {OnboardingModalComponent} from './components/widgets/onboarding-modal/onboarding-modal.component';
+import { AlertComponent } from "./components/widgets/alert/alert.component";
+import { AlertlModule } from "./components/widgets/alert/alert.module";
 import {BookingEffects} from './effects/booking';
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
@@ -70,10 +72,11 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     FooterModule,
     PhotoswipeModule,
     AuthModalModule,
-    OnboardingModalModule
+    OnboardingModalModule,
+    AlertlModule
   ],
   providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AuthModalComponent, OnboardingModalComponent]
+  entryComponents: [AuthModalComponent, OnboardingModalComponent, AlertComponent]
 })
 export class AppModule { }

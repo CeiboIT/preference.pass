@@ -35,6 +35,38 @@ export class BookingService {
 
   constructor(private client: Apollo) { }
 
+  completeBooking(payload) {
+    const COMPLETE_BOOKING = gql`
+      
+      mutation CompleteBooking(
+        $reservationId: ID!,
+        $companionsIds: [ID!],
+        $subscriptionId: ID!,
+        $status: BookingState
+      ) {
+        updateReservation(
+          id: $reservationId,
+          companionsIds: $companionsIds,
+          status: $status,
+          subscriptionId: $subscriptionId
+        ) {
+          id
+        }
+      }
+      
+    `;
+
+    return this.client.mutate({
+      mutation: COMPLETE_BOOKING,
+      variables: {
+        reservationId: payload.reservationId,
+        companionsIds: payload.companionsIds,
+        status: 'Completed',
+        subscriptionId: payload.subscriptionId
+      }
+    })
+  }
+
   bookingStep1(payload) {
     const STEP1_MUTATION = gql`
       mutation bookingStep1(
@@ -77,7 +109,7 @@ export class BookingService {
         kidsAmount: payload.kidsAmount,
         adultsAmount: payload.adultsAmount,
         isComingAlone: checkIfComingAlone(payload),
-        status: "Details"
+        status: 'Details'
       }
     });
 

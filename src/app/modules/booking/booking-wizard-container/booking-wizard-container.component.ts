@@ -5,7 +5,7 @@ import {GetDepartures, GetDetail} from '../../../actions/activities';
 import {Observable} from 'rxjs/Observable';
 import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
-import { BookingStep1, MoveToStep } from '../../../actions/booking';
+import {BookingFinish, BookingStep1, MoveToStep} from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
 import {AddCompanion} from "../../../actions/user";
 
@@ -25,7 +25,7 @@ const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marco
     "subscriptions": [], "__typename": "Companion" }
 ]
 
-const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 1, "adults": 1, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
+const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 2, "adults": 2, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
   { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
 
 ], "__typename": "Subscription" };
@@ -115,13 +115,13 @@ const _mockBooking = {
         </div>
         <app-companions-form [parent]="booking"
           (onAddCompanionSubmit)="addCompanion($event)"
-          [subscription]="mockSubscription"
-          [companions]="mockCompanions"
-          [booking]="mockBooking"
+          [subscription]="activeSubscription$ | async"
+          [companions]="companions$ | async "
+          [booking]="booking.value"
         >
         </app-companions-form>
         
-        <button md-button class="button-success">
+        <button (click)="finishBooking()" md-button class="button-success">
           Finish Booking
         </button>
       </div>
@@ -153,10 +153,6 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
-
-  mockCompanions = mockCompanions;
-  mockSubscription = mockSubscription;
-  mockBooking  = _mockBooking;
 
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
@@ -192,11 +188,12 @@ export class BookingWizardContainerComponent implements OnInit {
     });
 
 
-    this.store.dispatch(new MoveToStep({step: 'Companions'}));
+    // this.store.dispatch(new MoveToStep({step: 'Companions'}));
 
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
+        this.booking = booking.booking;
       }
     });
 
@@ -271,7 +268,11 @@ export class BookingWizardContainerComponent implements OnInit {
 
   changeToStep = (step) => {
     this.step = step;
-  };
+  }
+
+  finishBooking() {
+    this.store.dispatch(new BookingFinish(this.booking));
+  }
 
   onCardFormValid($event) {
     console.log('Event in form', $event);

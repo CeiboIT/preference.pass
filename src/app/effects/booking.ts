@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
-  ActionTypes, BookingStep1Success, GetValidSubscriptionCompanionsSuccess, MoveToStep
+  ActionTypes, BookingFinishSuccess, BookingStep1Success, GetValidSubscriptionCompanionsSuccess, MoveToStep
 } from '../actions/booking';
 import { BookingService } from '../services/booking.service';
 import { Observable } from 'rxjs/Observable';
@@ -39,6 +39,23 @@ export class BookingEffects {
     });
 
   @Effect()
+  BookingFinish: Observable<{}> = this.action$
+    .ofType(ActionTypes.BOOKING_FINISH)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      return this.bookingService.completeBooking(payload)
+        .map((result) => {
+          return new BookingFinishSuccess(
+            result.data['updateReservation']
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+          return Observable.of({ type: ActionTypes.BOOKING_FINISH_FAILURE, payload: err });
+        } );
+    });
+
+  @Effect()
   CalculateBookingNextStep: Observable<{}> = this.action$
     .ofType(ActionTypes.BOOKING_STEP1_SUCCESS)
     .map(action => action.payload)
@@ -53,6 +70,7 @@ export class BookingEffects {
           };
         });
     });
+
 
   /*@Effect()
   GetValidSubscriptionCompanions: Observable<{}> = this.action$

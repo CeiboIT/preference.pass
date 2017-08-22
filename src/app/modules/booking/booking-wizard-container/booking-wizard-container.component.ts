@@ -121,7 +121,7 @@ const _mockBooking = {
         >
         </app-companions-form>
         
-        <button class="button-success">
+        <button md-button class="button-success">
           Finish Booking
         </button>
       </div>

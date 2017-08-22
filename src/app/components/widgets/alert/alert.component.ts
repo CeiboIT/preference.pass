@@ -4,7 +4,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 @Component({
 	selector: 'app-alert',
 	template: `
-		<div class="alert-dialog showAlert">
+		<div class="alert-dialog">
 			<div class="sa-icon sa-error animateErrorIcon" *ngIf="type == 'error'">
 				<span class="sa-x-mark animateXMark">
 					<span class="sa-line sa-left"></span>

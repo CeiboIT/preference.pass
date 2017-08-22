@@ -114,7 +114,6 @@ export class LayoutEffects {
     .map(action => action.payload)
     .do((payload) => {
       let modalConfig = {
-        panelClass: 'md-dialog-fullscreen-xs',
         data: {
           type: payload.type,
           title: payload.title,

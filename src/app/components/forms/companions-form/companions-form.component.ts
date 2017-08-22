@@ -116,8 +116,21 @@ export class CompanionsFormComponent implements OnInit {
 
   get limitAtInit() {
      const counts = _.countBy(this.subscription.companions, 'personType');
-     this.limits.forKids = !(this.subscription.kids > counts.Kid);
-     this.limits.forAdults = !(this.subscription.adults > counts.Adult);
+     if (this.subscription.kids) {
+       if (counts.Kid) {
+         this.limits.forKids = !(this.subscription.kids > counts.Kid);
+       } else {
+         this.limits.forKids = false;
+
+       }
+     }
+     if (this.subscription.adults) {
+       if (counts.Adult) {
+        this.limits.forAdults = !(this.subscription.adults > counts.Adult);
+       } else {
+         this.limits.forKids = false;
+       }
+     }
      return this.limits;
   }
 

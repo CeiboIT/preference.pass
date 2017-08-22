@@ -115,13 +115,13 @@ const _mockBooking = {
         </div>
         <app-companions-form [parent]="booking"
           (onAddCompanionSubmit)="addCompanion($event)"
-          [subscription]=" activeSubscription$ | async"
-          [companions]=" companions$ | async"
-          [booking]="booking.value"
+          [subscription]="mockSubscription"
+          [companions]="mockCompanions"
+          [booking]="mockBooking"
         >
         </app-companions-form>
         
-        <button class="button-success">
+        <button md-button class="button-success">
           Finish Booking
         </button>
       </div>
@@ -153,6 +153,11 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
+
+  mockCompanions = mockCompanions;
+  mockSubscription = mockSubscription;
+  mockBooking  = _mockBooking;
+
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -185,6 +190,9 @@ export class BookingWizardContainerComponent implements OnInit {
         this.store.dispatch(new GetDetail(id));
       }
     });
+
+
+    this.store.dispatch(new MoveToStep({step: 'Companions'}));
 
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {

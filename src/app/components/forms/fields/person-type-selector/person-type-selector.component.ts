@@ -4,8 +4,8 @@ import {FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-person-type-selector',
   template: `
-    <md-radio-group class="example-radio-group" (change)="onChange($event)">
-      <md-radio-button class="example-radio-button" *ngFor="let type of options" [value]="type">
+    <md-radio-group class="d-flex justify-content-around" (change)="onChange($event)">
+      <md-radio-button *ngFor="let type of options" [value]="type">
         {{type}}
       </md-radio-button>
     </md-radio-group>

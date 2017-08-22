@@ -109,7 +109,7 @@ const _mockBooking = {
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
         <div class="row">
-          <h2>
+          <h2 class="w-100 text-center">
             Charge companions to your subscription
           </h2>
         </div>

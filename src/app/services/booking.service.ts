@@ -22,9 +22,9 @@ const GET_VALID_SUBSCRIPTION = gql`
           id
           fullName
           email
+          personType
         }
       }
-
       id
     }
   }

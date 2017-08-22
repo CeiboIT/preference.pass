@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { Observable } from "rxjs/Rx";
 import gql from 'graphql-tag';
 import {Apollo} from 'apollo-angular';
 
@@ -25,6 +24,7 @@ export class SubscriptionService {
       });
 
       this.createAuthorizationHeader(headers);
+      console.log('Subscription Body: ', body);
       let subscription = JSON.stringify(body);
       this.http.post(this.endpoint, subscription, {
         headers: headers
@@ -50,6 +50,7 @@ export class SubscriptionService {
             id
             fullName
             email
+            personType
           }
         }
     `;

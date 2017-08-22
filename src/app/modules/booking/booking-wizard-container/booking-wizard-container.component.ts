@@ -25,10 +25,18 @@ const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marco
     "subscriptions": [], "__typename": "Companion" }
 ]
 
-const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults": 3, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
+const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 1, "adults": 1, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
   { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
 
 ], "__typename": "Subscription" };
+
+
+const _mockBooking = {
+  kidsAmount: 1,
+  adultsAmount: 1,
+  isComingAlone: false
+};
+
 
 @Component({
   selector: 'app-booking-wizard-container',
@@ -47,6 +55,8 @@ const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults
             >
             </app-booking-step-1>
           </div>
+          
+          {{ booking.value | json }}
         </div>
 
         <div class="col-md-8 offset-md-2" *ngIf="step === 2">
@@ -58,7 +68,6 @@ const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults
               {{ savingMessage }}
               <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
             </h1>
-
           </div>
 
           <h2 class="col-12 text-center">
@@ -73,19 +82,30 @@ const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults
             (onSuccess)="step2Success($event)"
           >
           </app-booking-step-2>
+
+
         </div>
       </div>
       
       <div *ngIf="bookingStep === 'Subscription'" class="col-md-8 offset-md-2">
+        <div class="row">
+          <div class="col-12">
+            <button md-button color="primary" (click)="backToStep1()">
+              Back
+            </button>            
+          </div>
+        </div>
         <app-subscription-wizard
           [kidsAmount]="booking.value.kidsAmount"
           [adultsAmount]="booking.value.adultsAmount"
+          [isComingAlone]="booking.value.isComingAlone"
           [startsAt]="booking.value.executionDate"
           (subscriptionSuccess)="onSubscriptionSuccess($event)"
           (subscriptionError)="onSubscriptionError($event)"
         >
         </app-subscription-wizard>
       </div>
+      
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
         <div class="row">
@@ -95,12 +115,16 @@ const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 3, "adults
         </div>
         <app-companions-form [parent]="booking"
           (onAddCompanionSubmit)="addCompanion($event)"
-          [subscription]=" mockSubscription"
-          [companions]=" mockCompanions"
+          [subscription]=" activeSubscription$ | async"
+          [companions]=" companions$ | async"
+          [booking]="booking.value"
         >
         </app-companions-form>
+        
+        <button class="button-success">
+          Finish Booking
+        </button>
       </div>
-      
     </div>
   `,
   styles: [
@@ -129,8 +153,6 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
-  public mockSubscription = mockSubscription;
-  public mockCompanions = mockCompanions;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -157,7 +179,6 @@ export class BookingWizardContainerComponent implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.store.dispatch(new GetDepartures(id));
-    this.store.dispatch(new MoveToStep({step: 'Companions'}));
     this.activity$.subscribe((data) => {
       console.log(data);
       if (data && !data.id) {
@@ -174,6 +195,11 @@ export class BookingWizardContainerComponent implements OnInit {
     this.activeSubscription$.subscribe((subscription) => {
       this.subscription = subscription;
     });
+  }
+
+  backToStep1() {
+    this.store.dispatch(new MoveToStep({step: 'Details'}));
+    this.step = 1;
   }
 
   get kidsAmount() {
@@ -193,7 +219,7 @@ export class BookingWizardContainerComponent implements OnInit {
   step2Success($event) {
     console.log($event);
     console.log('Booking so far: ', $event);
-    this.store.dispatch(new MoveToStep({step: 'Companions'}));
+    this.store.dispatch(new BookingStep1($event));
   }
 
   get savingMessage() {
@@ -202,6 +228,10 @@ export class BookingWizardContainerComponent implements OnInit {
     } else {
       return 'Booking you are saving';
     }
+  }
+
+  onSubscriptionSuccess($event) {
+    this.store.dispatch(new MoveToStep('Compaions'));
   }
 
   addCompanion($event) {
@@ -215,6 +245,10 @@ export class BookingWizardContainerComponent implements OnInit {
     let _booking = this.booking.value;
     _booking.activityId = this.activity.id;
     _booking.owner = this.user.id;
+    if (_booking.isComingAlone) {
+      _booking.kidsAmount = 0;
+      _booking.adultsAmount = 0;
+    }
     const _rate = this.rate;
     _booking.rate = {
       currency: _rate.currency,

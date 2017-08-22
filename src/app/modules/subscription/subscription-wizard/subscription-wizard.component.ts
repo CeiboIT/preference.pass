@@ -41,9 +41,27 @@ interface DiscountValidationResponse {
           </div>
           <div>
             <h2>
-              How many companions do you want to add to your subscription?
+              Companions to add to your subscription
             </h2>
-            <app-companion-amount [parent]="paymentRequest"></app-companion-amount>
+            <!--<app-companion-amount [parent]="paymentRequest"></app-companion-amount>-->
+            <div class="row">
+              <div class="col-6">
+                <h2>
+                  Adults
+                </h2>
+                <p>
+                  {{adultsAmount}}
+                </p>
+              </div>
+              <div class="col-6">
+                <h2>
+                  Kids
+                </h2>
+                <p>
+                  {{kidsAmount}}
+                </p>
+              </div>
+            </div>
           </div>
           <div>
             <h2>
@@ -85,6 +103,8 @@ interface DiscountValidationResponse {
         <button md-button (click)="next()" [disabled]="step === 3 || hasDiscountCard">
           CONTINUE
         </button>
+        
+        {{ paymentRequest.value | json }}
       </div>
     </md-card>
   </div>
@@ -109,6 +129,7 @@ export class SubscriptionWizardComponent implements OnInit {
   @Output() onDiscountFormValid: EventEmitter<any> = new EventEmitter();
   @Input() kidsAmount;
   @Input() adultsAmount;
+  @Input() isComingAlone;
   @Input() startsAt = _today;
   public limitDate = _inthreemonths;
 
@@ -143,10 +164,10 @@ export class SubscriptionWizardComponent implements OnInit {
 
   ngOnInit() {
     this.paymentRequest = this.fb.group({
-      kidsAmount: [this.kidsAmount || ''],
-      adultsAmount: [this.adultsAmount || ''],
+      kidsAmount: [this.kidsAmount || 0],
+      adultsAmount: [this.adultsAmount || 0],
       startsAt: [this.startsAt || ''],
-      isComingAlone: [false],
+      isComingAlone: [this.isComingAlone || false],
       plan: [''],
       cardToken: ['']
     });

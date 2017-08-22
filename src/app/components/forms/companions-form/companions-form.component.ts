@@ -14,10 +14,10 @@ import * as _ from 'lodash';
       <div class="row">
         <div class="col-12">
           <app-companion-charge-form
-            *ngIf="!limitReached.forAdults && !limitReached.forKids"
+            *ngIf="!limits.forAdults || !limits.forKids"
             [parent]="newCompanion"
-            [adultsLimitReached]="limitReached.forAdults"
-            [kidsLimitReached]="limitReached.forKids"
+            [adultsLimitReached]="limits.forAdults"
+            [kidsLimitReached]="limits.forKids"
             (onCompanionSubmit)="submitCompanion($event)"
           >
           </app-companion-charge-form>
@@ -61,7 +61,12 @@ export class CompanionsFormComponent implements OnInit {
   @Input() entityKey;
   @Input() subscription;
   @Input() companions;
+  @Input() booking;
   @Output() onAddCompanionSubmit: EventEmitter<any> = new EventEmitter();
+  public limits = {
+    forKids: false,
+    forAdults: false
+  };
   public kidsList = [];
   public adultsList = [];
   public selectedKids = [];
@@ -82,47 +87,49 @@ export class CompanionsFormComponent implements OnInit {
   }
 
   selectCompanion(companion) {
-    console.log(companion);
     if (companion.personType === 'Adult') {
       const _index = this.selectedAdults.indexOf(companion);
       if ( _index !== -1) {
         this.selectedAdults.splice(_index, 1);
       } else {
-        this.selectedAdults.push(companion);
+        if (this.booking.adultsAmount > this.selectedAdults.length) {
+          this.selectedAdults.push(companion);
+        }
       }
     }
-
     if (companion.personType === 'Kid') {
       const _index = this.selectedKids.indexOf(companion);
       if ( _index !== -1) {
        this.selectedKids.splice(_index, 1);
       } else {
-        this.selectedKids.push(companion);
+        // Check for booking amount first of all
+        if (this.booking.kidsAmount > this.selectedKids.length) {
+          this.selectedKids.push(companion);
+        }
       }
     }
+    const allSelections = this.selectedAdults.concat(this.selectedKids);
+    console.log(allSelections);
+    const ids = _.map(allSelections, o => o.id);
+    this.parent.get('companionsIds').setValue(ids);
   }
 
-  get limitReached() {
+  get limitAtInit() {
      const counts = _.countBy(this.subscription.companions, 'personType');
-     let limits = {
-       forKids : false,
-       forAdults: false
-     };
-     limits.forKids = !(this.subscription.kids >= counts.Kid);
-     limits.forAdults = !(this.subscription.adults >= counts.Adult);
-
-     return limits;
+     this.limits.forKids = !(this.subscription.kids > counts.Kid);
+     this.limits.forAdults = !(this.subscription.adults > counts.Adult);
+     return this.limits;
   }
 
   generateCompanionsList() {
     if (!this.subscription.isComingAlone) {
-        if (this.limitReached.forKids ) {
+        if (this.limitAtInit.forKids ) {
           this.kidsList = _.groupBy(this.subscription.companions, 'personType').Kid || [];
         } else {
           this.kidsList = _.groupBy(this.companions, 'personType').Kid || [];
         }
 
-        if (this.limitReached.forAdults) {
+        if (this.limitAtInit.forAdults) {
           this.adultsList = _.groupBy(this.subscription.companions, 'personType').Adult || [];
         } else {
           this.adultsList = _.groupBy(this.companions, 'personType').Adult || [];
@@ -133,7 +140,6 @@ export class CompanionsFormComponent implements OnInit {
   ngOnInit() {
       this.generateCompanionsList();
   }
-
 
   get isLimitReached() {
     return false;

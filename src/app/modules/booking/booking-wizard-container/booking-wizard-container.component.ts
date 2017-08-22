@@ -153,7 +153,8 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
-
+  private bookingId = '';
+  private activeSubscriptionId = '';
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -165,6 +166,7 @@ export class BookingWizardContainerComponent implements OnInit {
      kidsAmount: [''],
      adultsAmount: ['']
    });
+
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.companions$ = onStateChangeObservable(this.store, 'auth.user.companions');
@@ -193,7 +195,9 @@ export class BookingWizardContainerComponent implements OnInit {
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
-        this.booking = booking.booking;
+        if (booking.booking && booking.booking.id) {
+          this.bookingId = booking.booking.id;
+        }
       }
     });
 
@@ -236,7 +240,7 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   onSubscriptionSuccess($event) {
-    this.store.dispatch(new MoveToStep('Compaions'));
+    this.store.dispatch(new MoveToStep('Companions'));
   }
 
   addCompanion($event) {
@@ -271,7 +275,10 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   finishBooking() {
-    this.store.dispatch(new BookingFinish(this.booking));
+    let _booking = this.booking.value;
+    _booking.id = this.bookingId;
+    _booking.subscriptionId = this.subscription.id;
+    this.store.dispatch(new BookingFinish(_booking));
   }
 
   onCardFormValid($event) {

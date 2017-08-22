@@ -59,7 +59,7 @@ export class BookingService {
     return this.client.mutate({
       mutation: COMPLETE_BOOKING,
       variables: {
-        reservationId: payload.reservationId,
+        reservationId: payload.id,
         companionsIds: payload.companionsIds,
         status: 'Completed',
         subscriptionId: payload.subscriptionId

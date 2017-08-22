@@ -19,6 +19,16 @@ reducers[ActionTypes.BOOKING_STEP1] = (state, payload) => {
   });
 };
 
+
+reducers[ActionTypes.BOOKING_STEP1_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    sending: true,
+    booking: {
+      id : payload.id
+    }
+  });
+};
+
 reducers[ActionTypes.MOVE_TO_STEP] = (state, payload) => {
     return Object.assign({}, state, {
       sending: false,

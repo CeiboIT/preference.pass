@@ -3,6 +3,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import {
   ActionTypes, BookingFinishSuccess, BookingStep1Success, GetValidSubscriptionCompanionsSuccess, MoveToStep
 } from '../actions/booking';
+import { ActionTypes as SubscriptionActions } from '../actions/subscription';
 import { BookingService } from '../services/booking.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toArray';
@@ -36,6 +37,18 @@ export class BookingEffects {
           console.log(err);
           return Observable.of({ type: ActionTypes.BOOKING_STEP1_FAILURE, payload: err });
         } );
+    });
+
+
+
+  @Effect()
+  BookingSubscription: Observable<{}> = this.action$
+    .ofType(SubscriptionActions.POST_SUBSCRIPTION_SUCCESS)
+    .map(action => action.payload)
+    .map((payload) => {
+      return new MoveToStep({
+        step: 'Companions', subscription: payload
+      });
     });
 
   @Effect()

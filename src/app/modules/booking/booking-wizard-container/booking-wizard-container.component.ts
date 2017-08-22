@@ -240,7 +240,7 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   onSubscriptionSuccess($event) {
-    this.store.dispatch(new MoveToStep('Companions'));
+    console.log($event);
   }
 
   addCompanion($event) {

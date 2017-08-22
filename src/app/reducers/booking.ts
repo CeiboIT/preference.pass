@@ -1,5 +1,6 @@
 const reducers = {};
 import { ActionTypes, Actions } from '../actions/booking';
+import { ActionTypes as SubscriptionActions } from '../actions/subscription';
 
 // Status ---> Details, Details Companions Subscription Completed
 

@@ -14,7 +14,7 @@ import * as _ from 'lodash';
       <div class="row">
         <div class="col-12">
           <app-companion-charge-form
-            *ngIf="!limits.forAdults && !limits.forKids"
+            *ngIf="!limits.forAdults || !limits.forKids"
             [parent]="newCompanion"
             [adultsLimitReached]="limits.forAdults"
             [kidsLimitReached]="limits.forKids"
@@ -140,7 +140,6 @@ export class CompanionsFormComponent implements OnInit {
   ngOnInit() {
       this.generateCompanionsList();
   }
-
 
   get isLimitReached() {
     return false;

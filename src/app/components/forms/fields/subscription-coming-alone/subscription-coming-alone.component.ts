@@ -15,7 +15,9 @@ export class SubscriptionComingAloneComponent implements OnInit {
   ngOnInit() { }
 
   comingAloneChange($event) {
+    console.log('checked', $event);
     this.comingAloneStatusChange.emit($event.checked);
+    this.parent.get('isComingAlone').setValue($event.checked);
   }
 
   get parentValue() {

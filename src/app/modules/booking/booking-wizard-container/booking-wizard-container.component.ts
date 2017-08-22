@@ -55,6 +55,8 @@ const _mockBooking = {
             >
             </app-booking-step-1>
           </div>
+          
+          {{ booking.value | json }}
         </div>
 
         <div class="col-md-8 offset-md-2" *ngIf="step === 2">
@@ -66,7 +68,6 @@ const _mockBooking = {
               {{ savingMessage }}
               <app-total-saving [rate]="rate" [amountOfKids]="kidsAmount" [amountOfAdults]="adultsAmount"></app-total-saving>
             </h1>
-
           </div>
 
           <h2 class="col-12 text-center">
@@ -81,19 +82,30 @@ const _mockBooking = {
             (onSuccess)="step2Success($event)"
           >
           </app-booking-step-2>
+
+
         </div>
       </div>
       
       <div *ngIf="bookingStep === 'Subscription'" class="col-md-8 offset-md-2">
+        <div class="row">
+          <div class="col-12">
+            <button md-button color="primary" (click)="backToStep1()">
+              Back
+            </button>            
+          </div>
+        </div>
         <app-subscription-wizard
           [kidsAmount]="booking.value.kidsAmount"
           [adultsAmount]="booking.value.adultsAmount"
+          [isComingAlone]="booking.value.isComingAlone"
           [startsAt]="booking.value.executionDate"
           (subscriptionSuccess)="onSubscriptionSuccess($event)"
           (subscriptionError)="onSubscriptionError($event)"
         >
         </app-subscription-wizard>
       </div>
+      
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
         <div class="row">
@@ -104,13 +116,15 @@ const _mockBooking = {
         <app-companions-form [parent]="booking"
           (onAddCompanionSubmit)="addCompanion($event)"
           [subscription]=" activeSubscription$ | async"
-          [companions]=" companions$ | async "
+          [companions]=" companions$ | async"
           [booking]="booking.value"
         >
         </app-companions-form>
+        
+        <button class="button-success">
+          Finish Booking
+        </button>
       </div>
-      
-      
     </div>
   `,
   styles: [
@@ -139,9 +153,6 @@ export class BookingWizardContainerComponent implements OnInit {
   public activity;
   public step = 1;
   public bookingStep = '';
-  public mockBooking = _mockBooking;
-  public mockSubscription = mockSubscription;
-  public mockCompanions = mockCompanions;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -184,6 +195,11 @@ export class BookingWizardContainerComponent implements OnInit {
     this.activeSubscription$.subscribe((subscription) => {
       this.subscription = subscription;
     });
+  }
+
+  backToStep1() {
+    this.store.dispatch(new MoveToStep({step: 'Details'}));
+    this.step = 1;
   }
 
   get kidsAmount() {
@@ -229,6 +245,10 @@ export class BookingWizardContainerComponent implements OnInit {
     let _booking = this.booking.value;
     _booking.activityId = this.activity.id;
     _booking.owner = this.user.id;
+    if (_booking.isComingAlone) {
+      _booking.kidsAmount = 0;
+      _booking.adultsAmount = 0;
+    }
     const _rate = this.rate;
     _booking.rate = {
       currency: _rate.currency,

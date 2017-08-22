@@ -24,6 +24,7 @@ export class SubscriptionService {
       });
 
       this.createAuthorizationHeader(headers);
+      console.log('Subscription Body: ', body);
       let subscription = JSON.stringify(body);
       this.http.post(this.endpoint, subscription, {
         headers: headers

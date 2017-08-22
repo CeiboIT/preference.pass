@@ -191,6 +191,9 @@ export class BookingWizardContainerComponent implements OnInit {
       }
     });
 
+
+    this.store.dispatch(new MoveToStep({step: 'Companions'}));
+
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;

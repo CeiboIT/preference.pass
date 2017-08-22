@@ -4,7 +4,7 @@ declare var MaterialAvatar;
 @Component({
   selector: 'app-person-card',
   template: `    
-    <md-card class="person-card" (click)="cardSelected()">
+    <md-card class="person-card mb-1" (click)="cardSelected()">
       <md-card-content>
         <div class="row">
           <div class="col-3">
@@ -21,7 +21,7 @@ declare var MaterialAvatar;
                   </strong>
                 </div>
                 <div>
-                  {{ person.email}}
+                  {{ person.email }}
                 </div>
               </div>
             </div>

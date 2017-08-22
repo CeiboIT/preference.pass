@@ -25,7 +25,7 @@ const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marco
     "subscriptions": [], "__typename": "Companion" }
 ]
 
-const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 1, "adults": 1, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
+const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 2, "adults": 2, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
   { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
 
 ], "__typename": "Subscription" };
@@ -109,7 +109,7 @@ const _mockBooking = {
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
         <div class="row">
-          <h2>
+          <h2 class="w-100 text-center">
             Charge companions to your subscription
           </h2>
         </div>

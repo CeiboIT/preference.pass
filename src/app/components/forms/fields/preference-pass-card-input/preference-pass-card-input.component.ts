@@ -8,7 +8,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
       <md-input-container class="input-full-width">
         <input type="text" mdInput placeholder="Card Number" formControlName="code">
       </md-input-container>
-     
     </div>
   `
 })

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SubscriptionWizardComponent } from './subscription-wizard.component';
 import { CompanionsAmountContainerComponent } from './companions-amount-container/companions-amount-container.component';
 import { CompanionAmountModule } from '../../../components/forms/companion-amount/companion-amount.module';
-import { MdButtonModule, MdCardModule } from '@angular/material';
+import { MdButtonModule, MdCardModule, MdSelectModule } from '@angular/material';
 import { SubscriptionPricingContainerModule } from './subscription-pricing-container/subscription-pricing-container.module';
 import { DiscountCardContainerModule } from './discount-card-container/discount-card-container.module';
 import { PaymentsComponentsModule } from './../../../components/forms/payment/payment-form.module';
@@ -13,6 +13,7 @@ import { SubscriptionStep1Component } from './subscription-step-1/subscription-s
 import { SubscriptionStep2Component } from './subscription-step-2/subscription-step-2.component';
 import { SubscriptionStep3Component } from './subscription-step-3/subscription-step-3.component';
 import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
+import {FieldsModule} from '../../../components/forms/fields/fields.module';
 
 @NgModule({
   imports: [
@@ -24,7 +25,9 @@ import {DateSelectModule} from '../../../components/forms/fields/date-select/dat
     PaymentsComponentsModule,
     MdButtonModule,
     MdCardModule,
-    DateSelectModule
+    MdSelectModule,
+    DateSelectModule,
+    FieldsModule
   ],
   declarations: [
     SubscriptionWizardComponent,

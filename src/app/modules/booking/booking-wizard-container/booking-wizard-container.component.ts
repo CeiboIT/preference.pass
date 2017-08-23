@@ -55,8 +55,6 @@ const _mockBooking = {
             >
             </app-booking-step-1>
           </div>
-          
-          {{ booking.value | json }}
         </div>
 
         <div class="col-md-8 offset-md-2" *ngIf="step === 2">
@@ -190,7 +188,7 @@ export class BookingWizardContainerComponent implements OnInit {
     });
 
 
-    // this.store.dispatch(new MoveToStep({step: 'Companions'}));
+    this.store.dispatch(new MoveToStep({step: 'Details'}));
 
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {

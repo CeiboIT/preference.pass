@@ -6,9 +6,11 @@ import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
 import { stripeKey } from '../../../constants/stripe';
 import * as moment from 'moment';
+import {generateDatesInterval} from '../../../utils/dates';
 const _today = moment();
 const _inthreemonths = _today.clone();
 _inthreemonths.add(3, 'months');
+
 interface DiscountValidationResponse {
   err?: any;
   valid?: boolean;
@@ -37,7 +39,7 @@ interface DiscountValidationResponse {
           <div >
             <button md-button color="primary" (click)="claim()">
               Claim discount
-            </button>   
+            </button>
           </div>
           <div>
             <h2>
@@ -67,9 +69,11 @@ interface DiscountValidationResponse {
             <h2>
               Select your subscription start date
             </h2>
-            <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"
-                             [initialDate]="startsAt" [limitDate]="limitDate"
-            ></app-date-select>
+            <app-subscription-start-date [parent]="paymentRequest"
+              (onDateSelected)="onStartDateSelected($event)" 
+              [limitDate]="limitDate"
+            >
+            </app-subscription-start-date>
           </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
@@ -78,6 +82,7 @@ interface DiscountValidationResponse {
                                                 [hasDiscount]="hasDiscount"
             >
             </app-subscription-pricing-container>
+
           </div>
         </div>
 
@@ -103,8 +108,6 @@ interface DiscountValidationResponse {
         <button md-button (click)="next()" [disabled]="step === 3 || hasDiscountCard">
           CONTINUE
         </button>
-        
-        {{ paymentRequest.value | json }}
       </div>
     </md-card>
   </div>
@@ -131,7 +134,7 @@ export class SubscriptionWizardComponent implements OnInit {
   @Input() adultsAmount;
   @Input() isComingAlone;
   @Input() startsAt = _today;
-  public limitDate = _inthreemonths;
+  public limitDate;
 
   public subscription$: Observable<any>;
   public paymentRequest;
@@ -146,6 +149,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public payLoading$: Observable<any>;;
   public totalPay = 0;
   public plan;
+  public selectableDates = [];
   public claimDiscount: boolean = false;
   constructor(
     private store: Store<any>,
@@ -162,6 +166,10 @@ export class SubscriptionWizardComponent implements OnInit {
     this.claimDiscount = true;
   }
 
+  onStartDateSelected($event) {
+    this.paymentRequest.get('value').startsAt($event.value);
+  }
+
   ngOnInit() {
     this.paymentRequest = this.fb.group({
       kidsAmount: [this.kidsAmount || 0],
@@ -171,6 +179,9 @@ export class SubscriptionWizardComponent implements OnInit {
       plan: [''],
       cardToken: ['']
     });
+
+    this.limitDate = moment(this.startsAt).clone();
+
     this.discountCard = this.fb.group({
       discountCardCode: ['']
     });
@@ -191,6 +202,8 @@ export class SubscriptionWizardComponent implements OnInit {
     const _code = $event.value.code;
     this.store.dispatch(new ValidateCode(_code));
   }
+
+
 
   back() {
     this.step --;

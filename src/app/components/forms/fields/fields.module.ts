@@ -23,6 +23,7 @@ import { SubscriptionComingAloneComponent } from './subscription-coming-alone/su
 import {CompanionsSelectorComponent} from './companions-selector/companions-selector.component';
 import { PreferencePassCardInputComponent } from './preference-pass-card-input/preference-pass-card-input.component';
 import { DiscountCodeInputComponent } from './discount-code-input/discount-code-input.component';
+import { SubscriptionStartDateComponent } from './subscription-start-date/subscription-start-date.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { DiscountCodeInputComponent } from './discount-code-input/discount-code-
     SubscriptionComingAloneComponent,
     CompanionsSelectorComponent,
     PreferencePassCardInputComponent,
-    DiscountCodeInputComponent
+    DiscountCodeInputComponent,
+    SubscriptionStartDateComponent
   ],
   exports: [
     AmountInputComponent,
@@ -68,7 +70,8 @@ import { DiscountCodeInputComponent } from './discount-code-input/discount-code-
     SubscriptionComingAloneComponent,
     CompanionsSelectorComponent,
     PreferencePassCardInputComponent,
-    DiscountCodeInputComponent
+    DiscountCodeInputComponent,
+    SubscriptionStartDateComponent
   ]
 })
 export class FieldsModule { }

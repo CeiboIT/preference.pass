@@ -23,15 +23,17 @@ export class SubscriptionStartDateComponent implements OnInit {
   selectableDates;
   constructor() { }
   ngOnInit() {
-    this.parent.get('plan').valueChanges.subscribe(data => {
+    this.plan = this.parent.get('plan').value;
+    this.parent.get('plan').valueChanges.subscribe((data) => {
+      console.log(data);
       if (data) {
         this.plan = data;
         this.selectableDates = this.generateSelectableDates();
         this.parent.get('startsAt').setValue(this.initialDate);
       }
     });
-    this.generateSelectableDates();
     this.parent.get('startsAt').setValue(this.initialDate);
+    this.generateSelectableDates();
   }
 
   generateSelectableDates() {

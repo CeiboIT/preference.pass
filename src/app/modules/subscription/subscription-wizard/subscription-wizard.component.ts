@@ -42,12 +42,9 @@ interface DiscountValidationResponse {
             </button>
           </div>
           <div>
-            <h2>
-              Companions to add to your subscription
-            </h2>
             <!--<app-companion-amount [parent]="paymentRequest"></app-companion-amount>-->
-            <div class="row">
-              <div class="col-6">
+            <div class="row" *ngIf="adultsAmount || kidsAmount">
+              <div class="col-6" *ngIf="adultsAmount">
                 <h2>
                   Adults
                 </h2>
@@ -55,7 +52,7 @@ interface DiscountValidationResponse {
                   {{adultsAmount}}
                 </p>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="kidsAmount">
                 <h2>
                   Kids
                 </h2>
@@ -80,7 +77,6 @@ interface DiscountValidationResponse {
                 Select your subscription start date
               </h2>
               
-              {{ paymentRequest.value | json  }}
               <app-subscription-start-date [parent]="paymentRequest"
                                            (onDateSelected)="onStartDateSelected($event)"
                                            [limitDate]="limitDate"
@@ -181,7 +177,7 @@ export class SubscriptionWizardComponent implements OnInit {
       adultsAmount: [this.adultsAmount || 0],
       startsAt: [this.startsAt || ''],
       isComingAlone: [this.isComingAlone || false],
-      plan: [''],
+      plan: ['FourDays'],
       cardToken: ['']
     });
 

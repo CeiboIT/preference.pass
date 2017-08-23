@@ -18,18 +18,20 @@ import * as moment from 'moment';
 export class SubscriptionStartDateComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() limitDate;
+  @Input() initialDate;
   plan;
   selectableDates;
   constructor() { }
   ngOnInit() {
-    this.parent.valueChanges.subscribe(data => {
-      if (data.plan) {
-        this.plan = data.plan;
+    this.parent.get('plan').valueChanges.subscribe(data => {
+      if (data) {
+        this.plan = data;
         this.selectableDates = this.generateSelectableDates();
+        this.parent.get('startsAt').setValue(this.initialDate);
       }
     });
-
     this.generateSelectableDates();
+    this.parent.get('startsAt').setValue(this.initialDate);
   }
 
   generateSelectableDates() {

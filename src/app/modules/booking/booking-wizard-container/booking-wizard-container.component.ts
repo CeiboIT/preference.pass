@@ -105,12 +105,12 @@ const _mockBooking = {
       
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
-        <div class="row">
+        <div *ngIf="!isComingAlone" class="row">
           <h2 class="w-100 text-center">
             Charge companions to your subscription
           </h2>
         </div>
-        <app-companions-form [parent]="booking"
+        <app-companions-form [parent]="booking" *ngIf="!isComingAlone"
           (onAddCompanionSubmit)="addCompanion($event)"
           [subscription]="activeSubscription$ | async"
           [companions]="companions$ | async "
@@ -118,7 +118,7 @@ const _mockBooking = {
         >
         </app-companions-form>
         
-        <button (click)="finishBooking()" md-button class="button-success" [disabled]="loadingBooking">
+        <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
           <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
           Finish Booking
         </button>
@@ -133,6 +133,13 @@ const _mockBooking = {
       .button-success {
         color: white;
         background-color: green;
+        font-size: 1.6em;
+      }
+
+      @media (max-width: 767px) {
+        .button-success {
+          font-size: 1.1em;
+        }
       }
     `
   ]
@@ -230,6 +237,11 @@ export class BookingWizardContainerComponent implements OnInit {
 
   get adultsAmount() {
     return this.booking.get('adultsAmount').value +  1;
+  }
+
+  get isComingAlone() {
+    const _bookingValue = this.booking.value;
+    return (_bookingValue.isComingAlone || (_bookingValue.kidsAmount && _bookingValue.adultsAmount));
   }
 
   get rate() {

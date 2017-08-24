@@ -11,7 +11,6 @@ import * as _ from 'lodash';
   selector: 'app-companions-form',
   template: ` 
     <form class="d-flex" action="" novalidate>
-       
       <div class="p-2 w-50">
         <md-card class="p-0 text-center">
           <md-card-content class="p-3">
@@ -26,8 +25,6 @@ import * as _ from 'lodash';
           </md-card-content>
         </md-card>
       </div>
-
-
         <div class="align-self-stretch p-2 w-100">
           <md-card class="p-0">
             <h1 class="title">Available companions</h1>

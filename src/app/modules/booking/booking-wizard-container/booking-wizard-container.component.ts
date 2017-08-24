@@ -155,6 +155,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public step = 1;
   public bookingStep = '';
   private bookingId = '';
+  selectedRateId;
   private activeSubscriptionId = '';
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
@@ -188,6 +189,10 @@ export class BookingWizardContainerComponent implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
+    if (this.activatedRoute.snapshot.queryParams){
+      this.selectedRateId = this.activatedRoute.snapshot.queryParams.rateId;
+    }
+    console.log(this.activatedRoute.snapshot);
     this.store.dispatch(new GetDepartures(id));
     this.activity$.subscribe((data) => {
       console.log(data);
@@ -228,8 +233,18 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   get rate() {
+    let rate ;
     if (this.activity &&  this.activity.rates && this.activity.rates.length === 1) {
-      return this.activity.rates[0];
+      rate = this.activity.rates[0];
+    };
+    if (this.activity && this.activity.rates && this.selectedRateId) {
+      this.activity.rates.some(r => {
+        if (r.id === this.selectedRateId) {
+          rate = r;
+          return true;
+        }
+      });
+      return rate;
     }
   }
 

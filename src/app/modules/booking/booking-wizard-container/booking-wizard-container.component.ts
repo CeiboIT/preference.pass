@@ -81,8 +81,6 @@ const _mockBooking = {
             (onSuccess)="step2Success($event)"
           >
           </app-booking-step-2>
-
-
         </div>
       </div>
       

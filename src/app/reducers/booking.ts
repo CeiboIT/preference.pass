@@ -20,13 +20,18 @@ reducers[ActionTypes.BOOKING_STEP1] = (state, payload) => {
   });
 };
 
-
 reducers[ActionTypes.BOOKING_STEP1_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
-    sending: true,
+    sending: false,
     booking: {
       id : payload.id
     }
+  });
+};
+
+reducers[ActionTypes.BOOKING_STEP1_FAILURE] = (state, payload) => {
+  return Object.assign({}, state, {
+    sending: false
   });
 };
 
@@ -36,6 +41,24 @@ reducers[ActionTypes.MOVE_TO_STEP] = (state, payload) => {
       currentStep: payload.step,
       activeSubscription: payload.subscription
     });
+};
+
+reducers[ActionTypes.BOOKING_FINISH] = (state, payload) => {
+  return Object.assign({}, state, {
+    loadingBooking: true
+  });
+};
+
+reducers[ActionTypes.BOOKING_FINISH_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    loadingBooking: false
+  });
+};
+
+reducers[ActionTypes.BOOKING_FINISH_FAILURE] = (state, payload) => {
+  return Object.assign({}, state, {
+    loadingBooking: false
+  });
 };
 
 export default function reducer(state = initialState, action: Actions) {

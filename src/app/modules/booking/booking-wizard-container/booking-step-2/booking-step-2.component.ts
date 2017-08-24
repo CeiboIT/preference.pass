@@ -14,8 +14,10 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
     <div class="row">
       <div class="col-12 text-center">
         <button md-raised-button 
+                [disabled]="loading"
                 (click)="bookNow()"
                 class="button-success w-100 py-2 mt-3" type="button">
+          <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> </span>
           Book&nbsp;now&nbsp;and&nbsp;save <app-total-saving
           [rate]="rate"
           [amountOfKids]="booking.kidsAmount"
@@ -46,6 +48,7 @@ export class BookingStep2Component implements OnInit {
   @Input() departures;
   @Input() rate;
   @Input() activity;
+  @Input() loading;
   @Output() onSuccess: EventEmitter<any> = new EventEmitter();
   constructor() { }
 

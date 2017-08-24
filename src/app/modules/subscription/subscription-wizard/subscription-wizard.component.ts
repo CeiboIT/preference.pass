@@ -61,7 +61,12 @@ interface DiscountValidationResponse {
             </div>
           </div>
           <div>
-
+            <h2>
+              Select your subscription start date
+            </h2>
+            <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"
+                             [initialDate]="startsAt" [limitDate]="limitDate"
+            ></app-date-select>
           </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
@@ -170,6 +175,8 @@ export class SubscriptionWizardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    document.body.scrollTop = 0;
     this.paymentRequest = this.fb.group({
       kidsAmount: [this.kidsAmount || 0],
       adultsAmount: [this.adultsAmount || 0],

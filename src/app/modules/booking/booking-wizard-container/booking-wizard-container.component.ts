@@ -244,8 +244,8 @@ export class BookingWizardContainerComponent implements OnInit {
           return true;
         }
       });
-      return rate;
     }
+    return rate;
   }
 
   step2Success($event) {

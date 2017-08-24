@@ -6,9 +6,19 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-subscription-start-date',
   template: `
-    <div [formGroup]="parent" >
+    <div [formGroup]="parent">
+      <!-- <div *ngIf="!showSelect">
+        <md-card  (click)="selectDate(date)" *ngFor="let date of selectableDates">
+          <md-card-content>
+            {{
+            date.format('MMMM DD YYYY')
+            }}
+          </md-card-content>
+        </md-card>        
+      </div> -->
+      
       <select placeholder="Subscription Starting Date" formControlName="startsAt">
-        <option *ngFor="let date of selectableDates" [value]="date">
+        <option *ngFor="let date of selectableDates" [value]="date.toISOString()">
           {{ date.format('MMMM DD YYYY')  }}
         </option>
       </select>
@@ -34,6 +44,18 @@ export class SubscriptionStartDateComponent implements OnInit {
     });
     this.parent.get('startsAt').setValue(this.initialDate);
     this.generateSelectableDates();
+  }
+
+  selectDate(date) {
+    this.parent.get('startsAt').setValue(date.toISOString());
+  }
+
+  get showSelect(){
+    if (this.selectableDates) {
+      return this.selectableDates.length > 5;
+    } else {
+      return false;
+    }
   }
 
   generateSelectableDates() {

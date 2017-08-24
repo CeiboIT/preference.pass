@@ -6,7 +6,6 @@ import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
 import { stripeKey } from '../../../constants/stripe';
 import * as moment from 'moment';
-import {generateDatesInterval} from '../../../utils/dates';
 const _today = moment();
 const _inthreemonths = _today.clone();
 _inthreemonths.add(3, 'months');
@@ -42,7 +41,6 @@ interface DiscountValidationResponse {
             </button>
           </div>
           <div>
-            <!--<app-companion-amount [parent]="paymentRequest"></app-companion-amount>-->
             <div class="row" *ngIf="adultsAmount || kidsAmount">
               <div class="col-6" *ngIf="adultsAmount">
                 <h2>
@@ -177,7 +175,7 @@ export class SubscriptionWizardComponent implements OnInit {
       adultsAmount: [this.adultsAmount || 0],
       startsAt: [this.startsAt || ''],
       isComingAlone: [this.isComingAlone || false],
-      plan: ['FourDays'],
+      plan: [''],
       cardToken: ['']
     });
 

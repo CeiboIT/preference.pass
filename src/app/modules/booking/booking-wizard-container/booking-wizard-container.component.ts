@@ -161,8 +161,8 @@ export class BookingWizardContainerComponent implements OnInit {
      pickUpTime: [''],
      companionsIds: [''],
      isComingAlone: [''],
-     kidsAmount: [''],
-     adultsAmount: ['']
+     kidsAmount: [0],
+     adultsAmount: [0]
    });
 
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');

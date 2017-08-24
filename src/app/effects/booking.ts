@@ -58,9 +58,7 @@ export class BookingEffects {
     .switchMap((payload) => {
       return this.bookingService.completeBooking(payload)
         .map((result) => {
-          return new BookingFinishSuccess(
-            result.data['updateReservation']
-          );
+          return new BookingFinishSuccess(result.data['updateReservation'])
         })
         .catch((err) => {
           console.log(err);

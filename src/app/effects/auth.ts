@@ -11,8 +11,6 @@ import {
   RegisterWithEmailAndPasswordSuccess, RegisterWithFacebookFailure, RegisterWithFacebookSuccess
 } from '../actions/auth';
 
-import { OpenAlert } from "../actions/layout";
-
 import {AuthService} from '../services/auth.service';
 
 @Injectable()
@@ -23,11 +21,8 @@ export class AuthEffects {
     .ofType(ActionTypes.LOGIN_WITH_EMAIL)
     .map(action => action.payload)
     .switchMap((payload) => {
-      console.log(payload);
       return this.authService.passswordLessSignUp(payload)
-        .then(result => (
-          new LoginWithEmailSuccess({}), new OpenAlert({type: 'success', title: 'Success!', message: 'Please check your e-mail.'}))
-        )
+        .then(result => new LoginWithEmailSuccess({}))
         .catch(err => new LoginWithEmailFailure({}));
     });
   @Effect()

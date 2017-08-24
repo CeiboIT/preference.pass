@@ -79,6 +79,7 @@ const _mockBooking = {
             [activity]="activity$ | async "
             [departures]="departures$ | async "
             [rate]="rate"
+            [loading]="loading$ | async"
             (onSuccess)="step2Success($event)"
           >
           </app-booking-step-2>
@@ -121,7 +122,8 @@ const _mockBooking = {
         >
         </app-companions-form>
         
-        <button (click)="finishBooking()" md-button class="button-success">
+        <button (click)="finishBooking()" md-button class="button-success" [disabled]="loadingBooking">
+          <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
           Finish Booking
         </button>
       </div>
@@ -147,6 +149,9 @@ export class BookingWizardContainerComponent implements OnInit {
   public companions$: Observable<any>;
   public bookingStep$: Observable<any>;
   public activeSubscription$: Observable<any>;
+  public loading$: Observable<any>;
+  public loadingBooking$: Observable<any>;
+  public loadingBooking;
   public user;
   public subscription;
   public departures;
@@ -173,10 +178,16 @@ export class BookingWizardContainerComponent implements OnInit {
     this.activity$ = onStateChangeObservable(this.store, 'activities.selectedActivity');
     this.bookingStep$ = onStateChangeObservable(this.store, 'booking');
     this.activeSubscription$ = onStateChangeObservable(this.store, 'booking.activeSubscription');
+    this.loading$ = onStateChangeObservable(this.store, 'booking.sending');
+    this.loadingBooking$ = onStateChangeObservable(this.store, 'booking.loadingBooking');
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);
     this.activity$.subscribe(activity => this.activity = activity);
+
+    this.loadingBooking$.subscribe(status => {
+      this.loadingBooking = status;
+    })
   }
 
   ngOnInit() {
@@ -209,6 +220,7 @@ export class BookingWizardContainerComponent implements OnInit {
   backToStep1() {
     this.store.dispatch(new MoveToStep({step: 'Details'}));
     this.step = 1;
+    document.body.scrollTop = 0;
   }
 
   get kidsAmount() {

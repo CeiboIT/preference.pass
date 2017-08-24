@@ -121,6 +121,7 @@ export class BookingStep1Component implements OnInit {
 
   onStep1Submit($event) {
     this.onSubmit.emit($event);
+    document.body.scrollTop = 0;
   }
 
 

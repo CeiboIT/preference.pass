@@ -163,6 +163,8 @@ export class SubscriptionWizardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    document.body.scrollTop = 0;
     this.paymentRequest = this.fb.group({
       kidsAmount: [this.kidsAmount || 0],
       adultsAmount: [this.adultsAmount || 0],

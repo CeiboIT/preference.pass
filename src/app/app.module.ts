@@ -34,6 +34,7 @@ import {OnboardingModalComponent} from './components/widgets/onboarding-modal/on
 import { AlertComponent } from "./components/widgets/alert/alert.component";
 import { AlertlModule } from "./components/widgets/alert/alert.module";
 import {BookingEffects} from './effects/booking';
+import { AlertsEffects } from "./effects/alerts";
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -68,6 +69,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     EffectsModule.run(BookingEffects),
+    EffectsModule.run(AlertsEffects),
     ToolbarModule,
     FooterModule,
     PhotoswipeModule,

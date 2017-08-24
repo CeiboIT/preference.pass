@@ -19,6 +19,7 @@ export class ActivitiesQueries {
                 startsAt
                 finishAt
                 rates {
+                    id
                     name
                     discountPrice
                     originalPrice
@@ -48,6 +49,7 @@ export class ActivitiesQueries {
             mainPhoto
             headline
             rates {
+              id
               name
               discountPrice
               originalPrice
@@ -78,6 +80,7 @@ export class ActivitiesQueries {
           startsAt
           finishAt
           rates {
+            id
             name
             discountPrice
             originalPrice
@@ -138,6 +141,7 @@ export class ActivitiesQueries {
                     formatedAddress
                 }
                 rates {
+                  id
                   name
                   originalPrice
                   discountPrice
@@ -150,6 +154,7 @@ export class ActivitiesQueries {
                 finishAt
                 scheduleExplanation
                 rates {
+                  id
                   name
                   originalPrice
                   discountPrice

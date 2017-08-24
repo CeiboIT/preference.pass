@@ -53,7 +53,9 @@ export class AuthService {
       localStorage.removeItem('idToken');
       localStorage.removeItem('access_token');
       localStorage.setItem('logout', 'true');
-      webAuth.logout({});
+      webAuth.logout({
+        returnTo: redirectTo
+      });
       resolve();
     });
   }

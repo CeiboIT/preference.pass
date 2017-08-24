@@ -55,8 +55,6 @@ const _mockBooking = {
             >
             </app-booking-step-1>
           </div>
-          
-          {{ booking.value | json }}
         </div>
 
         <div class="col-md-8 offset-md-2" *ngIf="step === 2">
@@ -83,8 +81,6 @@ const _mockBooking = {
             (onSuccess)="step2Success($event)"
           >
           </app-booking-step-2>
-
-
         </div>
       </div>
       
@@ -159,6 +155,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public step = 1;
   public bookingStep = '';
   private bookingId = '';
+  selectedRateId;
   private activeSubscriptionId = '';
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
@@ -168,8 +165,8 @@ export class BookingWizardContainerComponent implements OnInit {
      pickUpTime: [''],
      companionsIds: [''],
      isComingAlone: [''],
-     kidsAmount: [''],
-     adultsAmount: ['']
+     kidsAmount: [0],
+     adultsAmount: [0]
    });
 
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
@@ -192,6 +189,10 @@ export class BookingWizardContainerComponent implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
+    if (this.activatedRoute.snapshot.queryParams){
+      this.selectedRateId = this.activatedRoute.snapshot.queryParams.rateId;
+    }
+    console.log(this.activatedRoute.snapshot);
     this.store.dispatch(new GetDepartures(id));
     this.activity$.subscribe((data) => {
       console.log(data);
@@ -201,7 +202,7 @@ export class BookingWizardContainerComponent implements OnInit {
     });
 
 
-    // this.store.dispatch(new MoveToStep({step: 'Companions'}));
+    this.store.dispatch(new MoveToStep({step: 'Details'}));
 
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
@@ -232,9 +233,19 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   get rate() {
+    let rate ;
     if (this.activity &&  this.activity.rates && this.activity.rates.length === 1) {
-      return this.activity.rates[0];
+      rate = this.activity.rates[0];
+    };
+    if (this.activity && this.activity.rates && this.selectedRateId) {
+      this.activity.rates.some(r => {
+        if (r.id === this.selectedRateId) {
+          rate = r;
+          return true;
+        }
+      });
     }
+    return rate;
   }
 
   step2Success($event) {

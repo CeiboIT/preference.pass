@@ -48,6 +48,7 @@ export class ActivityContainerComponent implements OnInit {
     console.log('Booking now');
     this.userService.checkUserCompletion(this.user, (goToNext) => {
       if (goToNext) {
+
         this.router.navigate(['booking/wizard/' + this.activity.id]);
       }
     });
@@ -61,7 +62,14 @@ export class ActivityContainerComponent implements OnInit {
       this.router.navigate(['subscription/wizard']);
     }*/
     const navigateTo = 'booking/wizard/' + this.activity.id;
-    this.router.navigate([navigateTo]);
+    if (this.activity.rates && this.activity.rates.length > 1) {
+      this.router.navigate([navigateTo], {queryParams: {
+        rateId: $event.id
+      }});
+    } else {
+      this.router.navigate([navigateTo]);
+    }
+
     /*this.userService.checkUserCompletion(this.user, (goToNext) => {
       if (goToNext) {
         this.router.navigate([navigateTo]);

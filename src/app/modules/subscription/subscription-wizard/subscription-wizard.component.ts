@@ -9,6 +9,7 @@ import * as moment from 'moment';
 const _today = moment();
 const _inthreemonths = _today.clone();
 _inthreemonths.add(3, 'months');
+
 interface DiscountValidationResponse {
   err?: any;
   valid?: boolean;
@@ -37,15 +38,11 @@ interface DiscountValidationResponse {
           <div >
             <button md-button color="primary" (click)="claim()">
               Claim discount
-            </button>   
+            </button>
           </div>
           <div>
-            <h2>
-              Companions to add to your subscription
-            </h2>
-            <!--<app-companion-amount [parent]="paymentRequest"></app-companion-amount>-->
-            <div class="row">
-              <div class="col-6">
+            <div class="row" *ngIf="adultsAmount || kidsAmount">
+              <div class="col-6" *ngIf="adultsAmount">
                 <h2>
                   Adults
                 </h2>
@@ -53,7 +50,7 @@ interface DiscountValidationResponse {
                   {{adultsAmount}}
                 </p>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="kidsAmount">
                 <h2>
                   Kids
                 </h2>
@@ -63,21 +60,22 @@ interface DiscountValidationResponse {
               </div>
             </div>
           </div>
-          <div>
-            <h2 class="pb-3">
-              Select your subscription start date
-            </h2>
-            <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"
-                             [initialDate]="startsAt" [limitDate]="limitDate"
-            ></app-date-select>
-          </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
                                                 [selectPlan]="selectPlan"
                                                 (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
-                                                [hasDiscount]="hasDiscount"
-            >
+                                                [hasDiscount]="hasDiscount">
             </app-subscription-pricing-container>
+            <div *ngIf="paymentRequest.value.plan">
+              <h2>
+                Select your subscription start date
+              </h2>
+              <app-subscription-start-date [parent]="paymentRequest"
+                                           (onDateSelected)="onStartDateSelected($event)"
+                                           [limitDate]="limitDate"
+                                           [initialDate]="startsAt"
+              ></app-subscription-start-date>
+            </div>
           </div>
         </div>
 
@@ -103,8 +101,6 @@ interface DiscountValidationResponse {
         <button md-button (click)="next()" [disabled]="step === 3 || hasDiscountCard">
           CONTINUE
         </button>
-        
-        {{ paymentRequest.value | json }}
       </div>
     </md-card>
   </div>
@@ -131,7 +127,7 @@ export class SubscriptionWizardComponent implements OnInit {
   @Input() adultsAmount;
   @Input() isComingAlone;
   @Input() startsAt = _today;
-  public limitDate = _inthreemonths;
+  public limitDate;
 
   public subscription$: Observable<any>;
   public paymentRequest;
@@ -146,6 +142,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public payLoading$: Observable<any>;;
   public totalPay = 0;
   public plan;
+  public selectableDates = [];
   public claimDiscount: boolean = false;
   constructor(
     private store: Store<any>,
@@ -162,6 +159,10 @@ export class SubscriptionWizardComponent implements OnInit {
     this.claimDiscount = true;
   }
 
+  onStartDateSelected($event) {
+    this.paymentRequest.get('value').startsAt($event.value);
+  }
+
   ngOnInit() {
 
     document.body.scrollTop = 0;
@@ -173,6 +174,9 @@ export class SubscriptionWizardComponent implements OnInit {
       plan: [''],
       cardToken: ['']
     });
+
+    this.limitDate = moment(this.startsAt).clone();
+
     this.discountCard = this.fb.group({
       discountCardCode: ['']
     });
@@ -193,6 +197,8 @@ export class SubscriptionWizardComponent implements OnInit {
     const _code = $event.value.code;
     this.store.dispatch(new ValidateCode(_code));
   }
+
+
 
   back() {
     this.step --;

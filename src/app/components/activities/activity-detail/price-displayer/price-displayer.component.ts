@@ -22,6 +22,6 @@ export class PriceDisplayerComponent implements OnInit {
 	}
 
 	get displayPrice () {
-		return (this.rates.length > 1 ? 'from' : 'at') + ' ' + this.lowestRate.currency + ' ' + this.lowestRate.discountPrice;
+		return (this.rates.length > 1 ? 'from' : 'at') + ' ' + this.lowestRate.discountPrice + ' ' + this.lowestRate.currency;
 	}
 }

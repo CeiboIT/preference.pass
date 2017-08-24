@@ -47,7 +47,6 @@ const ADD_COMPANION_TO_SUBSCRIPTION = gql`
 export class UserService {
   constructor(private client: Apollo, private store: Store<any>) { }
   createUser(userData: User) {
-    console.warn('createUser ',userData);
 
     const _createUser =  gql`
       mutation userCreation(

@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-subscription-pricing-container',
   template: `    
     <div class="d-flex flex-column text-center w-100">
-      <h2 class="mb-4">
+      <h2 class="my-4">
         Select a pricing plan
       </h2>
       <app-subscription-pricing-form [hasDiscount]="hasDiscount" 

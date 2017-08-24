@@ -64,7 +64,7 @@ interface DiscountValidationResponse {
             </div>
           </div>
           <div>
-            <h2>
+            <h2 class="pb-3">
               Select your subscription start date
             </h2>
             <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"

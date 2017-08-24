@@ -61,7 +61,7 @@ export class AlertsEffects {
 
     @Effect()
     PostSubscriptionFailure$: Observable<{}> = this.action$
-        .ofType(subscriptionActionTypes.POST_SUBSCRIPTION_SUCCESS)
+        .ofType(subscriptionActionTypes.POST_SUBSCRIPTION_FAILURE)
         .switchMap(() => {
             return this.alertService.openAlert({type: 'error', title: 'Error', message: 'An error has occurred.'});
         });

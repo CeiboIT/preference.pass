@@ -40,13 +40,11 @@ export class BookingService {
       
       mutation CompleteBooking(
         $reservationId: ID!,
-        $companionsIds: [ID!],
         $subscriptionId: ID!,
         $status: BookingState
       ) {
         updateReservation(
           id: $reservationId,
-          companionsIds: $companionsIds,
           status: $status,
           subscriptionId: $subscriptionId
         ) {

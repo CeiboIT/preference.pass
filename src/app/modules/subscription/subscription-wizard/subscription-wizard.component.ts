@@ -60,32 +60,21 @@ interface DiscountValidationResponse {
               </div>
             </div>
           </div>
-          <div>
-            <h2>
-              Select your subscription start date
-            </h2>
-            <app-date-select [parent]="paymentRequest" [parentKey]="'startsAt'"
-                             [initialDate]="startsAt" [limitDate]="limitDate"
-            ></app-date-select>
-          </div>
           <div class="mb-4" [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
                                                 [selectPlan]="selectPlan"
                                                 (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
-                                                [hasDiscount]="hasDiscount"
-            >
+                                                [hasDiscount]="hasDiscount">
             </app-subscription-pricing-container>
             <div *ngIf="paymentRequest.value.plan">
               <h2>
                 Select your subscription start date
               </h2>
-              
               <app-subscription-start-date [parent]="paymentRequest"
                                            (onDateSelected)="onStartDateSelected($event)"
                                            [limitDate]="limitDate"
                                            [initialDate]="startsAt"
-              >
-              </app-subscription-start-date>
+              ></app-subscription-start-date>
             </div>
           </div>
         </div>

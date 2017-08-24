@@ -207,19 +207,11 @@ export class BookingWizardContainerComponent implements OnInit {
         if (booking.booking && booking.booking.id) {
           this.bookingId = booking.booking.id;
         }
-        if (booking.currentStep === 'Companions'
-          && this.booking.value.isComingAlone
-          && this.subscription && this.subscription.id) {
-          this.finishBooking();
-        }
       }
     });
 
     this.activeSubscription$.subscribe((subscription) => {
       this.subscription = subscription;
-      if (this.bookingStep === 'Companions' && this.booking.value.isComingAlone) {
-        this.finishBooking();
-      };
     });
   }
 

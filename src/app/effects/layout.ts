@@ -50,7 +50,7 @@ export class LayoutEffects {
 
       this.dialog.open(AuthModalComponent, modalConfig)
         .afterClosed().subscribe(result => {
-          this.dispatchAuthAction(result.type, result.data);
+          if (result) this.dispatchAuthAction(result.type, result.data);
       });
     });
 
@@ -65,7 +65,7 @@ export class LayoutEffects {
 
       this.dialog.open(AuthModalComponent, modalConfig)
         .afterClosed().subscribe(result => {
-          this.dispatchAuthAction(result.type, result.data);
+          if (result) this.dispatchAuthAction(result.type, result.data);
       });
     });
 

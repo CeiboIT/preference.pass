@@ -10,7 +10,7 @@ import {
   RegisterWithEmailAndPasswordFailure,
   RegisterWithEmailAndPasswordSuccess, RegisterWithFacebookFailure, RegisterWithFacebookSuccess
 } from '../actions/auth';
-
+import { OpenAlert } from "../actions/layout";
 import {AuthService} from '../services/auth.service';
 
 @Injectable()
@@ -22,8 +22,8 @@ export class AuthEffects {
     .map(action => action.payload)
     .switchMap((payload) => {
       return this.authService.passswordLessSignUp(payload)
-        .then(result => new LoginWithEmailSuccess({}))
-        .catch(err => new LoginWithEmailFailure({}));
+        .then(result => (new LoginWithEmailSuccess({}), new OpenAlert({type: 'success', title: 'Success!', message: 'Please check your e-mail.'})))
+        .catch(err => (new LoginWithEmailFailure({}), new OpenAlert({type: 'error', title: 'Error', message: 'An error has occurred.'})));
     });
   @Effect()
   AuthWithGoogle: Observable<{}> = this.action$

@@ -32,6 +32,8 @@ reducers[ActionTypes.LOGOUT_SUCCESS] = (state, payload) => {
     loading: false
   });
 };
+
+
 export default function reducer(state = initialState, action: Actions) {
   return reducers[action.type] && reducers[action.type](state, action.payload) || state;
 };

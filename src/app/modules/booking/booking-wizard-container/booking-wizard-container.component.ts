@@ -123,6 +123,25 @@ const _mockBooking = {
           Finish Booking
         </button>
       </div>
+
+      <div *ngIf="bookingStep === 'FinishBooking'">
+        <div class="container text-center">
+            <md-card>
+              <app-success-animation></app-success-animation>
+
+              <h2>Finish booking successful</h2>
+
+              <div>
+                <button md-raised-button color="primary" routerLink="/">
+                  Go to landing
+                </button>
+                <button md-raised-button color="accent" routerLink="/user/bookings">
+                  Go to my bookings list
+                </button>
+              </div>
+            </md-card>
+        </div>
+      </div>
     </div>
   `,
   styles: [

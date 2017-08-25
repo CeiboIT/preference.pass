@@ -5,30 +5,7 @@ import * as moment from 'moment';
 @Component({
 	selector: 'app-user-bookings',
 	template: `
-	<!--<div class="booking" *ngFor="let booking of currentUser?.reservations">
-		{{ booking.activity | json }}
-	</div>-->
-	<div class="bookigns">
-		<div class="booking" *ngFor="let booking of currentUser?.reservations">
-			<div class="booking-image mr-xl-4 mb-4 mb-xl-0">
-				<img [src]="bookingPhoto(booking.activity?.mainPhoto?.url)" alt="{{ booking.activity?.name }}">
-			</div>
-			<div class="booking-content">
-				<h2 class="mt-0 mb-1">
-					{{ booking.activity?.name }}
-				</h2>
-					<p>
-					{{ booking.activity?.headline }}
-					</p>
-			</div>
-			<div class="booking-meta mt-4">
-				<div class="meta-item"> <i class="fa fa-map-marker"></i> {{ booking.activity?.area?.formatedAddress }}</div>
-				<div class="meta-item"><i class="fa fa-calendar-o"></i> {{ getDate(booking.executionDate) }}</div>
-				<div class="meta-item"><i class="fa fa-tag"></i> {{ booking.activity?.category?.name }}</div>
-				<div class="meta-item"><i class="fa fa-users"></i> {{ calculateCompanions(booking.adultsAmount, booking.kidsAmount ) }} companions</div>
-			</div>
-		</div>
-	</div>
+		<app-booking-detail-card *ngFor="let booking of currentUser?.reservations" [booking]="booking" [activity]="booking.activity" [pickUpLocation]="booking.pickUpLocation"></app-booking-detail-card>
 	`,
 	styleUrls: ['./user-bookings.component.scss']
 })

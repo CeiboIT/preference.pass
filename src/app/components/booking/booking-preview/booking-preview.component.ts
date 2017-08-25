@@ -4,54 +4,11 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-booking-preview',
   template: `
-    <md-card class="card-row" *ngIf="hasPickUpLocation">
-      <div class="card-row-inner">
-          <div class="card-row-image" [ngStyle]="{'background-image': 'url(' + mainPhoto + ')'}">
-              <div class="card-row-label text-center">{{ pickUpLocation?.name }}</div> 
-          </div>
+    <app-booking-detail-card [booking]="booking" [pickUpLocation]="pickUpLocation" [activity]="activity"></app-booking-detail-card>
 
-          <div class="card-row-body">
-              <h2 class="card-row-title">{{ activity?.name }}</h2>
-              <div class="card-row-content"><p> {{activity?.shortDescription}} </p>
-
-              <h2 class="card-row-title">Departs From</h2>
-              {{ pickUpLocation?.name}} - {{ pickUpLocation?.formattedAddress }}
-              </div>
-          </div>
-
-          <div class="card-row-properties">
-            <dl>
-              <dd>Date</dd><dt>{{ formattedDate }}</dt>
-              <dd *ngIf="booking.pickUpTime">Departs at:</dd><dt *ngIf="booking.pickUpTime">{{ booking.pickUpTime }}</dt>
-              <dd>Adults</dd><dt>{{ booking.adultsAmount || 1 }}</dt>
-              <dd>Kids</dd><dt>{{ booking.kidsAmount || 0 }}</dt>
-              <dd>Category</dd><dt>{{ activity?.category?.name }}</dt>
-            </dl>
-          </div>
-      </div>
-  </md-card>
-  <md-card *ngIf="hasPickUpLocation">
-    <div class="mb-3">{{ pickUpLocation?.name}} - {{ pickUpLocation?.formattedAddress }}</div>
-    <app-location-map [location]="pickUpLocation"></app-location-map>
-  </md-card>
-    
-    <md-card class="card-row" *ngIf="!hasPickUpLocation">
-      <div class="card-row-inner">
-        <div class="card-row-body">
-          <h2 class="card-row-title">{{ activity?.name }}</h2>
-          <div class="card-row-content"><p> {{activity?.shortDescription}} </p>
-          </div>
-        </div>
-        <div class="card-row-properties">
-          <dl>
-            <dd>Date</dd><dt>{{ formattedDate }}</dt>
-            <dd *ngIf="booking.pickUpTime">Departs at:</dd><dt *ngIf="booking.pickUpTime">{{ booking.pickUpTime }}</dt>
-            <dd>Adults</dd><dt>{{ booking.adultsAmount || 1 }}</dt>
-            <dd>Kids</dd><dt>{{ booking.kidsAmount || 0 }}</dt>
-            <dd>Category</dd><dt>{{ activity?.category?.name }}</dt>
-          </dl>
-        </div>
-      </div>
+    <md-card *ngIf="hasPickUpLocation">
+      <div class="mb-3">{{ pickUpLocation?.name}} - {{ pickUpLocation?.formattedAddress }}</div>
+      <app-location-map [location]="pickUpLocation"></app-location-map>
     </md-card>
   `,
   styleUrls: ['./booking-preview.component.scss']
@@ -63,24 +20,6 @@ export class BookingPreviewComponent implements OnInit {
   @Input() activity;
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.pickUpLocation);
-  }
-
-  get formattedDate() {
-    return moment(this.booking.executionDate).format('MMMM Do YYYY');
-  }
-
-  get hasPickUpLocation() {
-    return this.pickUpLocation && this.pickUpLocation.name;
-  }
-
-  get mainPhoto() {
-    if (this.pickUpLocation && this.pickUpLocation.mainPhoto) {
-      return this.pickUpLocation.mainPhoto[0].url;
-    } else {
-      return '';
-    }
-  }
+  ngOnInit() { }
 
 }

@@ -96,11 +96,16 @@ export class UserService {
               adultsAmount
               isComingAlone
               executionDate
+              pickUpLocation {
+                name
+                formattedAddress
+              }
               activity {
                 name
                 headline
                 mainPhoto
                 area {
+                  name
                   formatedAddress
                 }
                 startsAt

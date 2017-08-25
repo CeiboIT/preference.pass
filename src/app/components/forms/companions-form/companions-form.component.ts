@@ -10,9 +10,9 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-companions-form',
   template: ` 
-    <form class="d-flex" action="" novalidate *ngIf="isComingAlone">
+    <form class="d-sm-flex" action="" novalidate *ngIf="isComingAlone">
        
-      <div class="p-2 w-50">
+      <div class="p-2 w-50 companions">
         <md-card class="p-0 text-center">
           <md-card-content class="p-3">
               <app-companion-charge-form
@@ -80,6 +80,14 @@ import * as _ from 'lodash';
         padding: 16px;
         margin: 0;
       }
+
+      
+      @media (max-width: 577px) {
+        .companions {
+          width: 100%!important
+        }
+      }
+      
     `
   ]
 })

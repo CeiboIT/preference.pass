@@ -13,7 +13,7 @@ import { FroalaViewModule } from 'angular-froala-wysiwyg';
 import { HttpModule } from '@angular/http';
 import { LayoutEffects } from './effects/layout';
 import { SubscriptionEffects } from './effects/subscription';
-import { MdDialogModule } from '@angular/material';
+import { MdDialogModule, MdSnackBarModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { provideClient } from './app.config';
 import { reducer } from './reducers';
@@ -34,6 +34,7 @@ import {OnboardingModalComponent} from './components/widgets/onboarding-modal/on
 import { AlertComponent } from "./components/widgets/alert/alert.component";
 import { AlertlModule } from "./components/widgets/alert/alert.module";
 import {BookingEffects} from './effects/booking';
+import { ToastEffects } from "./effects/toast";
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -51,6 +52,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     FormsModule,
     HttpModule,
     MdDialogModule,
+    MdSnackBarModule,
     routing,
     FroalaViewModule.forRoot(),
     StoreModule.provideStore(reducer),
@@ -68,6 +70,7 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     EffectsModule.run(LayoutEffects),
     EffectsModule.run(UserEffects),
     EffectsModule.run(BookingEffects),
+    EffectsModule.run(ToastEffects),
     ToolbarModule,
     FooterModule,
     PhotoswipeModule,

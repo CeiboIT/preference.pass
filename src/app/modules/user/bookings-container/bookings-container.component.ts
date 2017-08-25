@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GetActivitiesByCategory } from '../../../actions/activities';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { Store } from '@ngrx/store';
@@ -8,18 +7,17 @@ import { Store } from '@ngrx/store';
 	selector: 'app-bookings-container',
 	template: `
 		<h1>Bookings</h1>
-		<app-user-bookings [bookings]="bookings$ | async"></app-user-bookings>
+		<app-user-bookings [currentUser]="user$ | async"></app-user-bookings>
 	`
 })
 
 export class BookingsContainerComponent implements OnInit {
-	public bookings$: Observable<any>;
+	public user$: Observable<any>;
 	constructor(
 		private store: Store<any>
 	  ) { }
 
 	ngOnInit() { 
-		this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
-		this.bookings$ = onStateChangeObservable(this.store, 'activities.tours');
+		this.user$ = onStateChangeObservable(this.store, 'auth.user');
 	}
 }

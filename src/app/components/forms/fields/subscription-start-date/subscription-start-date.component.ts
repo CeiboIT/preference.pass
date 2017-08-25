@@ -16,12 +16,14 @@ import * as moment from 'moment';
           </md-card-content>
         </md-card>        
       </div> -->
-      
-      <select placeholder="Subscription Starting Date" formControlName="startsAt">
-        <option *ngFor="let date of selectableDates" [value]="date.toISOString()">
-          {{ date.format('MMMM DD YYYY')  }}
-        </option>
-      </select>
+      <div class="material-select-custom">
+        <select formControlName="startsAt">
+          <option *ngFor="let date of selectableDates" [value]="date.toISOString()">
+            {{ date.format('MMMM DD YYYY')  }}
+          </option>
+        </select>
+        <label for="select">Subscription Starting Date</label><i class="bar"></i>
+      </div>
     </div>
   `
 })

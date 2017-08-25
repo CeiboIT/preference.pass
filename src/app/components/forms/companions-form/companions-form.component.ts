@@ -10,7 +10,8 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-companions-form',
   template: ` 
-    <form class="d-flex" action="" novalidate>
+    <form class="d-flex" action="" novalidate *ngIf="isComingAlone">
+       
       <div class="p-2 w-50">
         <md-card class="p-0 text-center">
           <md-card-content class="p-3">
@@ -29,12 +30,12 @@ import * as _ from 'lodash';
           <md-card class="p-0">
             <h1 class="title">Available companions</h1>
             <md-card-content class="p-3">
-              <h3 class="sub-title" *ngIf="adultsList">Adults</h3>
+              <h3 class="sub-title" *ngIf="adultsList.length">Adults</h3>
               <div *ngFor="let adult of adultsList" (click)="selectCompanion(adult)">
                 <app-person-element [person]="adult"></app-person-element>
               </div>
               
-              <h3 class="sub-title" *ngIf="kidsList">Kids</h3>
+              <h3 class="sub-title" *ngIf="kidsList.length">Kids</h3>
               <div *ngFor="let kid of kidsList" (click)="selectCompanion(kid)">
                 <app-person-element [person]="kid"></app-person-element>
               </div> 
@@ -234,5 +235,9 @@ export class CompanionsFormComponent implements OnInit {
     }
     return [];
   };
+
+  get isComingAlone() {
+    return !this.booking.isComingAlone;
+  }
 
 }

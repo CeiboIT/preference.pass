@@ -130,12 +130,19 @@ const _mockBooking = {
       .saving {
         color: green;
       }
+
       .button-success {
         color: white;
+        font-size: 1.6em;
         background-color: green;
         font-size: 1.6em;
       }
 
+      @media (max-width: 767px) {
+        .button-success {
+          font-size: 1.1em;
+        }
+      }
       @media (max-width: 767px) {
         .button-success {
           font-size: 1.1em;
@@ -171,7 +178,7 @@ export class BookingWizardContainerComponent implements OnInit {
      pickUpLocationId: [''],
      pickUpTime: [''],
      companionsIds: [''],
-     isComingAlone: [''],
+     isComingAlone: [false],
      kidsAmount: [0],
      adultsAmount: [0]
    });

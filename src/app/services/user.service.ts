@@ -90,6 +90,26 @@ export class UserService {
             id
             name 
             picture
+
+            reservations {
+              kidsAmount
+              adultsAmount
+              isComingAlone
+              executionDate
+              activity {
+                name
+                headline
+                mainPhoto
+                area {
+                  formatedAddress
+                }
+                startsAt
+                category {
+                  name
+                }
+              }
+            }
+            
             discountCodes(filter: {
               used: false
             }) {

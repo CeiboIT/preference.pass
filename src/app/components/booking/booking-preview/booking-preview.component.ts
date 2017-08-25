@@ -22,4 +22,8 @@ export class BookingPreviewComponent implements OnInit {
 
   ngOnInit() { }
 
+  get hasPickUpLocation() {
+		return this.pickUpLocation && this.pickUpLocation.name;
+	}
+
 }

@@ -49,7 +49,7 @@ export class BookingDetailCardComponent implements OnInit {
 	}
 
 	get hasPickUpLocation() {
-	return this.pickUpLocation && this.pickUpLocation.name;
+		return this.pickUpLocation && this.pickUpLocation.name;
 	}
 
 	get mainPhoto() {

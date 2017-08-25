@@ -19,12 +19,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 
 			<div class="sa-icon sa-info" *ngIf="type == 'info'"></div>
 
-			<div class="sa-icon sa-success animate" *ngIf="type == 'success'">
-				<span class="sa-line sa-tip animateSuccessTip"></span>
-				<span class="sa-line sa-long animateSuccessLong"></span>
-				<div class="sa-placeholder"></div>
-				<div class="sa-fix"></div>
-			</div>
+			<app-success-animation *ngIf="type == 'success'"></app-success-animation>
 
 			<h2 *ngIf="title">{{ title }}</h2>
 			<p *ngIf="message">{{ message }}</p>

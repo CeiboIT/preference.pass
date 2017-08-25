@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule }   from '@angular/router';
 import {BookingWizardContainerComponent} from './booking-wizard-container.component';
 import {BookingDateSelectorFormModule} from '../../../components/forms/booking-date-selector-form/booking-date-selector-form.module';
 import {PickLocationAndTimeSelectionFormModule} from '../../../components/forms/pick-location-and-time-selection-form/pick-location-and-time-selection-form.module';
@@ -17,10 +18,12 @@ import { BookingStep2Component } from './booking-step-2/booking-step-2.component
 import { BookingStep3Component } from './booking-step-3/booking-step-3.component';
 import {BookingPreviewModule} from '../../../components/booking/booking-preview/booking-preview.module';
 import {SubscriptionWizardModule} from '../../subscription/subscription-wizard/subscription-wizard.module';
+import { SuccessAnimationModule } from "../../../components/widgets/alert/success-animation/success-animation.module";
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     BookingDateSelectorFormModule,
     PickLocationAndTimeSelectionFormModule,
     CompanionsSelectionFormModule,
@@ -35,7 +38,8 @@ import {SubscriptionWizardModule} from '../../subscription/subscription-wizard/s
     ReactiveFormsModule,
     DateSelectModule,
     CompanionsFormModule,
-    BookingPreviewModule
+    BookingPreviewModule,
+    SuccessAnimationModule
   ],
   declarations: [BookingWizardContainerComponent, BookingStep1Component, BookingStep2Component, BookingStep3Component],
   exports: [BookingWizardContainerComponent]

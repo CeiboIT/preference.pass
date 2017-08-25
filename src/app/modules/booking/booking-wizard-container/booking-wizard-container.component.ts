@@ -8,7 +8,7 @@ import {onStateChangeObservable} from '../../../utils/store';
 import {BookingFinish, BookingStep1, MoveToStep} from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
 import {AddCompanion} from "../../../actions/user";
-
+/*
 const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano",
   "email": "mpotignano@gmail.com", "personType": 'Adult',
   "subscriptions": [ { "id": "cj6i4pv0fb7x80110zl5fnkjf", "__typename": "Subscription" }], "__typename": "Companion" },
@@ -28,7 +28,7 @@ const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marco
 const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 2, "adults": 2, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
   { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
 
-], "__typename": "Subscription" };
+], "__typename": "Subscription" };*/
 
 
 const _mockBooking = {
@@ -198,7 +198,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
     this.loadingBooking$.subscribe(status => {
       this.loadingBooking = status;
-    })
+    });
   }
 
   ngOnInit() {
@@ -271,6 +271,8 @@ export class BookingWizardContainerComponent implements OnInit {
     console.log($event);
     console.log('Booking so far: ', $event);
     this.store.dispatch(new BookingStep1($event));
+    document.body.scrollTop = 0;
+
   }
 
   get savingMessage() {
@@ -293,6 +295,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
   onStep1Submit(e) {
     e.preventDefault();
+    document.body.scrollTop = 0;
     let _booking = this.booking.value;
     _booking.activityId = this.activity.id;
     _booking.owner = this.user.id;

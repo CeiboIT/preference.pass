@@ -24,7 +24,7 @@ interface DiscountValidationResponse {
     <md-card>
       <wizard-header [step]="step"></wizard-header>
       <div [hidden]="step !== 1">
-        <div *ngIf="claimDiscount">
+        <!--<div *ngIf="claimDiscount">
           <app-discount-code-form [parent]="discountCode"
             (onValid)="onDiscountFormValidity($event)"
           ></app-discount-code-form>
@@ -33,13 +33,13 @@ interface DiscountValidationResponse {
               Validating code
             </span>
           </div>
-        </div>
+        </div>-->
         <div *ngIf="!claimDiscount">
-          <div >
+          <!--<div >
             <button md-button color="primary" (click)="claim()">
               Claim discount
             </button>
-          </div>
+          </div> -->
           <div>
             <div class="row" *ngIf="adultsAmount || kidsAmount">
               <div class="col-6" *ngIf="adultsAmount">
@@ -71,6 +71,7 @@ interface DiscountValidationResponse {
                 Select your subscription start date
               </h2>
               <app-subscription-start-date [parent]="paymentRequest"
+                                           [selectedPlan]="paymentRequest.get('plan').value"
                                            (onDateSelected)="onStartDateSelected($event)"
                                            [limitDate]="limitDate"
                                            [initialDate]="startsAt"
@@ -171,7 +172,7 @@ export class SubscriptionWizardComponent implements OnInit {
       adultsAmount: [this.adultsAmount || 0],
       startsAt: [this.startsAt || ''],
       isComingAlone: [this.isComingAlone || false],
-      plan: [''],
+      plan: [null],
       cardToken: ['']
     });
 

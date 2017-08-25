@@ -16,9 +16,10 @@ import * as moment from 'moment';
           </md-card-content>
         </md-card>        
       </div> -->
+      {{ plan2 }}
       <div class="material-select-custom">
         <select formControlName="startsAt">
-          <option *ngFor="let date of selectableDates" [value]="date.toISOString()">
+          <option *ngFor="let date of generateSelectableDates(selectedPlan)" [value]="date.toISOString()">
             {{ date.format('MMMM DD YYYY')  }}
           </option>
         </select>
@@ -31,6 +32,7 @@ export class SubscriptionStartDateComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() limitDate;
   @Input() initialDate;
+  @Input() selectedPlan;
   plan;
   selectableDates;
   constructor() { }
@@ -40,12 +42,10 @@ export class SubscriptionStartDateComponent implements OnInit {
       console.log(data);
       if (data) {
         this.plan = data;
-        this.selectableDates = this.generateSelectableDates();
         this.parent.get('startsAt').setValue(this.initialDate);
       }
     });
     this.parent.get('startsAt').setValue(this.initialDate);
-    this.generateSelectableDates();
   }
 
   selectDate(date) {
@@ -60,12 +60,12 @@ export class SubscriptionStartDateComponent implements OnInit {
     }
   }
 
-  generateSelectableDates() {
+  generateSelectableDates(plan) {
     let _dates = [];
     const _selectedDate = moment(this.limitDate).clone();
     let _initialDate;
-    if (this.plan) {
-      switch (this.plan) {
+    if (plan) {
+      switch (plan) {
         case('OneDay'):
           _initialDate = _selectedDate.clone().subtract(1, 'day');
           break;

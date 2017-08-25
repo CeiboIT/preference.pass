@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'app-companions-form',
   template: ` 
-    <form class="d-flex" action="" novalidate>
+    <form class="d-flex" action="" novalidate *ngIf="isComingAlone">
        
       <div class="p-2 w-50">
         <md-card class="p-0 text-center">
@@ -32,12 +32,12 @@ import * as _ from 'lodash';
           <md-card class="p-0">
             <h1 class="title">Available companions</h1>
             <md-card-content class="p-3">
-              <h3 class="sub-title" *ngIf="adultsList">Adults</h3>
+              <h3 class="sub-title" *ngIf="adultsList.length">Adults</h3>
               <div *ngFor="let adult of adultsList" (click)="selectCompanion(adult)">
                 <app-person-element [person]="adult"></app-person-element>
               </div>
               
-              <h3 class="sub-title" *ngIf="kidsList">Kids</h3>
+              <h3 class="sub-title" *ngIf="kidsList.length">Kids</h3>
               <div *ngFor="let kid of kidsList" (click)="selectCompanion(kid)">
                 <app-person-element [person]="kid"></app-person-element>
               </div> 
@@ -62,52 +62,6 @@ import * as _ from 'lodash';
 
         </div>
     </form>
-
-    <!--<form class="row" action="" novalidate>
-      <div class="row">
-        <div class="col-12">
-          <app-companion-charge-form
-            *ngIf="!limits.forAdults || !limits.forKids"
-            [parent]="newCompanion"
-            [adultsLimitReached]="limits.forAdults"
-            [kidsLimitReached]="limits.forKids"
-            (onCompanionSubmit)="submitCompanion($event)"
-          >
-          </app-companion-charge-form>
-        </div>
-      </div>-->
-
-      <!--<div class="row">
-        <div class="col-12">
-          <div *ngFor="let adult of adultsList">
-            <div (click)="selectCompanion(adult)">
-              <app-person-card [person]="adult"></app-person-card>
-            </div>
-          </div>  
-        </div>
-        <div class="col-12">
-          <div *ngFor="let kid of kidsList">
-            <div (click)="selectCompanion(kid)">
-            <app-person-card [person]="kid"></app-person-card>
-            </div>
-          </div> 
-        </div>
-      </div>-->
-      
-      <!--<div class="row">
-        <div class="col-12">
-          <div *ngFor="let adult of selectedAdults">
-            {{ adult.fullName }}
-          </div>
-        </div>
-        
-        <div class="col-12">
-          <div *ngFor="let kid of selectedKids">
-            {{ kid.fullName }}
-          </div>
-        </div>
-      </div>
-    </form>-->
   `,
 
   styles : [
@@ -237,5 +191,9 @@ export class CompanionsFormComponent implements OnInit {
     }
     return [];
   };
+
+  get isComingAlone() {
+    return !this.booking.isComingAlone;
+  }
 
 }

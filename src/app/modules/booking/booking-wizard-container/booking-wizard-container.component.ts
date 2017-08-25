@@ -118,7 +118,7 @@ const _mockBooking = {
         >
         </app-companions-form>
         
-        <button (click)="finishBooking()" md-button class="button-success" [disabled]="loadingBooking">
+        <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
           <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
           Finish Booking
         </button>
@@ -130,9 +130,16 @@ const _mockBooking = {
       .saving {
         color: green;
       }
+
       .button-success {
         color: white;
+        font-size: 1.6em;
         background-color: green;
+      }
+      @media (max-width: 767px) {
+        .button-success {
+          font-size: 1.1em;
+        }
       }
     `
   ]
@@ -164,7 +171,7 @@ export class BookingWizardContainerComponent implements OnInit {
      pickUpLocationId: [''],
      pickUpTime: [''],
      companionsIds: [''],
-     isComingAlone: [''],
+     isComingAlone: [false],
      kidsAmount: [0],
      adultsAmount: [0]
    });

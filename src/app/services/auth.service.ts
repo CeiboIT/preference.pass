@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-declare var auth0: any;
+import auth0 from 'auth0-js';
 import { Subject } from 'rxjs/Subject';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Store } from '@ngrx/store';
@@ -12,8 +12,9 @@ import { onStateChangeObservable } from '../utils/store';
 import { getUserIdFromToken } from "../utils/user";
 // const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
 // const auth0Domain = 'sof.au.auth0.com'; // development
-
-const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+declare var window: any;
+// const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+const serverUrl = 'https://preference-pass-testing.firebaseapp.com';
 const redirectTo = serverUrl + '/access_token';
 
 const auth0ClientID = 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1'; // production
@@ -34,7 +35,6 @@ const webAuth = new auth0.WebAuth(
     redirectUri: redirectTo
   }
 );
-
 
 @Injectable()
 export class AuthService {

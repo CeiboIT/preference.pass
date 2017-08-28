@@ -25,6 +25,7 @@ export class CompanionChargeFormComponent implements OnInit {
     $event.preventDefault();
     this.onCompanionSubmit.emit(this.parent.value);
     console.log(this.parent.value);
+    this.parent.reset();
   }
 
   ngOnInit() {

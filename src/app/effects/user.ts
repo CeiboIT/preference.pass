@@ -16,6 +16,7 @@ import {
 
 import {UserService} from '../services/user.service';
 import {getUserIdFromToken} from "../utils/user";
+import {parseLine} from "tslint/lib/test/lines";
 
 @Injectable()
 export class UserEffects {
@@ -71,7 +72,7 @@ export class UserEffects {
      return this.userService.addCompanionToSubscriptionAndUser(payload.companion, payload.subscriptionId)
        .map(result => {
           console.log(result);
-          return new AddCompanionSuccess({result: result, executionDate: payload.executionDate });
+          return new AddCompanionSuccess({result: result, executionDate: payload.executionDate, subscriptionId: payload.subscriptionId });
        });
     });
 

@@ -27,10 +27,10 @@ reducers[UserActionTypes.GET_USER_BASIC_DATA_SUCCESS] = (state, payload) => {
 };
 
 reducers[UserActionTypes.GET_USER_COMPANIONS_SUCCESS] = (state, payload) => {
-  let _user = state.user;
-  _user.companions = payload.companions;
   return Object.assign({}, state, {
-    user: _user
+    user: Object.assign({}, state.user, {
+      companions: payload.companions
+    })
   });
 };
 

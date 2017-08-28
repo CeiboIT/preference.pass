@@ -4,11 +4,13 @@ import {FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-person-type-selector',
   template: `
-    <md-radio-group class="d-flex justify-content-around" (change)="onChange($event)">
-      <md-radio-button *ngFor="let type of options" [value]="type">
-        {{type}}
-      </md-radio-button>
-    </md-radio-group>
+    <div [formGroup]="parent">
+      <md-radio-group class="d-flex justify-content-around" (change)="onChange($event)" formControlName="personType">
+        <md-radio-button *ngFor="let type of options" [value]="type">
+          {{type}}
+        </md-radio-button>
+      </md-radio-group>
+    </div>
   `
 })
 export class PersonTypeSelectorComponent implements OnInit {
@@ -20,7 +22,7 @@ export class PersonTypeSelectorComponent implements OnInit {
   }
 
   onChange($event) {
-    this.parent.get('personType').setValue($event.value);
+    // this.parent.get('personType').setValue($event.value);
   }
 
 }

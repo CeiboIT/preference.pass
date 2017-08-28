@@ -11,12 +11,21 @@ import * as _ from 'lodash';
   selector: 'app-companions-form',
   template: ` 
     <form class="d-sm-flex" action="" novalidate *ngIf="isComingAlone">
-       
-      <div class="p-2 w-50 companions">
-        <md-card class="p-0 text-center">
+      <md-card>
+        <div class="text-center">
+          <p >
+            Remaining kids to select {{ calculateRemainingCompanions.kids }}
+          </p>
+          <p >
+            Remaining adults to select {{ calculateRemainingCompanions.adults }}
+          </p>
+        </div>
+      </md-card>
+      
+      <div class="p-2 w-50 companions" *ngIf="!limits.forAdults || !limits.forKids">
+        <md-card class="p-0 text-center" >
           <md-card-content class="p-3">
               <app-companion-charge-form
-              *ngIf="!limits.forAdults || !limits.forKids"
               [parent]="newCompanion"
               [adultsLimitReached]="limits.forAdults"
               [kidsLimitReached]="limits.forKids"
@@ -57,55 +66,8 @@ import * as _ from 'lodash';
               </div>
             </md-card-content>
           </md-card>
-
         </div>
     </form>
-
-    <!--<form class="row" action="" novalidate>
-      <div class="row">
-        <div class="col-12">
-          <app-companion-charge-form
-            *ngIf="!limits.forAdults || !limits.forKids"
-            [parent]="newCompanion"
-            [adultsLimitReached]="limits.forAdults"
-            [kidsLimitReached]="limits.forKids"
-            (onCompanionSubmit)="submitCompanion($event)"
-          >
-          </app-companion-charge-form>
-        </div>
-      </div>-->
-
-      <!--<div class="row">
-        <div class="col-12">
-          <div *ngFor="let adult of adultsList">
-            <div (click)="selectCompanion(adult)">
-              <app-person-card [person]="adult"></app-person-card>
-            </div>
-          </div>  
-        </div>
-        <div class="col-12">
-          <div *ngFor="let kid of kidsList">
-            <div (click)="selectCompanion(kid)">
-            <app-person-card [person]="kid"></app-person-card>
-            </div>
-          </div> 
-        </div>
-      </div>-->
-      
-      <!--<div class="row">
-        <div class="col-12">
-          <div *ngFor="let adult of selectedAdults">
-            {{ adult.fullName }}
-          </div>
-        </div>
-        
-        <div class="col-12">
-          <div *ngFor="let kid of selectedKids">
-            {{ kid.fullName }}
-          </div>
-        </div>
-      </div>
-    </form>-->
   `,
 
   styles : [
@@ -116,7 +78,6 @@ import * as _ from 'lodash';
         margin: 0;
         border-bottom: 1px solid rgba(121, 132, 102, 0.14);
       }
-
       .sub-title {
         color: rgba(0,0,0,.7);
         display: block;
@@ -124,8 +85,6 @@ import * as _ from 'lodash';
         padding: 16px;
         margin: 0;
       }
-
-      
       @media (max-width: 577px) {
         .companions {
           width: 100%!important
@@ -150,19 +109,27 @@ export class CompanionsFormComponent implements OnInit {
   public adultsList = [];
   public selectedKids = [];
   public selectedAdults = [];
-  public selectedCompanions = [];
   public newCompanion: FormGroup;
   constructor(private fb: FormBuilder) {
     this.newCompanion = fb.group({
       fullName: [''],
       email: [''],
-      personType: ['']
+      personType: ['Adult']
     });
   }
 
   submitCompanion($event) {
     console.log($event);
     this.onAddCompanionSubmit.emit($event);
+  }
+
+  get calculateRemainingCompanions() {
+      let remaining = {
+        kids: 0, adults: 0
+      };
+      remaining.kids =  this.subscription.kids - this.selectedKids.length;
+      remaining.adults = this.subscription.adults - this.selectedAdults.length ;
+      return remaining;
   }
 
   selectCompanion(companion) {
@@ -194,13 +161,13 @@ export class CompanionsFormComponent implements OnInit {
   }
 
   get limitAtInit() {
+    console.log('Calculate Limits');
      const counts = _.countBy(this.subscription.companions, 'personType');
      if (this.subscription.kids) {
        if (counts.Kid) {
          this.limits.forKids = !(this.subscription.kids > counts.Kid);
        } else {
          this.limits.forKids = false;
-
        }
      }
      if (this.subscription.adults) {
@@ -248,4 +215,10 @@ export class CompanionsFormComponent implements OnInit {
     return !this.booking.isComingAlone;
   }
 
+  ngOnChanges (changes) {
+    if (changes.companions && changes.companions.previousValue) {
+      console.log('entered for companions');
+      this.generateCompanionsList();
+    }
+  }
 }

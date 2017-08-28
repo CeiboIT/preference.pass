@@ -8,12 +8,12 @@ import { ActionTypes as subscriptionActionTypes } from "../actions/subscription"
 @Injectable()
 export class ToastEffects {
   constructor(private action$: Actions, private snackBar: MdSnackBar) {}
-  @Effect()
+  @Effect({dispatch: false})
   PostSubscriptionSuccess$: Observable<{}> = this.action$
     .ofType(subscriptionActionTypes.POST_SUBSCRIPTION_SUCCESS)
-    .map (() => {
+    .do (() => {
         return this.snackBar.open('Payment Success!', '', {
             duration: 5000
           });
-    })
+    });
 }

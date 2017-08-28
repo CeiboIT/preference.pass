@@ -110,7 +110,7 @@ const _mockBooking = {
             Charge companions to your subscription
           </h2>
         </div>
-        <app-companions-form [parent]="booking" *ngIf="!isComingAlone"
+        <app-companions-form [parent]="booking" *ngIf="!booking.value.isComingAlone"
           (onAddCompanionSubmit)="addCompanion($event)"
           [subscription]="activeSubscription$ | async"
           [companions]="companions$ | async "

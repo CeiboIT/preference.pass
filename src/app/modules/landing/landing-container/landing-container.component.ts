@@ -15,30 +15,64 @@ import { Store } from '@ngrx/store';
   template: `
     <div class="landing-container">
       <div class="hot-deals py-5">
-        <h3 class="title mb-4">
-          Hot deals
-        </h3>
-        <app-hot-deals-list [hotDeals]="hotDeals$ | async "></app-hot-deals-list>
+        <div class="d-flex justify-content-between title mb-4">
+            <h3 class="mb-0">        
+              Hot deals
+            </h3>
+
+            <div class="see-more">
+              <span>
+                see more
+              </span>
+              <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" viewBox="0 0 18 18"><path _ngcontent-c5="" d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" fill-rule="evenodd"></path></svg>
+            </div>
+          </div>
+        <app-hot-deals-list [hotDeals]="hotDeals$ | async"></app-hot-deals-list>
       </div>
       
       <div class="my-5">
-        <h3 class="title mb-4">
-          Tours
-        </h3>
+        <div class="d-flex justify-content-between title mb-4">
+          <h3 class="mb-0">        
+            Tours
+          </h3>
+
+          <div class="see-more">
+            <span>
+              see more
+            </span>
+            <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" viewBox="0 0 18 18"><path _ngcontent-c5="" d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" fill-rule="evenodd"></path></svg>
+          </div>
+      </div>
         <app-activity-list [activities]="tours$ | async "></app-activity-list>
       </div>
 
       <div class="my-5">
-        <h3 class="title mb-4">
-          Activities
-        </h3>
+        <div class="d-flex justify-content-between title mb-4">
+          <h3 class="mb-0">        
+            Activities
+          </h3>
+
+          <div class="see-more">
+            <span>
+              see more
+            </span>
+            <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" viewBox="0 0 18 18"><path _ngcontent-c5="" d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" fill-rule="evenodd"></path></svg>
+          </div>
+        </div>
         <app-activity-list [activities]="activities$ | async "></app-activity-list>
       </div>
 
       <div class="my-5">
-        <h3 class="title mb-4">
-          Nightclubs
-        </h3>
+        <div class="d-flex justify-content-between title mb-4">
+          <h3 class="mb-0">        
+            Nightclubs
+          </h3>
+
+          <div class="see-more">
+              see more            
+            <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" viewBox="0 0 18 18"><path _ngcontent-c5="" d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" fill-rule="evenodd"></path></svg>
+          </div>
+        </div>
         <app-activity-list [activities]="nightclubs$ | async "></app-activity-list>
       </div>
     </div>
@@ -51,6 +85,7 @@ import { Store } from '@ngrx/store';
 
     .title {
         padding: 0 60px;
+        overflow: hidden;
     }
 
     .hot-deals {

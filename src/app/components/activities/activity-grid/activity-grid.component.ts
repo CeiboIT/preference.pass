@@ -5,8 +5,9 @@ import { Component, OnInit, Input } from '@angular/core';
 	template: 
 	`
 		<div class="row">
-			<div *ngFor="let activity of activities" class="col-md-4 col-sm-6 mb-4 pb-2">
-				<app-activity-card [activity]="activity"></app-activity-card>
+			<div *ngFor="let activity of activities" class="mb-4 pb-2" [ngClass]="{'col-md-4 col-sm-6': !isHotDeal, 'col-md-3 col-sm-4 col-6': isHotDeal }">
+				<app-activity-card [activity]="activity" *ngIf="!isHotDeal"></app-activity-card>
+				<app-hot-deal-card [hotDeal]="activity" *ngIf="isHotDeal"></app-hot-deal-card>
 			</div>
 		</div>
 	`,
@@ -15,7 +16,10 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class ActivityGridComponent implements OnInit {
 	@Input() activities;
+	@Input() isHotDeal;
 	constructor() { }
 
 	ngOnInit() { }
+
+
 }

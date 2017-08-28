@@ -47,40 +47,40 @@ export class ActivityListComponent implements OnInit {
   @Input() activities;
   @Input() category;
   public items;
+  public config: SwiperConfigInterface = {
+    pagination: null,
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    spaceBetween: 30,
+    slidesPerView: 5,
+     breakpoints: {
+        1024: {
+            //slidesPerView: 4,
+            slidesPerView: 'auto',
+            spaceBetween: 40
+        },
+        768: {
+            //slidesPerView: 3,
+            slidesPerView: 'auto',
+            spaceBetween: 30
+        },
+        767: {
+            //slidesPerView: 2,
+            slidesPerView: 'auto',
+            spaceBetween: 20
+        },
+        480: {
+          //slidesPerView: 1,
+          slidesPerView: 'auto',
+          spaceBetween: 10,
+        }
+    }
+  };
+  
   constructor() { 
-    this.items = Array(5).fill(0).map((x,i)=>i);
+    this.items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
   }
 
   ngOnInit() { }
-
-    public config: SwiperConfigInterface = {
-        pagination: null,
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev',
-        spaceBetween: 30,
-        slidesPerView: 5,
-         breakpoints: {
-            1024: {
-                //slidesPerView: 4,
-                slidesPerView: 'auto',
-                spaceBetween: 40
-            },
-            768: {
-                //slidesPerView: 3,
-                slidesPerView: 'auto',
-                spaceBetween: 30
-            },
-            767: {
-                //slidesPerView: 2,
-                slidesPerView: 'auto',
-                spaceBetween: 20
-            },
-            480: {
-              //slidesPerView: 1,
-              slidesPerView: 'auto',
-              spaceBetween: 10,
-            }
-      }
-  };
 }
 

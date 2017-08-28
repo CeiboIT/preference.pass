@@ -1,3 +1,18 @@
+.title {
+  padding: 0 60px;
+  overflow: hidden;
+
+  @media screen and (max-width: 480px) {
+    padding: 0 10px;
+  }
+
+  .see-more {
+    a {
+      color: initial;
+    }
+  }
+}
+
 .swiper-container {
   width: 100%;
   min-height: 300px;

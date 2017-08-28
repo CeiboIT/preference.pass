@@ -26,6 +26,14 @@ reducers[UserActionTypes.GET_USER_BASIC_DATA_SUCCESS] = (state, payload) => {
   });
 };
 
+reducers[UserActionTypes.GET_USER_COMPANIONS_SUCCESS] = (state, payload) => {
+  let _user = state.user;
+  _user.companions = payload.companions;
+  return Object.assign({}, state, {
+    user: _user
+  });
+};
+
 reducers[ActionTypes.LOGOUT_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
     user: {},

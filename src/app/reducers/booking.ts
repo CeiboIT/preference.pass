@@ -43,6 +43,12 @@ reducers[ActionTypes.MOVE_TO_STEP] = (state, payload) => {
     });
 };
 
+reducers[ActionTypes.GET_BOOKING_SUBSCRIPTION_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    sending: false,
+    activeSubscription: payload.subscription
+  });
+};
 reducers[ActionTypes.BOOKING_FINISH] = (state, payload) => {
   return Object.assign({}, state, {
     loadingBooking: true

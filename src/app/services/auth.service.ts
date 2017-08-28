@@ -13,8 +13,8 @@ import { getUserIdFromToken } from "../utils/user";
 // const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
 // const auth0Domain = 'sof.au.auth0.com'; // development
 declare var window: any;
-// const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
-const serverUrl = 'https://preference-pass-testing.firebaseapp.com';
+const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+// const serverUrl = 'https://preference-pass-testing.firebaseapp.com';
 const redirectTo = serverUrl + '/access_token';
 
 const auth0ClientID = 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1'; // production

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
-  ActionTypes, BookingFinishSuccess, BookingStep1Success, GetValidSubscriptionCompanionsSuccess, MoveToStep
+  ActionTypes, BookingFinishSuccess, BookingStep1Success, GetBookingSubscriptionSuccess,
+  GetValidSubscriptionCompanionsSuccess, MoveToStep
 } from '../actions/booking';
 import { ActionTypes as SubscriptionActions } from '../actions/subscription';
+import { ActionTypes as UserActions } from '../actions/user';
 import { BookingService } from '../services/booking.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toArray';
@@ -60,7 +62,7 @@ export class BookingEffects {
         .map((result) => {
           return (new BookingFinishSuccess(result.data['updateReservation']), new MoveToStep({
             step: 'FinishBooking'
-          }))
+          }));
         })
         .catch((err) => {
           console.log(err);
@@ -84,7 +86,20 @@ export class BookingEffects {
         });
     });
 
-
+  @Effect()
+  UpdateBookingSubscription: Observable<{}> = this.action$
+    .ofType(UserActions.ADD_COMPANION_SUCCESS)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      return this.bookingService.getBookingSubscription(payload.subscriptionId)
+        .map((result) => {
+          const _subscription = result.data['Subscription'];
+          return new GetBookingSubscriptionSuccess({subscription: _subscription});
+        }).catch((err) => {
+          console.log(err);
+          return Observable.of({ type: ActionTypes.GET_BOOKING_SUBSCRIPTION_FAILURE, payload: err });
+        });
+    });
   /*@Effect()
   GetValidSubscriptionCompanions: Observable<{}> = this.action$
     .ofType(ActionTypes.GET_VALID_SUBSCRIPTION_COMPANIONS)

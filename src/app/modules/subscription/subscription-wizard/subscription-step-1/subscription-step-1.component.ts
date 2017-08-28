@@ -3,9 +3,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-subscription-step-1',
   template: `
-    <app-companions-amount-container [parent]="paymentRequest"
-                                     (successClicked)="onCompanionFormSuccessClick($event)"
-    ></app-companions-amount-container>
+    <p>
+      Subscription step 1
+    </p>
   `
 })
 export class SubscriptionStep1Component implements OnInit {

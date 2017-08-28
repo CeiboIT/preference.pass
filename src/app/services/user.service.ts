@@ -184,9 +184,9 @@ export class UserService {
         }
       }
     `;
-    this.client.watchQuery({
+    return this.client.watchQuery({
       query: GET_USER_COMPANIONS,
-      fetchPolicy: "network-only"
+      fetchPolicy: 'network-only'
     });
   }
 

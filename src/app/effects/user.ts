@@ -6,7 +6,8 @@ import {
 } from '../actions/auth';
 
 import {
-  ActionTypes as UserActionTypes, AddCompanionSuccess, CreateUserSuccess, GetUserBasicDataSuccess
+  ActionTypes as UserActionTypes, AddCompanionSuccess, CreateUserSuccess, GetUserBasicDataSuccess,
+  GetUserCompanionsSuccess
 } from '../actions/user';
 
 import {
@@ -73,6 +74,21 @@ export class UserEffects {
           return new AddCompanionSuccess({result: result, executionDate: payload.executionDate });
        });
     });
+
+  @Effect()
+  GetUserCompanions: Observable<{}> = this.action$
+    .ofType(UserActionTypes.ADD_COMPANION_SUCCESS)
+    .switchMap(() => {
+        return this.userService.getUserCompanions()
+          .map(result => {
+            const _data = result.data['user'].companions;
+            return new GetUserCompanionsSuccess({companions : _data });
+          }).catch((err) => {
+            console.log(err);
+            return Observable.of({ type: UserActionTypes.GET_USER_COMPANIONS_FAILURE, payload: err });
+          });
+    });
+
   /*
   @Effect()
   AskUserFor: Observable<{}> = this.action$

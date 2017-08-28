@@ -25,7 +25,10 @@ export const ActionTypes = {
   MOVE_TO_STEP_FAILURE: type('[Booking] Move the next step failure'),
   GET_VALID_SUBSCRIPTION_COMPANIONS: type('[Booking] Get Subscription Companions'),
   GET_VALID_SUBSCRIPTION_COMPANIONS_FAILURE: type('[Booking] Get Subscription Companions Failure'),
-  GET_VALID_SUBSCRIPTION_COMPANIONS_SUCCESS: type('[Booking] Get Subscription Companions Success')
+  GET_VALID_SUBSCRIPTION_COMPANIONS_SUCCESS: type('[Booking] Get Subscription Companions Success'),
+  GET_BOOKING_SUBSCRIPTION: type('[Booking] Subscription'),
+  GET_BOOKING_SUBSCRIPTION_FAILURE: type('[Booking] Subscription Failure'),
+  GET_BOOKING_SUBSCRIPTION_SUCCESS: type('[Booking] Subscription Success'),
 };
 
 export class GetCompanions implements Action {
@@ -134,6 +137,22 @@ export class GetValidSubscriptionCompanionsSuccess implements Action {
   constructor(public payload: any) { }
 }
 
+
+export class GetBookingSubscription implements Action {
+  type = ActionTypes.GET_BOOKING_SUBSCRIPTION;
+  constructor(public payload: any) { }
+}
+
+export class GetBookingSubscriptionSuccess implements Action {
+  type = ActionTypes.GET_BOOKING_SUBSCRIPTION_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetBookingSubscriptionFailure implements Action {
+  type = ActionTypes.GET_BOOKING_SUBSCRIPTION_FAILURE;
+  constructor(public payload: any) { }
+}
+
 export type Actions =  GetCompanions |
 GetCompanionsSuccess |
 GetCompanionsFailure |
@@ -145,4 +164,5 @@ BookingAttemptSuccess |
  MoveToStep | MoveToStepFailure | MoveToStepSuccess |
 BookingAttemptFailure | BookingStep1  |  BookingStep1Success | BookingStep1Failure |
 BookingFinish | BookingFinishSuccess | BookingFinishFailure |
-GetValidSubscriptionCompanions  |  GetValidSubscriptionCompanionsFailure | GetValidSubscriptionCompanionsSuccess;
+GetValidSubscriptionCompanions  |  GetValidSubscriptionCompanionsFailure | GetValidSubscriptionCompanionsSuccess
+| GetBookingSubscription |GetBookingSubscriptionSuccess | GetBookingSubscriptionFailure;

@@ -3,7 +3,6 @@ import { compress, resize } from '../../../../constants/filestack';
 
 declare var PhotoSwipe;
 declare var PhotoSwipeUI_Default;
-
 @Component({
 	selector: 'app-photo-gallery',
 	template:
@@ -30,19 +29,15 @@ export class PhotoGalleryComponent implements OnInit {
 	public totalSubPhotosToDisplay: Number = 5;
   	private gallery: any;
 	constructor() { }
-
-	ngOnInit() { }
-
-	getItems() {
+  ngOnInit() { }
+  getItems() {
 		var items = [];
-
 		items.push({
 			src: this.mainPhoto.url,
 			w: 300,
 			h: 300,
 			doGetSlideDimensions: true
 		})
-
 		this.subPhotos.map((subPhoto) => {
 			var src = compress(subPhoto.url);
 

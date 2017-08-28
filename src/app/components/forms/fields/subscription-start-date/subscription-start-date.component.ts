@@ -7,16 +7,6 @@ import * as moment from 'moment';
   selector: 'app-subscription-start-date',
   template: `
     <div [formGroup]="parent">
-      <!-- <div *ngIf="!showSelect">
-        <md-card  (click)="selectDate(date)" *ngFor="let date of selectableDates">
-          <md-card-content>
-            {{
-            date.format('MMMM DD YYYY')
-            }}
-          </md-card-content>
-        </md-card>        
-      </div> -->
-      {{ plan2 }}
       <div class="material-select-custom">
         <select formControlName="startsAt">
           <option *ngFor="let date of generateSelectableDates(selectedPlan)" [value]="date.toISOString()">

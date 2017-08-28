@@ -130,6 +130,23 @@ const GET_VALID_SUBSCRIPTION = gql`
   }
 `;
 
+const GET_BOOKING_SUBSCRPTION = gql`
+  query GetBookingSubscription($subscriptionID: ID!) {
+    Subscription(id: $subscriptionID) {
+      id
+      kids
+      adults
+      isComingAlone
+      companions {
+        id
+        fullName
+        email
+        personType
+      }
+    }
+  }
+`;
+
 @Injectable()
 export class BookingService {
 
@@ -201,5 +218,15 @@ export class BookingService {
           bookingDate: bookingDate
         }
       });
+  }
+
+  getBookingSubscription(subscriptionId) {
+      return this.client.watchQuery({
+          query: GET_BOOKING_SUBSCRPTION,
+          variables: {
+              subscriptionID: subscriptionId
+          }
+        });
+
   }
 }

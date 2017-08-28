@@ -8,7 +8,7 @@
                 <i class="fa fa-arrow-circle-left mr-2" aria-hidden="true"></i> Ir a lista de Actividades
             </button>
         </div>
-        
+
         <div class="container" @fadeLeftAnimation>
             <div class="detail-banner-left">
                 <div class="detail-banner-info fadeLeft">
@@ -23,12 +23,6 @@
 
                 <div class="detail-banner-address fadeLeft">
                     <i class="fa fa-map-o"></i> {{ activity.area?.formatedAddress }}
-                </div>
-
-                <div class="fadeLeft">
-                    <div class="detail-banner-btn bookmark" (click)="bookNow()">
-                        <i class="fa fa-bookmark-o"></i> <span data-toggle="Bookmarked">Book now</span>
-                    </div>
                 </div>
             </div>
         </div>

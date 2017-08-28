@@ -20,7 +20,7 @@ import { trigger,style,transition,animate,query,stagger } from '@angular/animati
         query('.fadeLeft', [
           animate(1000, style('*'))
         ])
-        
+
       ])
     ]),
     trigger('fadeUpAnimation', [
@@ -34,7 +34,7 @@ import { trigger,style,transition,animate,query,stagger } from '@angular/animati
         query('.fadeUp', [
           animate(1000, style('*'))
         ])
-        
+
       ])
     ])
   ]
@@ -56,10 +56,6 @@ export class ActivityDetailComponent {
     this.selectedRate.emit($event);
   }
 
-  bookNow($event) {
-    console.log('Book now');
-    this.selectedRate.emit($event);
-  }
   get activityCover() {
     if (this.activity.coverPhoto) {
       return compress(this.activity.coverPhoto.url);

@@ -4,6 +4,18 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 @Component({
   selector: 'app-activity-list',
   template: `
+    <div class="d-flex justify-content-between title mb-4">
+      <h3 class="text-capitalize mb-0">        
+        {{ category }}
+      </h3>
+
+      <div class="see-more">
+        <a [routerLink]="['/list', category]">
+          See more
+        </a>
+        <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" viewBox="0 0 18 18"><path _ngcontent-c5="" d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" fill-rule="evenodd"></path></svg>
+      </div>
+    </div>
     <div [swiper]="config" class="swiper-container" *ngIf="activities.length">
       <div class="swiper-wrapper">
           <div *ngFor="let activity of activities" class="swiper-slide">
@@ -33,7 +45,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 
 export class ActivityListComponent implements OnInit {
   @Input() activities;
-  @Input() isHotDeal;
+  @Input() category;
   public items;
   constructor() { 
     this.items = Array(5).fill(0).map((x,i)=>i);

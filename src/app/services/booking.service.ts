@@ -216,7 +216,8 @@ export class BookingService {
         query: GET_VALID_SUBSCRIPTION,
         variables: {
           bookingDate: bookingDate
-        }
+        },
+        fetchPolicy: 'network-only'
       });
   }
 
@@ -225,7 +226,8 @@ export class BookingService {
           query: GET_BOOKING_SUBSCRPTION,
           variables: {
               subscriptionID: subscriptionId
-          }
+          },
+          fetchPolicy: 'network-only'
         });
   }
 }

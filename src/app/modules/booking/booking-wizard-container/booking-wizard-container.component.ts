@@ -115,6 +115,7 @@ const _mockBooking = {
           [subscription]="activeSubscription$ | async"
           [companions]="companions$ | async "
           [booking]="booking.value"
+         [companionLoading]="companionLoading$ | async "
         >
         </app-companions-form>
         
@@ -180,6 +181,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public activeSubscription$: Observable<any>;
   public loading$: Observable<any>;
   public loadingBooking$: Observable<any>;
+  public companionLoading$: Observable<any>;
   public loadingBooking = false;
   public user;
   public subscription;
@@ -210,6 +212,7 @@ export class BookingWizardContainerComponent implements OnInit {
     this.activeSubscription$ = onStateChangeObservable(this.store, 'booking.activeSubscription');
     this.loading$ = onStateChangeObservable(this.store, 'booking.sending');
     this.loadingBooking$ = onStateChangeObservable(this.store, 'booking.loadingBooking');
+    this.companionLoading$ = onStateChangeObservable(this.store, 'user.addingCompanion');
     this.user$.subscribe((user) => this.user = user);
     this.departures$.subscribe((departures) => this.departures = departures);
     this.user$.subscribe((user) => this.user = user);

@@ -161,8 +161,7 @@ export class UserService {
         variables: {
           now: _now
         },
-        fetchPolicy: "network-only"
-
+        fetchPolicy: 'network-only'
       });
   }
 
@@ -223,7 +222,8 @@ export class UserService {
       query: GET_SUBSCRIPTION,
       variables: {
         now: _now
-      }
+      },
+      fetchPolicy: 'network-only'
     });
   }
 

@@ -7,6 +7,16 @@ import * as _ from 'lodash';
  * {  "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "__typename": "Companion" } ], "__typename": "Subscription" }
  */
 
+function companionIsNewInSubscription(companion, subscription) {
+  let isNewCompanion = false;
+  if (subscription.companions && subscription.companions.length ) {
+      if (subscription.companions.indexOf(companion) !== -1 ) {
+        isNewCompanion = false;
+      }
+  }
+  return isNewCompanion;
+};
+
 @Component({
   selector: 'app-companions-form',
   template: ` 
@@ -30,6 +40,7 @@ import * as _ from 'lodash';
               [adultsLimitReached]="limits.forAdults"
               [kidsLimitReached]="limits.forKids"
               (onCompanionSubmit)="submitCompanion($event)"
+              [companionLoading]="companionLoading"
             >
             </app-companion-charge-form>
           </md-card-content>
@@ -100,6 +111,7 @@ export class CompanionsFormComponent implements OnInit {
   @Input() subscription;
   @Input() companions;
   @Input() booking;
+  @Input() companionLoading;
   @Output() onAddCompanionSubmit: EventEmitter<any> = new EventEmitter();
   public limits = {
     forKids: false,
@@ -179,7 +191,6 @@ export class CompanionsFormComponent implements OnInit {
      }
      return this.limits;
   }
-
   generateCompanionsList() {
     if (!this.subscription.isComingAlone) {
         if (this.limitAtInit.forKids ) {
@@ -199,17 +210,6 @@ export class CompanionsFormComponent implements OnInit {
   ngOnInit() {
       this.generateCompanionsList();
   }
-
-  get isLimitReached() {
-    return false;
-  }
-
-  get subscriptionCompanions() {
-    if ( this.subscription && this.subscription.companions ) {
-      return this.subscription.companions;
-    }
-    return [];
-  };
 
   get isComingAlone() {
     return !this.booking.isComingAlone;

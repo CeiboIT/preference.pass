@@ -4,11 +4,12 @@ import {FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-companion-charge-form',
   template: `
+  
     <form [formGroup]="parent" (ngSubmit)="onSubmitForm($event)">
       <app-person-type-selector [parent]="parent"></app-person-type-selector>   
       <app-user-fullname [parent]="parent"></app-user-fullname>
       <app-email-input [parent]="parent"></app-email-input>
-      <button md-raised-button color="accent" type="submit">
+      <button md-raised-button color="accent" type="submit" [disabled]="companionLoading">
         Add
       </button>
     </form>
@@ -18,6 +19,7 @@ export class CompanionChargeFormComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() adultsLimitReached;
   @Input() kidsLimitReached;
+  @Input() companionLoading;
   @Output() onCompanionSubmit: EventEmitter<any> = new EventEmitter();
   constructor() { }
 

@@ -180,7 +180,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public activeSubscription$: Observable<any>;
   public loading$: Observable<any>;
   public loadingBooking$: Observable<any>;
-  public loadingBooking;
+  public loadingBooking = false;
   public user;
   public subscription;
   public departures;

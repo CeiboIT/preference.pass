@@ -39,6 +39,7 @@ reducers[ActionTypes.MOVE_TO_STEP] = (state, payload) => {
     return Object.assign({}, state, {
       sending: false,
       currentStep: payload.step,
+      loadingBooking: false,
       activeSubscription: payload.subscription
     });
 };

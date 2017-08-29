@@ -20,7 +20,7 @@ import * as _ from 'lodash';
             Remaining adults to select {{ calculateRemainingCompanions.adults }}
           </p>
         </div>
-      </md-card>
+      </md-card> 
       
       <div class="p-2 w-50 companions" *ngIf="!limits.forAdults || !limits.forKids">
         <md-card class="p-0 text-center" >
@@ -127,8 +127,8 @@ export class CompanionsFormComponent implements OnInit {
       let remaining = {
         kids: 0, adults: 0
       };
-      remaining.kids =  this.subscription.kids - this.selectedKids.length;
-      remaining.adults = this.subscription.adults - this.selectedAdults.length ;
+      remaining.kids =  this.booking.kidsAmount - this.selectedKids.length;
+      remaining.adults = this.booking.adultsAmount - this.selectedAdults.length ;
       return remaining;
   }
 

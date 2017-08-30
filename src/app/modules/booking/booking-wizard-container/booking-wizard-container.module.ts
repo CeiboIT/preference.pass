@@ -19,6 +19,7 @@ import { BookingStep3Component } from './booking-step-3/booking-step-3.component
 import {BookingPreviewModule} from '../../../components/booking/booking-preview/booking-preview.module';
 import {SubscriptionWizardModule} from '../../subscription/subscription-wizard/subscription-wizard.module';
 import { SuccessAnimationModule } from "../../../components/widgets/alert/success-animation/success-animation.module";
+import {SubscriptionCompanionsFormModule} from "../../../components/forms/subscription-companions-form/subscription-companions-form.module";
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { SuccessAnimationModule } from "../../../components/widgets/alert/succes
     DateSelectModule,
     CompanionsFormModule,
     BookingPreviewModule,
-    SuccessAnimationModule
+    SuccessAnimationModule,
+    SubscriptionCompanionsFormModule
   ],
   declarations: [BookingWizardContainerComponent, BookingStep1Component, BookingStep2Component, BookingStep3Component],
   exports: [BookingWizardContainerComponent]

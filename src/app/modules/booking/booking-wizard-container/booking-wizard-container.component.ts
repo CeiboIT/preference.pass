@@ -102,6 +102,16 @@ const _mockBooking = {
         >
         </app-subscription-wizard>
       </div>
+
+      <div>
+        <app-subscription-companions-form
+          [subscriptionObserver]="activeSubscription$"
+          [userCompanions]="companions$ | async "
+          (onSubmit)="onAddSubscriptionCompanionsSubmit($event)"
+        >
+        </app-subscription-companions-form>
+      </div>
+      
       
 
       <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
@@ -352,5 +362,9 @@ export class BookingWizardContainerComponent implements OnInit {
     console.log('Event in form', $event);
     const _code = $event.value.code;
     this.store.dispatch(new SearchPPCard(_code));
+  }
+
+  onAddSubscriptionCompanionsSubmit($event) {
+    console.log($event);
   }
 }

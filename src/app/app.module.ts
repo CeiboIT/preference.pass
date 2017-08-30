@@ -35,6 +35,8 @@ import { AlertComponent } from "./components/widgets/alert/alert.component";
 import { AlertlModule } from "./components/widgets/alert/alert.module";
 import {BookingEffects} from './effects/booking';
 import { ToastEffects } from "./effects/toast";
+import {CompanionChargeFormComponent} from "./components/forms/companion-charge-form/companion-charge-form.component";
+import {CompanionChargeFormModule} from "./components/forms/companion-charge-form/companion-charge-form.module";
 
 const SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -75,11 +77,12 @@ const SWIPER_CONFIG: SwiperConfigInterface = {
     FooterModule,
     PhotoswipeModule,
     AuthModalModule,
+    CompanionChargeFormModule,
     OnboardingModalModule,
     AlertlModule
   ],
   providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AuthModalComponent, OnboardingModalComponent, AlertComponent]
+  entryComponents: [AuthModalComponent, OnboardingModalComponent, AlertComponent, CompanionChargeFormComponent]
 })
 export class AppModule { }

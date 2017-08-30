@@ -6,7 +6,8 @@ import {
 } from '../actions/auth';
 
 import {
-  ActionTypes as UserActionTypes, AddCompanionSuccess, CreateUserSuccess, GetUserBasicDataSuccess,
+  ActionTypes as UserActionTypes, AddCompanionsFailure, AddCompanionsSuccess, AddCompanionSuccess, CreateUserSuccess,
+  GetUserBasicDataSuccess,
   GetUserCompanionsSuccess
 } from '../actions/user';
 
@@ -69,11 +70,26 @@ export class UserEffects {
     .ofType(UserActionTypes.ADD_COMPANION)
     .map(action => action.payload)
     .switchMap((payload) => {
-     return this.userService.addCompanionToSubscriptionAndUser(payload.companion, payload.subscriptionId)
-       .map(result => {
+
+      return this.userService.addCompanionToSubscriptionAndUser(payload.companion, payload.subscriptionId)
+        .map(result => {
           console.log(result);
           return new AddCompanionSuccess({result: result, executionDate: payload.executionDate, subscriptionId: payload.subscriptionId });
-       });
+        });
+    });
+
+
+  @Effect()
+  AddCompanions: Observable<{}> = this.action$
+    .ofType(UserActionTypes.ADD_COMPANIONS)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      return this.userService.addCompanionsToTrip(payload.companions, payload.subscriptionId)
+        .then(result => {
+          return new AddCompanionsSuccess({result: result, executionDate: payload.executionDate, subscriptionId: payload.subscriptionId });
+        }).catch(err => {
+          return new AddCompanionsFailure(err);
+        });
     });
 
   @Effect()

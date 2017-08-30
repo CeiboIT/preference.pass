@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CompanionChargeFormComponent } from './companion-charge-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FieldsModule} from '../fields/fields.module';
-import {MdButtonModule} from '@angular/material';
+import {MdButtonModule, MdDialogModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -11,7 +11,8 @@ import {MdButtonModule} from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     FieldsModule,
-    MdButtonModule
+    MdButtonModule,
+    MdDialogModule
   ],
   declarations: [CompanionChargeFormComponent],
   exports: [CompanionChargeFormComponent]

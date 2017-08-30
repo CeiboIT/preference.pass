@@ -7,7 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
 import {BookingFinish, BookingStep1, MoveToStep} from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
-import {AddCompanion} from "../../../actions/user";
+import {AddCompanion, AddCompanions} from "../../../actions/user";
 /*
 const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano",
   "email": "mpotignano@gmail.com", "personType": 'Adult',
@@ -104,10 +104,11 @@ const _mockBooking = {
       </div>
 
       <div>
+        
         <app-subscription-companions-form
           [subscriptionObserver]="activeSubscription$"
           [userCompanions]="companions$ | async "
-          (onSubmit)="onAddSubscriptionCompanionsSubmit($event)"
+          (onSubmit)="addCompanionsToTrip($event)"
         >
         </app-subscription-companions-form>
       </div>
@@ -120,14 +121,6 @@ const _mockBooking = {
             Charge companions to your subscription
           </h2>
         </div>
-        <app-companions-form [parent]="booking" *ngIf="!booking.value.isComingAlone"
-          (onAddCompanionSubmit)="addCompanion($event)"
-          [subscription]="activeSubscription$ | async"
-          [companions]="companions$ | async "
-          [booking]="booking.value"
-         [companionLoading]="companionLoading$ | async "
-        >
-        </app-companions-form>
         
         <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
           <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
@@ -201,7 +194,6 @@ export class BookingWizardContainerComponent implements OnInit {
   public bookingStep = '';
   private bookingId = '';
   selectedRateId;
-  private activeSubscriptionId = '';
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
      executionDate: [''],
@@ -364,7 +356,8 @@ export class BookingWizardContainerComponent implements OnInit {
     this.store.dispatch(new SearchPPCard(_code));
   }
 
-  onAddSubscriptionCompanionsSubmit($event) {
+  addCompanionsToTrip($event) {
     console.log($event);
+    this.store.dispatch(new AddCompanions({ companions : $event, subscriptionId: this.subscription.id}));
   }
 }

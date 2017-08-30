@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import * as _ from 'lodash';
+import {FormGroup} from '@angular/forms';
+import {MdDialog} from "@angular/material";
+import {CompanionChargeFormComponent} from '../companion-charge-form/companion-charge-form.component';
 
 @Component({
   selector: 'app-subscription-companions-form',
@@ -20,30 +23,44 @@ import * as _ from 'lodash';
         <md-card class="p-0">
           <md-card-content class="p-3">
             <h2>
-              Companions added to this trip <button md-button color="primary"> Add Companion to this trip</button>
+              Companions added to this trip 
+              <button md-button color="primary" 
+                (click)="addNewCompanion()"> Add Companion to this trip
+              </button>
             </h2>
             <div *ngFor="let companion of subscriptionMembers">
               <app-person-element [person]="companion"></app-person-element>
             </div>
           </md-card-content>
+          
+          <button md-raised-button color="primary" (click)="onSubmitCompanions()">
+            Save companions
+          </button>
         </md-card>
-      </div>
-      <div>
-        <button md-button color="primary">
-          Save
-        </button>
       </div>
       
     </div>
   `
 })
+
+  /*
+let modalConfig = {
+  data: {type: 'register'},
+  panelClass: 'md-dialog-fullscreen-xs'
+};
+
+this.dialog.open(AuthModalComponent, modalConfig)
+  .afterClosed().subscribe(result => {
+  if (result) this.dispatchAuthAction(result.type, result.data);
+});
+*/
 export class SubscriptionCompanionsFormComponent implements OnInit {
   @Input() userCompanions;
   @Input() subscriptionObserver: Observable<any>;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
   public subscriptionMembers = [];
   public subscription = {};
-  constructor() { }
+  constructor(private dialog: MdDialog ) { }
 
   ngOnInit() {
     this.subscriptionObserver.subscribe((subscription) => {
@@ -54,8 +71,22 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
     });
   }
 
+  onSubmitCompanions() {
+    this.onSubmit.emit(this.subscriptionMembers);
+  }
+
   selectPreviousAddedCompanion(companion) {
     this.subscriptionMembers.push(companion);
+  }
+  addNewCompanion() {
+    const modalConfig = {
+      panelClass: 'md-dialog-fullscreen-xs'
+    };
+
+    this.dialog.open(CompanionChargeFormComponent, modalConfig)
+      .afterClosed().subscribe(result => {
+          this.subscriptionMembers.push(result);
+    });
   }
 
   get selectableUserCompanions() {
@@ -72,6 +103,4 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
     }
     return _list;
   }
-
-
 }

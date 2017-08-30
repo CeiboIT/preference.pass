@@ -237,7 +237,7 @@ export class UserService {
           personType: companionData.personType,
           companionOwnerId: userId
         }
-      });
+      }).toPromise();
     }
 
     checkSubscription = (user, openModal, cb?) => {
@@ -261,31 +261,80 @@ export class UserService {
       }
     }
 
-    addCompanionToSubscriptionAndUser(companionData, subscriptionId) {
-      const userId = getUserIdFromToken();
-      return Observable.create(observer => {
-        this.client.mutate({
-          mutation: CREATE_COMPANION,
-          variables: {
-            fullName: companionData.fullName,
-            email: companionData.email,
-            personType: companionData.personType,
-            companionOwnerId: userId
-          }
-        }).toPromise()
-          .then((result) => {
-            const _data = result.data['createCompanion'];
-            this.client.mutate({
-              mutation: ADD_COMPANION_TO_SUBSCRIPTION,
-              variables: {
-                companionId: _data.id,
-                subscriptionId: subscriptionId
-              }
-            }).toPromise().then(compResult => {
-              observer.next(compResult);
-            });
+
+    addCompanionsToTrip(companions, subscriptionId) {
+      return new Promise((resolve, reject) => {
+          let _promises = [];
+          companions.map(companion => {
+            if (!companion.id) {
+              _promises.push(this.addCompanionToSubscriptionAndUser(companion, subscriptionId, true));
+            } else {
+              _promises.push(this.addCompanionToSubscription(companion.id, subscriptionId));
+            }
           });
+          if ( _promises.length) {
+            Promise.all(_promises)
+              .then(results => {
+                console.log(results);
+                resolve(results);
+              })
+              .catch(err => reject(err));
+          } else {
+            resolve();
+          }
       });
+    }
+
+
+    addCompanionToSubscription(companionId, subscriptionId) {
+      return this.client.mutate({
+        mutation: ADD_COMPANION_TO_SUBSCRIPTION,
+        variables: {
+          companionId: companionId,
+          subscriptionId: subscriptionId
+        }
+      }).toPromise();
+    }
+
+    addCompanionToSubscriptionAndUser(companionData, subscriptionId, asPromise?) {
+      const userId = getUserIdFromToken();
+      if (!asPromise) {
+        return Observable.create(observer => {
+          this.client.mutate({
+            mutation: CREATE_COMPANION,
+            variables: {
+              fullName: companionData.fullName,
+              email: companionData.email,
+              personType: companionData.personType,
+              companionOwnerId: userId
+            }
+          }).toPromise()
+            .then((result) => {
+              const _data = result.data['createCompanion'];
+              this.addCompanionToSubscription(_data.id, subscriptionId).then(compResult => {
+                observer.next(compResult);
+              });
+            });
+        });
+      } else {
+        return new Promise((resolve, reject) => {
+            this.client.mutate({
+              mutation: CREATE_COMPANION,
+              variables: {
+                fullName: companionData.fullName,
+                email: companionData.email,
+                personType: companionData.personType,
+                companionOwnerId: userId
+              }
+            }).toPromise()
+              .then((result) => {
+                const _data = result.data['createCompanion'];
+                this.addCompanionToSubscription(_data.id, subscriptionId).then(compResult => {
+                  resolve(compResult);
+                }).catch(err => reject(err));
+              }).catch(err => reject(err));
+        });
+      }
     }
 
     authenticateUser(idToken, accessToken) {

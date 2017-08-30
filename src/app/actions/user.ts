@@ -16,6 +16,9 @@ export const ActionTypes = {
   ADD_COMPANION: type('[User] Add Companion'),
   ADD_COMPANION_SUCCESS: type('[User] Add Companion Success'),
   ADD_COMPANION_FAILURE: type('[User] Add Companion Failure'),
+  ADD_COMPANIONS: type('[User] Add Companions'),
+  ADD_COMPANIONS_SUCCESS: type('[User] Add Companions Success'),
+  ADD_COMPANIONS_FAILURE: type('[User] Add Companions Failure'),
   GET_USER_COMPANIONS: type('[User] Get companions'),
   GET_USER_COMPANIONS_FAILURE: type('[User] Get companions Failure'),
   GET_USER_COMPANIONS_SUCCESS: type('[User] Get companions Success'),
@@ -68,6 +71,22 @@ export class AddCompanionSuccess implements Action {
 
 export class AddCompanionFailure implements Action {
   type = ActionTypes.ADD_COMPANION_FAILURE;
+  constructor(public payload: any) {}
+}
+
+
+export class AddCompanions implements Action {
+  type = ActionTypes.ADD_COMPANIONS;
+  constructor(public payload: any) {}
+}
+
+export class AddCompanionsSuccess implements Action {
+  type = ActionTypes.ADD_COMPANIONS_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class AddCompanionsFailure implements Action {
+  type = ActionTypes.ADD_COMPANIONS_FAILURE;
   constructor(public payload: any) {}
 }
 

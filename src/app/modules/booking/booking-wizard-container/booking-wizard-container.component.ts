@@ -103,8 +103,7 @@ const _mockBooking = {
         </app-subscription-wizard>
       </div>
 
-      <div>
-        
+      <div *ngIf="bookingStep ===  'CompanionsToTrip'">
         <app-subscription-companions-form
           [subscriptionObserver]="activeSubscription$"
           [userCompanions]="companions$ | async "
@@ -112,10 +111,7 @@ const _mockBooking = {
         >
         </app-subscription-companions-form>
       </div>
-      
-      
-
-      <div *ngIf="bookingStep === 'Companions'" class="col-md-8 offset-md-2">
+      <div *ngIf="bookingStep === 'CompanionsToBooking'" class="col-md-8 offset-md-2">
         <div *ngIf="!isComingAlone" class="row">
           <h2 class="w-100 text-center">
             Charge companions to your subscription
@@ -358,6 +354,10 @@ export class BookingWizardContainerComponent implements OnInit {
 
   addCompanionsToTrip($event) {
     console.log($event);
-    this.store.dispatch(new AddCompanions({ companions : $event, subscriptionId: this.subscription.id}));
+    this.store.dispatch(new AddCompanions({
+      companions : $event,
+      subscriptionId: this.subscription.id,
+      executionDate: this.booking.value.executionDate
+    }));
   }
 }

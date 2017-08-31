@@ -15,6 +15,23 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import {UserService} from '../services/user.service';
+import * as _ from 'lodash';
+
+function analyzeUserSubscription(user) {
+  let conditions = {
+    hasSubscription : false,
+    hasCompanionsCompleted: false
+  };
+  conditions.hasSubscription = !!(user.subscriptions && user.subscriptions.length);
+  if (conditions.hasSubscription) {
+    const _subscription = user.subscriptions[0];
+    const _counts = _.countBy(_subscription.companions, 'personType');
+    const _kidsCompleted = _counts.Kid === _subscription.kids;
+    const _adultsCompleted = _counts.Adult === _subscription.adults;
+    conditions.hasCompanionsCompleted = _kidsCompleted && _adultsCompleted;
+  }
+  return conditions;
+}
 
 @Injectable()
 export class BookingEffects {
@@ -49,7 +66,7 @@ export class BookingEffects {
     .map(action => action.payload)
     .map((payload) => {
       return new MoveToStep({
-        step: 'Companions', subscription: payload
+        step: 'CompanionsToTrip', subscription: payload
       });
     });
 
@@ -78,10 +95,15 @@ export class BookingEffects {
         return this.bookingService.getValidSubscription(payload.executionDate)
           .map((result) => {
           const _user = result.data['user'];
-          if (!_user.subscriptions || (_user.subscriptions && !_user.subscriptions.length)) {
+          const _userAnalysis = analyzeUserSubscription(_user);
+          if (!_userAnalysis.hasSubscription) {
             return new MoveToStep({step: 'Subscription' });
           } else {
-            return new MoveToStep({step: 'Companions', subscription: _user.subscriptions[0]});
+            if( _userAnalysis.hasCompanionsCompleted) {
+              return new MoveToStep({step: 'CompanionsToBooking', subscription: _user.subscriptions[0]});
+            } else {
+              return new MoveToStep({ step: 'CompanionsToTrip', subscription: _user.subscriptions[0] });
+            }
           };
         });
     });

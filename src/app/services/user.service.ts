@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Apollo, ApolloQueryObservable } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import {User} from '../models/user';
 import {Store} from '@ngrx/store';

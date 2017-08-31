@@ -9,6 +9,11 @@ import * as _ from 'lodash';
         <h2>
           Available companions
         </h2>
+        <div>
+          Kids: {{ remainingKids }}
+
+          Adults: {{ remainingAdults }}
+        </div>
         <div *ngFor="let companion of availableCompanions" (click)="companionSelected(companion)">
           {{ companion.fullName }}
         </div>
@@ -40,6 +45,8 @@ import * as _ from 'lodash';
 export class SubscriptionCompanionSelectFormComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() subscription;
+  @Input() kidsAmount;
+  @Input() adultsAmount;
   selectedKids = [];
   selectedAdults = [];
   selectedCompanions = [];
@@ -51,17 +58,22 @@ export class SubscriptionCompanionSelectFormComponent implements OnInit {
   }
 
   companionSelected(companion) {
-    if (companion.personType === 'Kid') {
+    if (companion.personType === 'Kid' && this.remainingKids) {
       this.selectedKids.push(companion);
-    } else {
-      this.selectedAdults.push(companion);
+    }
+    if (companion.personType === 'Adult' && this.remainingAdults) {
+        this.selectedAdults.push(companion);
     }
     this.selectedCompanions.push(companion);
     this.selectedCompanionsIds.push(companion.id);
     this.parent.get('companionsIds').setValue(this.selectedCompanionsIds);
   }
-
-
+  get remainingKids() {
+    return this.kidsAmount - this.selectedKids.length;
+  }
+  get remainingAdults() {
+    return this.adultsAmount - this.selectedAdults.length;
+  }
   get availableCompanions() {
     if(this.subscription) {
       let _list = _.clone(this.subscription.companions);

@@ -119,8 +119,9 @@ const _mockBooking = {
           <h2 class="w-100 text-center">
             Who is coming with you to {{ activity?.name}} ?
           </h2>
-
           <app-subscription-companion-select-form [parent]="booking"
+                                                  [kidsAmount]="booking.value.kidsAmount"
+                                                  [adultsAmount]="booking.value.adultsAmount"
                                                   [subscription]="activeSubscription$ | async ">
           </app-subscription-companion-select-form>
         </div>

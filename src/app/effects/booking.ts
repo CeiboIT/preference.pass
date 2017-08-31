@@ -89,7 +89,7 @@ export class BookingEffects {
 
   @Effect()
   CalculateBookingNextStep: Observable<{}> = this.action$
-    .ofType(ActionTypes.BOOKING_STEP1_SUCCESS)
+    .ofType(ActionTypes.BOOKING_STEP1_SUCCESS, UserActions.ADD_COMPANIONS_SUCCESS)
     .map(action => action.payload)
     .switchMap((payload) => {
         return this.bookingService.getValidSubscription(payload.executionDate)
@@ -99,7 +99,7 @@ export class BookingEffects {
           if (!_userAnalysis.hasSubscription) {
             return new MoveToStep({step: 'Subscription' });
           } else {
-            if( _userAnalysis.hasCompanionsCompleted) {
+            if ( _userAnalysis.hasCompanionsCompleted) {
               return new MoveToStep({step: 'CompanionsToBooking', subscription: _user.subscriptions[0]});
             } else {
               return new MoveToStep({ step: 'CompanionsToTrip', subscription: _user.subscriptions[0] });

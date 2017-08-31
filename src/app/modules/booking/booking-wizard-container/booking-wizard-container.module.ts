@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule }   from '@angular/router';
+import { RouterModule } from '@angular/router';
 import {BookingWizardContainerComponent} from './booking-wizard-container.component';
 import {BookingDateSelectorFormModule} from '../../../components/forms/booking-date-selector-form/booking-date-selector-form.module';
 import {PickLocationAndTimeSelectionFormModule} from '../../../components/forms/pick-location-and-time-selection-form/pick-location-and-time-selection-form.module';
 import {CompanionChargeFormModule} from '../../../components/forms/companion-charge-form/companion-charge-form.module';
-import {CompanionsSelectionFormModule} from '../../../components/forms/companions-selection-form/companions-selection-form.module';
 import {MdButtonModule, MdCardModule} from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {PreferencePassCardFormModule} from '../../../components/forms/preference-pass-card-form/preference-pass-card-form.module';
@@ -18,8 +17,9 @@ import { BookingStep2Component } from './booking-step-2/booking-step-2.component
 import { BookingStep3Component } from './booking-step-3/booking-step-3.component';
 import {BookingPreviewModule} from '../../../components/booking/booking-preview/booking-preview.module';
 import {SubscriptionWizardModule} from '../../subscription/subscription-wizard/subscription-wizard.module';
-import { SuccessAnimationModule } from "../../../components/widgets/alert/success-animation/success-animation.module";
-import {SubscriptionCompanionsFormModule} from "../../../components/forms/subscription-companions-form/subscription-companions-form.module";
+import { SuccessAnimationModule } from '../../../components/widgets/alert/success-animation/success-animation.module';
+import {SubscriptionCompanionsFormModule} from '../../../components/forms/subscription-companions-form/subscription-companions-form.module';
+import {SubscriptionCompanionSelectFormModule} from '../../../components/forms/subscription-companion-select-form/subscription-companion-select-form.module';
 
 @NgModule({
   imports: [
@@ -27,7 +27,6 @@ import {SubscriptionCompanionsFormModule} from "../../../components/forms/subscr
     RouterModule,
     BookingDateSelectorFormModule,
     PickLocationAndTimeSelectionFormModule,
-    CompanionsSelectionFormModule,
     CompanionChargeFormModule,
     PreferencePassCardFormModule,
     SubscriptionWizardModule,
@@ -41,7 +40,8 @@ import {SubscriptionCompanionsFormModule} from "../../../components/forms/subscr
     CompanionsFormModule,
     BookingPreviewModule,
     SuccessAnimationModule,
-    SubscriptionCompanionsFormModule
+    SubscriptionCompanionsFormModule,
+    SubscriptionCompanionSelectFormModule
   ],
   declarations: [BookingWizardContainerComponent, BookingStep1Component, BookingStep2Component, BookingStep3Component],
   exports: [BookingWizardContainerComponent]

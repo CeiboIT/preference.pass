@@ -113,9 +113,16 @@ const _mockBooking = {
       </div>
       <div *ngIf="bookingStep === 'CompanionsToBooking'" class="col-md-8 offset-md-2">
         <div *ngIf="!isComingAlone" class="row">
+
+        </div>
+        <div class="row">
           <h2 class="w-100 text-center">
-            Charge companions to your subscription
+            Who is coming with you to {{ activity?.name}} ?
           </h2>
+
+          <app-subscription-companion-select-form [parent]="booking"
+                                                  [subscription]="activeSubscription$ | async ">
+          </app-subscription-companion-select-form>
         </div>
         
         <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">

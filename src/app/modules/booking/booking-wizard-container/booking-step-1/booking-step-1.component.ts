@@ -22,7 +22,11 @@ _inthreemonths.add(3, 'months');
             <h2>
               How many people is coming with you?
             </h2>
-            <app-companion-amount [parent]="parent"></app-companion-amount>
+            <app-companion-amount [parent]="parent"
+              [kidsLimit]="subscription?.kids"
+              [adultsLimit]="subscription?.adults"
+            >
+            </app-companion-amount>
           </md-card-content>
         </md-card>
 
@@ -93,6 +97,7 @@ export class BookingStep1Component implements OnInit {
   @Input() departures;
   @Input() rate;
   @Input() activity;
+  @Input() subscription;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
 
   public today = _today;

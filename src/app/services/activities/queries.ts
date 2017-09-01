@@ -31,10 +31,10 @@ export class ActivitiesQueries {
                 }
             }
         }
-      `
+      `;
     return this.client.watchQuery({
       query: GET_ACTIVITIES
-    })
+    });
   }
 
   getHotDeals() {
@@ -173,7 +173,7 @@ export class ActivitiesQueries {
                 lng
             }
         }
-      `
+      `;
     return this.client.watchQuery({
       query: GET_ACTIVITY,
       variables: { id: id }

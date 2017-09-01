@@ -7,36 +7,8 @@ import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
 import {BookingFinish, BookingStep1, MoveToStep} from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
-import {AddCompanion, AddCompanions} from "../../../actions/user";
-/*
-const mockCompanions = [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano",
-  "email": "mpotignano@gmail.com", "personType": 'Adult',
-  "subscriptions": [ { "id": "cj6i4pv0fb7x80110zl5fnkjf", "__typename": "Subscription" }], "__typename": "Companion" },
-  { "id": "cj6jep4k7m35d0111936g1hxx", "fullName": "Juan Carlos Potignano",
-    "email": "jcpotignano@gmail.com", "personType": 'Adult',
-    "subscriptions": [], "__typename": "Companion" },
-
-  { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano",
-    "email": "lpotignano@gmail.com", "personType": 'Kid',
-    "subscriptions": [ { "id": "cj6i4pv0fb7x80110zl5fnkjf", "__typename": "Subscription" }], "__typename": "Companion" },
-
-  { "id": "cj6jep4k7m35d0111936g1hee", "fullName": "Laura Potignano",
-    "email": "lpotignano@gmail.com", "personType": 'Kid',
-    "subscriptions": [], "__typename": "Companion" }
-]
-
-const mockSubscription = { "id": "cj6i4pv0fb7x80110zl5fnkjf", "kids": 2, "adults": 2, "isComingAlone": false, "companions": [ { "id": "cj6jep4k7m35d0111936g1hzz", "fullName": "Marcos Potignano", "email": "mpotignano@gmail.com", "personType": "Adult", "__typename": "Companion" },
-  { "id": "cj6jep4k7m35d0111936g1hdd", "fullName": "Luis Romualdo Potignano", "email": "lpotignano@gmail.com", "personType": "Kid", "__typename": "Companion" }
-
-], "__typename": "Subscription" };*/
-
-
-const _mockBooking = {
-  kidsAmount: 1,
-  adultsAmount: 1,
-  isComingAlone: false
-};
-
+import {AddCompanion, AddCompanions} from '../../../actions/user';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-booking-wizard-container',
@@ -51,6 +23,7 @@ const _mockBooking = {
               [activity]="activity$ | async "
               [departures]="departures$ | async "
               [rate]="rate"
+              [subscription]="activeSubscription"
               (onSubmit)="onStep1Submit($event)"
             >
             </app-booking-step-1>
@@ -197,6 +170,8 @@ export class BookingWizardContainerComponent implements OnInit {
   public step = 1;
   public bookingStep = '';
   private bookingId = '';
+  private hasValidSubscription = false;
+  public activeSubscription;
   selectedRateId;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
@@ -231,7 +206,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
-    if (this.activatedRoute.snapshot.queryParams){
+    if (this.activatedRoute.snapshot.queryParams) {
       this.selectedRateId = this.activatedRoute.snapshot.queryParams.rateId;
     }
     console.log(this.activatedRoute.snapshot);
@@ -242,6 +217,10 @@ export class BookingWizardContainerComponent implements OnInit {
         this.store.dispatch(new GetDetail(id));
       }
     });
+
+    this.booking.get('executionDate').valueChanges.subscribe((executionDate) => {
+      this.getActiveSubscription();
+    })
 
 
     this.store.dispatch(new MoveToStep({step: 'Details'}));
@@ -264,6 +243,31 @@ export class BookingWizardContainerComponent implements OnInit {
     this.store.dispatch(new MoveToStep({step: 'Details'}));
     this.step = 1;
     document.body.scrollTop = 0;
+  }
+
+  getActiveSubscription() {
+    this.activeSubscription = {};
+    if (this.user && this.user.subscriptions && this.user.subscriptions.length && this.booking.get('executionDate').value) {
+      const _execution = moment(this.booking.get('executionDate').value);
+      this.hasValidSubscription = false;
+      this.user.subscriptions.some((subscription) => {
+        const _from = moment(subscription.startsAt);
+        const _to = moment(subscription.validity);
+        if ( _from <= _execution && _to >= _execution) {
+          this.activeSubscription = subscription;
+          this.hasValidSubscription = true;
+          if (this.booking.get('kidsAmount').value > subscription.kids) {
+            console.log('Change value for kidsAmount');
+            this.booking.get('kidsAmount').setValue(subscription.kids);
+          }
+          if (this.booking.get('adultsAmount').value > subscription.adults) {
+            console.log('Change value for adultsAmount');
+            this.booking.get('adultsAmount').setValue(subscription.adults);
+          }
+          return true;
+        }
+      });
+    }
   }
 
   get kidsAmount() {
@@ -345,7 +349,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
   changeToStep = (step) => {
     this.step = step;
-  }
+  };
 
   finishBooking() {
     let _booking = this.booking.value;

@@ -90,7 +90,6 @@ export class UserService {
             id
             name 
             picture
-
             reservations {
               kidsAmount
               adultsAmount
@@ -121,12 +120,13 @@ export class UserService {
               id
             }
             
-            subscription(filter: {
+            subscriptions(filter: {
               validity_gt: $now
             }) {
               id
               adults
               validity
+              startsAt
               kids
               isComingAlone
               companions {

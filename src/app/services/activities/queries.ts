@@ -67,9 +67,10 @@ export class ActivitiesQueries {
 
   getActivitiesByCategory(categoryName) {
     const GET_ACTIVITY_BY_CATEGORY = gql`
-      query($categoryName: String) {
+      query($categoryName: String, $published: Boolean ) {
         allActivities(filter: {
           category: { name: $categoryName}
+          published: $published
         }) {
           id
           name
@@ -95,7 +96,7 @@ export class ActivitiesQueries {
     `
     return this.client.watchQuery({
       query: GET_ACTIVITY_BY_CATEGORY,
-      variables: { categoryName: categoryName }
+      variables: { categoryName: categoryName, published: true }
     })
   }
 

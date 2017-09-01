@@ -3,12 +3,13 @@ import * as moment from 'moment';
 import {FormGroup} from '@angular/forms';
 function getDaysInMonth(year, month) {
   let daysInMonth;
-  if (month < 10) {
-    const dateString = year  + '-0' + month;
+  const _month = month + 1;
+  if (_month < 10) {
+    const dateString = year  + '-0' + _month;
     daysInMonth = moment(dateString, 'YYYY-MM').daysInMonth();
   }
-  if (month >= 10) {
-    const dateString = year  + '-' + month;
+  if (_month >= 10) {
+    const dateString = year  + '-' + _month;
     daysInMonth = moment(dateString, 'YYYY-MM').daysInMonth();
   }
   return daysInMonth;

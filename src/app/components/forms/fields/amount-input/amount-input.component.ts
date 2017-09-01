@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-amount-input',
@@ -25,10 +25,20 @@ export class AmountInputComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() parentKey: string;
   @Input() placeholder: string;
+  @Input() minAmount = 0;
+  @Input() maxAmount;
   clickOnRemove: EventEmitter<any> = new EventEmitter();
   clickOnAdd: EventEmitter<any> = new EventEmitter();
   constructor() { }
   ngOnInit() {
+    let _validators = [];
+    if (this.minAmount) {
+      _validators.push(Validators.min(this.minAmount));
+    }
+    if (this.maxAmount) {
+      _validators.push(Validators.max(this.maxAmount));
+    }
+    this.parent.get(this.parentKey).setValidators(_validators);
     this.clickOnAdd.subscribe(() => {
       const amount = this.parent.get(this.parentKey).value;
       if (amount) {

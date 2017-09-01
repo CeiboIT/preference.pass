@@ -81,7 +81,7 @@ export class SubscriptionPricingCardComponent implements OnInit {
   @Input() parent: FormGroup;
   @Output() onCardSelected: EventEmitter<any> = new EventEmitter();
   constructor() { }
-  
+
   ngOnInit() { }
 
   get days(){

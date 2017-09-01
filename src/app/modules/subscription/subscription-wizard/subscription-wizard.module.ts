@@ -14,6 +14,7 @@ import { SubscriptionStep2Component } from './subscription-step-2/subscription-s
 import { SubscriptionStep3Component } from './subscription-step-3/subscription-step-3.component';
 import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
 import {FieldsModule} from '../../../components/forms/fields/fields.module';
+import {PaypalButtonModule} from '../../../components/paypal-button/paypal-button.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import {FieldsModule} from '../../../components/forms/fields/fields.module';
     MdCardModule,
     MdSelectModule,
     DateSelectModule,
-    FieldsModule
+    FieldsModule,
+    PaypalButtonModule
   ],
   declarations: [
     SubscriptionWizardComponent,

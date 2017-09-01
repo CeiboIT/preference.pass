@@ -84,6 +84,15 @@ interface DiscountValidationResponse {
       <div [hidden]="step !== 2">
         <div class="d-flex flex-column w-100">
           <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
+          <div>
+            PAYPAL ZONE
+            <app-paypal-button
+            [client]="payPalClient"
+            [transaction]="payPalTransaction"
+            (onAuthorized)="paypalAuthorized($event)"
+            >
+            </app-paypal-button>
+          </div>
           <app-payment-form
               [onSuccess]="onCardChargeSuccess"
               [onError]="onCardChargeError"
@@ -145,6 +154,11 @@ export class SubscriptionWizardComponent implements OnInit {
   public plan;
   public selectableDates = [];
   public claimDiscount: boolean = false;
+  public payPalClient = {
+    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4',
+    production: 'AaJEzmFqAI2D8FhfNWFEvIl_EzZKX6iQOAHoXUVg_Tart6VgiFGfbYHBx5Lt9zQz8pW1aiFvF0AJC0LW'
+  };
+  public payPalTransaction = {};
   constructor(
     private store: Store<any>,
     private fb: FormBuilder
@@ -233,6 +247,10 @@ export class SubscriptionWizardComponent implements OnInit {
     this.calculateTotalToPay();
   }
 
+  paypalAuthorized($event) {
+    console.log($event);
+  }
+
   calculateTotalToPay() {
       let kidsAmount = this.paymentRequest.get('kidsAmount').value || 0;
       let adultsAmount = this.paymentRequest.get('adultsAmount').value || 0;
@@ -241,6 +259,12 @@ export class SubscriptionWizardComponent implements OnInit {
       let kidsTotalPrice = kidsAmount * plan.kidPrice;
       let total = adultsTotalPrice + kidsTotalPrice || 0;
       this.totalPay = Math.round((total) * 100) / 100;
+
+      this.payPalTransaction = {
+        total: this.totalPay,
+        currency: 'USD',
+        description: 'Payment for: Plan: ' + this.plan + 'Kids: ' + kidsAmount + ' Adults: ' + adultsAmount
+      };
   }
 
 }

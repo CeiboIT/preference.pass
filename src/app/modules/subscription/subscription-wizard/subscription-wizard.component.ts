@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
-import { stripeKey } from '../../../constants/stripe';
+import { stripeKey, stripeHandlerError } from '../../../constants/stripe';
 import * as moment from 'moment';
 const _today = moment();
 const _inthreemonths = _today.clone();
@@ -84,6 +84,8 @@ interface DiscountValidationResponse {
       <div [hidden]="step !== 2">
         <div class="d-flex flex-column w-100">
           <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
+
+          <span class="text-center text-danger">{{ cardError }}</span>
           <app-payment-form
               [onSuccess]="onCardChargeSuccess"
               [onError]="onCardChargeError"
@@ -145,6 +147,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public plan;
   public selectableDates = [];
   public claimDiscount: boolean = false;
+  public cardError;
   constructor(
     private store: Store<any>,
     private fb: FormBuilder
@@ -220,8 +223,9 @@ export class SubscriptionWizardComponent implements OnInit {
 	}
 
 	onCardChargeError = (err) => {
-		console.log(err);
-		this.subscriptionError.emit({err: err});
+    console.log(err);
+    this.cardError = err ? err.message : null;
+		//this.subscriptionError.emit({err: err});
 	};
 
   hasDiscountCardChange(event) {

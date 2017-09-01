@@ -10,8 +10,8 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
   template: `    
     <div>
       <div>
-        <md-card class="p-0">
-          <md-card-content class="p-3">
+        <md-card class="mb-2">
+          <md-card-content>
             <h1 class="title">Available companions</h1>
             <div *ngFor="let companion of selectableUserCompanions" (click)="selectPreviousAddedCompanion(companion)">
               <app-person-element [person]="companion"></app-person-element>
@@ -20,8 +20,8 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
         </md-card>
       </div>
       <div>
-        <md-card class="p-0">
-          <md-card-content class="p-3">
+        <md-card>
+          <md-card-content>
             <h2>
               Companions added to this trip 
               <button md-button color="primary" 
@@ -33,9 +33,11 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
             </div>
           </md-card-content>
           
-          <button md-raised-button color="primary" (click)="onSubmitCompanions()">
-            Save companions
-          </button>
+          <md-card-actions>
+            <button md-raised-button color="primary" (click)="onSubmitCompanions()">
+              Save companions
+            </button>
+          </md-card-actions>
         </md-card>
       </div>
       
@@ -85,7 +87,7 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
 
     this.dialog.open(CompanionChargeFormComponent, modalConfig)
       .afterClosed().subscribe(result => {
-          this.subscriptionMembers.push(result);
+          if (result) this.subscriptionMembers.push(result);
     });
   }
 

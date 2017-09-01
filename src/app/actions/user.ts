@@ -107,4 +107,4 @@ export class GetUserCompanionsFailure implements Action {
 
 export type Actions = LoadUser | CreateUser | CreateUserFailure | CreateUserSuccess | GetUserBasicData
   | GetUserCompanions | GetUserCompanionsSuccess | GetUserCompanionsFailure
-  | GetUserBasicDataSuccess | GetUserBasicDataFailure | AddCompanion | AddCompanionFailure | AddCompanionSuccess;
+  | GetUserBasicDataSuccess | GetUserBasicDataFailure | AddCompanion | AddCompanions | AddCompanionFailure | AddCompanionSuccess;

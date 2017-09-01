@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MdCardModule } from '@angular/material';
 import { SubscriptionCompanionSelectFormComponent } from './subscription-companion-select-form.component';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MdCardModule
   ],
-  declarations: [SubscriptionCompanionSelectFormComponent],
-  exports: [SubscriptionCompanionSelectFormComponent]
+  declarations: [ SubscriptionCompanionSelectFormComponent ],
+  exports: [ SubscriptionCompanionSelectFormComponent ]
 })
 export class SubscriptionCompanionSelectFormModule { }

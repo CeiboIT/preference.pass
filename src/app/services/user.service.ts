@@ -97,6 +97,7 @@ export class UserService {
               executionDate
               pickUpLocation {
                 name
+                mainPhoto
                 formattedAddress
               }
               activity {

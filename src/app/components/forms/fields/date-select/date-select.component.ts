@@ -13,6 +13,7 @@ import * as moment from 'moment';
                           (daySelected)="onDaySelected($event)"
                           [parent]="dateGroup"
                           [limitDate]="limitDate"
+                          [startDate]="startDate"
           >
           </app-day-select>
         </div>
@@ -20,12 +21,14 @@ import * as moment from 'moment';
           <app-month-select *ngIf="p == 'month'" (monthSelected)="onMonthSelected($event)"
                             [parent]="dateGroup"
                             [limitDate]="limitDate"
+                            [startDate]="startDate"
           ></app-month-select>
         </div>
         <div>
           <app-year-select *ngIf="p == 'year'" [years]="years" (yearSelected)="onYearSelected($event)"
                            [parent]="dateGroup"
                            [limitDate]="limitDate"
+                           [startDate]="startDate"
           >
           </app-year-select>
         </div>

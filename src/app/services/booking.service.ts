@@ -210,7 +210,6 @@ export class BookingService {
       }
   }
 
-
   getValidSubscription(bookingDate) {
       return this.client.watchQuery({
         query: GET_VALID_SUBSCRIPTION,

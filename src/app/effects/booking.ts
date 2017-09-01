@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
-  ActionTypes, BookingFinishSuccess, BookingStep1Success, GetBookingSubscriptionSuccess,
-  GetValidSubscriptionCompanionsSuccess, MoveToStep
+  ActionTypes, BookingFinishSuccess, BookingStep1Success, GetBookingSubscriptionSuccess, MoveToStep
 } from '../actions/booking';
 import { ActionTypes as SubscriptionActions } from '../actions/subscription';
 import { ActionTypes as UserActions } from '../actions/user';

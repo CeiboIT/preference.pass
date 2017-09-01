@@ -37,6 +37,7 @@ _inthreemonths.add(3, 'months');
               [years]="years"
               [initialDate]="today"
               [limitDate]="limitDate"
+              [startDate]="today"
             >
             </app-date-select>
           </md-card-content>

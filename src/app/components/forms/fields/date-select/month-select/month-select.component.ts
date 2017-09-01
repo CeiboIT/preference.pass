@@ -23,6 +23,7 @@ export class MonthSelectComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() limitDate;
   @Input() initialDate;
+  @Input() startDate;
   public months;
   constructor() { }
   ngOnInit() {

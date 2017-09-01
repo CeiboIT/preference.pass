@@ -35,31 +35,55 @@ export class DaySelectComponent implements OnInit {
   @Output() daySelected: EventEmitter<any> = new EventEmitter();
   @Input() parent: FormGroup;
   @Input() limitDate;
+  @Input() startDate;
   public days = [];
   private month;
   private year;
+  public start
+  public limit
   constructor() { }
   ngOnInit() {
-    // moment("2012-02", "YYYY-MM").daysInMonth()
-    this.monthObserver.subscribe((value) => {
+    this.parent.get('month').valueChanges.subscribe((value) => {
       this.month = value;
+      this.start = moment(this.startDate);
+      this.limit = moment(this.limitDate);
       const _year = this.year || new Date().getFullYear();
       const daysInMonth = getDaysInMonth(_year, this.month);
-      this.generateDaysInMonth(daysInMonth);
+      if (this.startDate && this.month === this.start.month()) {
+        this.generateDaysInMonth(daysInMonth, this.startDate);
+      } else if (this.limitDate && this.month === this.limit.month()) {
+        this.generateDaysInMonth(daysInMonth, null, this.limitDate);
+      } else {
+        this.generateDaysInMonth(daysInMonth);
+      }
     });
 
-    this.yearObserver.subscribe((value) => {
+    this.parent.get('year').valueChanges.subscribe((value) => {
       this.year = value;
+      this.start = moment(this.startDate);
+      this.limit = moment(this.limitDate);
       const _month = this.month || new Date().getMonth();
       const daysInMonth = getDaysInMonth(this.year, _month);
-      this.generateDaysInMonth(daysInMonth);
+      if (this.startDate && this.month === this.start.month()) {
+        this.generateDaysInMonth(daysInMonth, this.startDate);
+      } else if (this.limitDate && this.month === this.limit.month()) {
+        this.generateDaysInMonth(daysInMonth, null, this.limitDate);
+      } else {
+        this.generateDaysInMonth(daysInMonth);
+      }
     });
 
     if (this.parent.get('month').value && this.parent.get('year').value) {
+      this.start = moment(this.startDate);
+      this.limit = moment(this.limitDate);
       this.month = this.parent.get('month').value;
       this.year = this.parent.get('year').value;
       const daysInMonth = getDaysInMonth(this.year, this.month);
-      this.generateDaysInMonth(daysInMonth);
+      if (this.startDate && this.month === this.start.month()) {
+        this.generateDaysInMonth(daysInMonth, this.startDate);
+      } else {
+        this.generateDaysInMonth(daysInMonth);
+      }
     }
 
   }
@@ -67,11 +91,32 @@ export class DaySelectComponent implements OnInit {
     this.daySelected.emit($event.value);
   }
 
-  generateDaysInMonth(daysInMonth) {
+  generateDaysInMonth(daysInMonth, startDate?, limitDate?) {
     let _days = [];
-    for (let i = 1; i <= daysInMonth; i++) {
-      _days.push(i);
+    if (startDate && limitDate) {
+      for (let i = this.start.date() ; i <= this.limit.date(); i++) {
+        _days.push(i);
+      }
     }
+
+    if (startDate && !limitDate) {
+      for (let i = this.start.date(); i <= daysInMonth; i++) {
+        _days.push(i);
+      }
+    }
+
+    if (!startDate && limitDate) {
+      for (let i = 1; i <= this.limit.date() ; i++) {
+        _days.push(i);
+      }
+    }
+
+    if (!startDate && !limitDate) {;
+      for (let i = 1; i <= daysInMonth ; i++) {
+        _days.push(i);
+      }
+    }
+
     this.days = _days;
   }
 

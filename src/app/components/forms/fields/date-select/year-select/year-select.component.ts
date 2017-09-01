@@ -19,6 +19,7 @@ export class YearSelectComponent implements OnInit {
   @Input() years = [];
   @Input() parent;
   @Input() limitDate;
+  @Input() startDate;
   constructor() { }
   ngOnInit() {
     if (this.limitDate) {

@@ -11,33 +11,38 @@ import * as _ from 'lodash';
               <h2>
                 Available companions
               </h2>
-              <div>
-                Kids: {{ remainingKids }}
+              <div class="mb-3">
+                <span class="mr-3">Kids: {{ remainingKids }}</span>
 
-                Adults: {{ remainingAdults }}
+                <span>Adults: {{ remainingAdults }}</span>
               </div>
               <div *ngFor="let companion of availableCompanions" (click)="companionSelected(companion)">
-                {{ companion.fullName }}
+                <!--{{ companion.fullName }}-->
+                <app-person-element [person]="companion"></app-person-element>
               </div>
             </div>
             <div>
               <h2>
                 Selected Companions
               </h2>
-              <div>
+              {{ selectedKids }}
+              <div *ngIf="selectedKids.length">
                 <h3>
                   Selected kids
                 </h3>
                 <div *ngFor="let kid of selectedKids" (click)="removeCompanion(kid)">
-                  {{ kid.fullName }}
+                  <app-person-element [person]="kid"></app-person-element>
+                  <!--{{ kid.fullName }}-->
                 </div>
               </div>
-              <div>
+              {{ selectedAdults }}
+              <div *ngIf="selectedAdults.length">
                 <h3>
                   Selected Adults
                 </h3>
                 <div *ngFor="let adult of selectedAdults" (click)="removeCompanion(adult)">
-                  {{ adult.fullName }}
+                  <app-person-element [person]="adult"></app-person-element>
+                  <!--{{ adult.fullName }}-->
                 </div>
               </div>
             </div>

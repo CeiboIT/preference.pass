@@ -5,10 +5,12 @@ import {Apollo} from 'apollo-angular';
 
 const server = 'http://localhost:3030/';
 const uri = 'subscription/new';
+const payPalUri = 'subscription/new/paypal';
 
 @Injectable()
 export class SubscriptionService {
   private endpoint = server + uri;
+  private payPalEndPoint = server + payPalUri;
   private cardsEndpoint = 'http://localhost:3000';
   private codesEndpoint = 'http://localhost:3000';
   constructor(private http: Http, private client: Apollo) { }
@@ -24,22 +26,23 @@ export class SubscriptionService {
       });
 
       this.createAuthorizationHeader(headers);
-      console.log('Subscription Body: ', body);
-      let subscription = JSON.stringify(body);
-      this.http.post(this.endpoint, subscription, {
-        headers: headers
-      })
-      .map((response: Response) => response.json())
-      .subscribe(
-        data => {
-          console.log(data);
-          resolve(data);
-        },
-        err => {
-          console.log(err);
-          reject(err);
-        }
-      );
+      const subscription = JSON.stringify(body);
+      const _endpoint = (body.paymentSource && body.paymentSource !== 'PayPal') ? this.endpoint : this.payPalEndPoint;
+      this.http.post(_endpoint, subscription, {
+          headers: headers
+        }).map((response: Response) => response.json())
+        .subscribe(
+          data => {
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            console.log(err);
+            reject(err);
+          }
+        );
+
+
     });
   }
 

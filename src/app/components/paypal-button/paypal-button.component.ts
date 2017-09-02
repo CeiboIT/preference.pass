@@ -1,9 +1,13 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 declare var paypal: any;
 
-interface Transaction {
+interface Amount {
   total: string;
   currency: string;
+}
+
+interface Transaction {
+  amount: Amount;
   description?: string;
 }
 
@@ -22,7 +26,7 @@ interface Client {
   })
 export class PaypalButtonComponent implements OnInit {
   @Input() environment;
-  @Input() transaction: Transaction;
+  @Input() transactions: Transaction[];
   @Input() client: Client;
   @Output() onAuthorized: EventEmitter<any> = new EventEmitter();
   constructor(private elementRef: ElementRef) { }
@@ -36,12 +40,13 @@ export class PaypalButtonComponent implements OnInit {
     paypal.Button.render({
       env: 'sandbox',
       commit: true,
+      client: this.client,
       payment: (paymentData, paymentActions) => {
         console.log('Inside paypal payment', paymentData);
         console.log('Inside paypal Actions', paymentActions);
-        paymentActions.payments.create({
+        return paymentActions.payment.create({
           payment: {
-            transaction: this.transaction
+            transactions: this.transactions
           }
         });
       },

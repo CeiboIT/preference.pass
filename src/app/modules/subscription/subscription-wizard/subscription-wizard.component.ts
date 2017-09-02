@@ -84,14 +84,15 @@ interface DiscountValidationResponse {
       <div [hidden]="step !== 2">
         <div class="d-flex flex-column w-100">
           <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
-          <div>
-            PAYPAL ZONE
-            <app-paypal-button
-            [client]="payPalClient"
-            [transaction]="payPalTransaction"
-            (onAuthorized)="paypalAuthorized($event)"
-            >
-            </app-paypal-button>
+          <div class="row">
+            <div class="col-12">
+              <app-paypal-button
+                [client]="payPalClient"
+                [transactions]="payPalTransactions"
+                (onAuthorized)="paypalAuthorized($event)"
+              >
+              </app-paypal-button>
+            </div>
           </div>
           <app-payment-form
               [onSuccess]="onCardChargeSuccess"
@@ -137,6 +138,7 @@ export class SubscriptionWizardComponent implements OnInit {
   @Input() adultsAmount;
   @Input() isComingAlone;
   @Input() startsAt = _today;
+  @Input() user;
   public limitDate;
 
   public subscription$: Observable<any>;
@@ -155,10 +157,10 @@ export class SubscriptionWizardComponent implements OnInit {
   public selectableDates = [];
   public claimDiscount: boolean = false;
   public payPalClient = {
-    sandbox: 'AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4',
-    production: 'AaJEzmFqAI2D8FhfNWFEvIl_EzZKX6iQOAHoXUVg_Tart6VgiFGfbYHBx5Lt9zQz8pW1aiFvF0AJC0LW'
+    sandbox: 'AaJEzmFqAI2D8FhfNWFEvIl_EzZKX6iQOAHoXUVg_Tart6VgiFGfbYHBx5Lt9zQz8pW1aiFvF0AJC0LW',
+    production: 'AcxqWpVKlLzogoiEzh9NnzhWcUrJuvoxqJMK5n-ie7AgxaZipSU3mCIqzGxlfVJ7KlHmMhGitkNdujUw'
   };
-  public payPalTransaction = {};
+  public payPalTransactions = [];
   public cardError;
   constructor(
     private store: Store<any>,
@@ -229,7 +231,10 @@ export class SubscriptionWizardComponent implements OnInit {
   onCardChargeSuccess = (result) => {
     let token = result.token ? result.token.id : null;
     this.paymentRequest.get('cardToken').setValue(token);
-    this.store.dispatch(new PostSubscription(this.paymentRequest.value));
+    let _request = this.paymentRequest.value;
+    _request.paymentSource = 'Stripe';
+    _request.customerEmail = this.user.email;
+    this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});
 	}
@@ -237,7 +242,6 @@ export class SubscriptionWizardComponent implements OnInit {
 	onCardChargeError = (err) => {
     console.log(err);
     this.cardError = err ? err.message : null;
-		//this.subscriptionError.emit({err: err});
 	};
 
   hasDiscountCardChange(event) {
@@ -250,7 +254,12 @@ export class SubscriptionWizardComponent implements OnInit {
   }
 
   paypalAuthorized($event) {
-    console.log($event);
+    let _request = this.paymentRequest.value;
+    _request.payment = $event;
+    _request.paymentSource = 'PayPal';
+    this.store.dispatch(new PostSubscription(_request));
+    this.subscription$ = onStateChangeObservable(this.store, 'subscription');
+    this.subscriptionSuccess.emit({success: true});
   }
 
   calculateTotalToPay() {
@@ -262,11 +271,13 @@ export class SubscriptionWizardComponent implements OnInit {
       let total = adultsTotalPrice + kidsTotalPrice || 0;
       this.totalPay = Math.round((total) * 100) / 100;
 
-      this.payPalTransaction = {
-        total: this.totalPay,
-        currency: 'USD',
+      this.payPalTransactions = [{
+        amount: {
+          total: this.totalPay,
+          currency: 'USD'
+        },
         description: 'Payment for: Plan: ' + this.plan + 'Kids: ' + kidsAmount + ' Adults: ' + adultsAmount
-      };
+        }];
   }
 
 }

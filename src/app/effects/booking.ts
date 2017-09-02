@@ -64,9 +64,15 @@ export class BookingEffects {
     .ofType(SubscriptionActions.POST_SUBSCRIPTION_SUCCESS)
     .map(action => action.payload)
     .map((payload) => {
-      return new MoveToStep({
-        step: 'CompanionsToTrip', subscription: payload
-      });
+      console.log(payload);
+      if ( payload.isComingAlone) {
+        return new MoveToStep({step: 'CompanionsToBooking', subscription: payload});
+      } else {
+        return new MoveToStep({
+          step: 'CompanionsToTrip', subscription: payload
+        });
+      }
+
     });
 
   @Effect()
@@ -98,7 +104,7 @@ export class BookingEffects {
           if (!_userAnalysis.hasSubscription) {
             return new MoveToStep({step: 'Subscription' });
           } else {
-            if ( _userAnalysis.hasCompanionsCompleted) {
+            if ( _user.isComingAlone || _userAnalysis.hasCompanionsCompleted) {
               return new MoveToStep({step: 'CompanionsToBooking', subscription: _user.subscriptions[0]});
             } else {
               return new MoveToStep({ step: 'CompanionsToTrip', subscription: _user.subscriptions[0] });

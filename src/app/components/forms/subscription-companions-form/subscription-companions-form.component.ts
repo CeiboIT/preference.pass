@@ -12,6 +12,16 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
       <div>
         <md-card class="mb-2">
           <md-card-content>
+            <div>
+              <div>
+                Adults: 
+                {{ remainingAdults }}
+              </div>
+              <div>
+                Kids:
+                {{ remainingKids }}
+              </div>
+            </div>
             <h1 class="title">Available companions</h1>
             <div *ngFor="let companion of selectableUserCompanions" (click)="selectPreviousAddedCompanion(companion)">
               <app-person-element [person]="companion"></app-person-element>
@@ -28,7 +38,7 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
                 (click)="addNewCompanion()"> Add Companion to this trip
               </button>
             </h2>
-            <div *ngFor="let companion of subscriptionMembers">
+            <div *ngFor="let companion of subscriptionMembers" (click)="removeCompanion(companion)">
               <app-person-element [person]="companion"></app-person-element>
             </div>
           </md-card-content>
@@ -61,7 +71,9 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
   @Input() subscriptionObserver: Observable<any>;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
   public subscriptionMembers = [];
-  public subscription = {};
+  public subscription;
+  selectedKids = [];
+  selectedAdults = [];
   constructor(private dialog: MdDialog ) { }
 
   ngOnInit() {
@@ -77,9 +89,6 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
     this.onSubmit.emit(this.subscriptionMembers);
   }
 
-  selectPreviousAddedCompanion(companion) {
-    this.subscriptionMembers.push(companion);
-  }
   addNewCompanion() {
     const modalConfig = {
       panelClass: 'md-dialog-fullscreen-xs'
@@ -104,5 +113,42 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
       });
     }
     return _list;
+  }
+
+  selectPreviousAddedCompanion(companion) {
+    if (companion.personType === 'Kid' && this.remainingKids) {
+      this.selectedKids.push(companion);
+    }
+    if (companion.personType === 'Adult' && this.remainingAdults) {
+      this.selectedAdults.push(companion);
+    }
+    this.subscriptionMembers.push(companion);
+  }
+
+
+  removeCompanion(companion) {
+    if (companion) {
+      if( companion.personType === 'Kid') {
+        const kidIndex = this.selectedKids.indexOf(companion);
+        this.selectedKids.splice(kidIndex, 1);
+      } else {
+        const adultIndex = this.selectedAdults.indexOf(companion);
+        this.selectedKids.splice(adultIndex, 1);
+      }
+    }
+    const companionIndex = this.subscriptionMembers.indexOf(companion);
+    this.subscriptionMembers.splice(companionIndex, 1);
+
+  }
+
+  get remainingKids() {
+    if (this.subscription) {
+      return this.subscription.kids - this.selectedKids.length;
+    }
+  }
+  get remainingAdults() {
+    if (this.subscription) {
+     return this.subscription.adults - this.selectedAdults.length;
+    }
   }
 }

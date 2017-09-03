@@ -2,6 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { generateDatesInterval } from '../../../../utils/dates';
 import * as moment from 'moment';
+const plans = [
+  'OneDay',
+  'FourDays',
+  'SevenDays',
+  'FourteenDays'
+];
 
 @Component({
   selector: 'app-subscription-start-date',
@@ -9,7 +15,7 @@ import * as moment from 'moment';
     <div [formGroup]="parent">
       <div class="material-select-custom">
         <select formControlName="startsAt">
-          <option *ngFor="let date of generateSelectableDates(selectedPlan)" [value]="date.toISOString()">
+          <option *ngFor="let date of selectableDates" [value]="date.toISOString()">
             {{ date.format('MMMM DD YYYY')  }}
           </option>
         </select>
@@ -25,12 +31,14 @@ export class SubscriptionStartDateComponent implements OnInit {
   @Input() selectedPlan;
   plan;
   selectableDates;
+
   constructor() { }
   ngOnInit() {
     this.plan = this.parent.get('plan').value;
     this.parent.get('plan').valueChanges.subscribe((data) => {
       console.log(data);
       if (data) {
+        this.generateSelectableDates(data);
         this.plan = data;
         this.parent.get('startsAt').setValue(this.initialDate);
       }
@@ -73,7 +81,7 @@ export class SubscriptionStartDateComponent implements OnInit {
     } else {
       _dates.push(_selectedDate);
     }
+    this.selectableDates = _dates;
     return _dates;
   }
-
 }

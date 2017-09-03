@@ -284,7 +284,7 @@ export class BookingWizardContainerComponent implements OnInit {
 
   get isComingAlone() {
     const _bookingValue = this.booking.value;
-    return (_bookingValue.isComingAlone || (_bookingValue.kidsAmount && _bookingValue.adultsAmount));
+    return (_bookingValue.isComingAlone || ( !_bookingValue.kidsAmount && !_bookingValue.adultsAmount));
   }
 
   get rate() {

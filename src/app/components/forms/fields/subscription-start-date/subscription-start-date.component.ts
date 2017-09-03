@@ -84,4 +84,11 @@ export class SubscriptionStartDateComponent implements OnInit {
     this.selectableDates = _dates;
     return _dates;
   }
+  ngOnChanges (changes) {
+    console.log('Changes: ', changes);
+    if(changes.selectedPlan && changes.selectedPlan.firstChange ) {
+      this.plan = changes.selectedPlan.currentValue;
+      this.generateSelectableDates(this.plan);
+    }
+  }
 }

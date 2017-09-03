@@ -96,8 +96,9 @@ import * as moment from 'moment';
               </h2>
               <app-subscription-companion-select-form [parent]="booking"
                                                       [kidsAmount]="booking.value.kidsAmount"
-                                                      [adultsAmount]="booking.value.adultsAmount"
+                                                      [adultsAmount]="booking.value.adultsAmount" 
                                                       [subscription]="activeSubscription$ | async ">
+                
               </app-subscription-companion-select-form>
             </div>
           </div>

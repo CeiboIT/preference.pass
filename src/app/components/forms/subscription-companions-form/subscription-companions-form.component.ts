@@ -133,7 +133,7 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
         this.selectedKids.splice(kidIndex, 1);
       } else {
         const adultIndex = this.selectedAdults.indexOf(companion);
-        this.selectedKids.splice(adultIndex, 1);
+        this.selectedAdults.splice(adultIndex, 1);
       }
     }
     const companionIndex = this.subscriptionMembers.indexOf(companion);

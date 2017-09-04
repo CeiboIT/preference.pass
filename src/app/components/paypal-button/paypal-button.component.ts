@@ -41,6 +41,11 @@ export class PaypalButtonComponent implements OnInit {
       env: 'sandbox',
       commit: true,
       client: this.client,
+      style: {
+        size: 'large',
+        color: 'gold',
+        shape: 'rect',
+      },
       payment: (paymentData, paymentActions) => {
         console.log('Inside paypal payment', paymentData);
         console.log('Inside paypal Actions', paymentActions);

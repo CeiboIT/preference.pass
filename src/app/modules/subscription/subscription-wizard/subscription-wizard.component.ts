@@ -85,7 +85,7 @@ interface DiscountValidationResponse {
         <div class="d-flex flex-column w-100">
           <h2 class="text-center">Amount: USD {{ totalPay }}</h2>
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 text-center my-5">
               <app-paypal-button
                 [client]="payPalClient"
                 [transactions]="payPalTransactions"
@@ -94,14 +94,14 @@ interface DiscountValidationResponse {
               </app-paypal-button>
             </div>
           </div>
-          <app-payment-form
+          <!--<app-payment-form
               [onSuccess]="onCardChargeSuccess"
               [onError]="onCardChargeError"
               [stripeKey]="stripeKey"
               [error]="displayError$ | async"
               [errorMsg]="payErrorMsg$ | async"
               [loading]="payLoading$ | async">
-          </app-payment-form>
+          </app-payment-form>-->
         </div>
       </div>
 
@@ -109,7 +109,7 @@ interface DiscountValidationResponse {
         <button md-button (click)="back()" [disabled]="step === 1 || hasDiscountCard">
           BACK
         </button>
-        <button md-button (click)="next()" [disabled]="step === 3 || hasDiscountCard">
+        <button md-button (click)="next()" [disabled]="step === 2 || hasDiscountCard">
           CONTINUE
         </button>
       </div>

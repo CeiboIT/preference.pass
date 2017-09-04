@@ -11,6 +11,8 @@ export const ActionTypes = {
   GET_TOURS: type('[Activities] Get Tours'),
   GET_TOURS_SUCCESS: type('[Activities] Get Tours Success'),
   GET_TOURS_FAILURE: type('[Activities] Get Tours Failure'),
+  GET_HEALTH_AND_BEAUTY_SUCCESS: type('[Activities] Get Health and Beauty Success'),
+  GET_HEALTH_AND_BEAUTY_FAILURE: type('[Activities] Get Health and Beauty Failure'),
   GET_ACTIVITIES_SUCCESS: type('[Activities] Get Activities Success'),
   GET_ACTIVITIES_FAILURE: type('[Activities] Get Activities Failure'),
   GET_NIGHTCLUBS_SUCCESS: type('[Activities] Get Nightclubs Success'),
@@ -83,10 +85,6 @@ export class GetActivitiesSuccess implements Action {
   constructor(public payload: any) { }
 }
 
-export class GetNightClubsSuccess implements Action {
-  type = ActionTypes.GET_NIGHTCLUBS_SUCCESS;
-  constructor(public payload: any) { }
-}
 
 export class GetShowsSuccess implements Action {
   type = ActionTypes.GET_SHOWS_SUCCESS;
@@ -95,6 +93,21 @@ export class GetShowsSuccess implements Action {
 
 export class GetShowsFailure implements Action {
   type = ActionTypes.GET_SHOWS_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class GetHealthAndBeautySuccess implements Action {
+  type = ActionTypes.GET_HEALTH_AND_BEAUTY_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetHealthAndBeautyFailure implements Action {
+  type = ActionTypes.GET_HEALTH_AND_BEAUTY_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class GetNightClubsSuccess implements Action {
+  type = ActionTypes.GET_NIGHTCLUBS_SUCCESS;
   constructor(public payload: any) { }
 }
 

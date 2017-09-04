@@ -4,7 +4,7 @@ import {
   ActionTypes, GetActivitiesSuccess, GetDeparturesSuccess,
   GetDetail,
   GetDetailFailure,
-  GetDetailSuccess, GetHotDealsSuccess,
+  GetDetailSuccess, GetHealthAndBeautySuccess, GetHotDealsSuccess,
   GetList,
   GetListFailure,
   GetListSuccess, GetNightClubsSuccess, GetShowsSuccess, GetToursSuccess
@@ -65,6 +65,8 @@ export class ActivitiesEffects {
               return new GetNightClubsSuccess(_data);
             case('SHOW'):
               return new GetShowsSuccess(_data);
+            case('HEALTHANDBEAUTY'):
+              return new GetHealthAndBeautySuccess(_data);
           }
         } else {
           return new GetListSuccess(_data);

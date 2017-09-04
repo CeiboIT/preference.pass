@@ -124,6 +124,7 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
         });
       });
     }
+
     _list.map((companion, i) => {
       if (
         ( companion.personType === 'Adult' && !this.subscription.adults )

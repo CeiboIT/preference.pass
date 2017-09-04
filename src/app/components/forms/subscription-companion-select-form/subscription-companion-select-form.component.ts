@@ -84,7 +84,7 @@ export class SubscriptionCompanionSelectFormComponent implements OnInit {
     return this.adultsAmount - this.selectedAdults.length;
   }
   get availableCompanions() {
-    if(this.subscription) {
+    if (this.subscription) {
       let _list = _.clone(this.subscription.companions);
       if (this.selectedCompanions.length) {
         this.selectedCompanions.map((member) => {
@@ -96,6 +96,15 @@ export class SubscriptionCompanionSelectFormComponent implements OnInit {
           });
         });
       }
+      _list.map((companion, i) => {
+        if (
+          ( companion.personType === 'Adult' && !this.adultsAmount)
+          ||
+          ( companion.personType === 'Kid' && !this.kidsAmount)
+        ) {
+          _list.splice(i, 1);
+        }
+      });
       return _list;
     } else {
       return [];

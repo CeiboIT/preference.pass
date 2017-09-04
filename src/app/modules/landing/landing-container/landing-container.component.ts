@@ -68,9 +68,8 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesByCategory({name: 'ACTIVITIES', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'SHOW', fromLanding: true}));
-    this.store.dispatch(new GetHotDeals({ fromLanding: true }));
     this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
-    this.store.dispatch(new GetHotDeals({}));
+    this.store.dispatch(new GetHotDeals({ fromLanding: true }));
     this.activities$ = onStateChangeObservable(this.store, 'activities.activities');
     this.tours$ = onStateChangeObservable(this.store, 'activities.tours');
     this.shows$ = onStateChangeObservable(this.store, 'activities.shows');

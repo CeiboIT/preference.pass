@@ -47,25 +47,31 @@ export class ActivitiesEffects {
     .ofType(ActionTypes.GET_ACTIVITIES_BY_CATEGORY)
     .map(action => action.payload)
     .mergeMap((payload) => {
-      return this.activitiesQueries.getActivitiesByCategory(payload.name)
-        .map((result) => {
-          const _data = result.data['allActivities'];
-          if (payload.fromLanding) {
-            switch (payload.name) {
-              case('TOURS'):
-                return new GetToursSuccess(_data);
-              case('ACTIVITIES'):
+      let query;
+      if (payload.fromLanding) {
+        query = this.activitiesQueries.getActivitiesByCategory(payload.name, 10);
+      } else {
+        query = this.activitiesQueries.getActivitiesByCategory(payload.name);
+      }
+      return query.map((result) => {
+        const _data = result.data['allActivities'];
+        if (payload.fromLanding) {
+          switch (payload.name) {
+            case('TOURS'):
+              return new GetToursSuccess(_data);
+            case('ACTIVITIES'):
               return new GetActivitiesSuccess(_data);
-              case('NIGHTCLUBS'):
-                return new GetNightClubsSuccess(_data);
-              case('SHOW'):
-                return new GetShowsSuccess(_data);
-            }
-          } else {
-            return new GetListSuccess(_data);
+            case('NIGHTCLUBS'):
+              return new GetNightClubsSuccess(_data);
+            case('SHOW'):
+              return new GetShowsSuccess(_data);
           }
-        })
+        } else {
+          return new GetListSuccess(_data);
+        }
+      })
         .catch(() => Observable.of({ type: ActionTypes.GET_LIST_FAILURE }));
+
     });
 
   @Effect()

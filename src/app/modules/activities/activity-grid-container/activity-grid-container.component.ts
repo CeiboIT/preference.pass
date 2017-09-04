@@ -31,19 +31,18 @@ export class ActivityGridContainerComponent implements OnInit {
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
 		private store: Store<any>
-	) { 
+	) {
 
 	}
 
-	ngOnInit() { 
+	ngOnInit() {
 		this.param = this.activatedRoute.snapshot.params['type'];
 		const category = this.types[this.param];
 		if (category && this.param != 'hot-deals') {
-			this.store.dispatch(new GetActivitiesByCategory({name: category, fromLanding: true}));
+			this.store.dispatch(new GetActivitiesByCategory({name: category}));
 			this.activities$ = onStateChangeObservable(this.store, 'activities.' + this.param);
 		}
-
-		if (this.param == 'hot-deals') {
+		if (this.param === 'hot-deals') {
 			this.isHotDeal = true;
 			this.store.dispatch(new GetHotDeals({}));
 			this.activities$ = onStateChangeObservable(this.store, 'activities.hotDeals');

@@ -10,10 +10,16 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
       </h3>
 
       <div class="see-more">
-        <a [routerLink]="['/list', category]">
+        <a [routerLink]="['/list', categoryToNavigate]">
           See more
         </a>
-        <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" viewBox="0 0 18 18"><path _ngcontent-c5="" d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" fill-rule="evenodd"></path></svg>
+        <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" 
+             viewBox="0 0 18 18">
+          <path _ngcontent-c5="" 
+             d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" 
+               fill-rule="evenodd">
+          </path>
+        </svg>
       </div>
     </div>
     <div [swiper]="config" class="swiper-container" *ngIf="activities.length">
@@ -76,9 +82,19 @@ export class ActivityListComponent implements OnInit {
         }
     }
   };
-  
-  constructor() { 
+
+  constructor() {
     this.items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
+  }
+
+  get categoryToNavigate() {
+    let _category = this.category.toUpperCase();
+    if (_category.indexOf(' ') !== -1) {
+        const reg = new RegExp(' ', 'g');
+        return _category.replace(reg, '');
+    } else {
+      return _category
+    }
   }
 
   ngOnInit() { }

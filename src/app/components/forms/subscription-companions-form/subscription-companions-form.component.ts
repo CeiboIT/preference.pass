@@ -116,13 +116,15 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
   }
 
   selectPreviousAddedCompanion(companion) {
+    console.log(this.remainingKids);
     if (companion.personType === 'Kid' && this.remainingKids) {
       this.selectedKids.push(companion);
+      this.subscriptionMembers.push(companion);
     }
     if (companion.personType === 'Adult' && this.remainingAdults) {
       this.selectedAdults.push(companion);
+      this.subscriptionMembers.push(companion);
     }
-    this.subscriptionMembers.push(companion);
   }
 
 

@@ -35,16 +35,6 @@ import { AuthLogOut } from '../../../actions/auth';
                 Actividades
               </a>
             </li>
-            <li class="navbar-item">
-              <a>
-                Categorias
-              </a>
-            </li>
-            <li class="navbar-item">
-              <a>
-                Lugares
-              </a>
-            </li>
           </ul>
         </div>
       </md-toolbar-row>

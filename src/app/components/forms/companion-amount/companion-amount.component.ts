@@ -8,7 +8,7 @@ import { FormGroup } from '@angular/forms';
       <app-amount-input [parent]="parent" 
               [parentKey]="'kidsAmount'" [placeholder]="'Kids'" 
               [hidden]="hiddeAmountInput"
-              [maxAmount]="kidsAmount"
+              [maxAmount]="kidsLimit"
       >
       </app-amount-input>
       <app-amount-input [parent]="parent" 

@@ -7,7 +7,7 @@ import {
   GetDetailSuccess, GetHotDealsSuccess,
   GetList,
   GetListFailure,
-  GetListSuccess, GetNightClubsSuccess, GetToursSuccess
+  GetListSuccess, GetNightClubsSuccess, GetShowsSuccess, GetToursSuccess
 } from '../actions/activities';
 import { ActivitiesQueries } from '../services/activities/queries';
 import { Observable } from 'rxjs/Observable';
@@ -58,6 +58,8 @@ export class ActivitiesEffects {
               return new GetActivitiesSuccess(_data);
               case('NIGHTCLUBS'):
                 return new GetNightClubsSuccess(_data);
+              case('SHOW'):
+                return new GetShowsSuccess(_data);
             }
           } else {
             return new GetListSuccess(_data);

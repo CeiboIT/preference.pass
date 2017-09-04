@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 
-import { GetActivitiesByCategory, GetHotDeals } from '../../../actions/activities';
+import { GetActivitiesByCategory, GetListSuccess, GetHotDeals, GetHotDealsSuccess } from '../../../actions/activities';
 
 @Component({
 	selector: 'app-activity-grid-container',
@@ -24,7 +24,8 @@ export class ActivityGridContainerComponent implements OnInit {
 	private types = {
 		activities: 'ACTIVITIES',
 		tours: 'TOURS',
-		nightclubs: 'NIGHTCLUBS'
+		nightclubs: 'NIGHTCLUBS',
+		shows: 'SHOW'
 	};
 	public isHotDeal: Boolean = false;
 	constructor(
@@ -51,5 +52,10 @@ export class ActivityGridContainerComponent implements OnInit {
 
 	get title() {
 		return this.isHotDeal ? 'Hot Deals' : this.param;
+	}
+
+	ngOnDestroy() {
+		this.store.dispatch(new GetHotDealsSuccess([]));
+		this.store.dispatch(new GetListSuccess([]));
 	}
 }

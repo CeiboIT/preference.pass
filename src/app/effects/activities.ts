@@ -29,8 +29,15 @@ export class ActivitiesEffects {
   @Effect()
   GetHotDeals: Observable<{}> = this.action$
     .ofType(ActionTypes.GET_HOT_DEALS)
-    .switchMap(() => {
-      return this.activitiesQueries.getHotDeals()
+    .map(action => action.payload)
+    .mergeMap((payload) => {
+      let query;
+        if (payload.fromLanding) {
+          query = this.activitiesQueries.getHotDeals(10);
+        } else {
+          query = this.activitiesQueries.getHotDeals();
+        }
+      return query
         .map((result) => {
           return new GetHotDealsSuccess(
             result.data['allHotDeals']

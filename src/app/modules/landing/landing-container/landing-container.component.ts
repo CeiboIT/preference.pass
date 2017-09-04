@@ -29,7 +29,7 @@ import { Store } from '@ngrx/store';
       </div>
 
       <div class="my-5">
-        <app-activity-list [activities]="activities$ | async" [category]="'activities'"></app-activity-list>
+        <app-activity-list [activities]="activities$ | async" [category]="'offers'"></app-activity-list>
       </div>
       
       <div class="my-5">

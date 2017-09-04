@@ -3,7 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import gql from 'graphql-tag';
 import {Apollo} from 'apollo-angular';
 
-const server = 'http://localhost:3030/';
+const server = 'https://payments.preferencepass.xyz/';
 const uri = 'subscription/new';
 const payPalUri = 'subscription/new/paypal';
 
@@ -11,8 +11,8 @@ const payPalUri = 'subscription/new/paypal';
 export class SubscriptionService {
   private endpoint = server + uri;
   private payPalEndPoint = server + payPalUri;
-  private cardsEndpoint = 'http://localhost:3000';
-  private codesEndpoint = 'http://localhost:3000';
+  private cardsEndpoint = 'https://payments.preferencepass.xyz';
+  private codesEndpoint = 'https://payments.preferencepass.xyz';
   constructor(private http: Http, private client: Apollo) { }
 
   createAuthorizationHeader(headers:Headers) {

@@ -47,5 +47,4 @@ export class ActivityCardComponent {
   get activityPhoto(){
       return resize(this.activity.mainPhoto.url, 500, 500);
   }
-
 }

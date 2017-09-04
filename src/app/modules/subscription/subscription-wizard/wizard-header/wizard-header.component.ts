@@ -7,24 +7,27 @@ import { Component, OnInit, Input } from '@angular/core';
 			<div class="d-flex mdl-step" [ngClass]="{'is-active': step === 1}">
 				<span class="mdl-step__label">
 				<span class="mdl-step__title">
-					<span class="mdl-step__title-text">Title of step 1</span>
+					<span class="mdl-step__title-text">Select a plan</span>
 				</span>
 				<span class="mdl-step__label-indicator"><span class="mdl-step__label-indicator-content">1</span></span></span>
 			</div>
 			<div class="d-flex mdl-step" [ngClass]="{'is-active': step === 2}">
 				<span class="mdl-step__label">
 				<span class="mdl-step__title">
-					<span class="mdl-step__title-text">Title of step 2</span>
+					<span class="mdl-step__title-text">Check out</span>
 				</span>
 				<span class="mdl-step__label-indicator"><span class="mdl-step__label-indicator-content">2</span></span></span>
 			</div>
-			<div class="d-flex mdl-step" [ngClass]="{'is-active': step === 3}">
+			<div class="d-flex">
+
+			</div>
+			<!--<div class="d-flex mdl-step" [ngClass]="{'is-active': step === 3}">
 				<span class="mdl-step__label">
 				<span class="mdl-step__title">
 					<span class="mdl-step__title-text">Title of step 3</span>
 				</span>
 				<span class="mdl-step__label-indicator"><span class="mdl-step__label-indicator-content">3</span></span></span>
-			</div>
+			</div>-->
 		</div>
 	`,
 	styles: [`

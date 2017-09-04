@@ -40,7 +40,7 @@ export class ActivityGridContainerComponent implements OnInit {
 		const category = this.types[this.param];
 		if (category && this.param != 'hot-deals') {
 			this.store.dispatch(new GetActivitiesByCategory({name: category}));
-			this.activities$ = onStateChangeObservable(this.store, 'activities.' + this.param);
+			this.activities$ = onStateChangeObservable(this.store, 'activities.list');
 		}
 		if (this.param === 'hot-deals') {
 			this.isHotDeal = true;

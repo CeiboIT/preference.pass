@@ -14,6 +14,7 @@ import * as moment from 'moment';
   selector: 'app-booking-wizard-container',
   template: `
     <div class="container-fluid py-5">
+      
       <div *ngIf=" bookingStep === 'Details'">
         <div class="row" *ngIf="step === 1">
           <div class="col-md-8 offset-md-2">
@@ -27,6 +28,21 @@ import * as moment from 'moment';
               (onSubmit)="onStep1Submit($event)"
             >
             </app-booking-step-1>
+
+            <div *ngIf="booking.get('kidsAmount') && 
+            booking.get('kidsAmount').invalid && (booking.get('kidsAmount').dirty || booking.get('kidsAmount').touched)"
+                 class="alert alert-danger">
+              <div *ngIf="booking.get('kidsAmount').errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="booking.get('kidsAmount').errors.minlength">
+                Name must be at least 4 characters long.
+              </div>
+              <div *ngIf="booking.get('kidsAmount').errors.forbiddenName">
+                Name cannot be Bob.
+              </div>
+
+            </div>
           </div>
         </div>
 
@@ -82,6 +98,7 @@ import * as moment from 'moment';
           [subscriptionObserver]="activeSubscription$"
           [userCompanions]="companions$ | async "
           (onSubmit)="addCompanionsToTrip($event)"
+          [booking]="booking.value"
         >
         </app-subscription-companions-form>
       </div>
@@ -113,9 +130,7 @@ import * as moment from 'moment';
         <div class="container text-center">
             <md-card>
               <app-success-animation></app-success-animation>
-
               <h2>Finish booking successful</h2>
-
               <div>
                 <button md-raised-button color="primary" routerLink="/">
                   Go to landing
@@ -224,8 +239,25 @@ export class BookingWizardContainerComponent implements OnInit {
 
     this.booking.get('executionDate').valueChanges.subscribe((executionDate) => {
       this.getActiveSubscription();
-    })
+    });
 
+    this.booking.get('kidsAmount').valueChanges.subscribe((amount) => {
+      if (amount && this.activeSubscription.id) {
+        if (amount > this.activeSubscription.kids) {
+          console.log('Controlling kids amount');
+          this.booking.get('kidsAmount').setValue(this.activeSubscription.kids);
+        }
+      }
+    });
+
+    this.booking.get('adultsAmount').valueChanges.subscribe((amount) => {
+      if (amount && this.activeSubscription.id) {
+        if (amount > this.activeSubscription.adults) {
+          console.log('Controlling adultsAmount amount');
+          this.booking.get('adultsAmount').setValue(this.activeSubscription.adults);
+        }
+      }
+    });
 
     this.store.dispatch(new MoveToStep({step: 'Details'}));
 

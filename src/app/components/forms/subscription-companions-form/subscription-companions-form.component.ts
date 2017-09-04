@@ -15,11 +15,11 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
             <div>
               <div>
                 Adults: 
-                {{ remainingAdults }}
+                {{ remainingAdults  || 0 }}
               </div>
               <div>
                 Kids:
-                {{ remainingKids }}
+                {{ remainingKids || 0 }}
               </div>
             </div>
             <h1 class="title">Available companions</h1>
@@ -38,13 +38,13 @@ import {CompanionChargeFormComponent} from '../companion-charge-form/companion-c
                 (click)="addNewCompanion()"> Add Companion to this trip
               </button>
             </h2>
-            <div *ngFor="let companion of subscriptionMembers" (click)="removeCompanion(companion)">
+            <div *ngFor="let companion of subscriptionMembers">
               <app-person-element [person]="companion"></app-person-element>
             </div>
           </md-card-content>
           
           <md-card-actions>
-            <button md-raised-button color="primary" (click)="onSubmitCompanions()">
+            <button md-raised-button color="primary" (click)="onSubmitCompanions()" [disabled]=" !!(remainingAdults || remainingKids) ">
               Save companions
             </button>
           </md-card-actions>
@@ -68,6 +68,7 @@ this.dialog.open(AuthModalComponent, modalConfig)
 */
 export class SubscriptionCompanionsFormComponent implements OnInit {
   @Input() userCompanions;
+  @Input() booking;
   @Input() subscriptionObserver: Observable<any>;
   @Output() onSubmit: EventEmitter<any> = new EventEmitter();
   public subscriptionMembers = [];
@@ -95,13 +96,24 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
     };
 
     this.dialog.open(CompanionChargeFormComponent, modalConfig)
-      .afterClosed().subscribe(result => {
-          if (result) this.subscriptionMembers.push(result);
+      .afterClosed().subscribe(companion => {
+          if (companion) {
+            if (companion.personType === 'Kid' && this.remainingKids) {
+              this.selectedKids.push(companion);
+              this.subscriptionMembers.push(companion);
+            }
+            if (companion.personType === 'Adult' && this.remainingAdults) {
+              this.selectedAdults.push(companion);
+              this.subscriptionMembers.push(companion);
+            }
+          }
     });
   }
 
   get selectableUserCompanions() {
-    let _list = _.clone(this.userCompanions);
+    // let _initialList = _.clone(this.userCompanions);
+    let _list = _.clone(this.userCompanions);;
+    // filter kids or adults.
     if (this.subscriptionMembers.length) {
       this.subscriptionMembers.map((member) => {
         _list.some((companion, i) => {
@@ -112,16 +124,25 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
         });
       });
     }
+    _list.map((companion, i) => {
+      if (
+        ( companion.personType === 'Adult' && !this.subscription.adults )
+        ||
+        ( companion.personType === 'Kid' && !this.subscription.kids )
+      ) {
+        _list.splice(i, 1);
+      }
+    });
     return _list;
   }
 
   selectPreviousAddedCompanion(companion) {
-    console.log(this.remainingKids);
-    if (companion.personType === 'Kid' && this.remainingKids) {
+    if (companion.personType === 'Kid' && !!this.remainingKids) {
       this.selectedKids.push(companion);
       this.subscriptionMembers.push(companion);
     }
-    if (companion.personType === 'Adult' && this.remainingAdults) {
+    console.log('Remaining Adults: ' , !!this.remainingAdults);
+    if (companion.personType === 'Adult' && !!this.remainingAdults) {
       this.selectedAdults.push(companion);
       this.subscriptionMembers.push(companion);
     }
@@ -144,13 +165,17 @@ export class SubscriptionCompanionsFormComponent implements OnInit {
   }
 
   get remainingKids() {
-    if (this.subscription) {
+    if (this.subscription && !!this.subscription.kids) {
       return this.subscription.kids - this.selectedKids.length;
+    } else {
+      return false;
     }
   }
   get remainingAdults() {
-    if (this.subscription) {
+    if (this.subscription && !!this.subscription.adults) {
      return this.subscription.adults - this.selectedAdults.length;
+    } else {
+      return false;
     }
   }
 }

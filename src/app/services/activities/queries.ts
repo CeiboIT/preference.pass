@@ -54,8 +54,8 @@ const GET_HOT_DEALS = gql`
 `;
 
 const GET_FIRTS_HOTDEALS = gql`
-  query($first: Int!) {
-    allHotDeals(first: $first) {
+  query($firsts: Int!) {
+    allHotDeals(first: $firsts) {
       id
       mainPhoto
       activity {
@@ -138,32 +138,19 @@ export class ActivitiesQueries {
     });
   }
 
-  getHotDeals() {
-    const GET_HOT_DEALS = gql`
-      query {
-        allHotDeals {
-          id
-          mainPhoto
-          activity {
-            id
-            name
-            mainPhoto
-            headline
-            rates {
-              id
-              name
-              discountPrice
-              originalPrice
-              currency
-            }
-          }
-        }
-      }
-    `;
-
-    return this.client.watchQuery({
-      query: GET_HOT_DEALS
-    });
+  getHotDeals(firsts?) {
+    if (!!firsts) {
+      return this.client.watchQuery({
+        query: GET_FIRTS_HOTDEALS,
+        variables: { firsts: firsts },
+        fetchPolicy: 'network-only'
+      });
+    } else {
+      return this.client.watchQuery({
+        query: GET_HOT_DEALS,
+        fetchPolicy: 'network-only'
+      });
+    }
   }
 
   getActivitiesByCategory(categoryName, firsts?) {

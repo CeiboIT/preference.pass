@@ -10,7 +10,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
       </h3>
 
       <div class="see-more">
-        <a [routerLink]="['/list', categoryToNavigate]">
+        <a [routerLink]="['/list', category]">
           See more
         </a>
         <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" 

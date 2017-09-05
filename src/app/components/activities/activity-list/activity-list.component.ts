@@ -15,7 +15,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
         </a>
         <svg aria-hidden="true" focusable="false" role="presentation" style="fill: currentcolor; height: 10px; width: 10px;" 
              viewBox="0 0 18 18">
-          <path _ngcontent-c5="" 
+          <path
              d="M4.293 1.707A1 1 0 1 1 5.708.293l7.995 8a1 1 0 0 1 0 1.414l-7.995 8a1 1 0 1 1-1.415-1.414L11.583 9l-7.29-7.293z" 
                fill-rule="evenodd">
           </path>
@@ -52,7 +52,6 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 export class ActivityListComponent implements OnInit {
   @Input() activities;
   @Input() category;
-  public items;
   public config: SwiperConfigInterface = {
     pagination: null,
     nextButton: '.swiper-button-next',
@@ -82,9 +81,10 @@ export class ActivityListComponent implements OnInit {
         }
     }
   };
+  public items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
 
   constructor() {
-    this.items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
+    
   }
 
   get categoryToNavigate() {
@@ -97,6 +97,10 @@ export class ActivityListComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    
+  }
+
+
 }
 

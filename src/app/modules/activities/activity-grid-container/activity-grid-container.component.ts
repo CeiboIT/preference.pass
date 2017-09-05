@@ -25,7 +25,8 @@ export class ActivityGridContainerComponent implements OnInit {
 		activities: 'ACTIVITIES',
 		tours: 'TOURS',
 		nightclubs: 'NIGHTCLUBS',
-		shows: 'SHOW'
+		shows: 'SHOW',
+		offers: 'OFFERS'
 	};
 	public isHotDeal: Boolean = false;
 	constructor(

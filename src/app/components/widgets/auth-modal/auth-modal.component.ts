@@ -56,11 +56,11 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
       </div>
       <div>
         <div *ngIf="isLogin">
-          <div>
+          <!--<div>
             <button md-raised-button [md-dialog-close]="loginWithFacebook()" class="facebook-button w-100 mb-2">
               <i class="fa fa-facebook mr-2"></i> Log in with Facebook
             </button>
-          </div>
+          </div>-->
           <div>
             <button md-raised-button [md-dialog-close]="loginWithGoogle()" class="google-button w-100 mb-2">
               <i class="fa fa-google mr-2"></i> Log in with Google
@@ -83,7 +83,8 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
               <hr class="hr-separator">
             </div>
             <div class="d-flex justify-content-between align-items-center">
-              Don't have an account? <button type="button" class="btn-outline accent" (click)="changeToRegisterWithEmail()"> Register</button>
+              Don't have an account? <button type="button" class="btn-outline accent" 
+                                             (click)="changeToRegisterWithEmail()"> Register</button>
             </div>
           </form>
         </div>
@@ -92,18 +93,19 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
           <form novalidate [formGroup]="auth">
             <div>
               <app-email-signup [parent]="auth"></app-email-signup>
-              <button type="submit" class="submit-button w-100 my-2 text-white" [md-dialog-close]="registerWithEmail()" md-raised-button color="accent">
+              <button type="submit" class="submit-button w-100 my-2 text-white" 
+                      [md-dialog-close]="registerWithEmail()" md-raised-button color="accent">
                 Register with email
               </button>
             </div>
           </form>
         </div>
         <div *ngIf="!isLogin && !isRegisterWithEmail">
-          <div>
-            <button md-raised-button [md-dialog-close]="registerWithFacebook()" class="facebook-button w-100 mb-2">
+          <!-- <<div>
+            button md-raised-button [md-dialog-close]="registerWithFacebook()" class="facebook-button w-100 mb-2">
               <i class="fa fa-facebook mr-2"></i> Register with Facebook
             </button>
-          </div>
+          </div>  -->
           <div >
             <button md-raised-button [md-dialog-close]="registerWithGoogle()" class="google-button w-100 mb-2">
               <i class="fa fa-google mr-2"></i> Register with Google

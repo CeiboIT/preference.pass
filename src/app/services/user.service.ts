@@ -90,7 +90,9 @@ export class UserService {
             id
             name 
             picture
-            reservations {
+            reservations(filter: {
+              status: Completed
+            }) {
               kidsAmount
               adultsAmount
               isComingAlone

@@ -52,7 +52,6 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 export class ActivityListComponent implements OnInit {
   @Input() activities;
   @Input() category;
-  public items;
   public config: SwiperConfigInterface = {
     pagination: null,
     nextButton: '.swiper-button-next',
@@ -82,6 +81,7 @@ export class ActivityListComponent implements OnInit {
         }
     }
   };
+  public items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
 
   constructor() {
     
@@ -98,7 +98,9 @@ export class ActivityListComponent implements OnInit {
   }
 
   ngOnInit() { 
-    this.items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
+    
   }
+
+
 }
 

@@ -3,7 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import gql from 'graphql-tag';
 import {Apollo} from 'apollo-angular';
 
-const server = 'http://localhost:3030/';
+const server = 'http://payments-preferencepass-sqbtrbewzr.now.sh/';
 const uri = 'subscription/new';
 const payPalUri = 'subscription/new/paypal';
 

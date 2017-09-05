@@ -54,7 +54,7 @@ export class AuthService {
       localStorage.removeItem('access_token');
       localStorage.setItem('logout', 'true');
       webAuth.logout({
-        returnTo: redirectTo
+        returnTo: serverUrl
       });
       resolve();
     });

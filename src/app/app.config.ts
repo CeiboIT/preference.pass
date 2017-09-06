@@ -1,8 +1,8 @@
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 const prod = 'https://api.graph.cool/simple/v1/cj76588cy10aq0133eli0nu97';
-const development = 'https://api.graph.cool/simple/v1/cj41c9u2zddol0177la66g30g'
+const development = 'https://api.graph.cool/simple/v1/cj41c9u2zddol0177la66g30g';
 const networkInterface = createNetworkInterface({
-  uri : prod
+  uri : development
 });
 
 networkInterface.use([{

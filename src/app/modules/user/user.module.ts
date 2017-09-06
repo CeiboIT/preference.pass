@@ -8,6 +8,8 @@ import { BookingsContainerModule } from './bookings-container/bookings-container
 import { SubscriptionsContainerModule } from "./subscriptions-container/subscriptions-container.module";
 import { CompanionsContainerModule } from "./companions-container/companions-container.module";
 import { MdButtonModule, MdCardModule } from '@angular/material';
+import {PpCardContainerModule} from './pp-card-container/pp-card-container.module';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,8 @@ import { MdButtonModule, MdCardModule } from '@angular/material';
     UserProfileContainerModule,
     BookingsContainerModule,
     SubscriptionsContainerModule,
-    CompanionsContainerModule
+    CompanionsContainerModule,
+    PpCardContainerModule
   ],
   exports: [
     UserContainerComponent

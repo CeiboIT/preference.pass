@@ -11,7 +11,7 @@ const payPalUri = 'subscription/new/paypal';
 export class SubscriptionService {
   private endpoint = server + uri;
   private payPalEndPoint = server + payPalUri;
-  private cardsEndpoint = 'https://payments.preferencepass.xyz';
+  private cardsEndpoint = 'http://localhost:3000';
   private codesEndpoint = 'https://payments.preferencepass.xyz';
   constructor(private http: Http, private client: Apollo) { }
 

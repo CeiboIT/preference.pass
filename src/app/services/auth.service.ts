@@ -9,21 +9,18 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { GetUserBasicData } from '../actions/user';
 import { onStateChangeObservable } from '../utils/store';
-import { getUserIdFromToken } from "../utils/user";
-// const auth0ClientID = 'hdVqOGTjXxo0yaJwAqD8Ckx2IiA5m4vr'; // development
-// const auth0Domain = 'sof.au.auth0.com'; // development
+import { getUserIdFromToken } from '../utils/user';
+
 declare var window: any;
 const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 // const serverUrl = 'https://preference-pass-testing.firebaseapp.com';
 const redirectTo = serverUrl + '/access_token';
-
-// const auth0ClientID = 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1'; // development
-// const auth0Domain = 'preferencepassdevelopment.auth0.com'; // development
 const PROJECT_ID = 'cj41c9u2zddol0177la66g30g'; // GraphCoolProjectID
 
-
-const auth0ClientID = 'jVoLk0OP2e3ZNo91EJssEDxOEGAM3ukO'; // production
-const auth0Domain = 'preferencepass.auth0.com'; // production
+const auth0ClientID = 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1'; // development
+const auth0Domain = 'preferencepassdevelopment.auth0.com'; // development
+// const auth0ClientID = 'jVoLk0OP2e3ZNo91EJssEDxOEGAM3ukO'; // production
+// const auth0Domain = 'preferencepass.auth0.com'; // production
 
 function getHashValue(key) {
   const matches = location.hash.match(new RegExp(key + '=([^&]*)'));
@@ -104,12 +101,14 @@ export class AuthService {
 
         const idToken = getHashValue('id_token');
         const accessToken = getHashValue('access_token');
-
+        console.log('IdToken', idToken);
+        console.log('access token', accessToken);
         this.userService.authenticateUser(idToken, accessToken).subscribe((result) => {
-          let token = result['data']['authenticateAuth0User']['token'];
+          const token = result['data']['authenticateAuth0User']['token'];
+          console.log('Token', token);
           localStorage.setItem('idToken', token);
 
-          getUserIdFromToken() == 'undefined' ? this.parseHash() : this.getCurrentUser();
+          getUserIdFromToken() === 'undefined' ? this.parseHash() : this.getCurrentUser();
 
           resolve(result);
         },

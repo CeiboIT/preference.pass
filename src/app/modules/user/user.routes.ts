@@ -5,6 +5,7 @@ import { UserProfileContainerComponent } from './user-profile-container/user-pro
 import { BookingsContainerComponent } from './bookings-container/bookings-container.component';
 import { SubscriptionsContainerComponent } from "./subscriptions-container/subscriptions-container.component";
 import { CompanionsContainerComponent } from "./companions-container/companions-container.component";
+import {PpCardContainerComponent} from './pp-card-container/pp-card-container.component';
 
 const routes: Routes = [
   { path : '', component: UserContainerComponent,
@@ -13,8 +14,9 @@ const routes: Routes = [
       { path: 'profile', component: UserProfileContainerComponent },
       { path: 'bookings', component: BookingsContainerComponent },
       { path: 'subscriptions', component: SubscriptionsContainerComponent },
-      { path: 'companions', component: CompanionsContainerComponent }
-    ] 
+      { path: 'companions', component: CompanionsContainerComponent },
+      { path: 'ppcard', component: PpCardContainerComponent}
+    ]
   }
 ];
 

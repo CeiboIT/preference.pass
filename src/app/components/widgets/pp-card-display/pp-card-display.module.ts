@@ -6,6 +6,7 @@ import { PpCardDisplayComponent } from './pp-card-display.component';
   imports: [
     CommonModule
   ],
-  declarations: [PpCardDisplayComponent]
+  declarations: [PpCardDisplayComponent],
+  exports: [PpCardDisplayComponent]
 })
 export class PpCardDisplayModule { }

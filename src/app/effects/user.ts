@@ -58,7 +58,8 @@ export class UserEffects {
     .ofType(AuthActionTypes.REGISTER_WITH_GOOGLE_SUCCESS,
       AuthActionTypes.REGISTER_WITH_FACEBOOK_SUCCESS,
       UserActionTypes.GET_USER_BASIC_DATA,
-      SubscriptionActions.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID
+      SubscriptionActions.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID,
+      SubscriptionActions.SEARCH_PP_CARD_SUCCESS
       )
     .switchMap((action) => {
       return this.userService.getCurrentUser()

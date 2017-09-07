@@ -78,7 +78,7 @@ import * as moment from 'moment';
       <div *ngIf="bookingStep === 'Subscription'" class="col-md-8 offset-md-2">
         <div class="row">
           <div class="col-12">
-            <button md-button color="primary" (click)="backToStep1()" class="mb-5">
+            <button md-button color="primary" (click)="backToStep1()" class="mb-3">
               Back
             </button>            
           </div>

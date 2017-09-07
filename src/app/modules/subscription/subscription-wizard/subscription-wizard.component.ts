@@ -60,14 +60,14 @@ interface DiscountValidationResponse {
               </div>
             </div>
           </div>
-          <div class="mb-4" [hidden]="hasDiscountCard">
+          <div [hidden]="hasDiscountCard">
             <app-subscription-pricing-container [parent]="paymentRequest"
                                                 [selectPlan]="selectPlan"
                                                 (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
                                                 [hasDiscount]="hasDiscount">
             </app-subscription-pricing-container>
             <div *ngIf="paymentRequest.value.plan">
-              <h2>
+              <h2 class="mt-2">
                 Select your subscription start date
               </h2>
               <app-subscription-start-date [parent]="paymentRequest"
@@ -120,10 +120,6 @@ interface DiscountValidationResponse {
   </div>
   `,
   styles: [`
-    md-card {
-      margin: -24px;
-    }
-
     .or {
       display:flex;
       justify-content:center;
@@ -140,14 +136,6 @@ interface DiscountValidationResponse {
         height:1px;
         margin: 0 10px;
     }
-
-    @media screen and (max-width: 768px) {
-      md-card {
-        margin: -16px -24px;
-        box-shadow: none!important;
-      }
-    }
-
   `]
 })
 export class SubscriptionWizardComponent implements OnInit {

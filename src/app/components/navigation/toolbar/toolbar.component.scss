@@ -65,6 +65,14 @@ ul.navbar-items {
         //margin-top: 15px;
         max-width: 36px;
     }
+
+    a {
+        color: white;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
 }
 
 

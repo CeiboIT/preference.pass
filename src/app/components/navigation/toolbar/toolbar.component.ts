@@ -12,7 +12,7 @@ import { AuthLogOut } from '../../../actions/auth';
           <a routerLink="/">
             <img src="../../../../assets/imgs/PPLogo-circle_white.svg">
           </a>
-          <span class="hidden-xs-down ml-2" routerLink="/"><h2>Preference pass</h2></span>
+          <h2><a class="hidden-xs-down ml-2" routerLink="/">Preference pass</a></h2>
         </div>
         <div *ngIf="isLoggedIn">
           <app-user-menu [user]="user" (onUserLogOut)="onUserLogOut()"></app-user-menu>

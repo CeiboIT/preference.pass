@@ -94,6 +94,9 @@ interface DiscountValidationResponse {
               </app-paypal-button>
             </div>
           </div>
+
+          <div class="or"> OR </div>
+
           <app-payment-form
               [onSuccess]="onCardChargeSuccess"
               [onError]="onCardChargeError"
@@ -119,6 +122,23 @@ interface DiscountValidationResponse {
   styles: [`
     md-card {
       margin: -24px;
+    }
+
+    .or {
+      display:flex;
+      justify-content:center;
+      align-items: center;
+      color:rgba(0, 0, 0, 0.38);
+    }
+    
+    .or:after,
+    .or:before {
+        content: "";
+        display: block;
+        background: rgba(0, 0, 0, 0.12);
+        width: 30%;
+        height:1px;
+        margin: 0 10px;
     }
 
     @media screen and (max-width: 768px) {

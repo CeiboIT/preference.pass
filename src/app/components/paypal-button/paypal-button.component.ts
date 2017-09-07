@@ -1,4 +1,11 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+  } from '@angular/core';
 declare var paypal: any;
 
 interface Amount {
@@ -42,7 +49,7 @@ export class PaypalButtonComponent implements OnInit {
       commit: true,
       client: this.client,
       style: {
-        size: 'large',
+        size: 'responsive',
         color: 'gold',
         shape: 'rect',
       },

@@ -26,7 +26,9 @@ export class ActivityGridContainerComponent implements OnInit {
 		tours: 'TOURS',
 		nightclubs: 'NIGHTCLUBS',
 		shows: 'SHOW',
-		offers: 'OFFERS'
+		offers: 'OFFERS',
+		healthandbeauty: "HEALTHANDBEAUTY"
+		
 	};
 	public isHotDeal: Boolean = false;
 	constructor(
@@ -39,7 +41,8 @@ export class ActivityGridContainerComponent implements OnInit {
 
 	ngOnInit() {
 		this.param = this.activatedRoute.snapshot.params['type'];
-		const category = this.types[this.param];
+		const category = this.types[this.proccessCategory(this.param)];
+
 		if (category && this.param != 'hot-deals') {
 			this.store.dispatch(new GetActivitiesByCategory({name: category}));
 			this.activities$ = onStateChangeObservable(this.store, 'activities.list');
@@ -53,6 +56,10 @@ export class ActivityGridContainerComponent implements OnInit {
 
 	get title() {
 		return this.isHotDeal ? 'Hot Deals' : this.param;
+	}
+
+	proccessCategory(category) {
+		return (category.replace(/ /g,'')).toLowerCase();
 	}
 
 	ngOnDestroy() {

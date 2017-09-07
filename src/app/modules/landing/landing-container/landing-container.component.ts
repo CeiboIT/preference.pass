@@ -24,21 +24,21 @@ import { Store } from '@ngrx/store';
         <app-hot-deals-list [hotDeals]="hotDeals$ | async"></app-hot-deals-list>
       </div>
       
-      <div class="my-5">
+      <div class="py-5">
         <app-activity-list [activities]="tours$ | async" [category]="'tours'"></app-activity-list>
       </div>
 
-      <div class="my-5">
+      <div class="py-5">
         <app-activity-list [activities]="activities$ | async" [category]="'offers'"></app-activity-list>
       </div>
       
-      <div class="my-5">
+      <div class="py-5">
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
 
-      <!--<div class="my-5">
+      <div class="py-5">
         <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
-      </div>-->
+      </div>
     </div>
   `,
   styles: [ `

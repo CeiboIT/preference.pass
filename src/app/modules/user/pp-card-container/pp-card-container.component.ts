@@ -16,6 +16,7 @@ import { SearchPPCard } from '../../../actions/subscription';
         *ngIf="!assignedCard"
         (onValid)="onPPCardValid($event)"
         (onGenerateVirtualCard)="generateVirtualCard()"
+        [loading]="loading$ | async"
       ></app-preference-pass-card-form>
 
       <app-pp-card-display *ngIf="assignedCard" [user]="user$ | async"
@@ -26,6 +27,7 @@ import { SearchPPCard } from '../../../actions/subscription';
 })
 export class PpCardContainerComponent implements OnInit {
   @Input() user$: Observable<any>;
+  @Input() loading$: Observable<any>;
   public ppAssignedCard$: Observable<any>;
   public card: FormGroup;
   public assignedCard;
@@ -34,6 +36,7 @@ export class PpCardContainerComponent implements OnInit {
   ngOnInit() {
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.ppAssignedCard$ = onStateChangeObservable(this.store, 'auth.user.preferencePassCard');
+    this.loading$ = onStateChangeObservable(this.store, 'subscription.loading');
     this.card = this.fb.group({
       code: []
     });

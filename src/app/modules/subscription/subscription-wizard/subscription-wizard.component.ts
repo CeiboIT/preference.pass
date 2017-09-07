@@ -94,14 +94,14 @@ interface DiscountValidationResponse {
               </app-paypal-button>
             </div>
           </div>
-          <!--<app-payment-form
+          <app-payment-form
               [onSuccess]="onCardChargeSuccess"
               [onError]="onCardChargeError"
               [stripeKey]="stripeKey"
               [error]="displayError$ | async"
               [errorMsg]="payErrorMsg$ | async"
               [loading]="payLoading$ | async">
-          </app-payment-form>-->
+          </app-payment-form>
         </div>
       </div>
 

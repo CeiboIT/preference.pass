@@ -65,16 +65,14 @@ export class SubscriptionService {
     });
   }
 
-  validatePPCard(code) {
+  validatePPCard(payload) {
     return new Promise((resolve, reject) => {
       const headers = new Headers({
         'Content-Type': 'application/json'
       });
       this.createAuthorizationHeader(headers);
-      const payload = JSON.stringify({
-        code: code
-      });
-      this.http.post(this.cardsEndpoint, payload, {
+      const _body = JSON.stringify(payload);
+      this.http.post(this.cardsEndpoint, _body, {
         headers: headers
       }).toPromise()
         .then(response => resolve(response.json()))

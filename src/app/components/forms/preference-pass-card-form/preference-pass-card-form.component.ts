@@ -7,17 +7,20 @@ import {Observable} from 'rxjs/Observable';
   template: `    
     <form [formGroup]="parent" novalidate>
       <app-preference-pass-card-input [parent]="parent"></app-preference-pass-card-input>
-      <button md-raised-button color="primary" [disabled]="!parent.valid" (click)="onCardSubmit()">
+      <button md-raised-button color="primary" [disabled]="!parent.valid || loading" (click)="onCardSubmit()">
         Validate card number
       </button>
-      <button md-button color="primary" (click)="generateVirtualCard()">
+      <button md-button color="primary" [disabled]="loading" (click)="generateVirtualCard()">
         I do not have a card, generate one
       </button>
+
+      <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> </span>
     </form>
   `
 })
 export class PreferencePassCardFormComponent implements OnInit {
   @Input() parent: FormGroup;
+  @Input() loading;
   @Output() onValid: EventEmitter<any> = new EventEmitter();
   @Output() onGenerateVirtualCard: EventEmitter<any> = new EventEmitter();
   validityObserver: Observable<any>;

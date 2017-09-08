@@ -1,18 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import gql from 'graphql-tag';
-import {Apollo} from 'apollo-angular';
-
-const server = 'https://payments.preferencepass.xyz/';
-const uri = 'subscription/new';
-const payPalUri = 'subscription/new/paypal';
+import { Apollo } from 'apollo-angular';
+import { subscriptionsEndpoint, cardsEndpoint, codesEndpoint } from '../../constants/api';
 
 @Injectable()
 export class SubscriptionService {
-  private endpoint = server + uri;
-  private payPalEndPoint = server + payPalUri;
-  private cardsEndpoint = 'http://localhost:3000';
-  private codesEndpoint = 'https://payments.preferencepass.xyz';
   constructor(private http: Http, private client: Apollo) { }
 
   createAuthorizationHeader(headers:Headers) {
@@ -27,8 +20,7 @@ export class SubscriptionService {
 
       this.createAuthorizationHeader(headers);
       const subscription = JSON.stringify(body);
-      const _endpoint = (body.paymentSource && body.paymentSource !== 'PayPal') ? this.endpoint : this.payPalEndPoint;
-      this.http.post(_endpoint, subscription, {
+      this.http.post(subscriptionsEndpoint, subscription, {
           headers: headers
         }).map((response: Response) => response.json())
         .subscribe(
@@ -41,8 +33,6 @@ export class SubscriptionService {
             reject(err);
           }
         );
-
-
     });
   }
 
@@ -72,14 +62,12 @@ export class SubscriptionService {
       });
       this.createAuthorizationHeader(headers);
       const _body = JSON.stringify(payload);
-      this.http.post(this.cardsEndpoint, _body, {
+      this.http.post(cardsEndpoint, _body, {
         headers: headers
       }).toPromise()
         .then(response => resolve(response.json()))
         .catch(err => reject(err));
     });
-
-
   }
 
   validateDiscountCode(code) {
@@ -91,13 +79,11 @@ export class SubscriptionService {
       const payload = JSON.stringify({
         code: code
       });
-      this.http.post(this.codesEndpoint, payload, {
+      this.http.post(codesEndpoint, payload, {
         headers: headers
       }).toPromise()
         .then(response => resolve(response.json()))
         .catch(err => reject(err));
     });
   }
-
-
 }

@@ -84,7 +84,6 @@ import * as moment from 'moment';
           </div>
         </div>
         <app-subscription-wizard
-          [user]="user"
           [kidsAmount]="booking.value.kidsAmount"
           [adultsAmount]="booking.value.adultsAmount"
           [isComingAlone]="booking.value.isComingAlone"

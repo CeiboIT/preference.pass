@@ -146,9 +146,7 @@ export class SubscriptionWizardComponent implements OnInit {
   @Input() adultsAmount;
   @Input() isComingAlone;
   @Input() startsAt = _today;
-  @Input() user;
   public limitDate;
-
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
@@ -224,8 +222,6 @@ export class SubscriptionWizardComponent implements OnInit {
     this.store.dispatch(new ValidateCode(_code));
   }
 
-
-
   back() {
     this.step --;
     this.hasDiscountCard = false;
@@ -240,8 +236,7 @@ export class SubscriptionWizardComponent implements OnInit {
     let token = result.token ? result.token.id : null;
     this.paymentRequest.get('cardToken').setValue(token);
     let _request = this.paymentRequest.value;
-    _request.paymentSource = 'Stripe';
-    _request.customerEmail = this.user.email;
+    _request.type = 'stripe';
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});
@@ -264,7 +259,7 @@ export class SubscriptionWizardComponent implements OnInit {
   paypalAuthorized($event) {
     let _request = this.paymentRequest.value;
     _request.payment = $event;
-    _request.paymentSource = 'PayPal';
+    _request.type = 'paypal';
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});

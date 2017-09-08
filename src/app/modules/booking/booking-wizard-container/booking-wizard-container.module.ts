@@ -20,6 +20,7 @@ import { SubscriptionWizardModule} from '../../subscription/subscription-wizard/
 import { SuccessAnimationModule } from '../../../components/widgets/alert/success-animation/success-animation.module';
 import { SubscriptionCompanionsFormModule } from '../../../components/forms/subscription-companions-form/subscription-companions-form.module';
 import { SubscriptionCompanionSelectFormModule}  from '../../../components/forms/subscription-companion-select-form/subscription-companion-select-form.module';
+import {BookingUserLocationFormModule} from '../../../components/forms/booking-user-location-form/booking-user-location-form.module';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { SubscriptionCompanionSelectFormModule}  from '../../../components/forms
     BookingPreviewModule,
     SuccessAnimationModule,
     SubscriptionCompanionsFormModule,
-    SubscriptionCompanionSelectFormModule
+    SubscriptionCompanionSelectFormModule,
+    BookingUserLocationFormModule
   ],
   declarations: [BookingWizardContainerComponent, BookingStep1Component, BookingStep2Component, BookingStep3Component],
   exports: [BookingWizardContainerComponent]

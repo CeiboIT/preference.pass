@@ -8,7 +8,7 @@ import { subscriptionsEndpoint, cardsEndpoint, codesEndpoint } from '../../const
 export class SubscriptionService {
   constructor(private http: Http, private client: Apollo) { }
 
-  createAuthorizationHeader(headers:Headers) {
+  createAuthorizationHeader(headers: Headers) {
     headers.append('Authorization', `Bearer ${localStorage.getItem('idToken')}`);
   }
 
@@ -33,6 +33,8 @@ export class SubscriptionService {
             reject(err);
           }
         );
+
+
     });
   }
 
@@ -68,6 +70,8 @@ export class SubscriptionService {
         .then(response => resolve(response.json()))
         .catch(err => reject(err));
     });
+
+
   }
 
   validateDiscountCode(code) {
@@ -86,4 +90,6 @@ export class SubscriptionService {
         .catch(err => reject(err));
     });
   }
+
+
 }

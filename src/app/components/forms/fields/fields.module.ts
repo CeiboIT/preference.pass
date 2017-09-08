@@ -24,6 +24,8 @@ import {CompanionsSelectorComponent} from './companions-selector/companions-sele
 import { PreferencePassCardInputComponent } from './preference-pass-card-input/preference-pass-card-input.component';
 import { DiscountCodeInputComponent } from './discount-code-input/discount-code-input.component';
 import { SubscriptionStartDateComponent } from './subscription-start-date/subscription-start-date.component';
+import { WhereIsCustomerComponent } from './where-is-customer/where-is-customer.component';
+import { UserPhoneNumberComponent } from './user-phone-number/user-phone-number.component';
 
 @NgModule({
   imports: [
@@ -54,7 +56,9 @@ import { SubscriptionStartDateComponent } from './subscription-start-date/subscr
     CompanionsSelectorComponent,
     PreferencePassCardInputComponent,
     DiscountCodeInputComponent,
-    SubscriptionStartDateComponent
+    SubscriptionStartDateComponent,
+    WhereIsCustomerComponent,
+    UserPhoneNumberComponent
   ],
   exports: [
     AmountInputComponent,
@@ -71,7 +75,9 @@ import { SubscriptionStartDateComponent } from './subscription-start-date/subscr
     CompanionsSelectorComponent,
     PreferencePassCardInputComponent,
     DiscountCodeInputComponent,
-    SubscriptionStartDateComponent
+    SubscriptionStartDateComponent,
+    WhereIsCustomerComponent,
+    UserPhoneNumberComponent
   ]
 })
 export class FieldsModule { }

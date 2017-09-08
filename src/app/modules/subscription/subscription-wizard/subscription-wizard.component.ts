@@ -24,22 +24,7 @@ interface DiscountValidationResponse {
     <md-card>
       <wizard-header [step]="step"></wizard-header>
       <div [hidden]="step !== 1">
-        <!--<div *ngIf="claimDiscount">
-          <app-discount-code-form [parent]="discountCode"
-            (onValid)="onDiscountFormValidity($event)"
-          ></app-discount-code-form>
-          <div *ngIf="discountCardValidationLoading">
-            <span>
-              Validating code
-            </span>
-          </div>
-        </div>-->
-        <div *ngIf="!claimDiscount">
-          <!--<div >
-            <button md-button color="primary" (click)="claim()">
-              Claim discount
-            </button>
-          </div> -->
+        <div>
           <div>
             <div class="row" *ngIf="adultsAmount || kidsAmount">
               <div class="col-6" *ngIf="adultsAmount">
@@ -61,6 +46,21 @@ interface DiscountValidationResponse {
             </div>
           </div>
           <div [hidden]="hasDiscountCard">
+            <div class="row" *ngIf="!hasDiscount">
+              <button md-button color="accent" (click)="claim()">
+                I have a discount code
+              </button>
+              <div *ngIf="claimDiscount">
+                <app-discount-code-form [parent]="discountCode"
+                  (onValid)="onDiscountFormValidity($event)"
+                ></app-discount-code-form>
+              </div>
+            </div>
+            
+            <h2 *ngIf="hasDiscount" class="text-center">
+              Wow!! Your subscription will have a 50% off if you choose a package! Enjoy!
+            </h2>
+            
             <app-subscription-pricing-container [parent]="paymentRequest"
                                                 [selectPlan]="selectPlan"
                                                 (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
@@ -94,7 +94,6 @@ interface DiscountValidationResponse {
               </app-paypal-button>
             </div>
           </div>
-
           <div class="or"> OR </div>
 
           <app-payment-form
@@ -146,14 +145,15 @@ export class SubscriptionWizardComponent implements OnInit {
   @Input() adultsAmount;
   @Input() isComingAlone;
   @Input() startsAt = _today;
+  @Input() user;
   public limitDate;
+
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
   public discountCode;
   public step = 1;
   public hasDiscountCard = false;
-  public hasDiscount = false;
   public stripeKey = stripeKey;
   public displayError$;
   public payErrorMsg$;
@@ -168,6 +168,7 @@ export class SubscriptionWizardComponent implements OnInit {
   };
   public payPalTransactions = [];
   public cardError;
+  public showDiscountCode;
   constructor(
     private store: Store<any>,
     private fb: FormBuilder
@@ -175,8 +176,8 @@ export class SubscriptionWizardComponent implements OnInit {
 
   }
 
-  onCompanionFormSuccessClick($event) {
-    console.log('click on success');
+  showDiscountCodeForm() {
+    this.showDiscountCode = true;
   }
 
   claim() {
@@ -232,11 +233,18 @@ export class SubscriptionWizardComponent implements OnInit {
     this.hasDiscountCard = false;
   }
 
+
+  get hasDiscount() {
+    return this.user && this.user.discountCodes && this.user.discountCodes.length;
+  }
+
   onCardChargeSuccess = (result) => {
     let token = result.token ? result.token.id : null;
     this.paymentRequest.get('cardToken').setValue(token);
     let _request = this.paymentRequest.value;
+    _request.paymentSource = 'Stripe';
     _request.type = 'stripe';
+    _request.customerEmail = this.user.email;
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});
@@ -259,6 +267,7 @@ export class SubscriptionWizardComponent implements OnInit {
   paypalAuthorized($event) {
     let _request = this.paymentRequest.value;
     _request.payment = $event;
+    _request.paymentSource = 'PayPal';
     _request.type = 'paypal';
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Form, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
 import {GetDepartures, GetDetail} from '../../../actions/activities';
 import {Observable} from 'rxjs/Observable';
@@ -120,6 +120,17 @@ import * as moment from 'moment';
             </div>
           </div>
         </div>
+        
+        <div class="row">
+          <div class="row">
+            <app-booking-user-location-form
+              [booking]="booking"
+              [user]="user"
+              [userData]="userData"
+            >
+            </app-booking-user-location-form>
+          </div>
+        </div>
         <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
           <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
           Finish Booking
@@ -172,6 +183,7 @@ import * as moment from 'moment';
 })
 export class BookingWizardContainerComponent implements OnInit {
   public booking;
+  public userData: FormGroup;
   public departures$: Observable<any>;
   public activity$: Observable<any>;
   public user$: Observable<any>;
@@ -201,8 +213,13 @@ export class BookingWizardContainerComponent implements OnInit {
      companionsIds: [''],
      isComingAlone: [false],
      kidsAmount: [0],
-     adultsAmount: [0]
+     adultsAmount: [0],
+     whereIs: ['']
    });
+
+     this.userData = this.fb.group({
+       phoneNumber: ['']
+     });
 
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');

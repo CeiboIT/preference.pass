@@ -13,7 +13,6 @@ interface ModalCallOptions {
   onSuccessRedirect?: string;
 }
 
-
 const CREATE_COMPANION = gql`
   mutation NewCompanion(
   $fullName: String!
@@ -119,7 +118,7 @@ export class UserService {
             
             discountCodes(filter: {
               used: false
-            }) {
+            }, first: 1) {
               id
             }
             

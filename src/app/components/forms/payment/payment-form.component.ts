@@ -3,13 +3,13 @@ import {
   Component,
   ElementRef,
   Input,
-  OnInit
-  } from '@angular/core';
+  OnInit, Output
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-form',
-  template: 
+  template:
   `
   <form novalidate [formGroup]="userData" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -50,7 +50,7 @@ export class PaymentFormComponent implements AfterContentInit {
   userData: FormGroup;
 
   constructor(
-    private elementRef: ElementRef, 
+    private elementRef: ElementRef,
     private fb: FormBuilder
   )  {}
 

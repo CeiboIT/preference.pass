@@ -35,9 +35,9 @@ const ADD_COMPANION_TO_SUBSCRIPTION = gql`
   mutation addCompanionToSubscription($subscriptionId: ID! $companionId: ID!) {
     addToSubscriptionOnCompanion(
       companionsCompanionId: $companionId
-      subscriptionsSubscriptionId: $subscriptionId) {
+      subscriptionsPPSubscriptionId: $subscriptionId) {
       companionsCompanion { id }
-      subscriptionsSubscription {id}
+      subscriptionsPPSubscription {id}
     }
   }
 `;

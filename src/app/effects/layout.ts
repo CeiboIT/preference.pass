@@ -6,6 +6,7 @@ import { Actions, Effect } from '@ngrx/effects';
 import { ActionTypes } from '../actions/layout';
 import { AuthModalComponent } from '../components/widgets/auth-modal/auth-modal.component';
 import { AlertComponent } from "../components/widgets/alert/alert.component";
+import { ContactUsComponent } from "../components/widgets/contact-us/contact-us.component";
 import { Observable } from 'rxjs/Observable';
 import { OnboardingModalComponent } from '../components/widgets/onboarding-modal/onboarding-modal.component';
 import 'rxjs/add/operator/do';
@@ -126,4 +127,23 @@ export class LayoutEffects {
           console.log(result);
       });
     });
+
+    @Effect({dispatch: false})
+    openContactDialog: Observable<{}> = this.action$
+      .ofType(ActionTypes.OPEN_CONTACT)
+      .map(action => action.payload)
+      .do((payload) => {
+        let modalConfig = {
+          data: {
+            type: payload.type,
+            title: payload.title,
+            message: payload.message
+          }
+        };
+  
+        this.dialog.open(ContactUsComponent, modalConfig)
+          .afterClosed().subscribe(result => {
+            console.log(result);
+        });
+      });
 }

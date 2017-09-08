@@ -96,6 +96,8 @@ interface DiscountValidationResponse {
           </div>
           <div class="or"> OR </div>
 
+          <span class="text-danger text-center my-2">{{ cardError }} {{ payErrorMsg$ | async }}</span>
+
           <app-payment-form
               [onSuccess]="onCardChargeSuccess"
               [onError]="onCardChargeError"
@@ -216,6 +218,7 @@ export class SubscriptionWizardComponent implements OnInit {
       }
     });
     this.payLoading$ = onStateChangeObservable(this.store, 'subscription.loading');
+    this.payErrorMsg$ = onStateChangeObservable(this.store, 'subscription.error');
   }
 
   onDiscountFormValidity($event) {
@@ -246,6 +249,7 @@ export class SubscriptionWizardComponent implements OnInit {
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});
+    this.cardError = null;
 	}
 
 	onCardChargeError = (err) => {

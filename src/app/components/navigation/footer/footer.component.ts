@@ -24,8 +24,11 @@ import { OpenContact } from "../../../actions/layout";
           <li>
             PLACES
           </li>
-          <li>
+          <!--<li>
             FAQS
+          </li>-->
+          <li>
+            <a routerLink="/terms-and-conditions">TERMS & CONDITIONS</a>
           </li>
           <li>
             <a class="link" (click)="openDialog();">CONTACT US</a>

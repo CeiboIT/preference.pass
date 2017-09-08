@@ -242,9 +242,7 @@ export class SubscriptionWizardComponent implements OnInit {
     let token = result.token ? result.token.id : null;
     this.paymentRequest.get('cardToken').setValue(token);
     let _request = this.paymentRequest.value;
-    _request.paymentSource = 'Stripe';
     _request.type = 'stripe';
-    _request.customerEmail = this.user.email;
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');
     this.subscriptionSuccess.emit({success: true});
@@ -267,7 +265,6 @@ export class SubscriptionWizardComponent implements OnInit {
   paypalAuthorized($event) {
     let _request = this.paymentRequest.value;
     _request.payment = $event;
-    _request.paymentSource = 'PayPal';
     _request.type = 'paypal';
     this.store.dispatch(new PostSubscription(_request));
     this.subscription$ = onStateChangeObservable(this.store, 'subscription');

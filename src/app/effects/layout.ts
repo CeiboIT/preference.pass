@@ -124,7 +124,7 @@ export class LayoutEffects {
 
       this.dialog.open(AlertComponent, modalConfig)
         .afterClosed().subscribe(result => {
-          console.log(result);
+
       });
     });
 
@@ -143,7 +143,7 @@ export class LayoutEffects {
   
         this.dialog.open(ContactUsComponent, modalConfig)
           .afterClosed().subscribe(result => {
-            console.log(result);
+            
         });
       });
 }

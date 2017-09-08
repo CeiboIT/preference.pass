@@ -31,6 +31,8 @@ import { OnboardingModalModule } from './components/widgets/onboarding-modal/onb
 import { OnboardingModalComponent } from './components/widgets/onboarding-modal/onboarding-modal.component';
 import { AlertComponent } from "./components/widgets/alert/alert.component";
 import { AlertlModule } from "./components/widgets/alert/alert.module";
+import { ContactUsComponent } from "./components/widgets/contact-us/contact-us.component";
+import { ContactUsModule } from "./components/widgets/contact-us/contact-us.module";
 import { BookingEffects} from './effects/booking';
 import { ToastEffects } from "./effects/toast";
 import { CompanionChargeFormComponent } from "./components/forms/companion-charge-form/companion-charge-form.component";
@@ -70,10 +72,11 @@ import { CompanionChargeFormModule } from "./components/forms/companion-charge-f
     AuthModalModule,
     CompanionChargeFormModule,
     OnboardingModalModule,
-    AlertlModule
+    AlertlModule,
+    ContactUsModule
   ],
   providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AuthModalComponent, OnboardingModalComponent, AlertComponent, CompanionChargeFormComponent]
+  entryComponents: [AuthModalComponent, OnboardingModalComponent, AlertComponent, CompanionChargeFormComponent, ContactUsComponent]
 })
 export class AppModule { }

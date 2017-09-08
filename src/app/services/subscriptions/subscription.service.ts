@@ -30,7 +30,7 @@ export class SubscriptionService {
           },
           err => {
             console.log(err);
-            reject(err);
+            reject(err._body);
           }
         );
 

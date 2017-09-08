@@ -30,7 +30,6 @@ export class UserEffects {
       console.log(payload);
       return this.userService.createUser(payload)
         .map(result => {
-          console.log(result);
           return new CreateUserSuccess(result);
         });
     });
@@ -74,7 +73,6 @@ export class UserEffects {
 
       return this.userService.addCompanionToSubscriptionAndUser(payload.companion, payload.subscriptionId)
         .map(result => {
-          console.log(result);
           return new AddCompanionSuccess({result: result, executionDate: payload.executionDate, subscriptionId: payload.subscriptionId });
         });
     });

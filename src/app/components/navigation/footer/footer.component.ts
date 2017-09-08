@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { OpenContact } from "../../../actions/layout";
 
 @Component({
   selector: 'app-footer',
@@ -22,11 +24,14 @@ import { Component, OnInit } from '@angular/core';
           <li>
             PLACES
           </li>
-          <li>
+          <!--<li>
             FAQS
+          </li>-->
+          <li>
+            <a routerLink="/terms-and-conditions">TERMS & CONDITIONS</a>
           </li>
           <li>
-            CONTACT US
+            <a class="link" (click)="openDialog();">CONTACT US</a>
           </li>
         </ul>
 
@@ -59,9 +64,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private store: Store<any>
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  openDialog() {
+    this.store.dispatch(new OpenContact({}));
   }
 
 }

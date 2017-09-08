@@ -18,6 +18,12 @@ footer {
             a {
                 color: white;
             }
+
+            .link {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
     }
 

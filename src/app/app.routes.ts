@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'booking', canActivate: [AuthGuard], loadChildren: 'app/modules/booking/booking.module#BookingModule' },
   { path: 'access_token', loadChildren: 'app/modules/token/token.module#TokenModule' },
   { path: 'user',  canActivate: [AuthGuard], loadChildren: 'app/modules/user/user.module#UserModule' },
+  { path: 'terms-and-conditions', loadChildren: 'app/modules/terms-and-conditions/terms-and-conditions.module#TermsAndConditionsModule'},
   { path: 'error', loadChildren: 'app/modules/errors/errors.module#ErrorsModule' },
   { path: '**', redirectTo: '' }
 

@@ -104,7 +104,6 @@ export class ActivitiesEffects {
     .switchMap((payload) => {
       return this.activitiesQueries.getActivityDepartures(payload)
         .map((result) => {
-          console.log(result);
           return new GetDeparturesSuccess(
             result.data['allPickUpLocations']
           );

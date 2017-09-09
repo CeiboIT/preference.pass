@@ -106,13 +106,17 @@ import * as moment from 'moment';
       </div>
       
       <div *ngIf="bookingStep === 'CompanionsToBooking'" class="col-md-8 offset-md-2">
-        <div *ngIf="!assignedCard">
-          <app-preference-pass-card-form [parent]="card"
-                                         *ngIf="!assignedCard"
-                                         (onValid)="onPPCardValid($event)"
-                                         (onGenerateVirtualCard)="generateVirtualCard()"
-                                         [loading]="loadingForPPCard$ | async"
-          ></app-preference-pass-card-form>
+        <div class="row" *ngIf="!assignedCard">
+          <md-card class="col-md-8 offset-md-2">
+            <md-card-content class="col-12 ">
+              <app-preference-pass-card-form [parent]="card"
+                                             *ngIf="!assignedCard"
+                                             (onValid)="onPPCardValid($event)"
+                                             (onGenerateVirtualCard)="generateVirtualCard()"
+                                             [loading]="loadingForPPCard$ | async"
+              ></app-preference-pass-card-form>
+            </md-card-content>
+          </md-card>
         </div>
         <!-- Case when user has card !-->
         <div *ngIf="assignedCard">

@@ -16,7 +16,7 @@ export class DiscountCodeInputComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.parent.get('code').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(8)]);
+    this.parent.get('code').setValidators([Validators.required, Validators.minLength(4), Validators.maxLength(4)]);
   }
 
 }

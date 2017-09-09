@@ -111,7 +111,7 @@ import * as moment from 'moment';
                                          *ngIf="!assignedCard"
                                          (onValid)="onPPCardValid($event)"
                                          (onGenerateVirtualCard)="generateVirtualCard()"
-                                         [loading]="loading$ | async"
+                                         [loading]="loadingForPPCard$ | async"
           ></app-preference-pass-card-form>
         </div>
         <!-- Case when user has card !-->
@@ -213,6 +213,7 @@ export class BookingWizardContainerComponent implements OnInit {
   public loadingBooking$: Observable<any>;
   public companionLoading$: Observable<any>;
   public ppAssignedCard$: Observable<any>;
+  public loadingForPPCard$: Observable<any>;
   public loadingBooking = false;
   public user;
   public subscription;
@@ -243,6 +244,7 @@ export class BookingWizardContainerComponent implements OnInit {
      this.userData = this.fb.group({
        phoneNumber: ['']
      });
+    this.loadingForPPCard$ = onStateChangeObservable(this.store, 'subscription.loading');
     this.ppAssignedCard$ = onStateChangeObservable(this.store, 'auth.user.preferencePassCard');
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');

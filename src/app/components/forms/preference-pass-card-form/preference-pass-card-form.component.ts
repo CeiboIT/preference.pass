@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
   template: `    
     <form [formGroup]="parent" novalidate>
       <h3>
-        Linking your card you obtain a 50% of discount in any package on your next trip
+        To finish your booking link your card number to get 50% off your next trip.
       </h3>
       <app-preference-pass-card-input [parent]="parent"></app-preference-pass-card-input>
       <!--<button md-raised-button color="primary" [disabled]="!parent.valid || loading" (click)="onCardSubmit()">

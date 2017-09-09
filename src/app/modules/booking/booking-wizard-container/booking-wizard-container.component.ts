@@ -164,7 +164,10 @@ import * as moment from 'moment';
         <div class="container text-center">
             <md-card>
               <app-success-animation></app-success-animation>
-              <h2>Finish booking successful</h2>
+              <h2>
+                Thank you for booking with us. <br>
+                We will send your booking confirmation and instructions via email shortly.
+              </h2>
               <div>
                 <button md-raised-button color="primary" routerLink="/">
                   Go to landing

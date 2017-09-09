@@ -1,5 +1,7 @@
 //DEV
 export const stripeKey = 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG';
+//PROD
+//export const stripeKey = 'pk_live_C2c0qwzBn3R75h56uVXpIk0s';
 
 const errorMessages = {
     incorrect_number: "The card number is incorrect.",

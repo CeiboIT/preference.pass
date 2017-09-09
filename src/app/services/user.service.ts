@@ -31,6 +31,14 @@ const CREATE_COMPANION = gql`
   }
 `;
 
+const UPDATE_USER_PHONE_NUMBER = gql`  
+  mutation UpdateUserPhoneNumber ($phoneNumber: String! $id: ID!) {
+    updateUser(id: $id phoneNumber: $phoneNumber ) {
+      id
+    }
+  }
+`;
+
 const ADD_COMPANION_TO_SUBSCRIPTION = gql`
   mutation addCompanionToSubscription($subscriptionId: ID! $companionId: ID!) {
     addToSubscriptionOnCompanion(
@@ -81,6 +89,19 @@ export class UserService {
     });
   }
 
+  updateUser(payload) {
+    const userId = getUserIdFromToken();
+    if (payload.phoneNumber) {
+        return this.client.mutate({
+          mutation : UPDATE_USER_PHONE_NUMBER,
+          variables: {
+            id: userId,
+            phoneNumber: payload.phoneNumber
+          }
+        });
+    }
+  }
+
   getCurrentUser() {
     const _now = new Date().toISOString();
     const GET_CURRENT_USER = gql`
@@ -89,6 +110,7 @@ export class UserService {
             id
             name 
             picture
+            phoneNumber
             reservations(filter: {
               status: Completed
             }) {

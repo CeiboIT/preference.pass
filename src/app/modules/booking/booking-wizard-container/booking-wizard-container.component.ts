@@ -7,7 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {onStateChangeObservable} from '../../../utils/store';
 import {BookingFinish, BookingStep1, MoveToStep} from '../../../actions/booking';
 import {SearchPPCard} from '../../../actions/subscription';
-import {AddCompanion, AddCompanions} from '../../../actions/user';
+import {AddCompanion, AddCompanions, UpdateUser} from '../../../actions/user';
 import * as moment from 'moment';
 
 @Component({
@@ -121,16 +121,21 @@ import * as moment from 'moment';
             </div>
           </div>
         </div>
-        
         <div class="row">
-          <div class="row">
-            <app-booking-user-location-form
-              [booking]="booking"
-              [user]="user"
-              [userData]="userData"
-            >
-            </app-booking-user-location-form>
-          </div>
+          <md-card class="w-100">
+            <md-card-content>
+              <div class="row">
+                <div class="col-md-8 offset-md-2">
+                  <app-booking-user-location-form
+                    [booking]="booking"
+                    [user]="user"
+                    [userData]="userData"
+                  >
+                  </app-booking-user-location-form>
+                </div>
+              </div>
+            </md-card-content>
+          </md-card>
         </div>
         <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
           <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
@@ -409,7 +414,11 @@ export class BookingWizardContainerComponent implements OnInit {
     let _booking = this.booking.value;
     _booking.id = this.bookingId;
     _booking.subscriptionId = this.subscription.id;
+    const _userData = this.userData.value;
     this.store.dispatch(new BookingFinish(_booking));
+    if(_userData.phoneNumber.length) {
+      this.store.dispatch(new UpdateUser(_userData));
+    }
   }
 
   onCardFormValid($event) {

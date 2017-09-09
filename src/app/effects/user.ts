@@ -8,7 +8,7 @@ import {
 import {
   ActionTypes as UserActionTypes, AddCompanionsFailure, AddCompanionsSuccess, AddCompanionSuccess, CreateUserSuccess,
   GetUserBasicDataSuccess,
-  GetUserCompanionsSuccess
+  GetUserCompanionsSuccess, UpdateUserFailure, UpdateUserSuccess
 } from '../actions/user';
 
 import {
@@ -18,6 +18,7 @@ import {
 import {UserService} from '../services/user.service';
 import {getUserIdFromToken} from "../utils/user";
 import {parseLine} from "tslint/lib/test/lines";
+import {User} from "../models/user";
 
 @Injectable()
 export class UserEffects {
@@ -64,6 +65,18 @@ export class UserEffects {
       return this.userService.getCurrentUser()
         .map(result => new GetUserBasicDataSuccess(result['data']['user']));
     });
+
+  @Effect()
+  UpdateUser: Observable<{}> = this.action$
+    .ofType(
+      UserActionTypes.UPDATE_USER
+    )
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      return this.userService.updateUser(payload)
+        .map(result => new UpdateUserSuccess({}));
+    });
+
 
   @Effect()
   AddCompanion: Observable<{}> = this.action$

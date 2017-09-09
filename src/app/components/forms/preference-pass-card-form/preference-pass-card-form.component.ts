@@ -6,6 +6,9 @@ import {Observable} from 'rxjs/Observable';
   selector: 'app-preference-pass-card-form',
   template: `    
     <form [formGroup]="parent" novalidate>
+      <h3>
+        Link your card number ti get 50% off in your next trip
+      </h3>
       <app-preference-pass-card-input [parent]="parent"></app-preference-pass-card-input>
       <button md-raised-button color="primary" [disabled]="!parent.valid || loading" (click)="onCardSubmit()">
         Validate card number

@@ -6,6 +6,9 @@ export const ActionTypes = {
   CREATE_USER: type('[User] Create'),
   CREATE_USER_SUCCESS: type('[User] Create success'),
   CREATE_USER_FAILURE: type('[User] Create failure'),
+  UPDATE_USER: type('[User] Update'),
+  UPDATE_USER_SUCCESS: type('[User] Update Success'),
+  UPDATE_USER_FAILURE: type('[User] Update failure'),
   LOAD_USER: type('[User] Load'),
   GET_USER_BASIC_DATA: type('[User] Get Basic Data'),
   GET_USER_BASIC_DATA_SUCCESS: type('[User] Get Basic Data Success'),
@@ -41,6 +44,22 @@ export class CreateUserFailure implements Action {
 
 export class CreateUserSuccess implements Action {
   type = ActionTypes.CREATE_USER_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+
+export class UpdateUser implements Action {
+  type = ActionTypes.UPDATE_USER;
+  constructor(public payload: any) {}
+}
+
+export class UpdateUserFailure implements Action {
+  type = ActionTypes.UPDATE_USER_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class UpdateUserSuccess implements Action {
+  type = ActionTypes.UPDATE_USER_SUCCESS;
   constructor(public payload: any) {}
 }
 
@@ -107,4 +126,5 @@ export class GetUserCompanionsFailure implements Action {
 
 export type Actions = LoadUser | CreateUser | CreateUserFailure | CreateUserSuccess | GetUserBasicData
   | GetUserCompanions | GetUserCompanionsSuccess | GetUserCompanionsFailure
-  | GetUserBasicDataSuccess | GetUserBasicDataFailure | AddCompanion | AddCompanions | AddCompanionFailure | AddCompanionSuccess;
+  | GetUserBasicDataSuccess | GetUserBasicDataFailure | AddCompanion | AddCompanions |
+  AddCompanionFailure | AddCompanionSuccess | UpdateUser | UpdateUserSuccess | UpdateUserFailure;

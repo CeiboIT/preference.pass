@@ -26,7 +26,7 @@ function analyzeUserSubscription(user) {
     const _subscription = user.subscriptions[0];
     const _counts = _.countBy(_subscription.companions, 'personType');
     const _kidsCompleted = !!_counts.Kid === !!_subscription.kids;
-    const _adultsCompleted = !!_counts.Adult === !!_subscription.adults;
+    const _adultsCompleted = (_subscription.adults === 1) || (!!_counts.Adult === !!_subscription.adults);
     conditions.hasCompanionsCompleted = _kidsCompleted && _adultsCompleted;
   }
   return conditions;

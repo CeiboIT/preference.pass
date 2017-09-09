@@ -13,12 +13,14 @@ const COMPLETE_BOOKING_WITH_COMPANIONS = gql`
   $subscriptionId: ID!,
   $status: BookingState,
   $companionsIds: [ID!]
+    $whereIs: String!
   ) {
     updateReservation(
       id: $reservationId,
       status: $status,
       subscriptionId: $subscriptionId,
       companionsIds: $companionsIds
+      whereIs: $whereIs
     ) {
       id
     }
@@ -93,13 +95,15 @@ const COMPLETE_BOOKING = gql`
   $reservationId: ID!,
   $subscriptionId: ID!,
   $status: BookingState,
-  $companionsIds: [ID!]
+  $companionsIds: [ID!],
+  $whereIs: String!
   ) {
     updateReservation(
       id: $reservationId,
       status: $status,
       subscriptionId: $subscriptionId,
-      companionsIds: $companionsIds
+      companionsIds: $companionsIds,
+      whereIs: $whereIs
     ) {
       id
     }
@@ -160,7 +164,8 @@ export class BookingService {
           reservationId: payload.id,
           companionsIds: payload.companionsIds,
           status: 'Completed',
-          subscriptionId: payload.subscriptionId
+          subscriptionId: payload.subscriptionId,
+          whereIs: payload.whereIs
         }
       });
     } else {
@@ -169,7 +174,8 @@ export class BookingService {
         variables: {
           reservationId: payload.id,
           status: 'Completed',
-          subscriptionId: payload.subscriptionId
+          subscriptionId: payload.subscriptionId,
+          whereIs: payload.whereIs
         }
       });
     }

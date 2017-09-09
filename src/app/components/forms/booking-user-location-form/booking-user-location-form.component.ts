@@ -21,6 +21,7 @@ export class BookingUserLocationFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.user);
   }
 
 }

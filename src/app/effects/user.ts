@@ -59,7 +59,8 @@ export class UserEffects {
       AuthActionTypes.REGISTER_WITH_FACEBOOK_SUCCESS,
       UserActionTypes.GET_USER_BASIC_DATA,
       SubscriptionActions.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID,
-      SubscriptionActions.SEARCH_PP_CARD_SUCCESS
+      SubscriptionActions.SEARCH_PP_CARD_SUCCESS,
+      SubscriptionActions.POST_SUBSCRIPTION_SUCCESS
       )
     .switchMap((action) => {
       return this.userService.getCurrentUser()

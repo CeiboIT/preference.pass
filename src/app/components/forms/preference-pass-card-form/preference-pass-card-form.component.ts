@@ -7,14 +7,14 @@ import {Observable} from 'rxjs/Observable';
   template: `    
     <form [formGroup]="parent" novalidate>
       <h3>
-        Link your card number ti get 50% off in your next trip
+        Linking your card you obtain a 50% of discount in any package on your next trip
       </h3>
       <app-preference-pass-card-input [parent]="parent"></app-preference-pass-card-input>
       <button md-raised-button color="primary" [disabled]="!parent.valid || loading" (click)="onCardSubmit()">
         Validate card number
       </button>
       <button md-button color="primary" [disabled]="loading" (click)="generateVirtualCard()">
-        I do not have a card, generate one
+        I do not have a card
       </button>
 
       <span *ngIf="loading"><i class="fa fa-spinner fa-spin"></i> </span>

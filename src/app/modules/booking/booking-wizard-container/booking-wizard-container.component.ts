@@ -106,41 +106,54 @@ import * as moment from 'moment';
       </div>
       
       <div *ngIf="bookingStep === 'CompanionsToBooking'" class="col-md-8 offset-md-2">
-        <div *ngIf="!isComingAlone" class="row">
-          <div class="row">
-            <div class="col-12">
-              <h2 class="w-100 text-center">
-                Who is coming with you to {{ activity?.name}} ?
-              </h2>
-              <app-subscription-companion-select-form [parent]="booking"
-                                                      [kidsAmount]="booking.value.kidsAmount"
-                                                      [adultsAmount]="booking.value.adultsAmount" 
-                                                      [subscription]="activeSubscription$ | async ">
-                
-              </app-subscription-companion-select-form>
+        <div *ngIf="!assignedCard">
+          <app-preference-pass-card-form [parent]="card"
+                                         *ngIf="!assignedCard"
+                                         (onValid)="onPPCardValid($event)"
+                                         (onGenerateVirtualCard)="generateVirtualCard()"
+                                         [loading]="loading$ | async"
+          ></app-preference-pass-card-form>
+        </div>
+        <!-- Case when user has card !-->
+        <div *ngIf="assignedCard">
+          <div *ngIf="!isComingAlone" class="row">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="w-100 text-center">
+                  Who is coming with you to {{ activity?.name}} ?
+                </h2>
+                <app-subscription-companion-select-form [parent]="booking"
+                                                        [kidsAmount]="booking.value.kidsAmount"
+                                                        [adultsAmount]="booking.value.adultsAmount"
+                                                        [subscription]="activeSubscription$ | async ">
+
+                </app-subscription-companion-select-form>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <md-card class="w-100">
-            <md-card-content>
-              <div class="row">
-                <div class="col-md-8 offset-md-2">
-                  <app-booking-user-location-form
-                    [booking]="booking"
-                    [user]="user"
-                    [userData]="userData"
-                  >
-                  </app-booking-user-location-form>
+          <div class="row">
+            <md-card class="w-100">
+              <md-card-content>
+                <div class="row">
+                  <div class="col-md-8 offset-md-2">
+                    <app-booking-user-location-form
+                      [booking]="booking"
+                      [user]="user"
+                      [userData]="userData"
+                    >
+                    </app-booking-user-location-form>
+                  </div>
                 </div>
-              </div>
-            </md-card-content>
-          </md-card>
+              </md-card-content>
+            </md-card>
+          </div>
+          <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
+            <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
+            Finish Booking
+          </button>
         </div>
-        <button (click)="finishBooking()" md-button class="button-success w-100 py-2 mt-3" [disabled]="loadingBooking">
-          <span *ngIf="loadingBooking"><i class="fa fa-spinner fa-spin"></i> </span>
-          Finish Booking
-        </button>
+        
+        
       </div>
 
       <div *ngIf="bookingStep === 'FinishBooking'">
@@ -199,16 +212,20 @@ export class BookingWizardContainerComponent implements OnInit {
   public loading$: Observable<any>;
   public loadingBooking$: Observable<any>;
   public companionLoading$: Observable<any>;
+  public ppAssignedCard$: Observable<any>;
   public loadingBooking = false;
   public user;
   public subscription;
   public departures;
+  public assignedCard;
   public activity;
   public step = 1;
   public bookingStep = '';
   private bookingId = '';
   private hasValidSubscription = false;
   public activeSubscription;
+  public card;
+
   selectedRateId;
   constructor(private fb: FormBuilder, private store: Store<any>, private activatedRoute: ActivatedRoute) {
    this.booking = this.fb.group({
@@ -226,7 +243,7 @@ export class BookingWizardContainerComponent implements OnInit {
      this.userData = this.fb.group({
        phoneNumber: ['']
      });
-
+    this.ppAssignedCard$ = onStateChangeObservable(this.store, 'auth.user.preferencePassCard');
     this.departures$ = onStateChangeObservable(this.store, 'activities.departures');
     this.user$ = onStateChangeObservable(this.store, 'auth.user');
     this.companions$ = onStateChangeObservable(this.store, 'auth.user.companions');
@@ -243,6 +260,14 @@ export class BookingWizardContainerComponent implements OnInit {
 
     this.loadingBooking$.subscribe(status => {
       this.loadingBooking = status;
+    });
+
+    this.ppAssignedCard$.subscribe((assignedCard) => {
+      this.assignedCard = assignedCard;
+    });
+
+    this.card = this.fb.group({
+      code: []
     });
   }
 
@@ -425,6 +450,17 @@ export class BookingWizardContainerComponent implements OnInit {
     console.log('Event in form', $event);
     const _code = $event.value.code;
     this.store.dispatch(new SearchPPCard(_code));
+  }
+
+  generateVirtualCard() {
+    this.store.dispatch(new SearchPPCard({
+      generateVirtualCard: true
+    }));
+  }
+
+  onPPCardValid($event) {
+    const _code = $event.value.code;
+    this.store.dispatch(new SearchPPCard({code: _code}));
   }
 
   addCompanionsToTrip($event) {

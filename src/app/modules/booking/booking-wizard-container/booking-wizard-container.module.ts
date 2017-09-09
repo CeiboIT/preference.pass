@@ -43,7 +43,8 @@ import {BookingUserLocationFormModule} from '../../../components/forms/booking-u
     SuccessAnimationModule,
     SubscriptionCompanionsFormModule,
     SubscriptionCompanionSelectFormModule,
-    BookingUserLocationFormModule
+    BookingUserLocationFormModule,
+    PreferencePassCardFormModule
   ],
   declarations: [BookingWizardContainerComponent, BookingStep1Component, BookingStep2Component, BookingStep3Component],
   exports: [BookingWizardContainerComponent]

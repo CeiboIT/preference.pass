@@ -26,7 +26,7 @@ export class ActivityGridContainerComponent implements OnInit {
 		tours: 'TOURS',
 		nightclubs: 'NIGHTCLUBS',
 		shows: 'SHOW',
-		offers: 'OFFERS',
+		offers: 'ACTIVITIES',
 		healthandbeauty: "HEALTHANDBEAUTY"
 		
 	};

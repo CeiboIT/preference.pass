@@ -66,7 +66,7 @@ interface DiscountValidationResponse {
                                                 (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
                                                 [hasDiscount]="hasDiscount">
             </app-subscription-pricing-container>
-            <div *ngIf="paymentRequest.value.plan">
+            <!--<div *ngIf="paymentRequest.value.plan">
               <h2 class="mt-2">
                 Select your subscription start date
               </h2>
@@ -76,7 +76,7 @@ interface DiscountValidationResponse {
                                            [limitDate]="limitDate"
                                            [initialDate]="startsAt"
               ></app-subscription-start-date>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -264,6 +264,8 @@ export class SubscriptionWizardComponent implements OnInit {
   selectPlan = (plan) => {
     this.plan = plan;
     this.calculateTotalToPay();
+    console.warn(plan);
+    this.next();
   }
 
   paypalAuthorized($event) {
@@ -290,7 +292,7 @@ export class SubscriptionWizardComponent implements OnInit {
           currency: 'USD'
         },
         description: 'Payment for: Plan: ' + this.plan + 'Kids: ' + kidsAmount + ' Adults: ' + adultsAmount
-        }];
+      }];
   }
 
 }

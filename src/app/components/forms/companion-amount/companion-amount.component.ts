@@ -30,19 +30,23 @@ export class CompanionAmountComponent implements OnInit {
   ngOnInit() { 
 
     this.parent.get('adultsAmount').valueChanges.subscribe(val => {
-      // val.adultsAmount == 1 && val.kidsAmount == 0 ? this.parent.get('isComingAlone').setValue(true) : this.parent.get('isComingAlone').setValue(false);
-      console.log(val);
+      this.isComingAlone();
+    })
+
+    this.parent.get('kidsAmount').valueChanges.subscribe(val => {
+      this.isComingAlone();
     })
    }
 
-  // comingAloneStatusChange(event) {
-  //   this.hiddeAmountInput = event;
-
-  //   if(event) {
-  //     this.parent.get("kidsAmount").setValue(0);
-  //     this.parent.get("adultsAmount").setValue(0);
-  //   }
-  // }
-
+  isComingAlone() {
+    let adultsAmount = this.parent.get('adultsAmount').value,
+        kidsAmount   = this.parent.get('kidsAmount').value;
+    
+    if(adultsAmount == 1 && kidsAmount == 0) {
+      this.parent.get('isComingAlone').setValue(true);
+    } else {
+      this.parent.get('isComingAlone').setValue(false);
+    }
+  }
 
 }

@@ -1,13 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Form, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngrx/store';
-import {GetDepartures, GetDetail} from '../../../actions/activities';
-import {Observable} from 'rxjs/Observable';
-import {ActivatedRoute} from '@angular/router';
-import {onStateChangeObservable} from '../../../utils/store';
-import {BookingFinish, BookingStep1, MoveToStep} from '../../../actions/booking';
-import {SearchPPCard} from '../../../actions/subscription';
-import {AddCompanion, AddCompanions, UpdateUser} from '../../../actions/user';
+import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { GetDepartures, GetDetail } from '../../../actions/activities';
+import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute } from '@angular/router';
+import { onStateChangeObservable } from '../../../utils/store';
+import { BookingFinish, BookingStep1, MoveToStep } from '../../../actions/booking';
+import { SearchPPCard } from '../../../actions/subscription';
+import { AddCompanion, AddCompanions, UpdateUser } from '../../../actions/user';
+import { OpenFinishBookingSuccessful } from "../../../actions/layout";
 import * as moment from 'moment';
 
 @Component({
@@ -163,16 +164,7 @@ import * as moment from 'moment';
       <div *ngIf="bookingStep === 'FinishBooking'">
         <div class="container text-center">
             <md-card>
-              <!--<app-success-animation></app-success-animation>-->
               <h2>Finish booking successful</h2>
-              <div>
-                <button md-raised-button color="primary" routerLink="/">
-                  Go to landing
-                </button>
-                <button md-raised-button color="accent" routerLink="/user/bookings">
-                  Go to my bookings list
-                </button>
-              </div>
             </md-card>
         </div>
       </div>
@@ -318,13 +310,10 @@ export class BookingWizardContainerComponent implements OnInit {
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
-        if(this.bookingStep === 'FinishBooking') {
-          console.warn('finish booking')
-          return
-        }
-        if (booking.booking && booking.booking.id) {
-          this.bookingId = booking.booking.id;
-        }
+
+        if (this.bookingStep === 'FinishBooking') this.store.dispatch(new OpenFinishBookingSuccessful({}));        
+        if (booking.booking && booking.booking.id) this.bookingId = booking.booking.id;
+        
       }
     });
 

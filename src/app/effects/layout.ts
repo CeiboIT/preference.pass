@@ -149,10 +149,10 @@ export class LayoutEffects {
         .map(action => action.payload)
         .do((payload) => {
           let modalConfig = { };
-    
+
           this.dialog.open(FinishBookingSuccessfulComponent, modalConfig)
             .afterClosed().subscribe(result => {
-              console.warn('redirect to landing');
+              window.location.replace(window.location.origin);
           });
         });
 }

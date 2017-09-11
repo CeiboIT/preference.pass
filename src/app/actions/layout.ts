@@ -41,7 +41,7 @@ export class OpenContact implements Action {
 }
 
 export class OpenFinishBookingSuccessful implements Action {
-  type = ActionTypes.OPEN_CONTACT;
+  type = ActionTypes.OPEN_FINISH_BOOKING_SUCCESSFUL;
   constructor(public payload: any) {}
 }
 

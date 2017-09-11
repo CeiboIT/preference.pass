@@ -265,7 +265,7 @@ export class BookingWizardContainerComponent implements OnInit {
     });
 
     this.card = this.fb.group({
-      code: []
+      code: ['358127148111', [Validators.minLength(12), Validators.maxLength(16) ]]
     });
   }
 

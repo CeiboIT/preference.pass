@@ -1,12 +1,12 @@
 //LOCAL
-export const cardsEndpoint = 'http://localhost:3010';
-export const codesEndpoint = 'http://localhost:3020';
-export const subscriptionsEndpoint = 'http://localhost:3030/subscription';
+// export const cardsEndpoint = 'http://localhost:3010';
+// export const codesEndpoint = 'http://localhost:3020';
+// export const subscriptionsEndpoint = 'http://localhost:3030/subscription';
 
 //TESTING
-// export const cardsEndpoint = 'https://cards-preferencepass-jezvkohbrj.now.sh';
-// export const codesEndpoint = 'https://discounts-preferencepass-eyrbkgfhmb.now.sh';
-// export const subscriptionsEndpoint = 'https://payments-preferencepass-dyjphesokp.now.sh/subscription';
+export const cardsEndpoint = 'https://cards-preferencepass-jezvkohbrj.now.sh';
+export const codesEndpoint = 'https://discounts-preferencepass-eyrbkgfhmb.now.sh';
+export const subscriptionsEndpoint = 'https://payments-preferencepass-ynduuawbcq.now.sh/subscription';
 
 //PROD
 // export const cardsEndpoint = 'https://cards.preferencepass.xyz';

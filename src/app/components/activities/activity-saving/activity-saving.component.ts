@@ -22,6 +22,6 @@ export class ActivitySavingComponent implements OnInit {
 	}
 	
 	get totalDiscount() {
-    	return this.lowestRate.currency + ' ' + ( this.lowestRate.originalPrice - this.lowestRate.discountPrice ) ;
+    	return this.lowestRate.currency + ' ' + Math.round(( this.lowestRate.originalPrice - this.lowestRate.discountPrice ) * 100) /100 ;
  	}
 }

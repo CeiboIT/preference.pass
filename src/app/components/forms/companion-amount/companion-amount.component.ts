@@ -27,26 +27,6 @@ export class CompanionAmountComponent implements OnInit {
   @Input() adultsLimit;
   constructor() { }
 
-  ngOnInit() { 
-
-    this.parent.get('adultsAmount').valueChanges.subscribe(val => {
-      this.isComingAlone();
-    })
-
-    this.parent.get('kidsAmount').valueChanges.subscribe(val => {
-      this.isComingAlone();
-    })
-   }
-
-  isComingAlone() {
-    let adultsAmount = this.parent.get('adultsAmount').value,
-        kidsAmount   = this.parent.get('kidsAmount').value;
-    
-    if(adultsAmount == 1 && kidsAmount == 0) {
-      this.parent.get('isComingAlone').setValue(true);
-    } else {
-      this.parent.get('isComingAlone').setValue(false);
-    }
-  }
+  ngOnInit() { }
 
 }

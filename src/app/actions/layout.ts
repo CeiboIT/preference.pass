@@ -7,7 +7,8 @@ export const ActionTypes = {
   OPEN_CARD_INTRODUCTION: type('[Layout] Open Card'),
   OPEN_ON_BOARDING: type('[Layout] Open On boarding'),
   OPEN_ALERT: type('[Layout] Open Alert'),
-  OPEN_CONTACT: type('[Layout] Open Contact')
+  OPEN_CONTACT: type('[Layout] Open Contact'),
+  OPEN_FINISH_BOOKING_SUCCESSFUL: type('[Layout] Open Finish Booking Successful')
 };
 
 export class OpenLogin implements Action {
@@ -39,4 +40,9 @@ export class OpenContact implements Action {
   constructor(public payload: any) {}
 }
 
-export type Actions = OpenLogin | OpenRegister | OpenCardIntroduction | OpenOnBoarding | OpenAlert | OpenContact;
+export class OpenFinishBookingSuccessful implements Action {
+  type = ActionTypes.OPEN_FINISH_BOOKING_SUCCESSFUL;
+  constructor(public payload: any) {}
+}
+
+export type Actions = OpenLogin | OpenRegister | OpenCardIntroduction | OpenOnBoarding | OpenAlert | OpenContact | OpenFinishBookingSuccessful;

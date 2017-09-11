@@ -119,9 +119,9 @@ import { MD_DIALOG_DATA, MdDialogRef } from '@angular/material';
         </div>
         
         <div class="my-2" *ngIf="!isLogin">
-          <div>Al hacer clic en Registrarse o en </div>
-          <div>Continuar con, acepto las Condiciones del servicio, </div>
-          <div>la Política de Privacidad de Prefence Pass.</div>
+          <div>In pressing the continue button I hereby confirm</div>
+          <div>that I have read and accept the terms and conditions,</div>
+          <div>and  privacy policy of Preference Pass.</div>
         </div>
         
         <div class="separator" *ngIf="!isLogin">

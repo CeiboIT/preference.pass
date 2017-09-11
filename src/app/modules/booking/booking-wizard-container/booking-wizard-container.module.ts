@@ -17,7 +17,6 @@ import { BookingStep2Component } from './booking-step-2/booking-step-2.component
 import { BookingStep3Component } from './booking-step-3/booking-step-3.component';
 import { BookingPreviewModule} from '../../../components/booking/booking-preview/booking-preview.module';
 import { SubscriptionWizardModule} from '../../subscription/subscription-wizard/subscription-wizard.module';
-import { SuccessAnimationModule } from '../../../components/widgets/alert/success-animation/success-animation.module';
 import { SubscriptionCompanionsFormModule } from '../../../components/forms/subscription-companions-form/subscription-companions-form.module';
 import { SubscriptionCompanionSelectFormModule}  from '../../../components/forms/subscription-companion-select-form/subscription-companion-select-form.module';
 import {BookingUserLocationFormModule} from '../../../components/forms/booking-user-location-form/booking-user-location-form.module';
@@ -40,7 +39,6 @@ import {BookingUserLocationFormModule} from '../../../components/forms/booking-u
     DateSelectModule,
     CompanionsFormModule,
     BookingPreviewModule,
-    SuccessAnimationModule,
     SubscriptionCompanionsFormModule,
     SubscriptionCompanionSelectFormModule,
     BookingUserLocationFormModule,

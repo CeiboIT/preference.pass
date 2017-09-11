@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
-import { stripeKey, stripeHandlerError } from '../../../constants/stripe';
+import { stripeHandlerError } from '../../../constants/stripe';
+import { environment } from "../../../../environments/environment";
 import * as moment from 'moment';
 const _today = moment();
 const _inthreemonths = _today.clone();
@@ -156,7 +157,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public discountCode;
   public step = 1;
   public hasDiscountCard = false;
-  public stripeKey = stripeKey;
+  public stripeKey = environment.stripe.key;
   public displayError$;
   public payErrorMsg$;
   public payLoading$: Observable<any>;;

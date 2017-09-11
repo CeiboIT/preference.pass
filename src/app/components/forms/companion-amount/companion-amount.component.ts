@@ -7,7 +7,6 @@ import { FormGroup } from '@angular/forms';
     <div>
       <app-amount-input [parent]="parent" 
               [parentKey]="'kidsAmount'" [placeholder]="'Kids'" 
-              [hidden]="hiddeAmountInput"
               [maxAmount]="kidsLimit"
       >
       </app-amount-input>
@@ -28,7 +27,13 @@ export class CompanionAmountComponent implements OnInit {
   @Input() adultsLimit;
   constructor() { }
 
-  ngOnInit() {  }
+  ngOnInit() { 
+
+    this.parent.get('adultsAmount').valueChanges.subscribe(val => {
+      // val.adultsAmount == 1 && val.kidsAmount == 0 ? this.parent.get('isComingAlone').setValue(true) : this.parent.get('isComingAlone').setValue(false);
+      console.log(val);
+    })
+   }
 
   // comingAloneStatusChange(event) {
   //   this.hiddeAmountInput = event;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { subscriptionsEndpoint, cardsEndpoint, codesEndpoint } from '../../constants/api';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class SubscriptionService {
@@ -20,7 +20,7 @@ export class SubscriptionService {
 
       this.createAuthorizationHeader(headers);
       const subscription = JSON.stringify(body);
-      this.http.post(subscriptionsEndpoint, subscription, {
+      this.http.post(environment.api.subscriptionsEndpoint, subscription, {
           headers: headers
         }).map((response: Response) => response.json())
         .subscribe(
@@ -64,7 +64,7 @@ export class SubscriptionService {
       });
       this.createAuthorizationHeader(headers);
       const _body = JSON.stringify(payload);
-      this.http.post(cardsEndpoint, _body, {
+      this.http.post(environment.api.cardsEndpoint, _body, {
         headers: headers
       }).toPromise()
         .then(response => resolve(response.json()))
@@ -83,7 +83,7 @@ export class SubscriptionService {
       const payload = JSON.stringify({
         code: code
       });
-      this.http.post(codesEndpoint, payload, {
+      this.http.post(environment.api.codesEndpoint, payload, {
         headers: headers
       }).toPromise()
         .then(response => resolve(response.json()))

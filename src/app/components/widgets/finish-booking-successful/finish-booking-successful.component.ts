@@ -12,10 +12,10 @@ import { Component, OnInit } from '@angular/core';
 			We will send your booking confirmation 
 			and instructions via email shortly</p>
 
-			<button md-raised-button color="primary" routerLink="/">
+			<button md-raised-button md-dialog-close color="primary" routerLink="/" class="mb-2">
 			  Go to landing
 			</button>
-			<button md-raised-button color="accent" routerLink="/user/bookings">
+			<button md-raised-button md-dialog-close color="accent" routerLink="/user/bookings" class="mb-2">
 			  Go to my bookings list
 			</button>
 		</div>

@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 			and instructions via email shortly</p>
 
       <md-dialog-actions>
-        <button md-raised-button color="primary" routerLink="/" md-dialog-close class="mb-2">
+        <button md-raised-button color="primary" routerLink="/" md-dialog-close class="mb-2 mr-2">
           Go to landing
         </button>
         <!-- Can optionally provide a result for the closing dialog. -->

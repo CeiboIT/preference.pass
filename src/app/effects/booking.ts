@@ -64,8 +64,7 @@ export class BookingEffects {
     .ofType(SubscriptionActions.POST_SUBSCRIPTION_SUCCESS)
     .map(action => action.payload)
     .map((payload) => {
-      console.log(payload);
-      if ( payload.isComingAlone) {
+      if (payload.adults == 1 && payload.kids == 0) {
         return new MoveToStep({step: 'CompanionsToBooking', subscription: payload});
       } else {
         return new MoveToStep({

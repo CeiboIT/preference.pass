@@ -310,7 +310,6 @@ export class BookingWizardContainerComponent implements OnInit {
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
-
         if (this.bookingStep === 'FinishBooking') this.store.dispatch(new OpenFinishBookingSuccessful({}));
         if (booking.booking && booking.booking.id) this.bookingId = booking.booking.id;
 

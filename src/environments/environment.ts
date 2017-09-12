@@ -8,7 +8,7 @@ export const environment = {
   api: {
     cardsEndpoint: 'https://cards-preferencepass-jezvkohbrj.now.sh',
     codesEndpoint: 'https://discounts-preferencepass-eyrbkgfhmb.now.sh',
-    subscriptionsEndpoint: 'https://payments-preferencepass-ynduuawbcq.now.sh/subscription'
+    subscriptionsEndpoint: 'https://payments-preferencepass-lhruvvgpfu.now.sh/subscription'
   },
   stripe: {
     key: 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG'

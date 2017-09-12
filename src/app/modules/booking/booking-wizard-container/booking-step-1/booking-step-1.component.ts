@@ -20,7 +20,7 @@ _inthreemonths.add(3, 'months');
         <md-card>
           <md-card-content>
             <h2>
-              How many people are coming with you?
+              How many people are coming?
             </h2>
             <app-companion-amount [parent]="parent"
               [kidsLimit]="subscription?.kids"
@@ -33,7 +33,7 @@ _inthreemonths.add(3, 'months');
         <md-card class="mt-3">
           <md-card-content>
             <h2 class="pb-2 pb-md-3">
-              When do you want go to {{ activity?.name}}
+              When do you want to go to {{ activity?.name}}
             </h2>
             <app-date-select
               [parent]="parent"

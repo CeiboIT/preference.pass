@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-subscription-pricing-card',
   template:  `    
-    <md-card [ngClass]="{'active': parentValue === price.id }">
+    <md-card [ngClass]="{'active': parentValue === price.id }" (click)="select(price)">
         <div class="mat-card-image">
           {{days}}
         </div>
@@ -21,7 +21,7 @@ import { FormGroup } from '@angular/forms';
 
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button color="primary" (click)="select(price)">
+        <button md-raised-button color="primary">
           Select
         </button>
       </md-card-actions>
@@ -34,7 +34,9 @@ import { FormGroup } from '@angular/forms';
         border: 1px solid #03a9f4;
         box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
       }*/
-
+      .mat-card {
+        cursor: pointer;
+      }
       .mat-card-image {
         background: #03a9f4;
         font-size: 1.8rem;

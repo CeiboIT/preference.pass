@@ -7,6 +7,7 @@ import { ActionTypes } from '../actions/layout';
 import { AuthModalComponent } from '../components/widgets/auth-modal/auth-modal.component';
 import { AlertComponent } from "../components/widgets/alert/alert.component";
 import { ContactUsComponent } from "../components/widgets/contact-us/contact-us.component";
+import { FinishBookingSuccessfulComponent } from "../components/widgets/finish-booking-successful/finish-booking-successful.component";
 import { Observable } from 'rxjs/Observable';
 import { OnboardingModalComponent } from '../components/widgets/onboarding-modal/onboarding-modal.component';
 import 'rxjs/add/operator/do';
@@ -133,17 +134,25 @@ export class LayoutEffects {
       .ofType(ActionTypes.OPEN_CONTACT)
       .map(action => action.payload)
       .do((payload) => {
-        let modalConfig = {
-          data: {
-            type: payload.type,
-            title: payload.title,
-            message: payload.message
-          }
-        };
+        let modalConfig = { };
   
         this.dialog.open(ContactUsComponent, modalConfig)
           .afterClosed().subscribe(result => {
             
         });
       });
+
+    
+    @Effect({dispatch: false})
+    OpenFinishBookingSuccessful: Observable<{}> = this.action$
+        .ofType(ActionTypes.OPEN_FINISH_BOOKING_SUCCESSFUL)
+        .map(action => action.payload)
+        .do((payload) => {
+          let modalConfig = { };
+
+          this.dialog.open(FinishBookingSuccessfulComponent, modalConfig)
+            .afterClosed().subscribe(result => {
+              window.location.replace(window.location.origin);
+          });
+        });
 }

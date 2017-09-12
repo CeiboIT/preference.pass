@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { PostSubscription, ValidateCode } from '../../../actions/subscription';
-import { stripeKey, stripeHandlerError } from '../../../constants/stripe';
+import { stripeHandlerError } from '../../../constants/stripe';
+import { environment } from "../../../../environments/environment";
 import * as moment from 'moment';
 const _today = moment();
 const _inthreemonths = _today.clone();
@@ -66,7 +67,7 @@ interface DiscountValidationResponse {
                                                 (hasDiscountCardChangeEvent)="hasDiscountCardChange($event)"
                                                 [hasDiscount]="hasDiscount">
             </app-subscription-pricing-container>
-            <div *ngIf="paymentRequest.value.plan">
+            <!--<div *ngIf="paymentRequest.value.plan">
               <h2 class="mt-2">
                 Select your subscription start date
               </h2>
@@ -76,7 +77,7 @@ interface DiscountValidationResponse {
                                            [limitDate]="limitDate"
                                            [initialDate]="startsAt"
               ></app-subscription-start-date>
-            </div>
+            </div>-->
           </div>
         </div>
 
@@ -156,7 +157,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public discountCode;
   public step = 1;
   public hasDiscountCard = false;
-  public stripeKey = stripeKey;
+  public stripeKey = environment.stripe.key;
   public displayError$;
   public payErrorMsg$;
   public payLoading$: Observable<any>;;
@@ -264,6 +265,8 @@ export class SubscriptionWizardComponent implements OnInit {
   selectPlan = (plan) => {
     this.plan = plan;
     this.calculateTotalToPay();
+    console.warn(plan);
+    this.next();
   }
 
   paypalAuthorized($event) {
@@ -290,7 +293,7 @@ export class SubscriptionWizardComponent implements OnInit {
           currency: 'USD'
         },
         description: 'Payment for: Plan: ' + this.plan + 'Kids: ' + kidsAmount + ' Adults: ' + adultsAmount
-        }];
+      }];
   }
 
 }

@@ -33,6 +33,8 @@ import { AlertComponent } from "./components/widgets/alert/alert.component";
 import { AlertlModule } from "./components/widgets/alert/alert.module";
 import { ContactUsComponent } from "./components/widgets/contact-us/contact-us.component";
 import { ContactUsModule } from "./components/widgets/contact-us/contact-us.module";
+import { FinishBookingSuccessfulComponent } from "./components/widgets/finish-booking-successful/finish-booking-successful.component";
+import { FinishBookingSuccessfulModule } from "./components/widgets/finish-booking-successful/finish-booking-successful.module";
 import { BookingEffects} from './effects/booking';
 import { ToastEffects } from "./effects/toast";
 import { CompanionChargeFormComponent } from "./components/forms/companion-charge-form/companion-charge-form.component";
@@ -73,10 +75,18 @@ import { CompanionChargeFormModule } from "./components/forms/companion-charge-f
     CompanionChargeFormModule,
     OnboardingModalModule,
     AlertlModule,
-    ContactUsModule
+    ContactUsModule,
+    FinishBookingSuccessfulModule
   ],
   providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [AuthModalComponent, OnboardingModalComponent, AlertComponent, CompanionChargeFormComponent, ContactUsComponent]
+  entryComponents: [ 
+    AuthModalComponent, 
+    OnboardingModalComponent, 
+    AlertComponent, 
+    CompanionChargeFormComponent, 
+    ContactUsComponent, 
+    FinishBookingSuccessfulComponent
+  ]
 })
 export class AppModule { }

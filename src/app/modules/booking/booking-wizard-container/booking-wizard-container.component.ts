@@ -311,9 +311,9 @@ export class BookingWizardContainerComponent implements OnInit {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
 
-        if (this.bookingStep === 'FinishBooking') this.store.dispatch(new OpenFinishBookingSuccessful({}));
+        if (this.bookingStep === 'FinishBooking') this.store.dispatch(new OpenFinishBookingSuccessful({}));        
         if (booking.booking && booking.booking.id) this.bookingId = booking.booking.id;
-
+        
       }
     });
 

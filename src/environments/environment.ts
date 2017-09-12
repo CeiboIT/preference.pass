@@ -4,5 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: {
+    cardsEndpoint: 'https://cards-preferencepass-jezvkohbrj.now.sh',
+    codesEndpoint: 'https://discounts-preferencepass-eyrbkgfhmb.now.sh',
+    subscriptionsEndpoint: 'https://payments-preferencepass-ynduuawbcq.now.sh/subscription'
+  },
+  stripe: {
+    key: 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG'
+  }
 };

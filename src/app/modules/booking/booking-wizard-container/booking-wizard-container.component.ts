@@ -358,7 +358,7 @@ export class BookingWizardContainerComponent implements OnInit {
   }
 
   get adultsAmount() {
-    return this.booking.get('adultsAmount').value +  1;
+    return this.booking.get('adultsAmount').value;
   }
 
   get isComingAlone() {

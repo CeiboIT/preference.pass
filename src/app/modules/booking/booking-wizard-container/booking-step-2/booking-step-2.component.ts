@@ -64,7 +64,7 @@ export class BookingStep2Component implements OnInit {
   }
 
   get adultsAmount() {
-    return this.booking.adultsAmount + 1;
+    return this.booking.adultsAmount;
   }
 
   bookNow(){

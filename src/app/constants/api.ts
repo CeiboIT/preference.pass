@@ -6,7 +6,7 @@
 //TESTING
 export const cardsEndpoint = 'https://cards-preferencepass-jezvkohbrj.now.sh';
 export const codesEndpoint = 'https://discounts-preferencepass-eyrbkgfhmb.now.sh';
-export const subscriptionsEndpoint = 'https://payments-preferencepass-uvmqbrwmap.now.sh/subscription';
+export const subscriptionsEndpoint = 'https://payments-preferencepass-emicxjzfqk.now.sh/subscription';
 
 //PROD
 // export const cardsEndpoint = 'https://cards.preferencepass.xyz';

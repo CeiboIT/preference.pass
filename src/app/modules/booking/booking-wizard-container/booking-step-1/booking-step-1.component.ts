@@ -59,12 +59,11 @@ _inthreemonths.add(3, 'months');
         -->
         <div class="row">
           <div class="col-12 text-center">
-            <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit">
+            <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit" [disabled]="!adultsAmount">
               Continue&nbsp;and&nbsp;save <app-total-saving
               [rate]="rate"
               [amountOfKids]="kidsAmount"
               [amountOfAdults]="adultsAmount">
-
             </app-total-saving>
 
             </button>
@@ -108,7 +107,7 @@ export class BookingStep1Component implements OnInit {
   }
 
   get savingMessage() {
-    if (!this.parent.get('adultsAmount').value && !this.parent.get('kidsAmount').value)  {
+    if ( this.parent.get('adultsAmount').value === 1 && !this.parent.get('kidsAmount').value)  {
       return 'Booking alone you are saving';
     } else {
       return 'Booking you are saving';
@@ -121,7 +120,7 @@ export class BookingStep1Component implements OnInit {
   }
 
   get adultsAmount() {
-    return this.parent.get('adultsAmount').value +  1;
+    return this.parent.get('adultsAmount').value;
   }
 
   onStep1Submit($event) {

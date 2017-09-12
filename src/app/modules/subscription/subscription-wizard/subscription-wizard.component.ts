@@ -279,7 +279,7 @@ export class SubscriptionWizardComponent implements OnInit {
       let kidsAmount = this.paymentRequest.get('kidsAmount').value || 0;
       let adultsAmount = this.paymentRequest.get('adultsAmount').value || 0;
       let plan = this.plan || {};
-      let adultsTotalPrice = (adultsAmount + 1) * plan.adultPrice;
+      let adultsTotalPrice = adultsAmount * plan.adultPrice;
       let kidsTotalPrice = kidsAmount * plan.kidPrice;
       let total = adultsTotalPrice + kidsTotalPrice || 0;
       this.totalPay = Math.round((total) * 100) / 100;

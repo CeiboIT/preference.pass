@@ -20,8 +20,8 @@ export class ActivitySavingComponent implements OnInit {
 	get lowestRate(): Rate {
     	return (this.rates && this.rates.length) ? _.sortBy(this.rates, 'discountPrice')[0] : this.rates;
 	}
-	
+
 	get totalDiscount() {
-    	return this.lowestRate.currency + ' ' + ( this.lowestRate.originalPrice - this.lowestRate.discountPrice ) ;
+    	return  ( this.lowestRate.originalPrice - this.lowestRate.discountPrice ) + ' ' + this.lowestRate.currency;
  	}
 }

@@ -311,9 +311,9 @@ export class BookingWizardContainerComponent implements OnInit {
       if (booking.currentStep) {
         this.bookingStep = booking.currentStep;
 
-        if (this.bookingStep === 'FinishBooking') this.store.dispatch(new OpenFinishBookingSuccessful({}));        
+        if (this.bookingStep === 'FinishBooking') this.store.dispatch(new OpenFinishBookingSuccessful({}));
         if (booking.booking && booking.booking.id) this.bookingId = booking.booking.id;
-        
+
       }
     });
 
@@ -414,10 +414,6 @@ export class BookingWizardContainerComponent implements OnInit {
     let _booking = this.booking.value;
     _booking.activityId = this.activity.id;
     _booking.owner = this.user.id;
-    if (_booking.isComingAlone) {
-      _booking.kidsAmount = 0;
-      _booking.adultsAmount = 0;
-    }
     const _rate = this.rate;
     _booking.rate = {
       currency: _rate.currency,

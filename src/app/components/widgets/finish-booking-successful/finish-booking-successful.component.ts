@@ -8,16 +8,19 @@ import { Component, OnInit } from '@angular/core';
 			<app-success-animation></app-success-animation>
 			<h2 class="mt-2">All DONE!</h2>
 
-			<p>Thanks for booking with us,
+			<p style="font-size:18px;">Thanks for booking with us,
 			We will send your booking confirmation 
 			and instructions via email shortly</p>
 
-			<button md-raised-button color="primary" routerLink="/">
-			  Go to landing
-			</button>
-			<button md-raised-button color="accent" routerLink="/user/bookings">
-			  Go to my bookings list
-			</button>
+      <md-dialog-actions>
+        <button md-raised-button color="primary" routerLink="/" md-dialog-close class="mb-2">
+          Go to landing
+        </button>
+        <!-- Can optionally provide a result for the closing dialog. -->
+        <button md-raised-button color="accent" routerLink="/user/bookings" md-dialog-close class="mb-2">
+          Go to my bookings list
+        </button>
+      </md-dialog-actions>
 		</div>
 		`,
 	styleUrls: ['./finish-booking-successful.component.scss']

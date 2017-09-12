@@ -148,11 +148,13 @@ export class LayoutEffects {
         .ofType(ActionTypes.OPEN_FINISH_BOOKING_SUCCESSFUL)
         .map(action => action.payload)
         .do((payload) => {
-          let modalConfig = { };
+          let modalConfig = { 
+            disableClose: true
+          };
 
           this.dialog.open(FinishBookingSuccessfulComponent, modalConfig)
             .afterClosed().subscribe(result => {
-              window.location.replace(window.location.origin);
+              // window.location.replace(window.location.origin);
           });
         });
 }

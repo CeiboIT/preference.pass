@@ -4,6 +4,7 @@ const initialState = {
   subscription: [],
   loading: false,
   validatingDiscountCode: false,
+  validDiscountCode: false,
   error: '',
   validPPCard: false,
   hasUnusedDiscount: false
@@ -53,6 +54,15 @@ reducers[ActionTypes.VALIDATE_DISCOUNT_CODE] = (state, payload) => {
 reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
     validatingDiscountCode: false
+  });
+};
+
+reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID] = (state, payload) => {
+  let message = payload ? 'Valid!' : 'Invalid code';
+  return Object.assign({}, state, {
+    validatingDiscountCode: false,
+    validDiscountCode: payload,
+    validDiscountCodeMessage: message
   });
 };
 

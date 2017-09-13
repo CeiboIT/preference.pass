@@ -7,7 +7,8 @@ export const environment = {
   production: false,
   auth0: {
     clientID: 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1',
-    domain: 'preferencepassdevelopment.auth0.com'
+    domain: 'preferencepassdevelopment.auth0.com',
+
   },
   api: {
     cardsEndpoint: 'https://dev.cards.preferencepass.xyz',
@@ -16,5 +17,6 @@ export const environment = {
   },
   stripe: {
     key: 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG'
-  }
+  },
+  graphCoolUri: 'https://api.graph.cool/simple/v1/cj41c9u2zddol0177la66g30g'
 };

@@ -21,7 +21,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
           Book&nbsp;now&nbsp;and&nbsp;save <app-total-saving
           [rate]="rate"
           [amountOfKids]="booking.kidsAmount"
-          [amountOfAdults]="adultsAmount">
+          [amountOfAdults]="booking.adultsAmount">
         </app-total-saving>
         </button>
       </div>
@@ -64,7 +64,7 @@ export class BookingStep2Component implements OnInit {
   }
 
   get adultsAmount() {
-    return this.booking.adultsAmount + 1;
+    return this.booking.adultsAmount;
   }
 
   bookNow(){

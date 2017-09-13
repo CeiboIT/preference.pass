@@ -6,7 +6,7 @@ import * as _ from 'lodash';
   selector: 'app-activity-price',
   template: `
     <span *ngIf="lowestRate && lowestRate.currency">
-      <strong>{{ lowestRate.currency }} {{ lowestRate.discountPrice }}</strong>
+      <strong>{{ lowestRate.discountPrice }} {{ lowestRate.currency }} </strong>
     </span>
   `
 })
@@ -19,5 +19,5 @@ export class ActivityPriceComponent implements OnInit {
   get lowestRate(): Rate {
     return _.sortBy(this.rates, 'discountPrice')[0];
   }
-  
+
 }

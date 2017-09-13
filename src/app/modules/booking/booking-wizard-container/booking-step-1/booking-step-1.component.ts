@@ -20,7 +20,7 @@ _inthreemonths.add(3, 'months');
         <md-card>
           <md-card-content>
             <h2>
-              How many people are coming with you?
+              How many people are coming?
             </h2>
             <app-companion-amount [parent]="parent"
               [kidsLimit]="subscription?.kids"
@@ -33,7 +33,7 @@ _inthreemonths.add(3, 'months');
         <md-card class="mt-3">
           <md-card-content>
             <h2 class="pb-2 pb-md-3">
-              When do you want go to {{ activity?.name}}
+              When do you want to go to {{ activity?.name}}
             </h2>
             <app-date-select
               [parent]="parent"
@@ -59,12 +59,11 @@ _inthreemonths.add(3, 'months');
         -->
         <div class="row">
           <div class="col-12 text-center">
-            <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit">
+            <button md-raised-button class="button-success w-100 py-2 mt-3" type="submit" [disabled]="!adultsAmount">
               Continue&nbsp;and&nbsp;save <app-total-saving
               [rate]="rate"
               [amountOfKids]="kidsAmount"
               [amountOfAdults]="adultsAmount">
-
             </app-total-saving>
 
             </button>
@@ -108,7 +107,7 @@ export class BookingStep1Component implements OnInit {
   }
 
   get savingMessage() {
-    if (!this.parent.get('adultsAmount').value && !this.parent.get('kidsAmount').value)  {
+    if ( this.parent.get('adultsAmount').value === 1 && !this.parent.get('kidsAmount').value)  {
       return 'Booking alone you are saving';
     } else {
       return 'Booking you are saving';
@@ -121,7 +120,7 @@ export class BookingStep1Component implements OnInit {
   }
 
   get adultsAmount() {
-    return this.parent.get('adultsAmount').value +  1;
+    return this.parent.get('adultsAmount').value;
   }
 
   onStep1Submit($event) {

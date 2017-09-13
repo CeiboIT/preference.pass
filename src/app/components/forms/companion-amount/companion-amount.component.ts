@@ -7,7 +7,6 @@ import { FormGroup } from '@angular/forms';
     <div>
       <app-amount-input [parent]="parent" 
               [parentKey]="'kidsAmount'" [placeholder]="'Kids'" 
-              [hidden]="hiddeAmountInput"
               [maxAmount]="kidsLimit"
       >
       </app-amount-input>
@@ -15,11 +14,10 @@ import { FormGroup } from '@angular/forms';
                         [maxAmount]="adultsLimit"
                         [parentKey]="'adultsAmount'" 
                         [placeholder]="'Adults'" 
-                        [hidden]="hiddeAmountInput"
       ></app-amount-input>
-      <app-subscription-coming-alone [parent]="parent" 
+      <!--<app-subscription-coming-alone [parent]="parent" 
        (comingAloneStatusChange)="comingAloneStatusChange($event)">
-      </app-subscription-coming-alone>
+      </app-subscription-coming-alone>-->
     </div>
   `
 })
@@ -27,19 +25,28 @@ export class CompanionAmountComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() kidsLimit;
   @Input() adultsLimit;
-  public hiddeAmountInput: Boolean = false;
   constructor() { }
 
-  ngOnInit() {  }
+  ngOnInit() { 
 
-  comingAloneStatusChange(event) {
-    this.hiddeAmountInput = event;
+    this.parent.get('adultsAmount').valueChanges.subscribe(val => {
+      this.isComingAlone();
+    })
 
-    if(event) {
-      this.parent.get("kidsAmount").setValue(0);
-      this.parent.get("adultsAmount").setValue(0);
+    this.parent.get('kidsAmount').valueChanges.subscribe(val => {
+      this.isComingAlone();
+    })
+   }
+
+  isComingAlone() {
+    let adultsAmount = this.parent.get('adultsAmount').value,
+        kidsAmount   = this.parent.get('kidsAmount').value;
+    
+    if(adultsAmount == 1 && kidsAmount == 0) {
+      this.parent.get('isComingAlone').setValue(true);
+    } else {
+      this.parent.get('isComingAlone').setValue(false);
     }
   }
-
 
 }

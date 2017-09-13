@@ -9,6 +9,10 @@ import {Observable} from 'rxjs/Observable';
       <h3>
         To finish your booking link your card number to get 50% off your next trip.
       </h3>
+      
+      <h2>
+        Enter the last 4 digits in your Preference Pass Card
+      </h2>
       <app-preference-pass-card-input [parent]="parent"></app-preference-pass-card-input>
       <!--<button md-raised-button color="primary" [disabled]="!parent.valid || loading" (click)="onCardSubmit()">
         Validate card number

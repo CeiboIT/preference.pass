@@ -24,6 +24,7 @@ export class ActivityGridContainerComponent implements OnInit {
 	private types = {
 		activities: 'ACTIVITIES',
 		tours: 'TOURS',
+		transport: 'TRANSPORT',
 		nightclubs: 'NIGHTCLUBS',
 		shows: 'SHOW',
 		offers: 'ACTIVITIES',

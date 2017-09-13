@@ -10,7 +10,8 @@ import {
   GetToursSuccess,
   GetActivitiesSuccess,
   GetNightClubsSuccess,
-  GetShowsSuccess
+  GetShowsSuccess,
+  GetTransportSuccess
   } from '../../../actions/activities';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
@@ -36,9 +37,9 @@ import { Store } from '@ngrx/store';
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
 
-      <div class="py-5">
-        <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
-      </div>
+      <!--<div class="py-5">
+        <app-activity-list [activities]="transport$ | async" [category]="'transport'"></app-activity-list>
+      </div>-->
     </div>
   `,
   styles: [ `
@@ -59,6 +60,7 @@ export class LandingContainerComponent implements OnInit {
   public hotDeals$: Observable<any>;
   public healthAndBeauty$: Observable<any>;
   public shows$: Observable<any>;
+  public transport$: Observable<any>;
 
   constructor(
     private store: Store<any>
@@ -68,13 +70,15 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesByCategory({name: 'ACTIVITIES', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'SHOW', fromLanding: true}));
-    this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
+    // this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'TRANSPORT', fromLanding: true}));
     this.store.dispatch(new GetHotDeals({ fromLanding: true }));
     this.activities$ = onStateChangeObservable(this.store, 'activities.activities');
     this.tours$ = onStateChangeObservable(this.store, 'activities.tours');
     this.shows$ = onStateChangeObservable(this.store, 'activities.shows');
     this.hotDeals$ = onStateChangeObservable(this.store, 'activities.hotDeals');
-    this.healthAndBeauty$ = onStateChangeObservable(this.store, 'activities.healthAndBeauty');
+    //this.healthAndBeauty$ = onStateChangeObservable(this.store, 'activities.healthAndBeauty');
+    //this.transport$ = onStateChangeObservable(this.store, 'activities.transport');
   }
 
   ngOnDestroy() {
@@ -83,5 +87,6 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesSuccess([]));
     this.store.dispatch(new GetNightClubsSuccess([]));
     this.store.dispatch(new GetShowsSuccess([]));
+    //this.store.dispatch(new GetTransportSuccess([]));
   }
 }

@@ -54,6 +54,8 @@ interface DiscountValidationResponse {
               <div *ngIf="claimDiscount">
                 <app-discount-code-form 
                   [parent]="discountCode"
+                  [validCode]="validDiscountCode$ | async"
+                  [message]="validDiscountCodeMessage$ | async"
                   [loading]="discountCodeLoading$ | async"
                   (onValid)="onDiscountFormValidity($event)"
                 ></app-discount-code-form>
@@ -165,6 +167,7 @@ export class SubscriptionWizardComponent implements OnInit {
   public payLoading$: Observable<any>;
   public discountCodeLoading$: Observable<any>;
   public validDiscountCode$: Observable<any>;
+  public validDiscountCodeMessage$: Observable<any>;
   public totalPay = 0;
   public plan;
   public selectableDates = [];
@@ -226,6 +229,7 @@ export class SubscriptionWizardComponent implements OnInit {
     this.payErrorMsg$ = onStateChangeObservable(this.store, 'subscription.error');
     this.discountCodeLoading$ = onStateChangeObservable(this.store, 'subscription.validatingDiscountCode');
     this.validDiscountCode$ = onStateChangeObservable(this.store, 'subscription.validDiscountCode');
+    this.validDiscountCodeMessage$ = onStateChangeObservable(this.store, 'subscription.validDiscountCodeMessage');
   }
 
   onDiscountFormValidity($event) {

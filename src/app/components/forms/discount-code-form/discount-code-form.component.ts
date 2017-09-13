@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
   selector: 'app-discount-code-form',
   template: `
     <form name="discountCodeForm" [formGroup]="parent" class="d-flex align-items-center">
-      <app-discount-code-input [parent]="parent"></app-discount-code-input>
+      <app-discount-code-input [parent]="parent" [message]="message" [validCode]="validCode"></app-discount-code-input>
       <span *ngIf="loading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> </span>
     </form>
   `
@@ -20,6 +20,8 @@ import { Observable } from 'rxjs/Observable';
 export class DiscountCodeFormComponent implements OnInit {
   @Input() parent: FormGroup;
   @Input() loading;
+  @Input() validCode;
+  @Input() message;
   @Output() onValid: EventEmitter<any> = new EventEmitter();
   validityObserver: Observable<any>;
   constructor() { }

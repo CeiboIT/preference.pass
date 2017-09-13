@@ -52,12 +52,12 @@ export class SubscriptionEffects {
     .switchMap(payload => {
       return this.service.validateDiscountCode(payload)
         .then(res => {
-          console.warn(res);
-          if (!res['valid']) {
-            return new ValidateCodeSuccessInvalid(res);
-          } else {
-            return new ValidateCodeSuccessValid(res);
-          }
+          // if (!res['valid']) {
+          //   return new ValidateCodeSuccessInvalid(res);
+          // } else {
+          //   return new ValidateCodeSuccessValid(res);
+          // }
+          return new ValidateCodeSuccessValid(res['valid']);
         })
         .catch(err => new SearchPPCardFailure(err));
     });

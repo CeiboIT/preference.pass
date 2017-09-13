@@ -57,21 +57,14 @@ reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS] = (state, payload) => {
   });
 };
 
-
 reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID] = (state, payload) => {
+  let message = payload ? 'Valid!' : 'Invalid code';
   return Object.assign({}, state, {
     validatingDiscountCode: false,
-    validDiscountCode: true
+    validDiscountCode: payload,
+    validDiscountCodeMessage: message
   });
 };
-
-reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS_INVALID] = (state, payload) => {
-  return Object.assign({}, state, {
-    validatingDiscountCode: false,
-    validDiscountCode: false
-  });
-};
-
 
 export default function reducer(state = initialState, action: Actions) {
   return reducers[action.type] && reducers[action.type](state, action.payload) || state;

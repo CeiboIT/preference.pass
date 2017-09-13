@@ -6,14 +6,17 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   template: `
     <div [formGroup]="parent">
       <md-input-container class="input-full-width">
-        <input type="text" mdInput placeholder="Discount code" formControlName="code">
+        <input mdInput placeholder="Discount code" formControlName="code">
+        <md-hint align="start"><strong [ngClass]="{'text-success': validCode, 'text-danger': !validCode}">{{ message }}</strong> </md-hint>
+        <md-hint align="end">{{ parent.get('code').value.length }} / 4</md-hint>
       </md-input-container>
-      {{ disabled }}
     </div>
   `
 })
 export class DiscountCodeInputComponent implements OnInit {
   @Input() parent: FormGroup;
+  @Input() message;
+  @Input() validCode;
   constructor() { }
 
   ngOnInit() {

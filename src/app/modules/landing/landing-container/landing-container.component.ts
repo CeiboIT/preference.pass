@@ -37,9 +37,9 @@ import { Store } from '@ngrx/store';
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
 
-      <div class="py-5">
+      <!--<div class="py-5">
         <app-activity-list [activities]="transport$ | async" [category]="'transport'"></app-activity-list>
-      </div>
+      </div>-->
     </div>
   `,
   styles: [ `
@@ -78,7 +78,7 @@ export class LandingContainerComponent implements OnInit {
     this.shows$ = onStateChangeObservable(this.store, 'activities.shows');
     this.hotDeals$ = onStateChangeObservable(this.store, 'activities.hotDeals');
     //this.healthAndBeauty$ = onStateChangeObservable(this.store, 'activities.healthAndBeauty');
-    this.transport$ = onStateChangeObservable(this.store, 'activities.transport');
+    //this.transport$ = onStateChangeObservable(this.store, 'activities.transport');
   }
 
   ngOnDestroy() {
@@ -87,6 +87,6 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesSuccess([]));
     this.store.dispatch(new GetNightClubsSuccess([]));
     this.store.dispatch(new GetShowsSuccess([]));
-    this.store.dispatch(new GetTransportSuccess([]));
+    //this.store.dispatch(new GetTransportSuccess([]));
   }
 }

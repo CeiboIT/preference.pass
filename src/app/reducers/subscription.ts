@@ -4,6 +4,7 @@ const initialState = {
   subscription: [],
   loading: false,
   validatingDiscountCode: false,
+  validDiscountCode: false,
   error: '',
   validPPCard: false,
   hasUnusedDiscount: false
@@ -55,6 +56,22 @@ reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS] = (state, payload) => {
     validatingDiscountCode: false
   });
 };
+
+
+reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS_VALID] = (state, payload) => {
+  return Object.assign({}, state, {
+    validatingDiscountCode: false,
+    validDiscountCode: true
+  });
+};
+
+reducers[ActionTypes.VALIDATE_DISCOUNT_CODE_SUCCESS_INVALID] = (state, payload) => {
+  return Object.assign({}, state, {
+    validatingDiscountCode: false,
+    validDiscountCode: false
+  });
+};
+
 
 export default function reducer(state = initialState, action: Actions) {
   return reducers[action.type] && reducers[action.type](state, action.payload) || state;

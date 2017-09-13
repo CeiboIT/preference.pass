@@ -1,17 +1,25 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+  } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-discount-code-form',
   template: `
-    <form name="discountCodeForm" [formGroup]="parent">
+    <form name="discountCodeForm" [formGroup]="parent" class="d-flex align-items-center">
       <app-discount-code-input [parent]="parent"></app-discount-code-input>
+      <span *ngIf="loading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> </span>
     </form>
   `
 })
 export class DiscountCodeFormComponent implements OnInit {
   @Input() parent: FormGroup;
+  @Input() loading;
   @Output() onValid: EventEmitter<any> = new EventEmitter();
   validityObserver: Observable<any>;
   constructor() { }

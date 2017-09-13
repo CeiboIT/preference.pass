@@ -52,7 +52,9 @@ interface DiscountValidationResponse {
                 I have a discount code
               </button>
               <div *ngIf="claimDiscount">
-                <app-discount-code-form [parent]="discountCode"
+                <app-discount-code-form 
+                  [parent]="discountCode"
+                  [loading]="discountCodeLoading$ | async"
                   (onValid)="onDiscountFormValidity($event)"
                 ></app-discount-code-form>
               </div>
@@ -160,7 +162,9 @@ export class SubscriptionWizardComponent implements OnInit {
   public stripeKey = environment.stripe.key;
   public displayError$;
   public payErrorMsg$;
-  public payLoading$: Observable<any>;;
+  public payLoading$: Observable<any>;
+  public discountCodeLoading$: Observable<any>;
+  public validDiscountCode$: Observable<any>;
   public totalPay = 0;
   public plan;
   public selectableDates = [];
@@ -200,7 +204,7 @@ export class SubscriptionWizardComponent implements OnInit {
       startsAt: [this.startsAt || ''],
       isComingAlone: [this.isComingAlone || false],
       plan: [null],
-      cardToken: ['']
+      cardToken: [''],
     });
 
     this.limitDate = moment(this.startsAt).clone();
@@ -210,7 +214,7 @@ export class SubscriptionWizardComponent implements OnInit {
     });
 
     this.discountCode = this.fb.group({
-      code: ['']
+      code: [''],
     });
 
     this.paymentRequest.valueChanges.subscribe(data => {
@@ -220,6 +224,8 @@ export class SubscriptionWizardComponent implements OnInit {
     });
     this.payLoading$ = onStateChangeObservable(this.store, 'subscription.loading');
     this.payErrorMsg$ = onStateChangeObservable(this.store, 'subscription.error');
+    this.discountCodeLoading$ = onStateChangeObservable(this.store, 'subscription.validatingDiscountCode');
+    this.validDiscountCode$ = onStateChangeObservable(this.store, 'subscription.validDiscountCode');
   }
 
   onDiscountFormValidity($event) {

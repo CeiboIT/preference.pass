@@ -30,7 +30,7 @@ import { Store } from '@ngrx/store';
       </div>
 
       <div class="py-5">
-        <app-activity-list [activities]="activities$ | async" [category]="'offers'"></app-activity-list>
+        <app-activity-list [activities]="activities$ | async" [category]="'activities'"></app-activity-list>
       </div>
       
       <div class="py-5">

@@ -52,6 +52,7 @@ export class SubscriptionEffects {
     .switchMap(payload => {
       return this.service.validateDiscountCode(payload)
         .then(res => {
+          console.warn(res);
           if (!res['valid']) {
             return new ValidateCodeSuccessInvalid(res);
           } else {

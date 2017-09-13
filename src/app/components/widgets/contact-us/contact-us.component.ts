@@ -28,7 +28,7 @@ import { Component, OnInit } from '@angular/core';
 								<div class="info">
 									<h3 class="title mt-3">PHONE</h3>
 									<p>
-										<i class="fa fa-mobile hidden-sm-down" aria-hidden="true"></i> &nbsp; <a href="tel:+018001124821">018001124821</a>
+										<i class="fa fa-mobile hidden-sm-down" aria-hidden="true"></i> &nbsp; <a href="tel:018001124821">018001124821</a>
 									</p>
 								</div>
 							</div>

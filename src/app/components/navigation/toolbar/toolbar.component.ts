@@ -32,7 +32,7 @@ import { AuthLogOut } from '../../../actions/auth';
           <ul class="d-flex navbar-items">
             <li class="navbar-item">
               <a routerLink="/" routerLinkActive="active">
-                Activities
+                Offers
               </a>
             </li>
           </ul>

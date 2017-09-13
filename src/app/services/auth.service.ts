@@ -10,6 +10,7 @@ import gql from 'graphql-tag';
 import { GetUserBasicData } from '../actions/user';
 import { onStateChangeObservable } from '../utils/store';
 import { getUserIdFromToken } from '../utils/user';
+import { environment } from "../../environments/environment";
 
 declare var window: any;
 const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
@@ -17,10 +18,8 @@ const serverUrl = window.location.protocol + '//' + window.location.hostname + '
 const redirectTo = serverUrl + '/access_token';
 const PROJECT_ID = 'cj41c9u2zddol0177la66g30g'; // GraphCoolProjectID
 
-const auth0ClientID = 'i5q_2LeZ99i8-V83pm2cirIpCpmoH3J1'; // development
-const auth0Domain = 'preferencepassdevelopment.auth0.com'; // development
-// const auth0ClientID = 'jVoLk0OP2e3ZNo91EJssEDxOEGAM3ukO'; // production
-// const auth0Domain = 'preferencepass.auth0.com'; // production
+const auth0ClientID = environment.auth0.clientID;
+const auth0Domain = environment.auth0.domain;
 
 function getHashValue(key) {
   const matches = location.hash.match(new RegExp(key + '=([^&]*)'));

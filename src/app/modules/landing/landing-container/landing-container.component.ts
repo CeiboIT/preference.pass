@@ -30,11 +30,15 @@ import { Store } from '@ngrx/store';
       </div>
 
       <div class="py-5">
-        <app-activity-list [activities]="activities$ | async" [category]="'offers'"></app-activity-list>
+        <app-activity-list [activities]="activities$ | async" [category]="'activities'"></app-activity-list>
       </div>
       
       <div class="py-5">
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
+      </div>
+      
+      <<div class="py-5">
+        <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
       </div>
 
       <!--<div class="py-5">
@@ -70,14 +74,14 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesByCategory({name: 'ACTIVITIES', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TOURS', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'SHOW', fromLanding: true}));
-    // this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TRANSPORT', fromLanding: true}));
     this.store.dispatch(new GetHotDeals({ fromLanding: true }));
     this.activities$ = onStateChangeObservable(this.store, 'activities.activities');
     this.tours$ = onStateChangeObservable(this.store, 'activities.tours');
     this.shows$ = onStateChangeObservable(this.store, 'activities.shows');
     this.hotDeals$ = onStateChangeObservable(this.store, 'activities.hotDeals');
-    //this.healthAndBeauty$ = onStateChangeObservable(this.store, 'activities.healthAndBeauty');
+    this.healthAndBeauty$ = onStateChangeObservable(this.store, 'activities.healthAndBeauty');
     //this.transport$ = onStateChangeObservable(this.store, 'activities.transport');
   }
 

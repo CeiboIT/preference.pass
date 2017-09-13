@@ -25,6 +25,10 @@ body {
     color: #c63f3f;
 }
 
+.text-success {
+    color: green;
+}
+
 .btn-outline {
     box-sizing: border-box;
     position: relative;
@@ -276,6 +280,9 @@ md-card.active {
   box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
+.mat-hint {
+    color: rgba(0,0,0,.54);
+}
 
 .material-select-custom {
     position: relative;

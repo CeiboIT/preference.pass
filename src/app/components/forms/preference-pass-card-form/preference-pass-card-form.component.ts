@@ -11,7 +11,7 @@ import {Observable} from 'rxjs/Observable';
       </h3>
       
       <h2>
-        Enter the last 4 digits in your Preference Pass Card
+        Enter the last 5 digits in your Preference Pass Card
       </h2>
       <app-preference-pass-card-input [parent]="parent"></app-preference-pass-card-input>
       <!--<button md-raised-button color="primary" [disabled]="!parent.valid || loading" (click)="onCardSubmit()">

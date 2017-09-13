@@ -265,7 +265,6 @@ export class SubscriptionWizardComponent implements OnInit {
   selectPlan = (plan) => {
     this.plan = plan;
     this.calculateTotalToPay();
-    console.warn(plan);
     this.next();
   }
 

@@ -28,6 +28,12 @@ export const ActionTypes = {
   GET_DEPARTURES: type('[Activities] Get Departures'),
   GET_DEPARTURES_SUCCESS: type('[Activities] Get Departures Success'),
   GET_DEPARTURES_FAILURE: type('[Activities] Get Departures Failure'),
+  GET_TRANSPORT_SUCCESS: type('[Activities] Get Transport Success'),
+  GET_TRANSPORT_FAILURE: type('[Activities] Get Transport Failure'),
+  GET_SHOPPING_SUCCESS: type('[Activities] Get Shopping Success'),
+  GET_SHOPPING_FAILURE: type('[Activities] Get Shopping Failure'),
+  GET_FOODANDBEVERAGE_SUCCESS: type('[Activities] Get Foodandbeverage Success'),
+  GET_FOODANDBEVERAGE_FAILURE: type('[Activities] Get Foodandbeverage Failure'),
 };
 
 export class GetList implements Action {
@@ -116,6 +122,36 @@ export class GetNightClubsFailure implements Action {
   constructor(public payload: any) { }
 }
 
+export class GetTransportSuccess implements Action {
+  type = ActionTypes.GET_TRANSPORT_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetTransportFailure implements Action {
+  type = ActionTypes.GET_TRANSPORT_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class GetShoppingSuccess implements Action {
+  type = ActionTypes.GET_SHOPPING_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetShoppingFailure implements Action {
+  type = ActionTypes.GET_SHOPPING_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class GetFoodandbeverageSuccess implements Action {
+  type = ActionTypes.GET_FOODANDBEVERAGE_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetFoodandbeverageFailure implements Action {
+  type = ActionTypes.GET_FOODANDBEVERAGE_FAILURE;
+  constructor(public payload: any) { }
+}
+
 export class GetDetail implements Action {
   type = ActionTypes.GET_DETAIL;
   constructor(public payload: any) { }
@@ -166,4 +202,5 @@ GetDetail | GetDetailFailure | GetDetailSuccess | GetTours | GetToursFailure | G
 | GetDepartures | GetDeparturesSuccess | GetDeparturesFailure | GetActivitiesFailure | GetActivitiesSuccess
 | GetActivitiesByCategory | GetActivitiesByCategorySuccess |
   GetActivitiesByCategoryFailure | GetNightClubsSuccess | GetNightClubsFailure |
-  GetHotDeals | GetHotDealsSuccess | GetHotDealsFailure | GetShowsSuccess | GetShowsFailure;
+  GetHotDeals | GetHotDealsSuccess | GetHotDealsFailure | GetShowsSuccess | GetShowsFailure |
+  GetTransportSuccess | GetTransportFailure | GetShoppingFailure | GetShoppingSuccess | GetFoodandbeverageFailure | GetActivitiesByCategorySuccess;

@@ -11,8 +11,8 @@ import {
   GetActivitiesSuccess,
   GetNightClubsSuccess,
   GetShowsSuccess,
-  GetTransportSuccess
-  } from '../../../actions/activities';
+  GetTransportSuccess, GetRestaurantsSuccess, GetShoppingSuccess, GetWeRecommendSuccess
+} from '../../../actions/activities';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { Store } from '@ngrx/store';
@@ -37,13 +37,29 @@ import { Store } from '@ngrx/store';
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
       
-      <<div class="py-5">
+      <div class="py-5">
+        <app-activity-list [activities]="restaurants$ | async" [category]="'Restaurants'"></app-activity-list>
+      </div>
+      
+      <div class="py-5">
+        <app-activity-list [activities]="nightclubs$ | async" [category]="'Nightclubs'"></app-activity-list>
+      </div>
+
+      <div class="py-5">
+        <app-activity-list [activities]="shopping$ | async" [category]="'Shopping'"></app-activity-list>
+      </div>
+
+      <div class="py-5">
+        <app-activity-list [activities]="transport$ | async" [category]="'transport'"></app-activity-list>
+      </div>
+      
+      <div class="py-5">
         <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
       </div>
 
-      <!--<div class="py-5">
-        <app-activity-list [activities]="transport$ | async" [category]="'transport'"></app-activity-list>
-      </div>-->
+      <div class="py-5">
+        <app-activity-list [activities]="weRecommend$ | async" [category]="'We recommend'"></app-activity-list>
+      </div>
     </div>
   `,
   styles: [ `
@@ -65,6 +81,9 @@ export class LandingContainerComponent implements OnInit {
   public healthAndBeauty$: Observable<any>;
   public shows$: Observable<any>;
   public transport$: Observable<any>;
+  public restaurants$: Observable<any>;
+  public shopping$: Observable<any>;
+  public weRecommend$: Observable<any>;
 
   constructor(
     private store: Store<any>
@@ -76,13 +95,21 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesByCategory({name: 'SHOW', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TRANSPORT', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'NIGHTCLUBS', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'RESTAURANTS', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'SHOPPING', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'PREFERENCEPASSRECOMMENDED', fromLanding: true}));
     this.store.dispatch(new GetHotDeals({ fromLanding: true }));
     this.activities$ = onStateChangeObservable(this.store, 'activities.activities');
     this.tours$ = onStateChangeObservable(this.store, 'activities.tours');
     this.shows$ = onStateChangeObservable(this.store, 'activities.shows');
     this.hotDeals$ = onStateChangeObservable(this.store, 'activities.hotDeals');
     this.healthAndBeauty$ = onStateChangeObservable(this.store, 'activities.healthAndBeauty');
-    //this.transport$ = onStateChangeObservable(this.store, 'activities.transport');
+    this.transport$ = onStateChangeObservable(this.store, 'activities.transport');
+    this.nightclubs$ = onStateChangeObservable(this.store, 'activities.nightclubs');
+    this.restaurants$ = onStateChangeObservable(this.store, 'activities.restaurants');
+    this.shopping$ = onStateChangeObservable(this.store, 'activities.shopping');
+    this.weRecommend$ = onStateChangeObservable(this.store, 'activities.weRecommend');
   }
 
   ngOnDestroy() {
@@ -91,6 +118,9 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesSuccess([]));
     this.store.dispatch(new GetNightClubsSuccess([]));
     this.store.dispatch(new GetShowsSuccess([]));
-    //this.store.dispatch(new GetTransportSuccess([]));
+    this.store.dispatch(new GetTransportSuccess([]));
+    this.store.dispatch(new GetRestaurantsSuccess([]));
+    this.store.dispatch(new GetShoppingSuccess([]));
+    this.store.dispatch(new GetWeRecommendSuccess([]));
   }
 }

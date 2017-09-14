@@ -5,10 +5,12 @@ const initialState = {
   tours: [],
   activities: [],
   restaurants: [],
+  shopping: [],
   healthAndBeauty: [],
   nightclubs: [],
   shows: [],
   hotDeals: [],
+  weRecommend: [],
   transport: [],
   selectedActivity: {},
   loading: false,
@@ -60,6 +62,20 @@ reducers[ActionTypes.GET_TOURS_SUCCESS] = (state, payload) => {
   });
 };
 
+reducers[ActionTypes.GET_SHOPPING_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    shopping: payload,
+    loading: false
+  });
+};
+
+reducers[ActionTypes.GET_WE_RECOMMEND_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    weRecommend: payload,
+    loading: false
+  });
+};
+
 reducers[ActionTypes.GET_HEALTH_AND_BEAUTY_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
     healthAndBeauty: payload,
@@ -84,6 +100,14 @@ reducers[ActionTypes.GET_NIGHTCLUBS_SUCCESS] = (state, payload) => {
 reducers[ActionTypes.GET_SHOWS_SUCCESS] = (state, payload) => {
   return Object.assign({}, state, {
     shows: payload,
+    loading: false
+  });
+};
+
+
+reducers[ActionTypes.GET_RESTAURANTS_SUCCESS] = (state, payload) => {
+  return Object.assign({}, state, {
+    restaurants: payload,
     loading: false
   });
 };

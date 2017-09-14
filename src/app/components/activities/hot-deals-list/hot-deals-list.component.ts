@@ -6,7 +6,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
   template: `
   <div class="d-flex justify-content-between title mb-4">
     <h3 class="text-capitalize mb-0">        
-      Hot Deals
+      <i class="fa fa-free-code-camp text-danger"></i> Hot Deals
     </h3>
 
     <div class="see-more">

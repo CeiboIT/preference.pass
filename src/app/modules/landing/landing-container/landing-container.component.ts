@@ -24,41 +24,17 @@ import { Store } from '@ngrx/store';
       <div class="hot-deals py-5">
         <app-hot-deals-list [hotDeals]="hotDeals$ | async"></app-hot-deals-list>
       </div>
-      
       <div class="py-5">
         <app-activity-list [activities]="tours$ | async" [category]="'tours'"></app-activity-list>
       </div>
-
       <div class="py-5">
         <app-activity-list [activities]="activities$ | async" [category]="'activities'"></app-activity-list>
       </div>
-      
       <div class="py-5">
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
-      
-      <div class="py-5">
-        <app-activity-list [activities]="restaurants$ | async" [category]="'Restaurants'"></app-activity-list>
-      </div>
-      
-      <div class="py-5">
-        <app-activity-list [activities]="nightclubs$ | async" [category]="'Nightclubs'"></app-activity-list>
-      </div>
-
-      <div class="py-5">
-        <app-activity-list [activities]="shopping$ | async" [category]="'Shopping'"></app-activity-list>
-      </div>
-
-      <div class="py-5">
-        <app-activity-list [activities]="transport$ | async" [category]="'transport'"></app-activity-list>
-      </div>
-      
       <div class="py-5">
         <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
-      </div>
-
-      <div class="py-5">
-        <app-activity-list [activities]="weRecommend$ | async" [category]="'We recommend'"></app-activity-list>
       </div>
     </div>
   `,

@@ -17,6 +17,10 @@ export const ActionTypes = {
   GET_ACTIVITIES_FAILURE: type('[Activities] Get Activities Failure'),
   GET_NIGHTCLUBS_SUCCESS: type('[Activities] Get Nightclubs Success'),
   GET_NIGHTCLUBS_FAILURE: type('[Activities] Get Nightclubs Failure'),
+  GET_RESTAURANTS_SUCCESS: type('[Activities] Get Restaurants Success'),
+  GET_RESTAURANTS_FAILURE: type('[Activities] Get Restaurants Failure'),
+  GET_WE_RECOMMEND_SUCCESS: type('[Activities] Get We Recommend Success'),
+  GET_WE_RECOMMEND_FAILURE: type('[Activities] Get We Recommend Failure'),
   GET_SHOWS_SUCCESS: type('[Activities] Get Shows Success'),
   GET_SHOWS_FAILURE: type('[Activities] Get Shows Failure'),
   GET_ACTIVITIES_BY_CATEGORY: type('[Activities] Get Activities by Category'),
@@ -78,6 +82,17 @@ export class GetHotDealsFailure implements Action {
 
 export class GetHotDealsSuccess implements Action {
   type = ActionTypes.GET_HOT_DEALS_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+
+export class GetWeRecommendSuccess implements Action {
+  type = ActionTypes.GET_WE_RECOMMEND_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class GetWeRecommendFailure implements Action {
+  type = ActionTypes.GET_WE_RECOMMEND_FAILURE;
   constructor(public payload: any) { }
 }
 
@@ -152,6 +167,17 @@ export class GetFoodandbeverageFailure implements Action {
   constructor(public payload: any) { }
 }
 
+
+export class GetRestaurantsFailure implements Action {
+  type = ActionTypes.GET_RESTAURANTS_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class GetRestaurantsSuccess implements Action {
+  type = ActionTypes.GET_RESTAURANTS_SUCCESS;
+  constructor(public payload: any) { }
+}
+
 export class GetDetail implements Action {
   type = ActionTypes.GET_DETAIL;
   constructor(public payload: any) { }
@@ -197,10 +223,13 @@ export class GetActivitiesByCategoryFailure implements Action {
   constructor(public payload: any) { }
 }
 
+
+
 export type Actions = GetList | GetListFailure | GetListSuccess |
 GetDetail | GetDetailFailure | GetDetailSuccess | GetTours | GetToursFailure | GetToursSuccess
 | GetDepartures | GetDeparturesSuccess | GetDeparturesFailure | GetActivitiesFailure | GetActivitiesSuccess
 | GetActivitiesByCategory | GetActivitiesByCategorySuccess |
   GetActivitiesByCategoryFailure | GetNightClubsSuccess | GetNightClubsFailure |
   GetHotDeals | GetHotDealsSuccess | GetHotDealsFailure | GetShowsSuccess | GetShowsFailure |
-  GetTransportSuccess | GetTransportFailure | GetShoppingFailure | GetShoppingSuccess | GetFoodandbeverageFailure | GetActivitiesByCategorySuccess;
+  GetTransportSuccess | GetTransportFailure | GetShoppingFailure | GetShoppingSuccess | GetWeRecommendFailure | GetWeRecommendSuccess
+  | GetFoodandbeverageFailure | GetActivitiesByCategorySuccess | GetRestaurantsSuccess | GetRestaurantsFailure;

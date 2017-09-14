@@ -18,5 +18,8 @@ export const environment = {
   stripe: {
     key: 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG'
   },
+  paypal: {
+    env: 'sandbox'
+  },
   graphCoolUri: 'https://api.graph.cool/simple/v1/cj41c9u2zddol0177la66g30g'
 };

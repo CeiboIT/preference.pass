@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import {
   ActionTypes, GetActivitiesSuccess, GetDeparturesSuccess,
-  GetDetail,
-  GetDetailFailure,
   GetDetailSuccess, GetHealthAndBeautySuccess, GetHotDealsSuccess,
-  GetList,
-  GetListFailure,
-  GetListSuccess, GetNightClubsSuccess, GetShowsSuccess, GetToursSuccess, GetTransportSuccess
+  GetListSuccess, GetNightClubsSuccess, GetRestaurantsSuccess, GetShoppingSuccess, GetShowsSuccess, GetToursSuccess,
+  GetTransportSuccess, GetWeRecommendSuccess
 } from '../actions/activities';
 import { ActivitiesQueries } from '../services/activities/queries';
 import { Observable } from 'rxjs/Observable';
@@ -76,6 +73,12 @@ export class ActivitiesEffects {
               return new GetHealthAndBeautySuccess(_data);
             case('TRANSPORT'):
               return new GetTransportSuccess(_data);
+            case('RESTAURANTS'):
+              return new GetRestaurantsSuccess(_data);
+            case('SHOPPING'):
+              return new GetShoppingSuccess(_data);
+            case('PREFERENCEPASSRECOMMENDED'):
+              return new GetWeRecommendSuccess(_data);
           }
         } else {
           return new GetListSuccess(_data);

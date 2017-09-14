@@ -33,8 +33,30 @@ import { Store } from '@ngrx/store';
       <div class="py-5">
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
+
       <div class="py-5">
-        <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
+        <app-activity-list [comingSoon]="comingSoon" [category]="'restaurants'"></app-activity-list>
+      </div>
+      
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Health and beauty'"></app-activity-list>
+      </div>
+      
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Bars'"></app-activity-list>
+      </div>
+
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Transport'"></app-activity-list>
+      </div>
+
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'we recommend'"></app-activity-list>
+      </div>
+
+
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Shopping'"></app-activity-list>
       </div>
     </div>
   `,
@@ -60,7 +82,7 @@ export class LandingContainerComponent implements OnInit {
   public restaurants$: Observable<any>;
   public shopping$: Observable<any>;
   public weRecommend$: Observable<any>;
-
+  comingSoon = true;
   constructor(
     private store: Store<any>
   ) { }

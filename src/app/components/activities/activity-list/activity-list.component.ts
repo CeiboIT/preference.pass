@@ -9,7 +9,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
         {{ category }}
       </h3>
 
-      <div class="see-more">
+      <div class="see-more" *ngIf="!comingSoon">
         <a [routerLink]="['/list', category]">
           See more
         </a>
@@ -22,7 +22,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
         </svg>
       </div>
     </div>
-    <div [swiper]="config" class="swiper-container" *ngIf="activities.length">
+    <div [swiper]="config" class="swiper-container" *ngIf="!comingSoon && activities.length">
       <div class="swiper-wrapper">
           <div *ngFor="let activity of activities" class="swiper-slide">
             <app-activity-card [activity]="activity"></app-activity-card>
@@ -36,15 +36,19 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
         <div [hidden]="config.prevButton != '.swiper-button-prev'" class="swiper-button-prev"></div>
     </div>
 
-    <div [swiper]="config" class="swiper-container" *ngIf="!activities.length">
+    <div [swiper]="config" class="swiper-container" *ngIf="!comingSoon && !activities.length">
       <div class="swiper-wrapper">
           <div *ngFor="let item of items" class="swiper-slide">
             <activity-card-loader></activity-card-loader>  
           </div>
         </div>
-    </div>  
-
-
+    </div>
+    
+    <div *ngIf="comingSoon" class="text-center">
+      <h1>
+        Coming soon
+      </h1>
+    </div>
   `,
   styleUrls: ['./activity-list.component.scss']
 })
@@ -52,6 +56,7 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
 export class ActivityListComponent implements OnInit {
   @Input() activities;
   @Input() category;
+  @Input() comingSoon = false;
   public config: SwiperConfigInterface = {
     pagination: null,
     nextButton: '.swiper-button-next',
@@ -84,7 +89,7 @@ export class ActivityListComponent implements OnInit {
   public items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
 
   constructor() {
-    
+
   }
 
   get categoryToNavigate() {
@@ -97,8 +102,8 @@ export class ActivityListComponent implements OnInit {
     }
   }
 
-  ngOnInit() { 
-    
+  ngOnInit() {
+
   }
 
 

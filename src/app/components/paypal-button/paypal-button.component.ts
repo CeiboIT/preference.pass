@@ -45,7 +45,7 @@ export class PaypalButtonComponent implements OnInit {
     console.log(this.elementRef);
     console.log('Element Reference: ', this.elementRef.nativeElement.querySelector('#paypal-button-container'));
     paypal.Button.render({
-      env: 'production',
+      env: 'sandbox',
       commit: true,
       client: this.client,
       style: {

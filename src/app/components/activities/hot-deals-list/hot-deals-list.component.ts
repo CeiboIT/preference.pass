@@ -61,7 +61,7 @@ export class HotDealsListComponent implements OnInit {
         },
         480: {
           slidesPerView: 2,
-          spaceBetween: 12,
+          spaceBetween: 12
         }
     }
   };

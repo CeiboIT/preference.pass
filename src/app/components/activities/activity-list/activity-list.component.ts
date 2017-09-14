@@ -65,22 +65,22 @@ export class ActivityListComponent implements OnInit {
     slidesPerView: 5,
      breakpoints: {
         1024: {
-            //slidesPerView: 4,
-            slidesPerView: 'auto',
+            slidesPerView: 4,
+            //slidesPerView: 'auto',
             spaceBetween: 20
         },
         768: {
-            //slidesPerView: 3,
-            slidesPerView: 'auto',
+            slidesPerView: 3,
+            //slidesPerView: 'auto',
             spaceBetween: 20
         },
         767: {
-            //slidesPerView: 2,
-            slidesPerView: 'auto',
+            slidesPerView: 2,
+            //slidesPerView: 'auto',
             spaceBetween: 20
         },
         480: {
-          //slidesPerView: 1,
+         //slidesPerView: 1,
           slidesPerView: 'auto',
           spaceBetween: 10,
         }

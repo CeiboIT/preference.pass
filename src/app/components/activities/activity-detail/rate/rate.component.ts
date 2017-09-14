@@ -10,7 +10,7 @@ import { Rate } from '../../../../models/rate';
         {{ rate.currency }}&nbsp;{{ rate.discountPrice }}&nbsp;
       </h3>
       <h4>
-        <span class="discount-color">
+        <span class="text-danger">
           <app-activity-saving [rates]="rate"></app-activity-saving>
         </span>
       </h4>
@@ -22,7 +22,7 @@ import { Rate } from '../../../../models/rate';
       </md-card-actions>
     </md-card>
   `,
-  styles: [ ':host { display: block} .discount-color { color: red}']
+  styles: [ ':host { display: block}']
 })
 export class RateComponent implements OnInit {
   @Input() rate: Rate;

@@ -6,9 +6,8 @@ import {SwiperConfigInterface} from 'ngx-swiper-wrapper';
   template: `
   <div class="d-flex justify-content-between title mb-4">
     <h3 class="text-capitalize mb-0">        
-      <i class="fa fa-free-code-camp text-danger"></i> Hot Deals
+       Hot Deals <i class="fa fa-free-code-camp text-danger"></i>
     </h3>
-
     <div class="see-more">
       <a [routerLink]="['/list', 'hot-deals']">
         See more
@@ -65,7 +64,7 @@ export class HotDealsListComponent implements OnInit {
         }
     }
   };
-  constructor() { 
+  constructor() {
     this.items = Array(this.config.slidesPerView).fill(0).map((x,i)=>i);
   }
 

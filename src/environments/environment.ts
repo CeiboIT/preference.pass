@@ -21,5 +21,8 @@ export const environment = {
   paypal: {
     env: 'sandbox'
   },
-  graphCoolUri: 'https://api.graph.cool/simple/v1/cj41c9u2zddol0177la66g30g'
+  graphCoolUri: 'https://api.graph.cool/simple/v1/cj41c9u2zddol0177la66g30g',
+  mailing: {
+    booking: 'https://dev.mailing.preferencepass.xyz/booking/'
+  }
 };

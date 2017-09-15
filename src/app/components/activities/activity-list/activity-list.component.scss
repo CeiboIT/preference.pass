@@ -37,34 +37,7 @@
   .swiper-container {
     padding: 0 10px;
   }
-
-  // .swiper-slide {
-  //   width: calc(95% - 10px);
-  //   margin-right: 10px;
-  // }
 }
-
-
-// @media screen and (min-width: 481px) and (max-width: 767px) {
-//   .swiper-slide {
-//     width: calc(50% - 20px);
-//     margin-right: 20px;
-//   }
-// }
-
-// @media screen and (min-width: 768px) and (max-width: 1023px) {
-//   .swiper-slide {
-//     width: calc(33.33% - 20px);
-//     margin-right: 20px;
-//   }
-// }
-
-// @media screen and (min-width: 1024px) {
-//   .swiper-slide {
-//     width: calc(25% - 20px);
-//     margin-right: 20px;
-//   }
-// }
 
 .swiper-slide {
   width: calc(100%/ 5 - 16px);

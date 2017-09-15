@@ -110,8 +110,14 @@ $filter-danger:          darken($danger-color, 10%);
     }
   }
 }
+
 video{
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+
+.icon {
+    font-size: 3.4em;
 }

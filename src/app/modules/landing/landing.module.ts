@@ -5,8 +5,9 @@ import { ActivityGridContainerModule } from '../activities/activity-grid-contain
 import { ActivityListModule } from '../../components/activities/activity-list/activity-list.module';
 import { LandingContainerComponent } from './landing-container/landing-container.component';
 import { routing } from './landing.routes';
-import {HotDealsListModule} from '../../components/activities/hot-deals-list/hot-deals-list.module';
-import {SubscriptionHeaderModule} from '../../components/widgets/subscription-header/subscription-header.module';
+import { HotDealsListModule } from '../../components/activities/hot-deals-list/hot-deals-list.module';
+import { BenefitsHeaderModule } from "../../components/widgets/benefits-header/benefits-header.module";
+
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import {SubscriptionHeaderModule} from '../../components/widgets/subscription-he
     ActivityGridContainerModule,
     ActivityListModule,
     HotDealsListModule,
-    SubscriptionHeaderModule,
+    BenefitsHeaderModule,
     routing
   ],
   declarations: [

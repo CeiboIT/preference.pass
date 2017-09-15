@@ -21,9 +21,7 @@ import { Store } from '@ngrx/store';
   selector: 'app-landing-container',
   template: `
     <div>
-      <app-subscription-header>
-        
-      </app-subscription-header>
+      <app-benefits-header></app-benefits-header>
     </div>
     <div class="landing-container">
       <div class="hot-deals py-5">

@@ -114,7 +114,7 @@ import { Component, OnInit, Input } from '@angular/core';
 							<div class="col-md-3 col-6">
 								<div class="info">
 									<div class="icon icon-danger">
-										<i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+										<i class="fa fa-money" aria-hidden="true"></i>
 									</div>
 									<div class="description">
 										<p>You pay service provider directly.</p>

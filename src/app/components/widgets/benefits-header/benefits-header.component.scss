@@ -9,15 +9,16 @@ $filter-warning:       darken($warning-color, 10%);
 $filter-danger:          darken($danger-color, 10%);
 
 .page-header{
-  background-color: $header-background;
-  background-position: center center;
-  background-size: cover;
-  min-height: 70vh;
-  max-height: 999px;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  z-index: 1;
+    background-color: #B2AFAB;
+    background-position: center center;
+    background-size: cover;
+    /* min-height: 80vh; */
+    /* max-height: 999px; */
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
 
   &.page-header-small{
     min-height: 65vh !important;
@@ -28,16 +29,17 @@ $filter-danger:          darken($danger-color, 10%);
   }
 
   .content-center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
     z-index: 2;
-    -ms-transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    height: 100%;
+    /* -webkit-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
     text-align: center;
     color: #FFFFFF;
     width: 100%;
+    padding: 50px 0;
   }
 
   .motto{
@@ -121,6 +123,7 @@ video{
     text-align: center;
     max-width: 400px;
     margin: 0 auto;
+    padding: 15px 0;
 
     .icon {
         font-size: 3.4em;

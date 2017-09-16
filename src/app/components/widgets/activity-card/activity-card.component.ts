@@ -25,6 +25,9 @@ import { compress, resize } from '../../../constants/filestack';
           <span class="text-danger">
             <app-activity-price [rates]="activity.rates"></app-activity-price>
           </span>
+          <span class="text-success ml-2">
+            <app-activity-saving [rates]="activity.rates"></app-activity-saving>
+          </span>
         </div>
       </div>
     </div>

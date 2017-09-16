@@ -6,7 +6,7 @@ import * as _ from 'lodash';
   selector: 'app-activity-price',
   template: `
     <span *ngIf="lowestRate && lowestRate.currency">
-      <strong>{{ lowestRate.discountPrice }} {{ lowestRate.currency }} </strong>
+      <strong>{{ lowestRate.currency }} {{ lowestRate.discountPrice }} </strong>
     </span>
   `
 })

@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-subscription-pricing-card',
   template:  `    
-    <md-card [ngClass]="{'active': parentValue === price.id }" (click)="select(price)">
+    <!--<md-card [ngClass]="{'active': parentValue === price.id }" (click)="select(price)">
         <div class="mat-card-image">
           {{days}}
         </div>
@@ -26,57 +26,23 @@ import { FormGroup } from '@angular/forms';
         </button>
       </md-card-actions>
   
-    </md-card>
+    </md-card>-->
+
+    <div class="card card-pricing text-center" [ngClass]="{'active': parentValue === price.id }" (click)="select(price)">
+      <div class="card-block">
+        <!--<h6 class="card-category">Category</h6>-->
+        <h1 class="card-title">{{days}}</h1>
+        <ul>
+          <li><b>{{ price.currency }} {{ price.adultPrice }}</b> per adult</li>
+          <li><b>{{ price.currency }} {{ price.kidPrice }}</b> per kid</li>
+        </ul>
+        <a class="btn btn-warning btn-round text-white">
+          Select Plan
+        </a>
+      </div>
+    </div>
   `,
-  styles: [
-    `
-      /*md-card.active {
-        border: 1px solid #03a9f4;
-        box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-      }*/
-      .mat-card {
-        cursor: pointer;
-      }
-      .mat-card-image {
-        background: #03a9f4;
-        font-size: 1.8rem;
-        line-height: 4rem;
-        color: #fff;
-        font-weight: 300;
-        text-align: center;
-      }
-
-      .mat-card-actions {
-        border-top: 1px solid rgba(160,160,160,0.2);
-        padding: 10px 0;
-        text-align: center;
-      }
-
-      .price {
-        position: relative;
-        font-size: 1.4rem;
-        line-height: 1.6em;
-        padding: 10px 0px;
-        text-align: center;
-      }
-
-      sup {
-        font-weight: 300;
-        font-size: .8rem;
-        line-height: 1.6em;
-        top: -7px;
-        margin-right: 2px;
-      }
-
-      sub {
-        font-weight: 300;
-        font-size: .8rem;
-        line-height: 1.6em;
-        top: 0;
-        margin-left: 2px;
-      }
-    `
-  ]
+  styleUrls: ['./subscription-pricing-card.component.scss'],
 })
 export class SubscriptionPricingCardComponent implements OnInit {
   @Input() price: Price;

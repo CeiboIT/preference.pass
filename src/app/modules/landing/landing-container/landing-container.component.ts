@@ -20,45 +20,49 @@ import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-landing-container',
   template: `
+    <div>
+      <app-benefits-header [part]="'1'"></app-benefits-header>
+    </div>
     <div class="landing-container">
       <div class="hot-deals py-5">
         <app-hot-deals-list [hotDeals]="hotDeals$ | async"></app-hot-deals-list>
       </div>
-      
       <div class="py-5">
         <app-activity-list [activities]="tours$ | async" [category]="'tours'"></app-activity-list>
       </div>
-
+      <div>
+        <app-benefits-header [part]="'2'"></app-benefits-header>
+      </div>
       <div class="py-5">
         <app-activity-list [activities]="activities$ | async" [category]="'activities'"></app-activity-list>
       </div>
-      
       <div class="py-5">
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
-      
-      <div class="py-5">
-        <app-activity-list [activities]="restaurants$ | async" [category]="'Restaurants'"></app-activity-list>
-      </div>
-      
-      <div class="py-5">
-        <app-activity-list [activities]="nightclubs$ | async" [category]="'Nightclubs'"></app-activity-list>
-      </div>
 
       <div class="py-5">
-        <app-activity-list [activities]="shopping$ | async" [category]="'Shopping'"></app-activity-list>
-      </div>
-
-      <div class="py-5">
-        <app-activity-list [activities]="transport$ | async" [category]="'transport'"></app-activity-list>
+        <app-activity-list [comingSoon]="comingSoon" [category]="'restaurants'"></app-activity-list>
       </div>
       
       <div class="py-5">
-        <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and Beauty'"></app-activity-list>
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Health and beauty'"></app-activity-list>
+      </div>
+      
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Bars'"></app-activity-list>
       </div>
 
       <div class="py-5">
-        <app-activity-list [activities]="weRecommend$ | async" [category]="'We recommend'"></app-activity-list>
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Transport'"></app-activity-list>
+      </div>
+
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'we recommend'"></app-activity-list>
+      </div>
+
+
+      <div class="py-5">
+        <app-activity-list [comingSoon]="comingSoon" [category]="'Shopping'"></app-activity-list>
       </div>
     </div>
   `,
@@ -84,7 +88,7 @@ export class LandingContainerComponent implements OnInit {
   public restaurants$: Observable<any>;
   public shopping$: Observable<any>;
   public weRecommend$: Observable<any>;
-
+  comingSoon = true;
   constructor(
     private store: Store<any>
   ) { }

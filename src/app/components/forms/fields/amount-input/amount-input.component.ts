@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {FormGroup, Validators} from '@angular/forms';
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-amount-input',
@@ -29,6 +30,7 @@ export class AmountInputComponent implements OnInit {
   @Input() maxAmount;
   clickOnRemove: EventEmitter<any> = new EventEmitter();
   clickOnAdd: EventEmitter<any> = new EventEmitter();
+  private changesObservable: Observable<any>;
   constructor() { }
   ngOnInit() {
     let _validators = [];
@@ -39,6 +41,14 @@ export class AmountInputComponent implements OnInit {
       _validators.push(Validators.max(this.maxAmount));
     }
     this.parent.get(this.parentKey).setValidators(_validators);
+    this.changesObservable = this.parent.get(this.parentKey).valueChanges;
+    this.changesObservable.subscribe((change) => {
+      console.log(change);
+      if (change < 0) {
+        this.parent.get(this.parentKey).setValue(0);
+      }
+    });
+
     this.clickOnAdd.subscribe(() => {
       const amount = this.parent.get(this.parentKey).value;
       if (amount) {

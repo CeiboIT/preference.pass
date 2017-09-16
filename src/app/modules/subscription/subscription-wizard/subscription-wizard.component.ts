@@ -93,8 +93,10 @@ interface DiscountValidationResponse {
             <div class="col-12 text-center my-5">
               <app-paypal-button
                 [client]="payPalClient"
+                [env]="payPalEnv"
                 [transactions]="payPalTransactions"
                 (onAuthorized)="paypalAuthorized($event)"
+                [loading]="payLoading$ | async"
               >
               </app-paypal-button>
             </div>
@@ -176,6 +178,7 @@ export class SubscriptionWizardComponent implements OnInit {
     sandbox: 'AaJEzmFqAI2D8FhfNWFEvIl_EzZKX6iQOAHoXUVg_Tart6VgiFGfbYHBx5Lt9zQz8pW1aiFvF0AJC0LW',
     production: 'AcxqWpVKlLzogoiEzh9NnzhWcUrJuvoxqJMK5n-ie7AgxaZipSU3mCIqzGxlfVJ7KlHmMhGitkNdujUw'
   };
+  public payPalEnv = environment.paypal.env;
   public payPalTransactions = [];
   public cardError;
   public showDiscountCode;

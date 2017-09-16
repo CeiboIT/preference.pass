@@ -277,7 +277,6 @@ export class BookingWizardContainerComponent implements OnInit {
     console.log(this.activatedRoute.snapshot);
     this.store.dispatch(new GetDepartures(id));
     this.activity$.subscribe((data) => {
-      console.log(data);
       if (data && !data.id) {
         this.store.dispatch(new GetDetail(id));
       }

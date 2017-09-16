@@ -38,6 +38,32 @@ export class SubscriptionService {
     });
   }
 
+  sendSubscriptionMail(body) {
+    return new Promise((resolve, reject) => {
+      var headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+
+      this.createAuthorizationHeader(headers);
+      const reservationId = body.id;
+      this.http.post(environment.mailing.booking + reservationId, {
+          headers: headers
+        }).map((response: Response) => response.json())
+        .subscribe(
+          data => {
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            console.log(err);
+            reject(err._body);
+          }
+        );
+
+
+    });
+  }
+
   getCompanions(subscriptionId) {
     const GET_SUBSCRIPTION_COMPANIONS = gql`      
         query getSubscriptionCompanions($subscriptionId: ID!) {

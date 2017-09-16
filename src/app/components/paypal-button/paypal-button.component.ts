@@ -35,23 +35,27 @@ export class PaypalButtonComponent implements OnInit {
   @Input() environment;
   @Input() transactions: Transaction[];
   @Input() client: Client;
+  @Input() env;
+  @Input() loading;
   @Output() onAuthorized: EventEmitter<any> = new EventEmitter();
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) {
+   }
   ngOnInit() {
     this.generatePayPalButton();
   }
 
   generatePayPalButton() {
-    console.log(this.elementRef);
-    console.log('Element Reference: ', this.elementRef.nativeElement.querySelector('#paypal-button-container'));
     paypal.Button.render({
-      env: 'sandbox',
+      env: this.env,
       commit: true,
       client: this.client,
       style: {
         size: 'responsive',
         color: 'gold',
         shape: 'rect',
+      },
+      validate: (actions) => {
+        this.loading ? actions.disable() : actions.enable();
       },
       payment: (paymentData, paymentActions) => {
         console.log('Inside paypal payment', paymentData);

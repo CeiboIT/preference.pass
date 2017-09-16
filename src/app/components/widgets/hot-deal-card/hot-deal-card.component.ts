@@ -5,7 +5,7 @@ import { resize } from '../../../constants/filestack';
 @Component({
   selector: 'app-hot-deal-card',
   template: `
-      <div class="activity-card" (click)="gotoDetail()">
+      <!--<div class="activity-card" (click)="gotoDetail()">
         <div class="activity-card-image m-0" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
         <div class="mt-1 activity-title d-flex justify-content-between">
             <div class="w-75">
@@ -22,6 +22,30 @@ import { resize } from '../../../constants/filestack';
         </div>
         <div class="activity-content mt-1">
           {{ headline }}
+        </div>
+      </div>-->
+
+      <div class="card" (click)="gotoDetail()">
+        <div class="card-image">
+            <div class="child">
+              <div class="content-img">
+                <div class="img" [ngStyle]="{'background-image': 'url(' + image + ')'}"></div>
+              </div>
+            </div>
+        </div>
+        <div class="card-block">
+          <h4 class="card-title">
+            {{ title }}
+          </h4>
+          <div class="card-description">
+            {{ headline }}
+          </div>
+          <div class="price">
+            <app-ctivity-strike-price [rates]="rates"></app-ctivity-strike-price>
+            <span class="text-danger">
+              <app-activity-price [rates]="rates"></app-activity-price>
+            </span>
+          </div>
         </div>
       </div>
   `,

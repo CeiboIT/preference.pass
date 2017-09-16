@@ -36,7 +36,6 @@ export class SubscriptionStartDateComponent implements OnInit {
   ngOnInit() {
     this.plan = this.parent.get('plan').value;
     this.parent.get('plan').valueChanges.subscribe((data) => {
-      console.log(data);
       if (data) {
         this.generateSelectableDates(data);
         this.plan = data;

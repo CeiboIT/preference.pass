@@ -42,7 +42,7 @@ import { CompanionChargeFormModule } from "./components/forms/companion-charge-f
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -80,12 +80,12 @@ import { CompanionChargeFormModule } from "./components/forms/companion-charge-f
   ],
   providers: [SERVICES, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents: [ 
-    AuthModalComponent, 
-    OnboardingModalComponent, 
-    AlertComponent, 
-    CompanionChargeFormComponent, 
-    ContactUsComponent, 
+  entryComponents: [
+    AuthModalComponent,
+    OnboardingModalComponent,
+    AlertComponent,
+    CompanionChargeFormComponent,
+    ContactUsComponent,
     FinishBookingSuccessfulComponent
   ]
 })

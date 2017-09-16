@@ -5,6 +5,9 @@ export const ActionTypes = {
   POST_SUBSCRIPTION: type('[Subscription] Post Subscription'),
   POST_SUBSCRIPTION_FAILURE: type('[Subscription] Post Subscription Failure'),
   POST_SUBSCRIPTION_SUCCESS: type('[Subscription] Post Subscription Success'),
+  SEND_SUBSCRIPTION_MAIL: type('[Subscription] Send Subscription Mail'),
+  SEND_SUBSCRIPTION_MAIL_FAILURE: type('[Subscription] Send Subscription Mail Failure'),
+  SEND_SUBSCRIPTION_MAIL_SUCCESS: type('[Subscription] Send Subscription Mail Success'),
   SEARCH_PP_CARD: type('[Subscription] Search PP Card'),
   SEARCH_PP_CARD_FAILURE: type('[Subscription] Search PP Card Failure'),
   SEARCH_PP_CARD_SUCCESS: type('[Subscription] Search PP Card Success'),
@@ -27,6 +30,21 @@ export class PostSubscriptionFailure implements Action {
 
 export class PostSubscriptionSuccess implements Action {
   type = ActionTypes.POST_SUBSCRIPTION_SUCCESS;
+  constructor(public payload: any) { }
+}
+
+export class SendSubscriptionMail implements Action {
+  type = ActionTypes.SEND_SUBSCRIPTION_MAIL;
+  constructor(public payload: any) { }
+}
+
+export class SendSubscriptionMailFailure implements Action {
+  type = ActionTypes.SEND_SUBSCRIPTION_MAIL_FAILURE;
+  constructor(public payload: any) { }
+}
+
+export class SendSubscriptionMailSuccess implements Action {
+  type = ActionTypes.SEND_SUBSCRIPTION_MAIL_SUCCESS;
   constructor(public payload: any) { }
 }
 
@@ -71,5 +89,6 @@ export class ValidateCodeSuccessValid implements Action {
 }
 
 export type Actions = PostSubscription | PostSubscriptionFailure | PostSubscriptionSuccess |
-SearchPPCard  | SearchPPCardFailure | SearchPPCardSuccess | ValidateCode |ValidateCodeSuccess | ValidateCodeFailure |
-  ValidateCodeSuccessInvalid | ValidateCodeSuccessValid;
+                      SendSubscriptionMail | SendSubscriptionMailFailure | SendSubscriptionMailSuccess |
+                      SearchPPCard  | SearchPPCardFailure | SearchPPCardSuccess | ValidateCode |ValidateCodeSuccess | ValidateCodeFailure |
+                      ValidateCodeSuccessInvalid | ValidateCodeSuccessValid;

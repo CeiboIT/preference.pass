@@ -6,15 +6,16 @@ import { FormGroup } from '@angular/forms';
   template: `
     <div>
       <app-amount-input [parent]="parent" 
-              [parentKey]="'kidsAmount'" [placeholder]="'Kids'" 
-              [maxAmount]="kidsLimit"
-      >
-      </app-amount-input>
-      <app-amount-input [parent]="parent" 
                         [maxAmount]="adultsLimit"
                         [parentKey]="'adultsAmount'" 
                         [placeholder]="'Adults'" 
       ></app-amount-input>
+
+      <app-amount-input [parent]="parent"
+                        [parentKey]="'kidsAmount'" [placeholder]="'Kids'"
+                        [maxAmount]="kidsLimit"
+      >
+      </app-amount-input>
       <!--<app-subscription-coming-alone [parent]="parent" 
        (comingAloneStatusChange)="comingAloneStatusChange($event)">
       </app-subscription-coming-alone>-->
@@ -27,7 +28,7 @@ export class CompanionAmountComponent implements OnInit {
   @Input() adultsLimit;
   constructor() { }
 
-  ngOnInit() { 
+  ngOnInit() {
 
     this.parent.get('adultsAmount').valueChanges.subscribe(val => {
       this.isComingAlone();
@@ -41,7 +42,7 @@ export class CompanionAmountComponent implements OnInit {
   isComingAlone() {
     let adultsAmount = this.parent.get('adultsAmount').value,
         kidsAmount   = this.parent.get('kidsAmount').value;
-    
+
     if(adultsAmount == 1 && kidsAmount == 0) {
       this.parent.get('isComingAlone').setValue(true);
     } else {

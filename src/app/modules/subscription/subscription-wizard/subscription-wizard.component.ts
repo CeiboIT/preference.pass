@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
@@ -9,7 +9,7 @@ import { environment } from "../../../../environments/environment";
 import * as moment from 'moment';
 const _today = moment();
 const _inthreemonths = _today.clone();
-_inthreemonths.add(3, 'months');
+_inthreemonths.add(2, 'months');
 
 interface DiscountValidationResponse {
   err?: any;
@@ -24,43 +24,67 @@ interface DiscountValidationResponse {
   <div>
     <md-card>
       <wizard-header [step]="step"></wizard-header>
-      <div [hidden]="step !== 1">
-        <div>
-          <div>
-            <div class="row" *ngIf="adultsAmount || kidsAmount">
-              <div class="col-6" *ngIf="adultsAmount">
-                <h2>
-                  Adults
-                </h2>
-                <p>
-                  {{adultsAmount}}
-                </p>
-              </div>
-              <div class="col-6" *ngIf="kidsAmount">
-                <h2>
-                  Kids
-                </h2>
-                <p>
-                  {{kidsAmount}}
-                </p>
-              </div>
-            </div>
-          </div>
+      <div [hidden]="step !== 1" class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+
           <div [hidden]="hasDiscountCard">
             <div class="row" *ngIf="!hasDiscount">
-              <button md-button color="accent" (click)="claim()">
-                I have a discount code
-              </button>
-              <div *ngIf="claimDiscount">
-                <app-discount-code-form 
-                  [parent]="discountCode"
-                  [validCode]="validDiscountCode$ | async"
-                  [message]="validDiscountCodeMessage$ | async"
-                  [loading]="discountCodeLoading$ | async"
-                  (onValid)="onDiscountFormValidity($event)"
-                ></app-discount-code-form>
+              <div class="col-12">
+                <button type="button" class="btn btn-success btn-block btn-round text-white" (click)="claim()">
+                  I have a discount code
+                </button>
+                <div class="row">
+                  <div class="col-12" *ngIf="claimDiscount">
+                    <h3 class="col-12 mt-3">
+                      Introduce your discount code bellow
+                    </h3>
+                    <app-discount-code-form class="w-100"
+                                            [parent]="discountCode"
+                                            [validCode]="validDiscountCode$ | async"
+                                            [message]="validDiscountCodeMessage$ | async"
+                                            [loading]="discountCodeLoading$ | async"
+                                            (onValid)="onDiscountFormValidity($event)"
+                    ></app-discount-code-form>
+                  </div>
+                </div>
               </div>
             </div>
+            
+          <!--<div class="row" *ngIf="!user">
+            <div class="col-12" [formGroup]="userData" >
+              <app-email-input [parent]="userData"></app-email-input>
+            </div>
+          </div>!-->
+
+          <div class="row" *ngIf="!user">
+            <div class="col-12" [formGroup]="paymentRequest" >
+              <app-email-input [parent]="paymentRequest"></app-email-input>
+            </div>
+          </div>
+          
+          <div class="row">
+            <h2 class="col-12">
+              How many people is in your party?
+            </h2>
+            <div class="col-12">
+              <app-companion-amount [parent]="paymentRequest"></app-companion-amount>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-12">
+              <app-date-select
+                [parent]="paymentRequest"
+                [parentKey]="'startsAt'"
+                [years]="years"
+                [initialDate]="today"
+                [limitDate]="limitDate"
+                [startDate]="today"
+              >
+              </app-date-select>
+            </div>              
+          </div>
+          
             
             <h2 *ngIf="hasDiscount" class="text-center">
               Wow!! Your subscription will have a 50% off if you choose a package! Enjoy!
@@ -155,8 +179,8 @@ export class SubscriptionWizardComponent implements OnInit {
   @Input() isComingAlone;
   @Input() startsAt = _today;
   @Input() user;
-  public limitDate;
-
+  public limitDate = _inthreemonths.toDate();
+  public today = new Date();
   public subscription$: Observable<any>;
   public paymentRequest;
   public discountCard;
@@ -201,19 +225,32 @@ export class SubscriptionWizardComponent implements OnInit {
     this.paymentRequest.get('value').startsAt($event.value);
   }
 
+
+  get years() {
+    const actualYear = new Date().getFullYear();
+    let _years = [actualYear];
+
+    if (_inthreemonths.year() !== actualYear) {
+      _years.push(_inthreemonths.year());
+    }
+    return _years;
+  }
+
   ngOnInit() {
+
 
     document.body.scrollTop = 0;
     this.paymentRequest = this.fb.group({
       kidsAmount: [this.kidsAmount || 0],
-      adultsAmount: [this.adultsAmount || 0],
+      adultsAmount: [this.adultsAmount || 1],
       startsAt: [this.startsAt || ''],
       isComingAlone: [this.isComingAlone || false],
       plan: [null],
       cardToken: [''],
     });
-
-    this.limitDate = moment(this.startsAt).clone();
+    if (!this.user) {
+      this.paymentRequest.addControl('email', new FormControl(), [Validators.required]);
+    }
 
     this.discountCard = this.fb.group({
       discountCardCode: ['']

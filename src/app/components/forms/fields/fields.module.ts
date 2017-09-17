@@ -6,9 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MdButtonModule,
   MdCardModule,
-  MdCheckboxModule,
+  MdCheckboxModule, MdDatepickerModule, MdFormField, MdFormFieldModule,
   MdIconModule,
-  MdInputModule, MdRadioModule, MdSelectModule
+  MdInputModule, MdNativeDateModule, MdRadioModule, MdSelectModule
 } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { PasswordComponent } from './password/password.component';
@@ -26,6 +26,7 @@ import { DiscountCodeInputComponent } from './discount-code-input/discount-code-
 import { SubscriptionStartDateComponent } from './subscription-start-date/subscription-start-date.component';
 import { WhereIsCustomerComponent } from './where-is-customer/where-is-customer.component';
 import { UserPhoneNumberComponent } from './user-phone-number/user-phone-number.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,9 @@ import { UserPhoneNumberComponent } from './user-phone-number/user-phone-number.
     MdIconModule,
     MdInputModule,
     MdRadioModule,
+    MdFormFieldModule,
+    MdNativeDateModule,
+    MdDatepickerModule,
     ReactiveFormsModule
   ],
   declarations: [
@@ -58,7 +62,8 @@ import { UserPhoneNumberComponent } from './user-phone-number/user-phone-number.
     DiscountCodeInputComponent,
     SubscriptionStartDateComponent,
     WhereIsCustomerComponent,
-    UserPhoneNumberComponent
+    UserPhoneNumberComponent,
+    DatepickerComponent
   ],
   exports: [
     AmountInputComponent,
@@ -77,7 +82,8 @@ import { UserPhoneNumberComponent } from './user-phone-number/user-phone-number.
     DiscountCodeInputComponent,
     SubscriptionStartDateComponent,
     WhereIsCustomerComponent,
-    UserPhoneNumberComponent
+    UserPhoneNumberComponent,
+    DatepickerComponent
   ]
 })
 export class FieldsModule { }

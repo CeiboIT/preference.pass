@@ -35,7 +35,13 @@ export class SubscriptionEffects {
     .map(action => action.payload)
     .switchMap((payload) => {
       return this.service.sendSubscription(payload)
-      .then((result) => new PostSubscriptionSuccess(result))
+      .then((result) => {
+        let _result = result;
+        if (payload.email) {
+          _result['email'] = payload.email;
+        };
+        return new PostSubscriptionSuccess(_result);
+      })
       .catch(err => new PostSubscriptionFailure(err));
     });
 

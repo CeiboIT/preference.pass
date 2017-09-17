@@ -13,7 +13,8 @@ export const environment = {
   api: {
     cardsEndpoint: 'https://dev.cards.preferencepass.xyz',
     codesEndpoint: 'https://dev.discounts.preferencepass.xyz',
-    subscriptionsEndpoint: 'https://dev.payments.preferencepass.xyz/subscription'
+    subscriptionsEndpoint: 'http://localhost:3030/subscription'
+    // subscriptionsEndpoint: 'https://dev.payments.preferencepass.xyz/subscription'
   },
   stripe: {
     key: 'pk_test_GA3U6cAIbztMaLpOFX1YYUAG'

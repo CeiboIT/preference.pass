@@ -15,6 +15,7 @@ import { SubscriptionStep3Component } from './subscription-step-3/subscription-s
 import {DateSelectModule} from '../../../components/forms/fields/date-select/date-select.module';
 import {FieldsModule} from '../../../components/forms/fields/fields.module';
 import {PaypalButtonModule} from '../../../components/paypal-button/paypal-button.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import {PaypalButtonModule} from '../../../components/paypal-button/paypal-butto
     MdSelectModule,
     DateSelectModule,
     FieldsModule,
+    ReactiveFormsModule,
     PaypalButtonModule
   ],
   declarations: [

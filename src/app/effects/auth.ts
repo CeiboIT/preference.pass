@@ -11,6 +11,7 @@ import {
   RegisterWithEmailAndPasswordSuccess, RegisterWithFacebookFailure, RegisterWithFacebookSuccess
 } from '../actions/auth';
 import { OpenAlert } from "../actions/layout";
+import { ActionTypes as SubscriptionActionTypes } from "../actions/subscription";
 import {AuthService} from '../services/auth.service';
 
 @Injectable()
@@ -24,6 +25,16 @@ export class AuthEffects {
       return this.authService.passswordLessSignUp(payload)
         .then(result => (new LoginWithEmailSuccess({}), new OpenAlert({type: 'success', title: 'Success!', message: 'Please check your e-mail.'})))
         .catch(err => (new LoginWithEmailFailure({}), new OpenAlert({type: 'error', title: 'Error', message: 'An error has occurred.'})));
+    });
+
+  @Effect({ dispatch: false})
+  SendMagicLink: Observable<{}> = this.action$
+    .ofType(SubscriptionActionTypes.POST_SUBSCRIPTION_SUCCESS)
+    .map(action => action.payload)
+    .switchMap((payload) => {
+      if (payload.email) {
+        return this.authService.passswordLessSignUp(payload);
+      }
     });
   @Effect()
   AuthWithGoogle: Observable<{}> = this.action$

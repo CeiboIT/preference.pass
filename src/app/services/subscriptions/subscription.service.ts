@@ -12,6 +12,28 @@ export class SubscriptionService {
     headers.append('Authorization', `Bearer ${localStorage.getItem('idToken')}`);
   }
 
+  checkUserSubscriptions() {
+    return new Promise((resolve, reject) => {
+      var headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+      this.createAuthorizationHeader(headers);
+      this.http.get(environment.api.subscriptionsEndpoint + '/check-user', {
+        headers: headers
+      }).map((response: Response) => response.json())
+        .subscribe(
+          data => {
+            console.log(data);
+            resolve(data);
+          },
+          err => {
+            console.log(err);
+            reject(err._body);
+          }
+        );
+    });
+  }
+
   sendSubscription(body) {
     return new Promise((resolve, reject) => {
       var headers = new Headers({

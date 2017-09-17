@@ -11,6 +11,7 @@ import { GetUserBasicData } from '../actions/user';
 import { onStateChangeObservable } from '../utils/store';
 import { getUserIdFromToken } from '../utils/user';
 import { environment } from "../../environments/environment";
+import {SubscriptionService} from "./subscriptions/subscription.service";
 
 declare var window: any;
 const serverUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
@@ -43,7 +44,9 @@ export class AuthService {
   private headers: Headers = new Headers({
     'content-type': 'application/json'
   });
-  constructor(private store: Store<{}>, private userService: UserService, private client: Apollo) {
+  constructor(private store: Store<{}>, private userService: UserService, private client: Apollo,
+              private  subscriptionService: SubscriptionService
+  ) {
     this.getCurrentUser();
   }
 
@@ -106,9 +109,8 @@ export class AuthService {
           const token = result['data']['authenticateAuth0User']['token'];
           console.log('Token', token);
           localStorage.setItem('idToken', token);
-
           getUserIdFromToken() === 'undefined' ? this.parseHash() : this.getCurrentUser();
-
+          this.subscriptionService.checkUserSubscriptions();
           resolve(result);
         },
           (err) => {

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 	selector: 'app-about-us',
 	template: 
 		`
-		<div class="page-header page-header-small" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/preferencepass-1499796934814.appspot.com/o/images%2FBG%2FMX%2FCancun_Mexico_Wallpaper_1.jpg?alt=media&token=0e770427-9c7d-42c1-bd91-fa6de0be1e41');">
+		<div class="page-header page-header-small" [ngStyle]="{'background-image': 'url(' + bgUrl +')'}">
 			<div class="filter filter-warning"></div>
 			<div class="content-center">
 				<div class="container">
@@ -26,7 +26,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AboutUsComponent implements OnInit {
-
+	bgUrl = 'https://firebasestorage.googleapis.com/v0/b/preferencepass-1499796934814.appspot.com/o/images%2FBG%2FMX%2FCancun_Mexico_Wallpaper_1.jpg?alt=media&token=0e770427-9c7d-42c1-bd91-fa6de0be1e41';
 	constructor() { }
 
 	ngOnInit() { }

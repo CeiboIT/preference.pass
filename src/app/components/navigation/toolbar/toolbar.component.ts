@@ -41,7 +41,7 @@ import { AuthLogOut } from '../../../actions/auth';
               </a>
             </li>
             <li class="navbar-item">
-              <a routerLink="/">
+              <a routerLink="/how-it-works" routerLinkActive="active">
                 How it works
               </a>
             </li>

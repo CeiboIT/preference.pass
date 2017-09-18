@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'user',  canActivate: [AuthGuard], loadChildren: 'app/modules/user/user.module#UserModule' },
   { path: 'terms-and-conditions', loadChildren: 'app/modules/terms-and-conditions/terms-and-conditions.module#TermsAndConditionsModule'},
   { path: 'about-us', loadChildren: 'app/modules/about-us/about-us.module#AboutUsModule'},
+  { path: 'how-it-works', loadChildren: 'app/modules/how-it-works/how-it-works.module#HowItWorksModule'},
   { path: 'error', loadChildren: 'app/modules/errors/errors.module#ErrorsModule' },
   { path: '**', redirectTo: '' }
 

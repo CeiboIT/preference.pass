@@ -35,7 +35,7 @@ import { AuthLogOut } from '../../../actions/auth';
                 Offers
               </a>
             </li>
-            <li class="navbar-item">
+            <!--<li class="navbar-item">
               <a routerLink="/about-us" routerLinkActive="active">
                 About Us
               </a>
@@ -44,7 +44,7 @@ import { AuthLogOut } from '../../../actions/auth';
               <a routerLink="/">
                 How it works
               </a>
-            </li>
+            </li>-->
             <li class="navbar-item">
               <a (click)="openContactUs();">
                 Contact us

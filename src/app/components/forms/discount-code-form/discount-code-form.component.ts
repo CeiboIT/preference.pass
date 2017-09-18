@@ -11,9 +11,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-discount-code-form',
   template: `
-    <form name="discountCodeForm" [formGroup]="parent" class="d-flex align-items-center">
-      <app-discount-code-input [parent]="parent" [message]="message" [validCode]="validCode"></app-discount-code-input>
-      <span *ngIf="loading" class="ml-3"><i class="fa fa-spinner fa-spin"></i> </span>
+    <form name="discountCodeForm" [formGroup]="parent">
+      <app-discount-code-input [parent]="parent" [message]="message" [validCode]="validCode" [loading]="loading"></app-discount-code-input>
     </form>
   `
 })

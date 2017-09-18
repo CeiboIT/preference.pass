@@ -47,11 +47,18 @@ interface DiscountValidationResponse {
             </div>
           </div>
           <div [hidden]="hasDiscountCard">
-            <div class="row" *ngIf="!hasDiscount">
+            <div *ngIf="!hasDiscount">
+              <!--
               <button md-button color="accent" (click)="claim()">
                 I have a discount code
-              </button>
-              <div *ngIf="claimDiscount">
+              </button>-->
+              <div class="col-md-6 m-auto">
+                  <button md-raised-button class="d-block btn btn-success btn-round w-100 mb-3" (click)="claim()">
+                    I have a discount code
+                  </button>
+              </div>
+              
+              <div *ngIf="claimDiscount" class="col-md-6 m-auto">
                 <app-discount-code-form 
                   [parent]="discountCode"
                   [validCode]="validDiscountCode$ | async"

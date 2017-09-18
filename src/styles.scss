@@ -60,6 +60,7 @@ body {
 
     &.btn-round {
         border-radius: 30px;
+        overflow: hidden;
     }
 
     &.btn-warning {
@@ -74,10 +75,22 @@ body {
         }
     }
 
+    &.btn-success {
+        background-color: #6bd098;
+        border-color: #6bd098;
+        color: #FFFFFF;
+
+        &:hover {
+            background-color: #44c47d;
+            color: #FFFFFF;
+            border-color: #44c47d;
+        }
+    }
+
     &:hover, &:focus {
         text-decoration: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
+        //-webkit-box-shadow: none;
+        //box-shadow: none;
     }
 }
 

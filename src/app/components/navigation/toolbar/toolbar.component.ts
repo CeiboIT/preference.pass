@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { OpenLogin, OpenRegister } from '../../../actions/layout';
+import { OpenLogin, OpenRegister, OpenContact } from '../../../actions/layout';
 import { AuthLogOut } from '../../../actions/auth';
 
 @Component({
@@ -35,6 +35,21 @@ import { AuthLogOut } from '../../../actions/auth';
                 Offers
               </a>
             </li>
+            <!--<li class="navbar-item">
+              <a routerLink="/about-us" routerLinkActive="active">
+                About Us
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a routerLink="/">
+                How it works
+              </a>
+            </li>-->
+            <li class="navbar-item">
+              <a (click)="openContactUs();">
+                Contact us
+              </a>
+            </li>
           </ul>
         </div>
       </md-toolbar-row>
@@ -55,6 +70,10 @@ export class ToolbarComponent implements OnInit {
 
   openRegister() {
     this.store.dispatch(new OpenRegister({}));
+  }
+
+  openContactUs() {
+    this.store.dispatch(new OpenContact({}));
   }
 
   onUserLogOut() {

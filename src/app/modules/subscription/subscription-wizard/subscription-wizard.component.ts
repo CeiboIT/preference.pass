@@ -47,11 +47,18 @@ interface DiscountValidationResponse {
             </div>
           </div>
           <div [hidden]="hasDiscountCard">
-            <div class="row" *ngIf="!hasDiscount">
+            <div *ngIf="!hasDiscount">
+              <!--
               <button md-button color="accent" (click)="claim()">
                 I have a discount code
-              </button>
-              <div *ngIf="claimDiscount">
+              </button>-->
+              <div class="col-md-6 m-auto">
+                  <button md-raised-button class="d-block btn btn-success btn-round w-100 mb-3" (click)="claim()">
+                    I have a discount code
+                  </button>
+              </div>
+              
+              <div *ngIf="claimDiscount" class="col-md-6 m-auto">
                 <app-discount-code-form 
                   [parent]="discountCode"
                   [validCode]="validDiscountCode$ | async"
@@ -93,8 +100,10 @@ interface DiscountValidationResponse {
             <div class="col-12 text-center my-5">
               <app-paypal-button
                 [client]="payPalClient"
+                [env]="payPalEnv"
                 [transactions]="payPalTransactions"
                 (onAuthorized)="paypalAuthorized($event)"
+                [loading]="payLoading$ | async"
               >
               </app-paypal-button>
             </div>
@@ -176,6 +185,7 @@ export class SubscriptionWizardComponent implements OnInit {
     sandbox: 'AaJEzmFqAI2D8FhfNWFEvIl_EzZKX6iQOAHoXUVg_Tart6VgiFGfbYHBx5Lt9zQz8pW1aiFvF0AJC0LW',
     production: 'AcxqWpVKlLzogoiEzh9NnzhWcUrJuvoxqJMK5n-ie7AgxaZipSU3mCIqzGxlfVJ7KlHmMhGitkNdujUw'
   };
+  public payPalEnv = environment.paypal.env;
   public payPalTransactions = [];
   public cardError;
   public showDiscountCode;

@@ -35,12 +35,8 @@ export class TotalSavingComponent implements OnInit {
       const _savingPerKid = _savingPerAdult - (_savingPerAdult * (this.kidsDiscountPercentage / 100));
       const _kidsTotalSaving = _savingPerKid * this.amountOfKids;
       const _adultsSaving = _savingPerAdult * this.amountOfAdults;
-      console.log(this.amountOfAdults);
-      console.log(_adultsSaving);
-      console.log(_kidsTotalSaving);
       return _kidsTotalSaving + _adultsSaving;
     } else {
-      console.log('Rate not found');
       return 0;
     }
 

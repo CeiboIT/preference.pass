@@ -13,9 +13,13 @@ import 'rxjs/add/operator/map';
 import {
   ActionTypes,
   PostSubscriptionFailure,
-  PostSubscriptionSuccess, SearchPPCardFailure, SearchPPCardSuccess,
+  PostSubscriptionSuccess,
+  SendSubscriptionMail,
+  SendSubscriptionMailSuccess,
+  SendSubscriptionMailFailure, SearchPPCardFailure, SearchPPCardSuccess,
   ValidateCodeFailure, ValidateCodeSuccess, ValidateCodeSuccessInvalid, ValidateCodeSuccessValid
 } from '../actions/subscription';
+import { ActionTypes as BookingActions } from '../actions/booking';
 import { SubscriptionService } from '../services/subscriptions/subscription.service';
 
 @Injectable()
@@ -61,4 +65,15 @@ export class SubscriptionEffects {
         })
         .catch(err => new SearchPPCardFailure(err));
     });
+
+    @Effect({dispatch: false})
+    sendSubscriptionMail$: Observable<{}> = this.action$
+      .ofType(ActionTypes.SEND_SUBSCRIPTION_MAIL)
+      .map(action => action.payload)
+      .switchMap(payload => {
+        console.log(payload);
+          return this.service.sendSubscriptionMail(payload)
+          .then(res => new SendSubscriptionMailSuccess(res))
+          .catch(err => new SendSubscriptionMailFailure(err));
+      });
 }

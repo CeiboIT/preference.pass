@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ActivityCardComponent } from './activity-card.component';
 import { MdCardModule } from '@angular/material';
 import { ActivityTitleComponent } from './activity-title/activity-title.component';
-import { ActivitySavingModule } from '../../../components/activities/activity-saving/activity-saving.module';
-import { ActivityPriceModule } from '../../../components/activities/activity-price/activity-price.module'
+import { ActivityPriceModule } from '../../activities/activity-price/activity-price.module';
+import { ActivityStrikePriceModule } from "../../activities/activity-strike-price/activity-strike-price.module";
+import { ActivitySavingModule } from "../../activities/activity-saving/activity-saving.module";
 
 @NgModule({
   imports: [
     CommonModule,
     MdCardModule,
-    ActivitySavingModule,
-    ActivityPriceModule
+    ActivityPriceModule,
+    ActivityStrikePriceModule,
+    ActivitySavingModule
   ],
   declarations: [
     ActivityCardComponent,

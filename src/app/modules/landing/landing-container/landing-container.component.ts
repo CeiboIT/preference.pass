@@ -14,6 +14,7 @@ import {
   GetTransportSuccess, GetRestaurantsSuccess, GetShoppingSuccess, GetWeRecommendSuccess
 } from '../../../actions/activities';
 import { Observable } from 'rxjs/Observable';
+import { ISubscription } from 'rxjs/Subscription';
 import { onStateChangeObservable } from '../../../utils/store';
 import { Store } from '@ngrx/store';
 
@@ -89,6 +90,18 @@ export class LandingContainerComponent implements OnInit {
   public shopping$: Observable<any>;
   public weRecommend$: Observable<any>;
   comingSoon = true;
+
+  private subscriptionActivities: ISubscription;
+  private subscriptionTours: ISubscription;
+  private subscriptionShows: ISubscription;
+  private subscriptionHotDeals: ISubscription;
+  private subscriptionHealthAndBeauty: ISubscription;
+  private subscriptionTransport: ISubscription;
+  private subscriptionNightclubs: ISubscription;
+  private subscriptionRestaurants: ISubscription;
+  private subscriptionShopping: ISubscription;
+  private subscriptionWeRecommend: ISubscription;
+  
   constructor(
     private store: Store<any>
   ) { }
@@ -114,9 +127,34 @@ export class LandingContainerComponent implements OnInit {
     this.restaurants$ = onStateChangeObservable(this.store, 'activities.restaurants');
     this.shopping$ = onStateChangeObservable(this.store, 'activities.shopping');
     this.weRecommend$ = onStateChangeObservable(this.store, 'activities.weRecommend');
+
+    this.subscriptionActivities =  this.activities$.subscribe();
+    this.subscriptionTours =  this.tours$.subscribe();
+    this.subscriptionShows =  this.shows$.subscribe();
+    this.subscriptionHotDeals =  this.hotDeals$.subscribe();
+    this.subscriptionHealthAndBeauty =  this.healthAndBeauty$.subscribe();
+    this.subscriptionTransport = this.transport$.subscribe();
+    this.subscriptionNightclubs = this.nightclubs$.subscribe();
+    this.subscriptionRestaurants = this.restaurants$.subscribe();
+    this.subscriptionShopping = this.shopping$.subscribe();
+    this.subscriptionWeRecommend = this.weRecommend$.subscribe();
+    
   }
 
   ngOnDestroy() {
+
+    this.subscriptionActivities.unsubscribe();
+    this.subscriptionTours.unsubscribe();
+    this.subscriptionShows.unsubscribe();
+    this.subscriptionHotDeals.unsubscribe();
+    this.subscriptionHealthAndBeauty.unsubscribe();
+    this.subscriptionTransport.unsubscribe();
+    this.subscriptionNightclubs.unsubscribe();
+    this.subscriptionRestaurants.unsubscribe();
+    this.subscriptionShopping.unsubscribe();
+    this.subscriptionWeRecommend.unsubscribe();
+
+
     this.store.dispatch(new GetHotDealsSuccess([]));
     this.store.dispatch(new GetToursSuccess([]));
     this.store.dispatch(new GetActivitiesSuccess([]));

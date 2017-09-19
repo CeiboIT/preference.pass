@@ -4,6 +4,8 @@ import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: 'app/modules/landing/landing.module#LandingModule' },
+  { path: 'detail', loadChildren: 'app/modules/activities/activity-container/activity-container.module#ActivityContainerModule' },
+  { path: 'list', loadChildren: 'app/modules/activities/activity-grid-container/activity-grid-container.module#ActivityGridContainerModule' },
   { path: 'subscription', loadChildren: 'app/modules/subscription/subscription.module#SubscriptionModule' },
   { path: 'booking', canActivate: [AuthGuard], loadChildren: 'app/modules/booking/booking.module#BookingModule' },
   { path: 'access_token', loadChildren: 'app/modules/token/token.module#TokenModule' },

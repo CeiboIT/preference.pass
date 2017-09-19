@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
+import { ISubscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { GetDetail } from '../../../actions/activities';
 import { onStateChangeObservable } from '../../../utils/store';
 import 'rxjs/add/operator/switchMap';
 import { isSubscriptionValid } from '../../../utils/user';
-import {UserService} from '../../../services/user.service';
-import {MoveToStep} from '../../../actions/booking';
+import { UserService } from '../../../services/user.service';
+import { MoveToStep } from '../../../actions/booking';
 @Component({
   selector: 'app-activity-container',
   template: `
@@ -27,6 +28,9 @@ export class ActivityContainerComponent implements OnInit {
   public user$: Observable<any>;
   public user;
   public activity;
+  
+  private subscriptionActivity: ISubscription;
+  private subscriptionUser: ISubscription;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -42,6 +46,9 @@ export class ActivityContainerComponent implements OnInit {
     this.user$.subscribe(user => this.user = user);
     this.activity$.subscribe(activity => this.activity = activity);
     this.activity = {};
+
+    this.subscriptionActivity = this.activity$.subscribe();
+    this.subscriptionUser = this.user$.subscribe();
   }
 
   bookNow($event) {
@@ -77,5 +84,10 @@ export class ActivityContainerComponent implements OnInit {
     }, false, {
       onSuccessRedirect: navigateTo
     });*/
+  }
+
+  ngOnDestroy() {
+    this.subscriptionActivity.unsubscribe();
+    this.subscriptionUser.unsubscribe();
   }
 }

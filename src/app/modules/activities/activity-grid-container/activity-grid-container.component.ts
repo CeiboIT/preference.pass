@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import {
+	GetActivitiesByCategory,
+	GetHotDeals,
+	GetHotDealsSuccess,
+	GetListSuccess
+	} from '../../../actions/activities';
+import { ISubscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 
-import { GetActivitiesByCategory, GetListSuccess, GetHotDeals, GetHotDealsSuccess } from '../../../actions/activities';
 
 @Component({
 	selector: 'app-activity-grid-container',
@@ -32,6 +38,7 @@ export class ActivityGridContainerComponent implements OnInit {
 		
 	};
 	public isHotDeal: Boolean = false;
+	private subscriptionActivities: ISubscription;
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
@@ -53,6 +60,8 @@ export class ActivityGridContainerComponent implements OnInit {
 			this.store.dispatch(new GetHotDeals({}));
 			this.activities$ = onStateChangeObservable(this.store, 'activities.hotDeals');
 		}
+
+		this.subscriptionActivities = this.activities$.subscribe();
 	}
 
 	get title() {
@@ -64,6 +73,7 @@ export class ActivityGridContainerComponent implements OnInit {
 	}
 
 	ngOnDestroy() {
+		this.subscriptionActivities.unsubscribe();
 		this.store.dispatch(new GetHotDealsSuccess([]));
 		this.store.dispatch(new GetListSuccess([]));
 	}

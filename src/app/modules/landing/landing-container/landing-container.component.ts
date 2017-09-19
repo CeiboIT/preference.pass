@@ -13,8 +13,8 @@ import {
   GetShowsSuccess,
   GetTransportSuccess, GetRestaurantsSuccess, GetShoppingSuccess, GetWeRecommendSuccess
 } from '../../../actions/activities';
-import { Observable } from 'rxjs/Observable';
 import { ISubscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import { onStateChangeObservable } from '../../../utils/store';
 import { Store } from '@ngrx/store';
 
@@ -24,19 +24,24 @@ import { Store } from '@ngrx/store';
     <div>
       <app-benefits-header [part]="'1'"></app-benefits-header>
     </div>
+
     <div class="landing-container">
       <div class="hot-deals py-5">
         <app-hot-deals-list [hotDeals]="hotDeals$ | async"></app-hot-deals-list>
       </div>
+      
       <div class="py-5">
         <app-activity-list [activities]="tours$ | async" [category]="'tours'"></app-activity-list>
       </div>
+      
       <div>
         <app-benefits-header [part]="'2'"></app-benefits-header>
       </div>
+      
       <div class="py-5">
         <app-activity-list [activities]="activities$ | async" [category]="'activities'"></app-activity-list>
       </div>
+
       <div class="py-5">
         <app-activity-list [activities]="shows$ | async" [category]="'shows'"></app-activity-list>
       </div>
@@ -60,7 +65,6 @@ import { Store } from '@ngrx/store';
       <div class="py-5">
         <app-activity-list [comingSoon]="comingSoon" [category]="'we recommend'"></app-activity-list>
       </div>
-
 
       <div class="py-5">
         <app-activity-list [comingSoon]="comingSoon" [category]="'Shopping'"></app-activity-list>
@@ -128,21 +132,19 @@ export class LandingContainerComponent implements OnInit {
     this.shopping$ = onStateChangeObservable(this.store, 'activities.shopping');
     this.weRecommend$ = onStateChangeObservable(this.store, 'activities.weRecommend');
 
-    this.subscriptionActivities =  this.activities$.subscribe();
-    this.subscriptionTours =  this.tours$.subscribe();
-    this.subscriptionShows =  this.shows$.subscribe();
-    this.subscriptionHotDeals =  this.hotDeals$.subscribe();
-    this.subscriptionHealthAndBeauty =  this.healthAndBeauty$.subscribe();
+    this.subscriptionActivities = this.activities$.subscribe();
+    this.subscriptionTours = this.tours$.subscribe();
+    this.subscriptionShows = this.shows$.subscribe();
+    this.subscriptionHotDeals = this.hotDeals$.subscribe();
+    this.subscriptionHealthAndBeauty = this.healthAndBeauty$.subscribe();
     this.subscriptionTransport = this.transport$.subscribe();
     this.subscriptionNightclubs = this.nightclubs$.subscribe();
     this.subscriptionRestaurants = this.restaurants$.subscribe();
     this.subscriptionShopping = this.shopping$.subscribe();
     this.subscriptionWeRecommend = this.weRecommend$.subscribe();
-    
   }
 
   ngOnDestroy() {
-
     this.subscriptionActivities.unsubscribe();
     this.subscriptionTours.unsubscribe();
     this.subscriptionShows.unsubscribe();
@@ -153,7 +155,6 @@ export class LandingContainerComponent implements OnInit {
     this.subscriptionRestaurants.unsubscribe();
     this.subscriptionShopping.unsubscribe();
     this.subscriptionWeRecommend.unsubscribe();
-
 
     this.store.dispatch(new GetHotDealsSuccess([]));
     this.store.dispatch(new GetToursSuccess([]));

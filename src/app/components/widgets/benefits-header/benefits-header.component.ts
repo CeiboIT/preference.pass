@@ -49,8 +49,6 @@ import { Component, OnInit, Input } from '@angular/core';
 								</div>
 							</div>
 						
-
-						<!--<div class="row pt-5">-->
 							<div class="col-sm-4 col-6">
 								<div class="info">
 									<div class="icon icon-danger">
@@ -83,7 +81,10 @@ import { Component, OnInit, Input } from '@angular/core';
 								</div>
 							</div>
 						</div>
-					<!--</div>-->
+						  
+						<div class="col-md-6 mt-3 mx-auto">
+							<app-become-a-member-now-button></app-become-a-member-now-button>
+						</div>
 					</div>
 
 					<div *ngIf="part == 2">
@@ -133,6 +134,10 @@ import { Component, OnInit, Input } from '@angular/core';
 								</div>
 							</div>
 
+						</div>
+
+						<div class="col-md-6 mt-3 mx-auto">
+							<app-become-a-member-now-button></app-become-a-member-now-button>
 						</div>
 
 					</div>

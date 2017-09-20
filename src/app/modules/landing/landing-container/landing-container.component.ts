@@ -47,27 +47,27 @@ import { Store } from '@ngrx/store';
       </div>
 
       <div class="py-5">
-        <app-activity-list [comingSoon]="comingSoon" [category]="'restaurants'"></app-activity-list>
+        <app-activity-list [activities]="restaurants$ | async" [category]="'restaurants'"></app-activity-list>
       </div>
       
       <div class="py-5">
-        <app-activity-list [comingSoon]="comingSoon" [category]="'Health and beauty'"></app-activity-list>
+        <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and beauty'"></app-activity-list>
       </div>
       
+      <!--<div class="py-5">
+        <app-activity-list [activities]="" [category]="'Bars'"></app-activity-list>
+      </div>-->
+
       <div class="py-5">
-        <app-activity-list [comingSoon]="comingSoon" [category]="'Bars'"></app-activity-list>
+        <app-activity-list [activities]="transport$ | async " [category]="'Transport'"></app-activity-list>
       </div>
 
       <div class="py-5">
-        <app-activity-list [comingSoon]="comingSoon" [category]="'Transport'"></app-activity-list>
+        <app-activity-list [activities]="weRecommend$ | async " [category]="'we recommend'"></app-activity-list>
       </div>
 
       <div class="py-5">
-        <app-activity-list [comingSoon]="comingSoon" [category]="'we recommend'"></app-activity-list>
-      </div>
-
-      <div class="py-5">
-        <app-activity-list [comingSoon]="comingSoon" [category]="'Shopping'"></app-activity-list>
+        <app-activity-list [activities]="shopping$ | async " [category]="'Shopping'"></app-activity-list>
       </div>
     </div>
   `,
@@ -105,7 +105,7 @@ export class LandingContainerComponent implements OnInit {
   private subscriptionRestaurants: ISubscription;
   private subscriptionShopping: ISubscription;
   private subscriptionWeRecommend: ISubscription;
-  
+
   constructor(
     private store: Store<any>
   ) { }

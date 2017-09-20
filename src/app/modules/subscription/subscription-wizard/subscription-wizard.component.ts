@@ -25,17 +25,17 @@ interface DiscountValidationResponse {
     <md-card>
       <wizard-header [step]="step"></wizard-header>
       <div [hidden]="step !== 1" class="row">
-        <div class="col-md-6 offset-md-3 text-center">
+        <div class="col-12 text-center">
 
           <div [hidden]="hasDiscountCard">
             <div class="row" *ngIf="!hasDiscount">
-              <div class="col-12">
+              <div class="col-md-6 mx-auto mb-2">
                 <button type="button" class="btn btn-success btn-block btn-round text-white" (click)="claim()">
                   I have a discount code
                 </button>
                 <div class="row">
                   <div class="col-12" *ngIf="claimDiscount">
-                    <h3 class="col-12 mt-3">
+                    <h3 class="mt-3">
                       Introduce your discount code bellow
                     </h3>
                     <app-discount-code-form class="w-100"
@@ -72,7 +72,7 @@ interface DiscountValidationResponse {
           </div>
           
           <div class="row">
-            <div class="col-12">
+            <div class="col-md-6 mx-auto">
               <app-date-select
                 [parent]="paymentRequest"
                 [parentKey]="'startsAt'"

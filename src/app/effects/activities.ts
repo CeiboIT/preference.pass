@@ -73,7 +73,7 @@ export class ActivitiesEffects {
               return new GetHealthAndBeautySuccess(_data);
             case('TRANSPORT'):
               return new GetTransportSuccess(_data);
-            case('RESTAURANTS'):
+            case('FOOD&BEVERAGES'):
               return new GetRestaurantsSuccess(_data);
             case('SHOPPING'):
               return new GetShoppingSuccess(_data);

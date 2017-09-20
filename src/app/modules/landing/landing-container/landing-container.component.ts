@@ -47,16 +47,12 @@ import { Store } from '@ngrx/store';
       </div>
 
       <div class="py-5">
-        <app-activity-list [activities]="restaurants$ | async" [category]="'restaurants'"></app-activity-list>
+        <app-activity-list [activities]="restaurants$ | async" [category]="'Food & Beverages'"></app-activity-list>
       </div>
       
       <div class="py-5">
         <app-activity-list [activities]="healthAndBeauty$ | async" [category]="'Health and beauty'"></app-activity-list>
       </div>
-      
-      <!--<div class="py-5">
-        <app-activity-list [activities]="" [category]="'Bars'"></app-activity-list>
-      </div>-->
 
       <div class="py-5">
         <app-activity-list [activities]="transport$ | async " [category]="'Transport'"></app-activity-list>
@@ -117,7 +113,7 @@ export class LandingContainerComponent implements OnInit {
     this.store.dispatch(new GetActivitiesByCategory({name: 'HEALTHANDBEAUTY', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'TRANSPORT', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'NIGHTCLUBS', fromLanding: true}));
-    this.store.dispatch(new GetActivitiesByCategory({name: 'RESTAURANTS', fromLanding: true}));
+    this.store.dispatch(new GetActivitiesByCategory({name: 'FOOD&BEVERAGES', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'SHOPPING', fromLanding: true}));
     this.store.dispatch(new GetActivitiesByCategory({name: 'PREFERENCEPASSRECOMMENDED', fromLanding: true}));
     this.store.dispatch(new GetHotDeals({ fromLanding: true }));

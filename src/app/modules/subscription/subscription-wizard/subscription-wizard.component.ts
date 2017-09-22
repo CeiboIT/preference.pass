@@ -99,6 +99,8 @@ interface DiscountValidationResponse {
               <h2 class="mt-2">
                 Select your subscription start date
               </h2>
+
+              renderiza bokking subscrition date
               <app-subscription-start-date [parent]="paymentRequest"
                                            [selectedPlan]="paymentRequest.get('plan').value"
                                            (onDateSelected)="onStartDateSelected($event)"

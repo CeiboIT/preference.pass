@@ -304,7 +304,14 @@ export class BookingWizardContainerComponent implements OnInit {
       }
     });
 
-    this.store.dispatch(new MoveToStep({step: 'Details'}));
+    //this.store.dispatch(new MoveToStep({step: 'Details'}));
+    this.getActiveSubscription(); 
+
+    if(this.hasValidSubscription) {
+      this.store.dispatch(new MoveToStep({step: 'Details'}));
+    } else {
+      this.store.dispatch(new MoveToStep({step: 'Subscription'}));
+    }
 
     this.bookingStep$.subscribe((booking) => {
       if (booking.currentStep) {
@@ -328,12 +335,14 @@ export class BookingWizardContainerComponent implements OnInit {
 
   getActiveSubscription() {
     this.activeSubscription = {};
-    if (this.user && this.user.subscriptions && this.user.subscriptions.length && this.booking.get('executionDate').value) {
-      const _execution = moment(this.booking.get('executionDate').value);
+    if (this.user && this.user.subscriptions && this.user.subscriptions.length) {
+      //const _execution = this.booking.get('executionDate').value ? moment(this.booking.get('executionDate').value) : moment(new Date());
+      const _execution = moment(new Date());
       this.hasValidSubscription = false;
       this.user.subscriptions.some((subscription) => {
         const _from = moment(subscription.startsAt);
         const _to = moment(subscription.validity);
+        //console.warn(_from <= _execution, _to >= _execution);
         if ( _from <= _execution && _to >= _execution) {
           this.activeSubscription = subscription;
           this.hasValidSubscription = true;

@@ -32,7 +32,7 @@ _inthreemonths.add(3, 'months');
 
         <md-card class="mt-3">
           <md-card-content>
-            <h2 class="pb-2 pb-md-3">
+            <!--<h2 class="pb-2 pb-md-3">
               When do you want to go to {{ activity?.name}}
             </h2>
             <app-date-select
@@ -43,7 +43,18 @@ _inthreemonths.add(3, 'months');
               [limitDate]="limitDate"
               [startDate]="today"
             >
-            </app-date-select>
+            </app-date-select>-->
+            <h2 class="pb-2 pb-md-3">
+              Booking in a different date
+            </h2>
+
+            <!--renderiza bokking subscrition date-->
+            <!--<app-subscription-start-date [parent]="paymentRequest"
+                                         [selectedPlan]="paymentRequest.get('plan').value"
+                                         (onDateSelected)="onStartDateSelected($event)"
+                                         [limitDate]="limitDate"
+                                         [initialDate]="startsAt"
+            ></app-subscription-start-date>-->
           </md-card-content>
         </md-card>
         <!--

@@ -29,21 +29,6 @@ import * as moment from 'moment';
               (onSubmit)="onStep1Submit($event)"
             >
             </app-booking-step-1>
-
-            <div *ngIf="booking.get('kidsAmount') && 
-            booking.get('kidsAmount').invalid && (booking.get('kidsAmount').dirty || booking.get('kidsAmount').touched)"
-                 class="alert alert-danger">
-              <div *ngIf="booking.get('kidsAmount').errors.required">
-                Name is required.
-              </div>
-              <div *ngIf="booking.get('kidsAmount').errors.minlength">
-                Name must be at least 4 characters long.
-              </div>
-              <div *ngIf="booking.get('kidsAmount').errors.forbiddenName">
-                Name cannot be Bob.
-              </div>
-
-            </div>
           </div>
         </div>
 
